@@ -5,6 +5,7 @@ try:
 
     from engine.cue.cue_sequence import CueSequencer
     from engine.cue.cue_entity_storage import EntityStorage
+    from engine.cue.cue_assets import AssetManager
 
     from engine.cue.rendering.cue_renderer import CueRenderer
     from engine.cue.rendering.cue_scene import RenderScene
@@ -29,9 +30,9 @@ t = time.perf_counter()
 
 GameState.sequencer = CueSequencer(t)
 GameState.entity_storage = EntityStorage()
-# GameState.asset_manager = AssetManager()
+GameState.asset_manager = AssetManager(ASSET_DIR)
 
-GameState.renderer = CueRenderer(vsync=True)
+GameState.renderer = CueRenderer((1280, 720), vsync=True)
 
 # == init map ==
 
@@ -52,6 +53,7 @@ cue_map.load_map(ASSET_DIR + BOOTUP_MAP)
 
 # == main game loop ==
 
+# temp. cam
 from engine.cue.rendering.cue_camera import Camera
 GameState.active_camera = Camera(GameState.renderer.win_aspect, 70)
 
