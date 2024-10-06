@@ -4,6 +4,8 @@ import OpenGL
 OpenGL.ERROR_CHECKING = True
 OpenGL.ERROR_LOGGING = True
 
+OpenGL.ERROR_ON_COPY = False
+
 # == import engine ==
 
 try: import engine.cue.editor.on_cue as on_cue
