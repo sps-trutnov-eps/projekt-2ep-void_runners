@@ -57,6 +57,14 @@ cue_map.load_map(ASSET_DIR + BOOTUP_MAP)
 from engine.cue.rendering.cue_camera import Camera
 GameState.active_camera = Camera(GameState.renderer.win_aspect, 70)
 
+# temp
+from entity.player_move import PlayerMovement
+from engine.cue.components.cue_transform import Transform
+import engine.cue.rendering.cue_gizmos as gizmo
+from pygame.math import Vector3 as Vec3
+
+p = PlayerMovement(Transform(Vec3(0, 0, 0), Vec3(0, 0, 0)), GameState.active_camera)
+
 while True:
     # == event poll ==
 
@@ -86,6 +94,11 @@ while True:
 
     GameState.renderer.fullscreen_imgui_ctx.set_as_current_context()
     imgui.new_frame()
+
+    # TEMP. world origin gizmo
+    gizmo.draw_line(Vec3(0, 0, 0), Vec3(.2, 0, 0), Vec3(.35, .05, .05), Vec3(1, 0, 0))
+    gizmo.draw_line(Vec3(0, 0, 0), Vec3(0, .2, 0), Vec3(.05, .35, .05), Vec3(0, 1, 0))
+    gizmo.draw_line(Vec3(0, 0, 0), Vec3(0, 0, .2), Vec3(.05, .05, .35), Vec3(0, 0, 1))
 
     GameState.renderer.frame(GameState.active_camera, GameState.active_scene)
 
