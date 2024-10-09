@@ -22,7 +22,7 @@ except ImportError:
 # == contants ==
 
 ASSET_DIR = os.path.join(os.path.dirname(__file__), "../assets")
-BOOTUP_MAP = "/maps/main_menu.json"
+BOOTUP_MAP = "/maps/lag_balls.json"
 
 # == init engine ==
 
@@ -32,7 +32,7 @@ GameState.sequencer = CueSequencer(t)
 GameState.entity_storage = EntityStorage()
 GameState.asset_manager = AssetManager(ASSET_DIR)
 
-GameState.renderer = CueRenderer((1280, 720), vsync=True)
+GameState.renderer = CueRenderer((1280, 720), fullscreen=True, vsync=True)
 
 # == init map ==
 
@@ -94,6 +94,27 @@ while True:
 
     GameState.renderer.fullscreen_imgui_ctx.set_as_current_context()
     imgui.new_frame()
+
+    win_flags = imgui.WINDOW_NO_DECORATION | imgui.WINDOW_ALWAYS_AUTO_RESIZE | imgui.WINDOW_NO_SAVED_SETTINGS | imgui.WINDOW_NO_FOCUS_ON_APPEARING | imgui.WINDOW_NO_NAV | imgui.WINDOW_NO_MOVE
+    pad = 10
+
+    viewport = imgui.get_main_viewport()
+    imgui.set_next_window_position(viewport.work_pos.x + pad, viewport.work_pos.y + pad)
+    imgui.set_next_window_bg_alpha(.35)
+
+    try:
+        with imgui.begin("Perf overlay", flags=win_flags):
+            imgui.text("Performace overlay")
+            imgui.separator()
+
+            imgui.text(f"Frame time: {round(GameState.delta_time * 1000, 2)}ms")
+
+            imgui.spacing(); imgui.spacing()
+
+            imgui.text(f"Tick time: {round(GameState.cpu_tick_time * 1000, 2)}ms")
+            imgui.text(f"Cpu render time: {round(GameState.cpu_render_time * 1000, 2)}ms")
+    except:
+        pass
 
     # TEMP. world origin gizmo
     gizmo.draw_line(Vec3(0, 0, 0), Vec3(.2, 0, 0), Vec3(.35, .05, .05), Vec3(1, 0, 0))
