@@ -12,6 +12,8 @@ try:
 
     from engine.cue import cue_map
 
+    from ui import GameUI
+
     import pygame as pg
     import imgui
 
@@ -65,6 +67,12 @@ from pygame.math import Vector3 as Vec3
 
 p = PlayerMovement(Transform(Vec3(0, 0, 0), Vec3(0, 0, 0)), GameState.active_camera)
 
+# == Init UI ==
+
+game_ui = GameUI(lives=3, ammo=50, score=0)
+
+p.set_captured(False)
+
 while True:
     # == event poll ==
 
@@ -94,6 +102,8 @@ while True:
 
     GameState.renderer.fullscreen_imgui_ctx.set_as_current_context()
     imgui.new_frame()
+
+    game_ui.render_ui()
 
     win_flags = imgui.WINDOW_NO_DECORATION | imgui.WINDOW_ALWAYS_AUTO_RESIZE | imgui.WINDOW_NO_SAVED_SETTINGS | imgui.WINDOW_NO_FOCUS_ON_APPEARING | imgui.WINDOW_NO_NAV | imgui.WINDOW_NO_MOVE
     pad = 10
