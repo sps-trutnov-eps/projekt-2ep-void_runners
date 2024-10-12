@@ -124,3 +124,6 @@ dmypy.json
 .pyre/
 
 .vs/
+
+# ignore imgui config
+imgui.ini

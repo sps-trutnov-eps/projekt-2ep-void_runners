@@ -31,6 +31,7 @@ BOOTUP_MAP = "/maps/lag_balls.json"
 t = time.perf_counter()
 
 GameState.sequencer = CueSequencer(t)
+GameState.static_sequencer = CueSequencer(t)
 GameState.entity_storage = EntityStorage()
 GameState.asset_manager = AssetManager(ASSET_DIR)
 
@@ -93,15 +94,16 @@ while True:
 
     GameState.delta_time = dt
     GameState.renderer.fullscreen_imgui_ctx.delta_time(dt)
+
+    GameState.renderer.fullscreen_imgui_ctx.set_as_current_context()
+    imgui.new_frame()
     
     GameState.sequencer.tick(t)
+    GameState.static_sequencer.tick(t)
 
     tt = time.perf_counter() - t
 
     # == frame ==
-
-    GameState.renderer.fullscreen_imgui_ctx.set_as_current_context()
-    imgui.new_frame()
 
     game_ui.render_ui()
 
@@ -125,11 +127,6 @@ while True:
             imgui.text(f"Cpu render time: {round(GameState.cpu_render_time * 1000, 2)}ms")
     except:
         pass
-
-    # TEMP. world origin gizmo
-    gizmo.draw_line(Vec3(0, 0, 0), Vec3(.2, 0, 0), Vec3(.35, .05, .05), Vec3(1, 0, 0))
-    gizmo.draw_line(Vec3(0, 0, 0), Vec3(0, .2, 0), Vec3(.05, .35, .05), Vec3(0, 1, 0))
-    gizmo.draw_line(Vec3(0, 0, 0), Vec3(0, 0, .2), Vec3(.05, .05, .35), Vec3(0, 0, 1))
 
     GameState.renderer.frame(GameState.active_camera, GameState.active_scene)
 
