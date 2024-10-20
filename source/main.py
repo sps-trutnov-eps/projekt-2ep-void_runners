@@ -79,7 +79,7 @@ while True:
 
     for e in pg.event.get():
         if e.type == pg.VIDEORESIZE:
-            GameState.renderer.on_resize(e.size)
+            #GameState.renderer.on_resize(e.size)
             GameState.active_camera.re_aspect(GameState.renderer.win_aspect)
 
         elif e.type == pg.QUIT:
