@@ -16,14 +16,12 @@ out vec3 frag_pos; // world space
 out vec3 frag_norm;
 out vec2 frag_uv;
 
-out vec3 frag_col;
-
 void main() {
     vec4 w_pos = cue_model_mat * vec4(pos, 1.);
     gl_Position = bt_cam_mat * w_pos;
 
     // pass to fragment shader interpolators
     frag_pos = w_pos.xyz;
-    frag_col = norm;
+    frag_norm = (cue_model_mat * vec4(norm, 0.)).xyz;
     frag_uv = uv;
 }

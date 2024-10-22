@@ -24,7 +24,7 @@ except ImportError:
 # == contants ==
 
 ASSET_DIR = os.path.join(os.path.dirname(__file__), "../assets")
-BOOTUP_MAP = "/maps/lag_balls.json"
+BOOTUP_MAP = "/maps/test_map.json"
 
 # == init engine ==
 
@@ -35,7 +35,7 @@ GameState.static_sequencer = CueSequencer(t)
 GameState.entity_storage = EntityStorage()
 GameState.asset_manager = AssetManager(ASSET_DIR)
 
-GameState.renderer = CueRenderer((1280, 720), fullscreen=True, vsync=True)
+GameState.renderer = CueRenderer((1280, 720), fullscreen=False, vsync=True)
 
 # == init map ==
 
@@ -72,20 +72,18 @@ p = PlayerMovement(Transform(Vec3(0, 0, 0), Vec3(0, 0, 0)), GameState.active_cam
 
 game_ui = GameUI(lives=3, ammo=50, score=0)
 
-p.set_captured(False)
-
 while True:
     # == event poll ==
 
     for e in pg.event.get():
         if e.type == pg.VIDEORESIZE:
-            #GameState.renderer.on_resize(e.size)
             GameState.active_camera.re_aspect(GameState.renderer.win_aspect)
 
         elif e.type == pg.QUIT:
             sys.exit(0)
 
         GameState.sequencer.send_event_id(e.type, e)
+        GameState.static_sequencer.send_event_id(e.type, e)
 
     # == tick ==
 
