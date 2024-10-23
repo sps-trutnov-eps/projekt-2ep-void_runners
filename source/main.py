@@ -112,20 +112,6 @@ while True:
     imgui.set_next_window_position(viewport.work_pos.x + pad, viewport.work_pos.y + pad)
     imgui.set_next_window_bg_alpha(.35)
 
-    try:
-        with imgui.begin("Perf overlay", flags=win_flags):
-            imgui.text("Performace overlay")
-            imgui.separator()
-
-            imgui.text(f"Frame time: {round(GameState.delta_time * 1000, 2)}ms")
-
-            imgui.spacing(); imgui.spacing()
-
-            imgui.text(f"Tick time: {round(GameState.cpu_tick_time * 1000, 2)}ms")
-            imgui.text(f"Cpu render time: {round(GameState.cpu_render_time * 1000, 2)}ms")
-    except:
-        pass
-
     GameState.renderer.frame(GameState.active_camera, GameState.active_scene)
 
     GameState.cpu_tick_time = tt # delayed by a frame to match cpu_render_time
