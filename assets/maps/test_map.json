@@ -2,6 +2,7 @@
     "cmf_ver": 2,
     "cmf_header": {
         "type_list": [
+            "sps_player_spawn",
             "bt_static_mesh"
         ],
         "asset_list": []
@@ -78,6 +79,21 @@
                     "a_model_mesh": "models/icosph.npz",
                     "a_model_vshader": "shaders/base_cam.vert",
                     "a_model_fshader": "shaders/basic_lit.frag"
+                }
+            ],
+            [
+                "player_spawn",
+                "sps_player_spawn",
+                {
+                    "vec3://spawn_pos": [
+                        0.5099999904632568,
+                        0.0,
+                        0.5199999809265137
+                    ],
+                    "vec2://spawn_rot": [
+                        0.0,
+                        35.0
+                    ]
                 }
             ]
         ]
