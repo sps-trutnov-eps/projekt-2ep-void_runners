@@ -22,7 +22,7 @@ class PlayerMovement:
     SPRINT_MAX_SPEED = 3.6
     SPRINT_ACCEL = 24
 
-    MOUSE_ACCEL = math.radians(.2)
+    MOUSE_ACCEL = .2
     GROUND_FRICTION = 16
     OVERSPEED_FRICTION = 2
 
@@ -31,16 +31,16 @@ class PlayerMovement:
 
     PLAYER_OVERLAY = True
 
-    def __init__(self, player_trans: Transform, player_cam: Camera) -> None:
+    def __init__(self, player_trans: Transform, player_cam: Camera, initial_view_rot: Vec2 = Vec2(0, 0)) -> None:
         self.controlled_trans = player_trans
         self.controlled_cam = player_cam
         self.set_captured(True) # by-default true
 
-        self.p_pos = Vec3(0, 0, 0)
+        self.p_pos = Vec3(player_trans._pos)
         self.p_vel = Vec3(0, 0, 0)
         self.p_state = 0
 
-        self.view_rot = Vec2(0, 0)
+        self.view_rot = initial_view_rot
 
         seq.next(PlayerMovement.tick, self)
 
@@ -56,6 +56,9 @@ class PlayerMovement:
         # update controlled transform
 
         yaw_rot, pitch_rot = self.view_rot.yx
+        yaw_rot = math.radians(yaw_rot)
+        pitch_rot = math.radians(pitch_rot)
+
         self.view_forward = -Vec3(math.sin(yaw_rot) * math.cos(pitch_rot), math.sin(pitch_rot), math.cos(yaw_rot) * math.cos(pitch_rot))
         self.view_forward_flat = -Vec3(math.sin(yaw_rot), 0., math.cos(yaw_rot))
         self.view_right_flat = -Vec3(-math.cos(yaw_rot), 0., math.sin(yaw_rot))
@@ -72,7 +75,7 @@ class PlayerMovement:
                 imgui.text(f"p_state: {self.p_state}")
                 imgui.text(f"p_pos: {round(self.p_pos.x, 4)} {round(self.p_pos.y, 4)} {round(self.p_pos.z, 4)}")
                 imgui.text(f"p_vel: {round(self.p_vel.x, 4)} {round(self.p_vel.y, 4)} {round(self.p_vel.z, 4)}")
-                imgui.text(f"view_rot: {round(math.degrees(self.view_rot.x), 4)} {round(math.degrees(self.view_rot.y), 4)}")
+                imgui.text(f"view_rot: {round(self.view_rot.x, 4)} {round(self.view_rot.y, 4)}")
 
         seq.next(PlayerMovement.tick, self)
 
@@ -117,12 +120,11 @@ class PlayerMovement:
                 input_active = True
 
             # vel over max speed friction
-            if not vel.length_squared() == 0:
-                vel /= 1. + vel.length() / max_speed * PlayerMovement.OVERSPEED_FRICTION * dt
+            vel /= 1. + vel.length() / max_speed * PlayerMovement.OVERSPEED_FRICTION * dt
 
             # add accel to vel and reclamp to max or current speed (allows changing dir even at max speed, doesn't over accelerate and allows control even when over max speed eg. when landing from air or sprint)
             u_vel = vel + accel_vec
-            u_vel /= max(u_vel.length() / max(vel.length(), max_speed), 1.0) # * dt # * over max fric power
+            u_vel /= max(u_vel.length() / max(vel.length(), max_speed), 1.0)
 
             self.p_vel = u_vel
 

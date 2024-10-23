@@ -24,7 +24,12 @@ except ImportError:
 # == contants ==
 
 ASSET_DIR = os.path.join(os.path.dirname(__file__), "../assets")
-BOOTUP_MAP = "/maps/test_map.json"
+BOOTUP_MAP = "/maps/main_menu.json"
+
+# == import game entities ==
+
+import entity.sps_player_spawn
+import entity.sps_static_cam
 
 # == init engine ==
 
@@ -56,18 +61,6 @@ cue_map.load_map(ASSET_DIR + BOOTUP_MAP)
 
 # == main game loop ==
 
-# temp. cam
-from engine.cue.rendering.cue_camera import Camera
-GameState.active_camera = Camera(GameState.renderer.win_aspect, 70)
-
-# temp
-from entity.player_move import PlayerMovement
-from engine.cue.components.cue_transform import Transform
-import engine.cue.rendering.cue_gizmos as gizmo
-from pygame.math import Vector3 as Vec3
-
-p = PlayerMovement(Transform(Vec3(0, 0, 0), Vec3(0, 0, 0)), GameState.active_camera)
-
 # == Init UI ==
 
 game_ui = GameUI(lives=3, ammo=50, score=0)
@@ -76,10 +69,7 @@ while True:
     # == event poll ==
 
     for e in pg.event.get():
-        if e.type == pg.VIDEORESIZE:
-            GameState.active_camera.re_aspect(GameState.renderer.win_aspect)
-
-        elif e.type == pg.QUIT:
+        if e.type == pg.QUIT:
             sys.exit(0)
 
         GameState.sequencer.send_event_id(e.type, e)
@@ -104,13 +94,6 @@ while True:
     # == frame ==
 
     game_ui.render_ui()
-
-    win_flags = imgui.WINDOW_NO_DECORATION | imgui.WINDOW_ALWAYS_AUTO_RESIZE | imgui.WINDOW_NO_SAVED_SETTINGS | imgui.WINDOW_NO_FOCUS_ON_APPEARING | imgui.WINDOW_NO_NAV | imgui.WINDOW_NO_MOVE
-    pad = 10
-
-    viewport = imgui.get_main_viewport()
-    imgui.set_next_window_position(viewport.work_pos.x + pad, viewport.work_pos.y + pad)
-    imgui.set_next_window_bg_alpha(.35)
 
     GameState.renderer.frame(GameState.active_camera, GameState.active_scene)
 

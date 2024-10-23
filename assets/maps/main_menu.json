@@ -1,10 +1,53 @@
 {
-    "cmf_ver": 1,
+    "cmf_ver": 2,
     "cmf_header": {
-        "type_list": [],
+        "type_list": [
+            "sps_static_cam",
+            "bt_static_mesh"
+        ],
         "asset_list": []
     },
     "cmf_data": {
-        "map_entities": []
+        "map_entities": [
+            [
+                "sps_spawn",
+                "sps_static_cam",
+                {
+                    "vec3://t_pos": [
+                        -0.5199999809265137,
+                        0.38999998569488525,
+                        1.2599999904632568
+                    ],
+                    "vec2://t_rot": [
+                        0.0,
+                        33.15999984741211
+                    ]
+                }
+            ],
+            [
+                "test_menu_prop",
+                "bt_static_mesh",
+                {
+                    "vec3://t_pos": [
+                        -0.8699998259544373,
+                        0.0,
+                        -1.2499996423721313
+                    ],
+                    "vec3://t_rot": [
+                        0.0,
+                        0.0,
+                        0.0
+                    ],
+                    "vec3://t_scale": [
+                        0.4000000059604645,
+                        0.4000000059604645,
+                        0.4000000059604645
+                    ],
+                    "a_model_mesh": "models/icosph.npz",
+                    "a_model_vshader": "shaders/base_cam.vert",
+                    "a_model_fshader": "shaders/basic_lit.frag"
+                }
+            ]
+        ]
     }
 }
