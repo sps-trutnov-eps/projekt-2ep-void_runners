@@ -1,7 +1,8 @@
 {
-    "cmf_ver": 1,
+    "cmf_ver": 2,
     "cmf_header": {
         "type_list": [
+            "sps_player_spawn",
             "bt_static_mesh"
         ],
         "asset_list": []
@@ -10,26 +11,16 @@
         "map_entities": [
             [
                 "e0",
-                "bt_static_mesh",
+                "sps_player_spawn",
                 {
-                    "t_pos": [
-                        -20.0,
-                        19.0,
-                        20.0
-                    ],
-                    "t_rot": [
+                    "vec3://spawn_pos": [
                         0.0,
                         0.0,
                         0.0
                     ],
-                    "a_model_mesh": "models/icosph.npz",
-                    "a_model_vshader": "shaders/base_cam.vert",
-                    "a_model_fshader": "shaders/unlit.frag",
-                    "a_model_shader_name": "test_shasdasd",
-                    "t_scale": [
-                        1.0,
-                        1.0,
-                        1.0
+                    "vec2://spawn_rot": [
+                        0.0,
+                        0.0
                     ]
                 }
             ],

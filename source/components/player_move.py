@@ -17,19 +17,29 @@ import imgui
 
 @dataclass(init=False, slots=True)
 class PlayerMovement:
+    # *_MAX_SPEED - player won't accelerate past this speed
+    # *_ACCEL - how fast will player change its velocity (in units per second)
+    # *_IMPULSE - a one time velotity impulse (immidiate, not per second)
+
     WALK_MAX_SPEED = 1.6
     WALK_ACCEL = 16
     SPRINT_MAX_SPEED = 3.6
     SPRINT_ACCEL = 24
+    AIR_ACCEL = .4
+    MOUSE_ACCEL = .2 # (degrees per mouse-specific unit)
 
-    MOUSE_ACCEL = .2
+    JUMP_IMPULSE = Vec3(0., 2.5, 0.)
+    JUMP_FORWARD_IMPULSE = .6
+
     GROUND_FRICTION = 16
     OVERSPEED_FRICTION = 2
+    GRAVITY = Vec3(0., -5.6, 0.)
 
     PLAYER_SIZE = Vec3(.2, .95, .2)
     CAMERA_OFFSET = Vec3(0, .8, 0)
 
-    PLAYER_OVERLAY = True
+    # debug
+    PLAYER_INFO_OVERLAY = True
 
     def __init__(self, player_trans: Transform, player_cam: Camera, initial_view_rot: Vec2 = Vec2(0, 0)) -> None:
         self.controlled_trans = player_trans
@@ -55,6 +65,15 @@ class PlayerMovement:
 
         # update controlled transform
 
+        if self.is_captured:
+            # mouse input
+            rel = pg.mouse.get_rel()
+            self.view_rot.x += rel[1] * PlayerMovement.MOUSE_ACCEL
+            self.view_rot.y -= rel[0] * PlayerMovement.MOUSE_ACCEL
+
+            res = GameState.renderer.win_res
+            pg.mouse.set_pos(res[0] // 2, res[1] // 2)
+
         yaw_rot, pitch_rot = self.view_rot.yx
         yaw_rot = math.radians(yaw_rot)
         pitch_rot = math.radians(pitch_rot)
@@ -68,7 +87,7 @@ class PlayerMovement:
 
         self.controlled_cam.set_view(self.p_pos + PlayerMovement.CAMERA_OFFSET, Vec3(self.view_rot[0], self.view_rot[1], 0.))
 
-        if PlayerMovement.PLAYER_OVERLAY:
+        if PlayerMovement.PLAYER_INFO_OVERLAY:
             GameState.renderer.fullscreen_imgui_ctx.set_as_current_context()
 
             with utils.begin_dev_overlay("player_info"):
@@ -96,6 +115,16 @@ class PlayerMovement:
             keys = pg.key.get_pressed()
             mods = pg.key.get_mods()
             vel = self.p_vel
+
+            # jump and change state
+            if keys[pg.K_SPACE]:
+                input_active = True
+
+                self.p_vel += (self.view_forward_flat * PlayerMovement.JUMP_FORWARD_IMPULSE * (0.)) + PlayerMovement.JUMP_IMPULSE
+                self.p_state = 1
+
+                self.tick_in_flight()
+                return
 
             if mods & pg.KMOD_SHIFT:
                 max_speed = PlayerMovement.SPRINT_MAX_SPEED
@@ -128,14 +157,6 @@ class PlayerMovement:
 
             self.p_vel = u_vel
 
-            # mouse input
-            rel = pg.mouse.get_rel()
-            self.view_rot.x += rel[1] * PlayerMovement.MOUSE_ACCEL
-            self.view_rot.y -= rel[0] * PlayerMovement.MOUSE_ACCEL
-
-            res = GameState.renderer.win_res
-            pg.mouse.set_pos(res[0] // 2, res[1] // 2)
-
         # update (always) ticking state
 
         if not input_active:
@@ -150,7 +171,51 @@ class PlayerMovement:
             pass # TODO: phys collision
 
     def tick_in_flight(self) -> None:
-        raise NotImplementedError
+        dt = GameState.delta_time
+
+        # update user input
+
+        input_active = False
+
+        if self.is_captured:
+            keys = pg.key.get_pressed()
+            mods = pg.key.get_mods()
+            vel = self.p_vel
+
+            accel = PlayerMovement.AIR_ACCEL
+            accel_vec = Vec3(0, 0, 0)
+
+            if keys[pg.K_w]:
+                accel_vec += self.view_forward_flat * accel * dt
+                input_active = True
+            if keys[pg.K_s]:
+                accel_vec -= self.view_forward_flat * accel * dt
+                input_active = True
+            if keys[pg.K_d]:
+                accel_vec += self.view_right_flat * accel * dt
+                input_active = True
+            if keys[pg.K_a]:
+                accel_vec -= self.view_right_flat * accel * dt
+                input_active = True
+
+            vel += accel_vec
+
+        # update (always) ticking state
+
+        self.p_vel += PlayerMovement.GRAVITY * dt
+            
+        pos_diff: Vec3 = self.p_vel * dt
+        scene_hit = None #PhysGrid.slide_aabb(self.p_pos, pos_diff)
+
+        if scene_hit is None:
+            self.p_pos += pos_diff
+        else:
+            pass # TODO: phys collision
+
+        # check if landed and change state (temp. currently assume infinite floor at y == 0.)
+        if self.p_pos.y <= 0.:
+            self.p_vel.y = 0.
+            self.p_state = 0
 
     def set_captured(self, cap: bool) -> None:
         pg.event.set_grab(cap)
