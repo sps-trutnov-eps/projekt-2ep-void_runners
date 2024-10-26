@@ -11,6 +11,9 @@ try:
     from engine.cue.rendering.cue_scene import RenderScene
 
     from engine.cue import cue_map
+    from engine.cue import cue_utils
+    from engine.cue import cue_cmds
+    from engine.cue import cue_sequence as seq
 
     from ui import GameUI
 
@@ -31,6 +34,8 @@ BOOTUP_MAP = "/maps/test_map.json"
 import entity.sps_player_spawn
 import entity.sps_static_cam
 
+import dev_utils
+
 # == init engine ==
 
 t = time.perf_counter()
@@ -41,34 +46,47 @@ GameState.entity_storage = EntityStorage()
 GameState.asset_manager = AssetManager(ASSET_DIR)
 
 GameState.renderer = CueRenderer((1280, 720), fullscreen=False, vsync=True)
+GameState.active_scene = RenderScene()
+
+# == Init game state ==
+
+game_ui = GameUI(lives=3, ammo=50, score=0)
+dev_con = False
+
+p_spawn: entity.sps_player_spawn.SpsPlayerSpawn | None = None
+
+def on_map_load(path: str) -> None:
+    global p_spawn
+
+    # try to lookup the player spawn entity
+    try:
+        p_spawn = GameState.entity_storage.get_entity("sps_player_spawn", "sps_player")
+    except KeyError:
+        p_spawn = None
+
+    # GameState.static_sequencer.on_event(cue_map.on_load_evid, on_map_load)
+# GameState.static_sequencer.on_event(cue_map.on_load_evid, on_map_load)
 
 # == init map ==
 
-def clear_map() -> None:
-    global t
-    t = time.perf_counter()
-
-    GameState.entity_storage.reset()
-    GameState.sequencer.reset(t)
-
-    # GameState.asset_manager.reset()
-    
-    GameState.active_scene = RenderScene()
-    # GameState.active_camera = None
-
-clear_map()
 cue_map.load_map(ASSET_DIR + BOOTUP_MAP)
+on_map_load(ASSET_DIR + BOOTUP_MAP)
 
 # == main game loop ==
-
-# == Init UI ==
-
-game_ui = GameUI(lives=3, ammo=50, score=0)
 
 while True:
     # == event poll ==
 
     for e in pg.event.get():
+        GameState.renderer.fullscreen_imgui_ctx.process_key_event(e)
+
+        if e.type == pg.MOUSEMOTION:
+            GameState.renderer.fullscreen_imgui_ctx.set_mouse_input(e.pos)
+
+        if e.type == pg.KEYDOWN and e.dict["key"] == pg.K_BACKQUOTE:
+            dev_con ^= True
+            p_spawn.player_controller.set_captured(not dev_con)
+
         if e.type == pg.QUIT:
             sys.exit(0)
 
@@ -94,6 +112,15 @@ while True:
     # == frame ==
 
     game_ui.render_ui()
+
+    if dev_con:
+        dev_con = cue_utils.show_developer_console()
+
+        if not dev_con:
+            p_spawn.player_controller.set_captured(True)
+
+    if dev_utils.is_perf_overlay_open:
+        cue_utils.show_perf_overlay()
 
     GameState.renderer.frame(GameState.active_camera, GameState.active_scene)
 

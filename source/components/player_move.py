@@ -38,9 +38,6 @@ class PlayerMovement:
     PLAYER_SIZE = Vec3(.2, .95, .2)
     CAMERA_OFFSET = Vec3(0, .8, 0)
 
-    # debug
-    PLAYER_INFO_OVERLAY = True
-
     def __init__(self, player_trans: Transform, player_cam: Camera, initial_view_rot: Vec2 = Vec2(0, 0)) -> None:
         self.controlled_trans = player_trans
         self.controlled_cam = player_cam
@@ -51,6 +48,7 @@ class PlayerMovement:
         self.p_state = 0
 
         self.view_rot = initial_view_rot
+        self.show_player_info = False
 
         seq.next(PlayerMovement.tick, self)
 
@@ -87,7 +85,7 @@ class PlayerMovement:
 
         self.controlled_cam.set_view(self.p_pos + PlayerMovement.CAMERA_OFFSET, Vec3(self.view_rot[0], self.view_rot[1], 0.))
 
-        if PlayerMovement.PLAYER_INFO_OVERLAY:
+        if self.show_player_info:
             GameState.renderer.fullscreen_imgui_ctx.set_as_current_context()
 
             with utils.begin_dev_overlay("player_info"):
@@ -241,3 +239,6 @@ class PlayerMovement:
     view_right_flat: Vec3
 
     p_aabb: None
+
+    # debug
+    show_player_info: bool

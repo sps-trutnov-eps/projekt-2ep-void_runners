@@ -2,8 +2,8 @@
     "cmf_ver": 2,
     "cmf_header": {
         "type_list": [
-            "sps_player_spawn",
-            "bt_static_mesh"
+            "bt_static_mesh",
+            "sps_player_spawn"
         ],
         "asset_list": []
     },
@@ -82,7 +82,7 @@
                 }
             ],
             [
-                "player_spawn",
+                "sps_player",
                 "sps_player_spawn",
                 {
                     "vec3://spawn_pos": [
