@@ -26,6 +26,9 @@ def spawn_player_point(en_data: dict):
     return SpsPlayerSpawn(en_data)
 
 def dev_player_spawn(s: None, dev_state: dict, en_data: dict) -> None:
+    if en_data["spawn_pos"] is None:
+        en_data["spawn_pos"] = dev_state["suggested_initial_pos"]
+
     min_p = en_data["spawn_pos"] - PlayerMovement.PLAYER_SIZE / 2
     max_p = en_data["spawn_pos"] + PlayerMovement.PLAYER_SIZE / 2
 
@@ -36,7 +39,7 @@ def dev_player_spawn(s: None, dev_state: dict, en_data: dict) -> None:
 
 def gen_def_data():
     return {
-        "spawn_pos": Vec3(),
+        "spawn_pos": None,
         "spawn_rot": Vec2(),
     }
 

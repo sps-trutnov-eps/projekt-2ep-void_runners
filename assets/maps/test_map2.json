@@ -1,0 +1,331 @@
+{
+    "cmf_ver": 2,
+    "cmf_header": {
+        "type_list": [
+            "bt_phys_aabb",
+            "sps_player_spawn",
+            "bt_static_mesh"
+        ],
+        "asset_list": []
+    },
+    "cmf_data": {
+        "map_entities": [
+            [
+                "r0_wall0",
+                "bt_static_mesh",
+                {
+                    "vec3://t_pos": [
+                        1.659999966621399,
+                        1.1299999952316284,
+                        -1.6399999856948853
+                    ],
+                    "vec3://t_rot": [
+                        0.0,
+                        0.0,
+                        0.0
+                    ],
+                    "vec3://t_scale": [
+                        2.4100000858306885,
+                        1.1299999952316284,
+                        1.0
+                    ],
+                    "a_model_mesh": "models/plane.npz",
+                    "a_model_vshader": "shaders/base_cam.vert",
+                    "a_model_fshader": "shaders/basic_lit.frag"
+                }
+            ],
+            [
+                "r0_floor",
+                "bt_static_mesh",
+                {
+                    "vec3://t_pos": [
+                        1.659999966621399,
+                        0.0,
+                        0.0
+                    ],
+                    "vec3://t_rot": [
+                        -90.0,
+                        0.0,
+                        0.0
+                    ],
+                    "vec3://t_scale": [
+                        2.4100000858306885,
+                        1.6399999856948853,
+                        1.0
+                    ],
+                    "a_model_mesh": "models/plane.npz",
+                    "a_model_vshader": "shaders/base_cam.vert",
+                    "a_model_fshader": "shaders/basic_lit.frag"
+                }
+            ],
+            [
+                "r0_wall1",
+                "bt_static_mesh",
+                {
+                    "vec3://t_pos": [
+                        1.659999966621399,
+                        1.1299999952316284,
+                        1.6399999856948853
+                    ],
+                    "vec3://t_rot": [
+                        0.0,
+                        0.0,
+                        0.0
+                    ],
+                    "vec3://t_scale": [
+                        2.4100000858306885,
+                        1.1299999952316284,
+                        1.0
+                    ],
+                    "a_model_mesh": "models/plane.npz",
+                    "a_model_vshader": "shaders/base_cam.vert",
+                    "a_model_fshader": "shaders/basic_lit.frag"
+                }
+            ],
+            [
+                "r0_ball1",
+                "bt_static_mesh",
+                {
+                    "vec3://t_pos": [
+                        2.9130001068115234,
+                        0.18700000643730164,
+                        -1.5199999809265137
+                    ],
+                    "vec3://t_rot": [
+                        0.0,
+                        0.0,
+                        0.0
+                    ],
+                    "vec3://t_scale": [
+                        0.30000001192092896,
+                        0.30000001192092896,
+                        0.30000001192092896
+                    ],
+                    "a_model_mesh": "models/icosph.npz",
+                    "a_model_vshader": "shaders/base_cam.vert",
+                    "a_model_fshader": "shaders/basic_lit.frag"
+                }
+            ],
+            [
+                "r0_ball0",
+                "bt_static_mesh",
+                {
+                    "vec3://t_pos": [
+                        3.5329999923706055,
+                        0.3569999933242798,
+                        -1.3200000524520874
+                    ],
+                    "vec3://t_rot": [
+                        0.0,
+                        0.0,
+                        0.0
+                    ],
+                    "vec3://t_scale": [
+                        0.5,
+                        0.5,
+                        0.5
+                    ],
+                    "a_model_mesh": "models/icosph.npz",
+                    "a_model_vshader": "shaders/base_cam.vert",
+                    "a_model_fshader": "shaders/basic_lit.frag"
+                }
+            ],
+            [
+                "sps_player",
+                "sps_player_spawn",
+                {
+                    "vec3://spawn_pos": [
+                        -0.009999999776482582,
+                        0.0,
+                        -0.3400000035762787
+                    ],
+                    "vec2://spawn_rot": [
+                        0.0,
+                        0.0
+                    ]
+                }
+            ],
+            [
+                "r0_floor_0",
+                "bt_static_mesh",
+                {
+                    "vec3://t_pos": [
+                        1.659999966621399,
+                        2.259999990463257,
+                        0.0
+                    ],
+                    "vec3://t_rot": [
+                        -90.0,
+                        0.0,
+                        0.0
+                    ],
+                    "vec3://t_scale": [
+                        2.4100000858306885,
+                        1.6399999856948853,
+                        1.0
+                    ],
+                    "a_model_mesh": "models/plane.npz",
+                    "a_model_vshader": "shaders/base_cam.vert",
+                    "a_model_fshader": "shaders/basic_lit.frag"
+                }
+            ],
+            [
+                "r0_ball1_0",
+                "bt_static_mesh",
+                {
+                    "vec3://t_pos": [
+                        -0.28200003504753113,
+                        0.2120000272989273,
+                        1.4649999141693115
+                    ],
+                    "vec3://t_rot": [
+                        0.0,
+                        0.0,
+                        0.0
+                    ],
+                    "vec3://t_scale": [
+                        0.41547009348869324,
+                        0.41547009348869324,
+                        0.41547009348869324
+                    ],
+                    "a_model_mesh": "models/icosph.npz",
+                    "a_model_vshader": "shaders/base_cam.vert",
+                    "a_model_fshader": "shaders/basic_lit.frag"
+                }
+            ],
+            [
+                "r0_ball1_1",
+                "bt_static_mesh",
+                {
+                    "vec3://t_pos": [
+                        0.4429999589920044,
+                        0.44700002670288086,
+                        1.3499999046325684
+                    ],
+                    "vec3://t_rot": [
+                        0.0,
+                        0.0,
+                        0.0
+                    ],
+                    "vec3://t_scale": [
+                        0.5309401750564575,
+                        0.5309401750564575,
+                        0.5309401750564575
+                    ],
+                    "a_model_mesh": "models/icosph.npz",
+                    "a_model_vshader": "shaders/base_cam.vert",
+                    "a_model_fshader": "shaders/basic_lit.frag"
+                }
+            ],
+            [
+                "r0_ball1_2",
+                "bt_static_mesh",
+                {
+                    "vec3://t_pos": [
+                        -0.10200004279613495,
+                        0.40700003504753113,
+                        -1.3200000524520874
+                    ],
+                    "vec3://t_rot": [
+                        0.0,
+                        0.0,
+                        0.0
+                    ],
+                    "vec3://t_scale": [
+                        0.5309401750564575,
+                        0.5309401750564575,
+                        0.5309401750564575
+                    ],
+                    "a_model_mesh": "models/icosph.npz",
+                    "a_model_vshader": "shaders/base_cam.vert",
+                    "a_model_fshader": "shaders/basic_lit.frag"
+                }
+            ],
+            [
+                "r0_bott_coll",
+                "bt_phys_aabb",
+                {
+                    "vec3://t_pos": [
+                        1.659999966621399,
+                        -0.02500000037252903,
+                        0.0
+                    ],
+                    "vec3://t_scale": [
+                        4.820000171661377,
+                        0.05000000074505806,
+                        3.2799999713897705
+                    ],
+                    "phys_bitmask": 0.0
+                }
+            ],
+            [
+                "r0_top_coll",
+                "bt_phys_aabb",
+                {
+                    "vec3://t_pos": [
+                        1.659999966621399,
+                        2.2849998474121094,
+                        0.0
+                    ],
+                    "vec3://t_scale": [
+                        4.820000171661377,
+                        0.05000000074505806,
+                        3.2799999713897705
+                    ],
+                    "phys_bitmask": 0.0
+                }
+            ],
+            [
+                "r0_side_coll",
+                "bt_phys_aabb",
+                {
+                    "vec3://t_pos": [
+                        1.659999966621399,
+                        1.1299998760223389,
+                        1.6649999618530273
+                    ],
+                    "vec3://t_scale": [
+                        4.820000171661377,
+                        2.3600001335144043,
+                        0.05000000074505806
+                    ],
+                    "phys_bitmask": 0.0
+                }
+            ],
+            [
+                "r0_side_coll_0",
+                "bt_phys_aabb",
+                {
+                    "vec3://t_pos": [
+                        1.659999966621399,
+                        1.1299998760223389,
+                        -1.6649999618530273
+                    ],
+                    "vec3://t_scale": [
+                        4.820000171661377,
+                        2.3600001335144043,
+                        0.05000000074505806
+                    ],
+                    "phys_bitmask": 0.0
+                }
+            ],
+            [
+                "r0_prop_coll",
+                "bt_phys_aabb",
+                {
+                    "vec3://t_pos": [
+                        3.5387818813323975,
+                        0.41586005687713623,
+                        -1.2619338035583496
+                    ],
+                    "vec3://t_scale": [
+                        0.8152478933334351,
+                        0.8152478933334351,
+                        0.8152478933334351
+                    ],
+                    "phys_bitmask": 0.0
+                }
+            ]
+        ]
+    }
+}

@@ -27,7 +27,7 @@ except ImportError:
 # == contants ==
 
 ASSET_DIR = os.path.join(os.path.dirname(__file__), "../assets")
-BOOTUP_MAP = "/maps/test_map.json"
+BOOTUP_MAP = "/maps/test_map2.json"
 
 # == import game entities ==
 

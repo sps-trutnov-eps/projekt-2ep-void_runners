@@ -30,6 +30,9 @@ def spawn_player_point(en_data: dict):
 
 def dev_player_spawn(s: dict | None, dev_state: dict, en_data: dict) -> dict:
     if s is None or not s["last_dict"] == en_data:
+        if en_data["t_pos"] is None:
+            en_data["t_pos"] = dev_state["suggested_initial_pos"]
+
         s = {
             "last_dict": dict(en_data),
             "trans": Transform(en_data["t_pos"], Vec3(en_data["t_rot"].x, -en_data["t_rot"].y, 0.)),
@@ -57,7 +60,7 @@ def dev_player_spawn(s: dict | None, dev_state: dict, en_data: dict) -> dict:
 
 def gen_def_data():
     return {
-        "t_pos": Vec3(),
+        "t_pos": None,
         "t_rot": Vec2(),
     }
 
