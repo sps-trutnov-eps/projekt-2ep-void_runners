@@ -1,8 +1,5 @@
 # Použitá díla třetích stran
 
-- **Autor díla**; *Název díla*; https://odkaz.na/konkretni/stranku
-- **Autor díla**; *Název díla*; https://odkaz.na/konkretni/stranku
-- **Autor díla**; *Název díla*; https://odkaz.na/konkretni/stranku
-- ...
+- **Kenney (www.kenney.nl)**; *Prototype Textures 1.0*; https://kenney.nl/assets/prototype-textures
 
 *Všechna ostatní zde neuvedená díla jsou vlastní tvorbou.*

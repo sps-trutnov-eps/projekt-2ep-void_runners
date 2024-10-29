@@ -38,7 +38,7 @@ utils.add_dev_command("gen_map", gen_map)
 
 def player_info_cmd(args: list[str]):
     try:
-        p_spawn = GameState.entity_storage.get_entity("sps_player_spawn", "sps_spawn")
+        p_spawn = GameState.entity_storage.get_entity("sps_player_spawn", "sps_player")
     except KeyError:
         utils.error("[dev utils] No active player controller, can't show info")
         return
