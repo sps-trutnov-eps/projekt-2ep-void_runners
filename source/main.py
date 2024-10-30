@@ -1,4 +1,4 @@
-import time, os, sys
+import time, os, sys, argparse
 
 try:
     from engine.cue.cue_state import GameState
@@ -26,13 +26,24 @@ except ImportError:
 
 # == contants ==
 
-ASSET_DIR = os.path.join(os.path.dirname(__file__), "../assets")
-BOOTUP_MAP = "/maps/test_map2.json"
+ASSET_DIR = os.path.join(os.path.dirname(__file__), "../assets/")
+BOOTUP_MAP =  ASSET_DIR + "/maps/test_map2.json"
+
+# == launch arguments ==
+
+p = argparse.ArgumentParser()
+p.add_argument("--bmap", type=str, dest="bootup_map")
+
+args = p.parse_args()
+
+if args.bootup_map:
+    BOOTUP_MAP = args.bootup_map
 
 # == import game entities ==
 
 import entity.sps_player_spawn
 import entity.sps_static_cam
+import entity.sps_dev_text
 
 import dev_utils
 
@@ -69,8 +80,8 @@ def on_map_load(path: str) -> None:
 
 # == init map ==
 
-cue_map.load_map(ASSET_DIR + BOOTUP_MAP)
-on_map_load(ASSET_DIR + BOOTUP_MAP)
+cue_map.load_map(BOOTUP_MAP)
+on_map_load(BOOTUP_MAP)
 
 # == main game loop ==
 

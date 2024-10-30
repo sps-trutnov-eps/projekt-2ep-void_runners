@@ -6,6 +6,7 @@ from engine.cue.rendering import cue_gizmos as gizmo
 from engine.cue.cue_state import GameState
 from engine.cue.components.cue_transform import Transform
 from engine.cue.rendering.cue_camera import Camera
+from engine.cue.entities.cue_entity_utils import handle_transform_edit_mode
 
 from pygame.math import Vector3 as Vec3, Vector2 as Vec2
 
@@ -37,6 +38,10 @@ def dev_player_spawn(s: dict | None, dev_state: dict, en_data: dict) -> dict:
             "last_dict": dict(en_data),
             "trans": Transform(en_data["t_pos"], Vec3(en_data["t_rot"].x, -en_data["t_rot"].y, 0.)),
         }
+
+    if dev_state["is_selected"]:
+        # handle trasnsform editing
+        handle_transform_edit_mode(s, dev_state, en_data, True, False, False)
     
     pos = en_data["t_pos"]
     min_p = pos - Vec3(.15, .15, .15)

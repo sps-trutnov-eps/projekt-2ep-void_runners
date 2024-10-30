@@ -6,6 +6,7 @@ from engine.cue.rendering import cue_gizmos as gizmo
 from engine.cue.cue_state import GameState
 from engine.cue.components.cue_transform import Transform
 from engine.cue.rendering.cue_camera import Camera
+from engine.cue.entities.cue_entity_utils import handle_transform_edit_mode
 
 from components.player_move import PlayerMovement
 
@@ -18,28 +19,37 @@ class SpsPlayerSpawn:
     def __init__(self, en_data: dict) -> None:
         GameState.active_camera = Camera(GameState.renderer.win_aspect)
 
-        self.player_controller = PlayerMovement(Transform(en_data["spawn_pos"], Vec3(0., 0., 0.)), GameState.active_camera, en_data["spawn_rot"])
+        self.player_controller = PlayerMovement(Transform(en_data["t_pos"], Vec3(0., 0., 0.)), GameState.active_camera, en_data["spawn_rot"])
     
     player_controller: PlayerMovement
 
 def spawn_player_point(en_data: dict):
     return SpsPlayerSpawn(en_data)
 
-def dev_player_spawn(s: None, dev_state: dict, en_data: dict) -> None:
-    if en_data["spawn_pos"] is None:
-        en_data["spawn_pos"] = dev_state["suggested_initial_pos"]
+def dev_player_spawn(s: dict | None, dev_state: dict, en_data: dict) -> dict:
+    if en_data["t_pos"] is None:
+        en_data["t_pos"] = dev_state["suggested_initial_pos"]
 
-    min_p = en_data["spawn_pos"] - PlayerMovement.PLAYER_SIZE / 2
-    max_p = en_data["spawn_pos"] + PlayerMovement.PLAYER_SIZE / 2
+    if s is None:
+        s = {}
+
+    if dev_state["is_selected"]:
+        # handle trasnsform editing
+        handle_transform_edit_mode(s, dev_state, en_data, True, False, False)
+
+    min_p = en_data["t_pos"] - PlayerMovement.PLAYER_SIZE / 2
+    max_p = en_data["t_pos"] + PlayerMovement.PLAYER_SIZE / 2
 
     min_p.y += PlayerMovement.PLAYER_SIZE.y / 2
     max_p.y += PlayerMovement.PLAYER_SIZE.y / 2
     
     gizmo.draw_box(min_p, max_p, Vec3(1., 1., .2) if dev_state["is_selected"] else Vec3(.7, .7, .05))
 
+    return s
+
 def gen_def_data():
     return {
-        "spawn_pos": None,
+        "t_pos": None,
         "spawn_rot": Vec2(),
     }
 

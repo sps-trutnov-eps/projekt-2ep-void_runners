@@ -6,6 +6,10 @@ OpenGL.ERROR_LOGGING = True
 
 OpenGL.ERROR_ON_COPY = False
 
+import sys, subprocess
+def test_play(map_path: str):
+    subprocess.Popen([sys.executable, "source/main.py", "--bmap", map_path])
+
 # == import engine ==
 
 try: import engine.cue.editor.on_cue as on_cue
@@ -16,6 +20,8 @@ except ImportError:
 # == import game entities ==
 import entity.sps_player_spawn
 import entity.sps_static_cam
+import entity.sps_dev_text
 
 on_cue.EDITOR_ASSET_DIR = os.path.join(os.path.dirname(__file__), "../assets")
+on_cue.EDITOR_TEST_PLAY_CALLBACK = test_play
 on_cue.start_editor()

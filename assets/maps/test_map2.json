@@ -134,7 +134,7 @@
                 "sps_player",
                 "sps_player_spawn",
                 {
-                    "vec3://spawn_pos": [
+                    "vec3://t_pos": [
                         -0.009999999776482582,
                         0.0,
                         -0.3400000035762787

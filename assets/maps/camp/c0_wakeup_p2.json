@@ -2,9 +2,11 @@
     "cmf_ver": 2,
     "cmf_header": {
         "type_list": [
-            "bt_static_mesh",
+            "bt_phys_aabb",
+            "bt_map_trigger",
             "sps_player_spawn",
-            "bt_phys_aabb"
+            "bt_static_mesh",
+            "sps_dev_text"
         ],
         "asset_list": []
     },
@@ -39,7 +41,7 @@
                 "sps_player",
                 "sps_player_spawn",
                 {
-                    "vec3://spawn_pos": [
+                    "vec3://t_pos": [
                         -0.47600001096725464,
                         0.0,
                         0.6129999756813049
@@ -560,28 +562,11 @@
                 }
             ],
             [
-                "r1_exit_map_trigger",
-                "bt_phys_aabb",
-                {
-                    "vec3://t_pos": [
-                        0.24525882303714752,
-                        1.1128426790237427,
-                        -28.900650024414062
-                    ],
-                    "vec3://t_scale": [
-                        2.35146164894104,
-                        2.216461658477783,
-                        0.3764617145061493
-                    ],
-                    "dev_comment": "// TODO: bt_map_trigger"
-                }
-            ],
-            [
                 "r1_exit_door",
                 "bt_static_mesh",
                 {
                     "vec3://t_pos": [
-                        -0.24100000619888307,
+                        -0.2410000115633011,
                         -0.42552071809768677,
                         -30.519615173339844
                     ],
@@ -598,7 +583,7 @@
                     "a_model_mesh": "models/door.npz",
                     "a_model_vshader": "shaders/base_cam.vert",
                     "a_model_fshader": "shaders/unlit.frag",
-                    "a_model_albedo": "textures/proto/Dark/texture_01.png"
+                    "a_model_albedo": "textures/proto/Purple/texture_08.png"
                 }
             ],
             [
@@ -704,7 +689,7 @@
                 "bt_static_mesh",
                 {
                     "vec3://t_pos": [
-                        5.275000095367432,
+                        6.510000095367432,
                         0.0,
                         -38.00385665893555
                     ],
@@ -722,6 +707,710 @@
                     "a_model_vshader": "shaders/base_cam.vert",
                     "a_model_fshader": "shaders/unlit.frag",
                     "a_model_albedo": "textures/proto/Dark/texture_01.png"
+                }
+            ],
+            [
+                "r1_wall_0",
+                "bt_static_mesh",
+                {
+                    "vec3://t_pos": [
+                        7.054328308105469,
+                        -4.885743618011475,
+                        -15.609781265258789
+                    ],
+                    "vec3://t_rot": [
+                        0.0,
+                        -90.0,
+                        180.0
+                    ],
+                    "vec3://t_scale": [
+                        12.545050621032715,
+                        13.689493179321289,
+                        0.9994932413101196
+                    ],
+                    "a_model_mesh": "models/plane.npz",
+                    "a_model_vshader": "shaders/base_cam.vert",
+                    "a_model_fshader": "shaders/unlit.frag",
+                    "a_model_albedo": "textures/proto/Dark/texture_13.png"
+                }
+            ],
+            [
+                "r1_wall_1",
+                "bt_static_mesh",
+                {
+                    "vec3://t_pos": [
+                        -9.870671272277832,
+                        -4.886000156402588,
+                        -15.609781265258789
+                    ],
+                    "vec3://t_rot": [
+                        0.0,
+                        90.0,
+                        180.0
+                    ],
+                    "vec3://t_scale": [
+                        12.545050621032715,
+                        13.689493179321289,
+                        0.9994932413101196
+                    ],
+                    "a_model_mesh": "models/plane.npz",
+                    "a_model_vshader": "shaders/base_cam.vert",
+                    "a_model_fshader": "shaders/unlit.frag",
+                    "a_model_albedo": "textures/proto/Dark/texture_13.png"
+                }
+            ],
+            [
+                "r1_top",
+                "bt_static_mesh",
+                {
+                    "vec3://t_pos": [
+                        -1.4110000133514404,
+                        8.809000015258789,
+                        -17.534780502319336
+                    ],
+                    "vec3://t_rot": [
+                        90.0,
+                        180.0,
+                        0.0
+                    ],
+                    "vec3://t_scale": [
+                        8.535530090332031,
+                        10.656405448913574,
+                        0.7780423164367676
+                    ],
+                    "a_model_mesh": "models/plane.npz",
+                    "a_model_vshader": "shaders/base_cam.vert",
+                    "a_model_fshader": "shaders/unlit.frag",
+                    "a_model_albedo": "textures/proto/Dark/texture_13.png"
+                }
+            ],
+            [
+                "r1_room_note",
+                "sps_dev_text",
+                {
+                    "vec3://t_pos": [
+                        0.0,
+                        0.44886863231658936,
+                        -4.5210185050964355
+                    ],
+                    "dev_text": "First course chamber, part of the \"invisible tutorial\" for jumping and sprinting.",
+                    "hide_text": false
+                }
+            ],
+            [
+                "cor2_dev_note",
+                "sps_dev_text",
+                {
+                    "vec3://t_pos": [
+                        -0.040950238704681396,
+                        0.6534915566444397,
+                        -37.924678802490234
+                    ],
+                    "dev_text": "A small transition hallway area. There should be a line guiding the player to the next chamber, maybe also throw some props around?",
+                    "hide_text": false
+                }
+            ],
+            [
+                "cor3_decor_2",
+                "bt_static_mesh",
+                {
+                    "vec3://t_pos": [
+                        12.633231163024902,
+                        1.1608961820602417,
+                        -41.45200729370117
+                    ],
+                    "vec3://t_rot": [
+                        0.0,
+                        0.0,
+                        4.0
+                    ],
+                    "vec3://t_scale": [
+                        0.16284210979938507,
+                        1.2778421640396118,
+                        0.5928421020507812
+                    ],
+                    "a_model_mesh": "models/cube.npz",
+                    "a_model_vshader": "shaders/base_cam.vert",
+                    "a_model_fshader": "shaders/unlit.frag"
+                }
+            ],
+            [
+                "cor3_decor_3",
+                "bt_static_mesh",
+                {
+                    "vec3://t_pos": [
+                        12.633231163024902,
+                        1.1608961820602417,
+                        -44.832008361816406
+                    ],
+                    "vec3://t_rot": [
+                        0.0,
+                        0.0,
+                        4.0
+                    ],
+                    "vec3://t_scale": [
+                        0.16284210979938507,
+                        1.2778421640396118,
+                        0.5928421020507812
+                    ],
+                    "a_model_mesh": "models/cube.npz",
+                    "a_model_vshader": "shaders/base_cam.vert",
+                    "a_model_fshader": "shaders/unlit.frag"
+                }
+            ],
+            [
+                "cor3_bott_0",
+                "bt_static_mesh",
+                {
+                    "vec3://t_pos": [
+                        13.549999237060547,
+                        0.0,
+                        -43.17386245727539
+                    ],
+                    "vec3://t_rot": [
+                        -90.0,
+                        0.0,
+                        0.0
+                    ],
+                    "vec3://t_scale": [
+                        0.9950000047683716,
+                        3.565000057220459,
+                        1.0
+                    ],
+                    "a_model_mesh": "models/plane.npz",
+                    "a_model_vshader": "shaders/base_cam.vert",
+                    "a_model_fshader": "shaders/unlit.frag",
+                    "a_model_albedo": "textures/proto/Dark/texture_01.png"
+                }
+            ],
+            [
+                "cor3_side_1",
+                "bt_static_mesh",
+                {
+                    "vec3://t_pos": [
+                        12.549999237060547,
+                        1.274999976158142,
+                        -43.17386245727539
+                    ],
+                    "vec3://t_rot": [
+                        -90.0,
+                        -90.0,
+                        0.0
+                    ],
+                    "vec3://t_scale": [
+                        1.5049999952316284,
+                        3.565000057220459,
+                        1.0
+                    ],
+                    "a_model_mesh": "models/plane.npz",
+                    "a_model_vshader": "shaders/base_cam.vert",
+                    "a_model_fshader": "shaders/unlit.frag",
+                    "a_model_albedo": "textures/proto/Dark/texture_01.png"
+                }
+            ],
+            [
+                "cor2_course_guide_decal",
+                "bt_static_mesh",
+                {
+                    "vec3://t_pos": [
+                        4.540432453155518,
+                        1.1087631559371949,
+                        -39.64377975463867
+                    ],
+                    "vec3://t_rot": [
+                        0.0,
+                        0.0,
+                        0.0
+                    ],
+                    "vec3://t_scale": [
+                        7.710000991821289,
+                        0.11500000298023223,
+                        1.0
+                    ],
+                    "a_model_mesh": "models/plane.npz",
+                    "a_model_vshader": "shaders/base_cam.vert",
+                    "a_model_fshader": "shaders/unlit.frag",
+                    "a_model_albedo": "textures/proto/Red/texture_04.png",
+                    "a_model_transparent": false
+                }
+            ],
+            [
+                "r2_entry_bott",
+                "bt_static_mesh",
+                {
+                    "vec3://t_pos": [
+                        13.55871295928955,
+                        0.0,
+                        -48.271942138671875
+                    ],
+                    "vec3://t_rot": [
+                        -90.0,
+                        0.0,
+                        0.0
+                    ],
+                    "vec3://t_scale": [
+                        3.359999895095825,
+                        1.5399999618530273,
+                        1.0
+                    ],
+                    "a_model_mesh": "models/plane.npz",
+                    "a_model_vshader": "shaders/base_cam.vert",
+                    "a_model_fshader": "shaders/unlit.frag",
+                    "a_model_albedo": "textures/proto/Dark/texture_01.png",
+                    "a_model_transparent": false
+                }
+            ],
+            [
+                "r2_entry_ledge_decal",
+                "bt_static_mesh",
+                {
+                    "vec3://t_pos": [
+                        13.559000015258789,
+                        0.004999999888241291,
+                        -49.74700164794922
+                    ],
+                    "vec3://t_rot": [
+                        -90.0,
+                        0.0,
+                        0.0
+                    ],
+                    "vec3://t_scale": [
+                        3.3600001335144043,
+                        0.06500007957220078,
+                        1.0
+                    ],
+                    "a_model_mesh": "models/plane.npz",
+                    "a_model_vshader": "shaders/base_cam.vert",
+                    "a_model_fshader": "shaders/unlit.frag",
+                    "a_model_albedo": "textures/proto/Orange/texture_02.png"
+                }
+            ],
+            [
+                "r2_platform_0",
+                "bt_static_mesh",
+                {
+                    "vec3://t_pos": [
+                        13.559000015258789,
+                        -0.2286512851715088,
+                        -53.191111907958984
+                    ],
+                    "vec3://t_rot": [
+                        0.0,
+                        0.0,
+                        0.0
+                    ],
+                    "vec3://t_scale": [
+                        0.6782715094089509,
+                        0.15827150642871857,
+                        0.4832715094089508
+                    ],
+                    "a_model_mesh": "models/cube.npz",
+                    "a_model_vshader": "shaders/base_cam.vert",
+                    "a_model_fshader": "shaders/unlit.frag",
+                    "a_model_albedo": "textures/proto/Dark/texture_08.png",
+                    "a_model_transparent": false
+                }
+            ],
+            [
+                "r2_platform_rail_0",
+                "bt_static_mesh",
+                {
+                    "vec3://t_pos": [
+                        13.559000015258789,
+                        -0.6486513018608093,
+                        -53.191111907958984
+                    ],
+                    "vec3://t_rot": [
+                        0.0,
+                        0.0,
+                        0.0
+                    ],
+                    "vec3://t_scale": [
+                        4.243990898132324,
+                        0.09893631935119629,
+                        0.114563949406147
+                    ],
+                    "a_model_mesh": "models/cube.npz",
+                    "a_model_vshader": "shaders/base_cam.vert",
+                    "a_model_fshader": "shaders/unlit.frag",
+                    "a_model_albedo": "textures/proto/Dark/texture_08.png",
+                    "a_model_transparent": false
+                }
+            ],
+            [
+                "r2_platform_rail_1",
+                "bt_static_mesh",
+                {
+                    "vec3://t_pos": [
+                        13.559000015258789,
+                        -0.6486513018608093,
+                        -56.721114044189456
+                    ],
+                    "vec3://t_rot": [
+                        0.0,
+                        0.0,
+                        0.0
+                    ],
+                    "vec3://t_scale": [
+                        4.243990898132324,
+                        0.09893631935119629,
+                        0.114563949406147
+                    ],
+                    "a_model_mesh": "models/cube.npz",
+                    "a_model_vshader": "shaders/base_cam.vert",
+                    "a_model_fshader": "shaders/unlit.frag",
+                    "a_model_albedo": "textures/proto/Dark/texture_08.png",
+                    "a_model_transparent": false
+                }
+            ],
+            [
+                "r2_platform_1",
+                "bt_static_mesh",
+                {
+                    "vec3://t_pos": [
+                        13.559000015258789,
+                        -0.2286512851715088,
+                        -56.721114044189456
+                    ],
+                    "vec3://t_rot": [
+                        0.0,
+                        0.0,
+                        0.0
+                    ],
+                    "vec3://t_scale": [
+                        0.6782715320587158,
+                        0.15827150642871857,
+                        0.4832715094089508
+                    ],
+                    "a_model_mesh": "models/cube.npz",
+                    "a_model_vshader": "shaders/base_cam.vert",
+                    "a_model_fshader": "shaders/unlit.frag",
+                    "a_model_albedo": "textures/proto/Dark/texture_08.png",
+                    "a_model_transparent": false
+                }
+            ],
+            [
+                "r2_platform_2",
+                "bt_static_mesh",
+                {
+                    "vec3://t_pos": [
+                        13.559000015258789,
+                        -0.2286512851715088,
+                        -60.031110992431636
+                    ],
+                    "vec3://t_rot": [
+                        0.0,
+                        0.0,
+                        0.0
+                    ],
+                    "vec3://t_scale": [
+                        0.6782715320587158,
+                        0.15827150642871857,
+                        0.4832715094089508
+                    ],
+                    "a_model_mesh": "models/cube.npz",
+                    "a_model_vshader": "shaders/base_cam.vert",
+                    "a_model_fshader": "shaders/unlit.frag",
+                    "a_model_albedo": "textures/proto/Dark/texture_08.png",
+                    "a_model_transparent": false
+                }
+            ],
+            [
+                "r2_platform_rail_2",
+                "bt_static_mesh",
+                {
+                    "vec3://t_pos": [
+                        13.559000015258789,
+                        -0.6486513018608093,
+                        -60.031110992431636
+                    ],
+                    "vec3://t_rot": [
+                        0.0,
+                        0.0,
+                        0.0
+                    ],
+                    "vec3://t_scale": [
+                        4.243990898132324,
+                        0.09893631935119629,
+                        0.114563949406147
+                    ],
+                    "a_model_mesh": "models/cube.npz",
+                    "a_model_vshader": "shaders/base_cam.vert",
+                    "a_model_fshader": "shaders/unlit.frag",
+                    "a_model_albedo": "textures/proto/Dark/texture_08.png",
+                    "a_model_transparent": false
+                }
+            ],
+            [
+                "r2_entry_bott_coll",
+                "bt_phys_aabb",
+                {
+                    "vec3://t_pos": [
+                        13.559000015258789,
+                        -0.02500000037252903,
+                        -48.27199935913086
+                    ],
+                    "vec3://t_scale": [
+                        6.71999979019165,
+                        0.05000000074505806,
+                        3.080000162124634
+                    ],
+                    "phys_bitmask": 0.0
+                }
+            ],
+            [
+                "r2_exit_bott_coll",
+                "bt_phys_aabb",
+                {
+                    "vec3://t_pos": [
+                        13.559000015258789,
+                        -0.02500000037252903,
+                        -64.3969955444336
+                    ],
+                    "vec3://t_scale": [
+                        6.71999979019165,
+                        0.05000000074505806,
+                        3.080000162124634
+                    ],
+                    "phys_bitmask": 0.0
+                }
+            ],
+            [
+                "r2_exit_ledge_decal",
+                "bt_static_mesh",
+                {
+                    "vec3://t_pos": [
+                        13.559000015258789,
+                        0.004999999888241291,
+                        -62.922000885009766
+                    ],
+                    "vec3://t_rot": [
+                        -90.0,
+                        0.0,
+                        0.0
+                    ],
+                    "vec3://t_scale": [
+                        3.3600001335144043,
+                        0.06500007957220078,
+                        1.0
+                    ],
+                    "a_model_mesh": "models/plane.npz",
+                    "a_model_vshader": "shaders/base_cam.vert",
+                    "a_model_fshader": "shaders/unlit.frag",
+                    "a_model_albedo": "textures/proto/Orange/texture_02.png"
+                }
+            ],
+            [
+                "r2_exit_bott",
+                "bt_static_mesh",
+                {
+                    "vec3://t_pos": [
+                        13.55871295928955,
+                        0.0,
+                        -64.39694213867188
+                    ],
+                    "vec3://t_rot": [
+                        -90.0,
+                        0.0,
+                        0.0
+                    ],
+                    "vec3://t_scale": [
+                        3.359999895095825,
+                        1.5399999618530273,
+                        1.0
+                    ],
+                    "a_model_mesh": "models/plane.npz",
+                    "a_model_vshader": "shaders/base_cam.vert",
+                    "a_model_fshader": "shaders/unlit.frag",
+                    "a_model_albedo": "textures/proto/Dark/texture_01.png",
+                    "a_model_transparent": false
+                }
+            ],
+            [
+                "r2_dev_note",
+                "sps_dev_text",
+                {
+                    "vec3://t_pos": [
+                        13.511634826660156,
+                        0.4495559632778168,
+                        -56.71164321899414
+                    ],
+                    "dev_text": "These platforms will be stationary at first, but start moving after the battery is inserted",
+                    "hide_text": false
+                }
+            ],
+            [
+                "r2_exit_door_busted",
+                "bt_static_mesh",
+                {
+                    "vec3://t_pos": [
+                        13.284197196960449,
+                        -0.49256202578544617,
+                        -67.3502197265625
+                    ],
+                    "vec3://t_rot": [
+                        0.0,
+                        0.0,
+                        0.0
+                    ],
+                    "vec3://t_scale": [
+                        0.13108783960342407,
+                        0.13108783960342407,
+                        0.13108783960342407
+                    ],
+                    "a_model_mesh": "models/door.npz",
+                    "a_model_vshader": "shaders/base_cam.vert",
+                    "a_model_fshader": "shaders/unlit.frag",
+                    "a_model_albedo": "textures/proto/Purple/texture_08.png",
+                    "a_model_transparent": false
+                }
+            ],
+            [
+                "r2_battery_prop",
+                "sps_dev_text",
+                {
+                    "vec3://t_pos": [
+                        15.865097999572754,
+                        0.0880584642291069,
+                        -65.43856811523438
+                    ],
+                    "dev_text": "A grabbable battery, can be inserted into the battery slot, TODO: sps_grab_prop entity type",
+                    "hide_text": false
+                }
+            ],
+            [
+                "r2_exit_door_note",
+                "sps_dev_text",
+                {
+                    "vec3://t_pos": [
+                        13.57650375366211,
+                        0.8686028122901917,
+                        -65.13082122802734
+                    ],
+                    "dev_text": "non-functioning door, player must find a diff way",
+                    "hide_text": false
+                }
+            ],
+            [
+                "r2_exit_power_slot",
+                "bt_static_mesh",
+                {
+                    "vec3://t_pos": [
+                        11.138690948486328,
+                        0.9150193929672241,
+                        -65.83556365966797
+                    ],
+                    "vec3://t_rot": [
+                        0.0,
+                        0.0,
+                        0.0
+                    ],
+                    "vec3://t_scale": [
+                        0.15588058531284332,
+                        0.22588057816028595,
+                        0.07088058441877365
+                    ],
+                    "a_model_mesh": "models/cube.npz",
+                    "a_model_vshader": "shaders/base_cam.vert",
+                    "a_model_fshader": "shaders/unlit.frag",
+                    "a_model_albedo": "textures/proto/Green/texture_09.png",
+                    "a_model_transparent": false
+                }
+            ],
+            [
+                "r2_exit_power_slot_note",
+                "sps_dev_text",
+                {
+                    "vec3://t_pos": [
+                        11.161772727966309,
+                        0.9358670115470886,
+                        -65.5606689453125
+                    ],
+                    "dev_text": "A power slot for a battery with suspitious cables going across the room to cor2",
+                    "hide_text": false
+                }
+            ],
+            [
+                "cor2_exit_door",
+                "bt_static_mesh",
+                {
+                    "vec3://t_pos": [
+                        19.36290740966797,
+                        -0.5369787216186523,
+                        -38.30411148071289
+                    ],
+                    "vec3://t_rot": [
+                        0.0,
+                        90.0,
+                        0.0
+                    ],
+                    "vec3://t_scale": [
+                        0.14575426280498505,
+                        0.14575426280498505,
+                        0.14575426280498505
+                    ],
+                    "a_model_mesh": "models/door.npz",
+                    "a_model_vshader": "shaders/base_cam.vert",
+                    "a_model_fshader": "shaders/unlit.frag",
+                    "a_model_albedo": "textures/proto/Purple/texture_08.png",
+                    "a_model_transparent": false
+                }
+            ],
+            [
+                "cor2_exit_map_trig",
+                "bt_map_trigger",
+                {
+                    "vec3://t_pos": [
+                        17.095834732055664,
+                        1.0924592018127441,
+                        -38.01653289794922
+                    ],
+                    "vec3://t_scale": [
+                        0.9100000262260437,
+                        2.0,
+                        2.0
+                    ],
+                    "next_map": "maps/camp/c0_wakeup_p3.json",
+                    "enabled_at_start": false
+                }
+            ],
+            [
+                "cor2_exit_note",
+                "sps_dev_text",
+                {
+                    "vec3://t_pos": [
+                        17.44878578186035,
+                        0.8507369160652161,
+                        -37.996826171875
+                    ],
+                    "dev_text": "This door will seem to be locked, but will open once the battery is inserted in the chamber to the left",
+                    "hide_text": false
+                }
+            ],
+            [
+                "cor2_exit_note_1",
+                "sps_dev_text",
+                {
+                    "vec3://t_pos": [
+                        17.44878578186035,
+                        0.6957369446754456,
+                        -37.996826171875
+                    ],
+                    "dev_text": "Some wireige would be nice to signal to the player the door / battery interaction",
+                    "hide_text": false
+                }
+            ],
+            [
+                "cor2_course_guide_note",
+                "sps_dev_text",
+                {
+                    "vec3://t_pos": [
+                        11.865434646606445,
+                        1.1138290166854858,
+                        -39.38190841674805
+                    ],
+                    "dev_text": "\"Arial Exa Training, This Way\"",
+                    "hide_text": false
                 }
             ]
         ]
