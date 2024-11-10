@@ -1,0 +1,107 @@
+{
+    "cmf_ver": 2,
+    "cmf_header": {
+        "type_list": [
+            "bt_static_mesh",
+            "sps_player_spawn"
+        ],
+        "asset_list": []
+    },
+    "cmf_data": {
+        "map_entities": [
+            [
+                "new_entity",
+                "bt_static_mesh",
+                {
+                    "vec3://t_pos": [
+                        0.0,
+                        0.0,
+                        -2.0
+                    ],
+                    "vec3://t_rot": [
+                        0.0,
+                        0.0,
+                        0.0
+                    ],
+                    "vec3://t_scale": [
+                        1.0,
+                        1.0,
+                        1.0
+                    ],
+                    "a_model_mesh": "models/cube.npz",
+                    "a_model_vshader": "shaders/base_cam.vert",
+                    "a_model_fshader": "shaders/basic_lit.frag",
+                    "a_model_albedo": "textures/def_white.png",
+                    "a_model_transparent": false
+                }
+            ],
+            [
+                "new_entity_0",
+                "sps_player_spawn",
+                {
+                    "vec3://t_pos": [
+                        -0.02588387206196785,
+                        0.9772680401802063,
+                        -2.377497911453247
+                    ],
+                    "vec2://spawn_rot": [
+                        0.0,
+                        0.0
+                    ]
+                }
+            ],
+            [
+                "wall",
+                "bt_static_mesh",
+                {
+                    "vec3://t_pos": [
+                        -0.004024328663945198,
+                        2.0036277770996094,
+                        -2.980583906173706
+                    ],
+                    "vec3://t_rot": [
+                        0.0,
+                        0.0,
+                        0.0
+                    ],
+                    "vec3://t_scale": [
+                        1.0,
+                        1.0,
+                        1.0
+                    ],
+                    "a_model_mesh": "models/plane.npz",
+                    "a_model_vshader": "shaders/base_cam.vert",
+                    "a_model_fshader": "shaders/basic_lit.frag",
+                    "a_model_albedo": "textures/def_white.png",
+                    "a_model_transparent": false
+                }
+            ],
+            [
+                "wall_0",
+                "bt_static_mesh",
+                {
+                    "vec3://t_pos": [
+                        -0.029024329036474228,
+                        1.9436277151107788,
+                        -2.0755839347839355
+                    ],
+                    "vec3://t_rot": [
+                        0.0,
+                        0.0,
+                        0.0
+                    ],
+                    "vec3://t_scale": [
+                        1.0,
+                        1.0,
+                        1.0
+                    ],
+                    "a_model_mesh": "models/plane.npz",
+                    "a_model_vshader": "shaders/base_cam.vert",
+                    "a_model_fshader": "shaders/basic_lit.frag",
+                    "a_model_albedo": "textures/def_white.png",
+                    "a_model_transparent": false
+                }
+            ]
+        ]
+    }
+}
