@@ -8,7 +8,7 @@ OpenGL.ERROR_ON_COPY = False
 
 import sys, subprocess
 def test_play(map_path: str):
-    subprocess.Popen([sys.executable, os.path.join(os.path.dirname(__file__), "/main.py"), "--bmap", map_path])
+    subprocess.Popen([sys.executable, os.path.join(os.path.dirname(__file__), "main.py"), "--bmap", map_path])
 
 # == import engine ==
 
