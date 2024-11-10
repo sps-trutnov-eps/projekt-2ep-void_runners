@@ -81,9 +81,61 @@
                 "bt_static_mesh",
                 {
                     "vec3://t_pos": [
-                        -0.029024329036474228,
-                        1.9436277151107788,
-                        -2.0755839347839355
+                        -0.9840243458747864,
+                        1.9836277961730957,
+                        -1.9955841302871704
+                    ],
+                    "vec3://t_rot": [
+                        0.0,
+                        -89.5999984741211,
+                        0.800000011920929
+                    ],
+                    "vec3://t_scale": [
+                        1.0,
+                        1.0,
+                        1.0
+                    ],
+                    "a_model_mesh": "models/plane.npz",
+                    "a_model_vshader": "shaders/base_cam.vert",
+                    "a_model_fshader": "shaders/basic_lit.frag",
+                    "a_model_albedo": "textures/def_white.png",
+                    "a_model_transparent": false
+                }
+            ],
+            [
+                "wall_1",
+                "bt_static_mesh",
+                {
+                    "vec3://t_pos": [
+                        0.9809756278991699,
+                        1.9836277961730957,
+                        -1.9955841302871704
+                    ],
+                    "vec3://t_rot": [
+                        0.0,
+                        -89.5999984741211,
+                        0.800000011920929
+                    ],
+                    "vec3://t_scale": [
+                        1.0,
+                        1.0,
+                        1.0
+                    ],
+                    "a_model_mesh": "models/plane.npz",
+                    "a_model_vshader": "shaders/base_cam.vert",
+                    "a_model_fshader": "shaders/basic_lit.frag",
+                    "a_model_albedo": "textures/def_white.png",
+                    "a_model_transparent": false
+                }
+            ],
+            [
+                "new_entity_1",
+                "bt_static_mesh",
+                {
+                    "vec3://t_pos": [
+                        0.0,
+                        -0.26499998569488525,
+                        -1.3350000381469727
                     ],
                     "vec3://t_rot": [
                         0.0,
@@ -95,7 +147,111 @@
                         1.0,
                         1.0
                     ],
-                    "a_model_mesh": "models/plane.npz",
+                    "a_model_mesh": "models/cube.npz",
+                    "a_model_vshader": "shaders/base_cam.vert",
+                    "a_model_fshader": "shaders/basic_lit.frag",
+                    "a_model_albedo": "textures/def_white.png",
+                    "a_model_transparent": false
+                }
+            ],
+            [
+                "new_entity_2",
+                "bt_static_mesh",
+                {
+                    "vec3://t_pos": [
+                        0.0,
+                        -0.5349999666213989,
+                        -0.8750000596046448
+                    ],
+                    "vec3://t_rot": [
+                        0.0,
+                        0.0,
+                        0.0
+                    ],
+                    "vec3://t_scale": [
+                        1.0,
+                        1.0,
+                        1.0
+                    ],
+                    "a_model_mesh": "models/cube.npz",
+                    "a_model_vshader": "shaders/base_cam.vert",
+                    "a_model_fshader": "shaders/basic_lit.frag",
+                    "a_model_albedo": "textures/def_white.png",
+                    "a_model_transparent": false
+                }
+            ],
+            [
+                "new_entity_3",
+                "bt_static_mesh",
+                {
+                    "vec3://t_pos": [
+                        0.0,
+                        -0.8399999737739563,
+                        0.2449999451637268
+                    ],
+                    "vec3://t_rot": [
+                        0.0,
+                        0.0,
+                        0.0
+                    ],
+                    "vec3://t_scale": [
+                        1.0,
+                        1.0,
+                        1.0
+                    ],
+                    "a_model_mesh": "models/cube.npz",
+                    "a_model_vshader": "shaders/base_cam.vert",
+                    "a_model_fshader": "shaders/basic_lit.frag",
+                    "a_model_albedo": "textures/def_white.png",
+                    "a_model_transparent": false
+                }
+            ],
+            [
+                "new_entity_4",
+                "bt_static_mesh",
+                {
+                    "vec3://t_pos": [
+                        0.0,
+                        -0.8399999737739563,
+                        3.044999837875366
+                    ],
+                    "vec3://t_rot": [
+                        0.0,
+                        0.0,
+                        0.0
+                    ],
+                    "vec3://t_scale": [
+                        1.0,
+                        1.0,
+                        1.0
+                    ],
+                    "a_model_mesh": "models/cube.npz",
+                    "a_model_vshader": "shaders/base_cam.vert",
+                    "a_model_fshader": "shaders/basic_lit.frag",
+                    "a_model_albedo": "textures/def_white.png",
+                    "a_model_transparent": false
+                }
+            ],
+            [
+                "new_entity_5",
+                "bt_static_mesh",
+                {
+                    "vec3://t_pos": [
+                        0.0,
+                        -0.8399999737739563,
+                        5.815000057220459
+                    ],
+                    "vec3://t_rot": [
+                        0.0,
+                        0.0,
+                        0.0
+                    ],
+                    "vec3://t_scale": [
+                        1.0,
+                        1.0,
+                        1.0
+                    ],
+                    "a_model_mesh": "models/cube.npz",
                     "a_model_vshader": "shaders/base_cam.vert",
                     "a_model_fshader": "shaders/basic_lit.frag",
                     "a_model_albedo": "textures/def_white.png",
