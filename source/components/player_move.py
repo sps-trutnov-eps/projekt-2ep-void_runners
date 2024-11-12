@@ -4,13 +4,16 @@ import math
 from engine.cue.cue_state import GameState
 from engine.cue.components.cue_transform import Transform
 from engine.cue.rendering.cue_camera import Camera
+from engine.cue.phys.cue_phys_types import PhysRay
 
 import engine.cue.cue_sequence as seq
 
 from pygame.math import Vector3 as Vec3, Vector2 as Vec2
 import pygame as pg
+import numpy as np
 
 from engine.cue import cue_utils as utils
+from engine.cue.rendering import cue_gizmos as gizmo
 import imgui
 
 # The core player movement controller for SPSU
@@ -34,8 +37,9 @@ class PlayerMovement:
     GROUND_FRICTION = 16
     OVERSPEED_FRICTION = 2
     GRAVITY = Vec3(0., -5.6, 0.)
+    MIN_STEP_STRAIGHTNESS = .7
 
-    PLAYER_SIZE = Vec3(.2, .95, .2)
+    PLAYER_SIZE = Vec3(.45, .95, .45)
     CAMERA_OFFSET = Vec3(0, .8, 0)
 
     def __init__(self, player_trans: Transform, player_cam: Camera, initial_view_rot: Vec2 = Vec2(0, 0)) -> None:
@@ -49,6 +53,7 @@ class PlayerMovement:
 
         self.view_rot = initial_view_rot
         self.show_player_info = False
+        self.show_player_debug = False
 
         seq.next(PlayerMovement.tick, self)
 
@@ -93,14 +98,71 @@ class PlayerMovement:
                 imgui.text(f"p_pos: {round(self.p_pos.x, 4)} {round(self.p_pos.y, 4)} {round(self.p_pos.z, 4)}")
                 imgui.text(f"p_vel: {round(self.p_vel.x, 4)} {round(self.p_vel.y, 4)} {round(self.p_vel.z, 4)}")
                 imgui.text(f"view_rot: {round(self.view_rot.x, 4)} {round(self.view_rot.y, 4)}")
+        
+        if self.show_player_debug:
+            pos = self.controlled_trans._pos + pg.math.Vector3(0, self.PLAYER_SIZE.y / 2, 0)
+            min_p = pos - self.PLAYER_SIZE / 2
+            max_p = pos + self.PLAYER_SIZE / 2
+
+            gizmo.draw_box(min_p, max_p, Vec3(1., .35, .35))
+            gizmo.draw_line(pos, pos + self.p_vel, Vec3(1., .35, 1.), Vec3(1., .35, 1.))
 
         seq.next(PlayerMovement.tick, self)
 
     # == landed state player movement ==
     # note: do not search for any kind of logic here, most stuff was figured out by feel and experimentation
 
-    def land_accel_func(self, d: Vec3, vel: Vec3, maxs: float, accel: float, dt: float) -> Vec3:
+    def _land_accel_func(self, d: Vec3, vel: Vec3, maxs: float, accel: float, dt: float) -> Vec3:
         return d * ((maxs - vel.length() * .0) / maxs * accel) * dt
+
+    def _check_collisions_and_apply_velocity(self, dt: float) -> bool:
+        new_vel: Vec3 = self.p_vel
+        new_pos: Vec3 = self.p_pos
+        tmax = new_vel.length() * dt
+        standing_on_ground = False
+
+        player_box: PhysRay = PhysRay.make(new_pos + Vec3(0., PlayerMovement.PLAYER_SIZE.y / 2, 0.), new_vel.normalize(), PlayerMovement.PLAYER_SIZE)
+        scene_hit = GameState.collider_scene.first_hit(player_box, tmax)
+
+        show_debug = self.show_player_debug
+
+        while scene_hit is not None:
+            # conform to collision
+            frac_traveled = scene_hit.tmin / tmax
+            if np.dot(scene_hit.norm, np.array([0., 1., 0.], dtype=np.float32)) > PlayerMovement.MIN_STEP_STRAIGHTNESS:
+                standing_on_ground = True
+
+            new_pos += new_vel * dt * frac_traveled
+            new_vel = new_vel - new_vel.project(scene_hit.norm)
+            dt *= 1. - frac_traveled
+
+            if show_debug:
+                hit_pos = Vec3(*scene_hit.pos)
+                hit_pos2 = Vec3(*(scene_hit.pos + scene_hit.norm))
+                gizmo.draw_line(hit_pos, hit_pos2, Vec3(.35, 1., .35), Vec3(.35, 1., .35))
+
+            # add a tiny nudge away from the collider to fully escape the hit 
+            new_pos += scene_hit.norm * 1e-6
+
+            # recalc scene hits
+            tmax = new_vel.length() * dt
+            if tmax != 0.:
+                player_box: PhysRay = PhysRay.make(new_pos + Vec3(0., PlayerMovement.PLAYER_SIZE.y / 2, 0.), new_vel.normalize(), PlayerMovement.PLAYER_SIZE)
+                scene_hit = GameState.collider_scene.first_hit(player_box, tmax)
+            else:
+                break
+
+            if frac_traveled == 0:
+                # we're stuck inside a collider (?)
+                new_vel = Vec3()
+                break
+
+        new_pos += new_vel * dt
+
+        self.p_vel = new_vel
+        self.p_pos = new_pos
+
+        return standing_on_ground
 
     def tick_landed(self) -> None:
         dt = GameState.delta_time
@@ -134,16 +196,16 @@ class PlayerMovement:
             accel_vec = Vec3(0, 0, 0)
 
             if keys[pg.K_w]:
-                accel_vec += self.land_accel_func(self.view_forward_flat, vel, max_speed, accel, dt)
+                accel_vec += self._land_accel_func(self.view_forward_flat, vel, max_speed, accel, dt)
                 input_active = True
             if keys[pg.K_s]:
-                accel_vec -= self.land_accel_func(self.view_forward_flat, vel, max_speed, accel, dt)
+                accel_vec -= self._land_accel_func(self.view_forward_flat, vel, max_speed, accel, dt)
                 input_active = True
             if keys[pg.K_d]:
-                accel_vec += self.land_accel_func(self.view_right_flat, vel, max_speed, accel, dt)
+                accel_vec += self._land_accel_func(self.view_right_flat, vel, max_speed, accel, dt)
                 input_active = True
             if keys[pg.K_a]:
-                accel_vec -= self.land_accel_func(self.view_right_flat, vel, max_speed, accel, dt)
+                accel_vec -= self._land_accel_func(self.view_right_flat, vel, max_speed, accel, dt)
                 input_active = True
 
             # vel over max speed friction
@@ -159,14 +221,16 @@ class PlayerMovement:
 
         if not input_active:
             self.p_vel /= 1. + PlayerMovement.GROUND_FRICTION * dt
-            
-        pos_diff: Vec3 = self.p_vel * dt
-        scene_hit = None #PhysGrid.slide_aabb(self.p_pos, pos_diff)
 
-        if scene_hit is None:
-            self.p_pos += pos_diff
-        else:
-            pass # TODO: phys collision
+        standing_on_ground = True
+        if self.p_vel.length_squared() != 0:
+            standing_on_ground = self._check_collisions_and_apply_velocity(dt)
+
+        # FIXME: broken standing detection
+        # if not standing_on_ground:
+        #     self.p_state = 1
+        #     return
+                
 
     def tick_in_flight(self) -> None:
         dt = GameState.delta_time
@@ -202,17 +266,12 @@ class PlayerMovement:
 
         self.p_vel += PlayerMovement.GRAVITY * dt
             
-        pos_diff: Vec3 = self.p_vel * dt
-        scene_hit = None #PhysGrid.slide_aabb(self.p_pos, pos_diff)
-
-        if scene_hit is None:
-            self.p_pos += pos_diff
-        else:
-            pass # TODO: phys collision
+        standing_on_ground = False
+        if self.p_vel.length_squared() != 0:
+            standing_on_ground = self._check_collisions_and_apply_velocity(dt)
 
         # check if landed and change state (temp. currently assume infinite floor at y == 0.)
-        if self.p_pos.y <= 0.:
-            self.p_vel.y = 0.
+        if standing_on_ground:
             self.p_state = 0
 
     def set_captured(self, cap: bool) -> None:
@@ -242,3 +301,4 @@ class PlayerMovement:
 
     # debug
     show_player_info: bool
+    show_player_debug: bool

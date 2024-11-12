@@ -47,6 +47,19 @@ def player_info_cmd(args: list[str]):
 
 utils.add_dev_command("player_info", player_info_cmd)
 
+# == player debug toggle ==
+
+def player_debug_cmd(args: list[str]):
+    try:
+        p_spawn = GameState.entity_storage.get_entity("sps_player_spawn", "sps_player")
+    except KeyError:
+        utils.error("[dev utils] No active player controller, can't show debug")
+        return
+
+    p_spawn.player_controller.show_player_debug ^= True
+
+utils.add_dev_command("player_debug", player_debug_cmd)
+
 # == perf overlay ==
 
 is_perf_overlay_open = False
@@ -55,3 +68,24 @@ def perf_overlay_cmd(args: list[str]):
     is_perf_overlay_open ^= True
 
 utils.add_dev_command("perf_info", perf_overlay_cmd)
+
+# == deltascale ==
+
+dev_deltascale = 1.
+def deltascale_cmd(args: list[str]):
+    if len(args) != 1:
+        utils.error("[dev utils] unknown args, use 'deltascale [deltascale_scalar]' to set deltascale")
+        return
+
+    try:
+        scale = float(args[0])
+    except:
+        utils.error("[dev utils] unknown deltascale value")
+        return
+
+    utils.info(f"[dev utils] setting deltascale to {scale}")
+    
+    global dev_deltascale
+    dev_deltascale = scale
+
+utils.add_dev_command("deltascale", deltascale_cmd)

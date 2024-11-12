@@ -15,6 +15,8 @@ try:
     from engine.cue import cue_cmds
     from engine.cue import cue_sequence as seq
 
+    from engine.cue.phys.cue_phys_scene import PhysScene
+
     from ui import GameUI
 
     import pygame as pg
@@ -58,6 +60,7 @@ GameState.asset_manager = AssetManager(ASSET_DIR)
 
 GameState.renderer = CueRenderer((1280, 720), fullscreen=False, vsync=True)
 GameState.active_scene = RenderScene()
+GameState.collider_scene = PhysScene()
 
 # == Init game state ==
 
@@ -106,7 +109,7 @@ while True:
 
     # == tick ==
 
-    dt = time.perf_counter() - t
+    dt = (time.perf_counter() - t) * dev_utils.dev_deltascale
     t = time.perf_counter()
 
     GameState.delta_time = dt
