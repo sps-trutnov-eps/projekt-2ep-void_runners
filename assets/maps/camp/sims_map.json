@@ -2,8 +2,8 @@
     "cmf_ver": 2,
     "cmf_header": {
         "type_list": [
-            "bt_static_mesh",
-            "sps_player_spawn"
+            "sps_player_spawn",
+            "bt_static_mesh"
         ],
         "asset_list": []
     },
@@ -30,8 +30,8 @@
                     ],
                     "a_model_mesh": "models/cube.npz",
                     "a_model_vshader": "shaders/base_cam.vert",
-                    "a_model_fshader": "shaders/basic_lit.frag",
-                    "a_model_albedo": "textures/def_white.png",
+                    "a_model_fshader": "shaders/unlit.frag",
+                    "a_model_albedo": "textures/proto/Dark/texture_08.png",
                     "a_model_transparent": false
                 }
             ],
@@ -71,8 +71,8 @@
                     ],
                     "a_model_mesh": "models/plane.npz",
                     "a_model_vshader": "shaders/base_cam.vert",
-                    "a_model_fshader": "shaders/basic_lit.frag",
-                    "a_model_albedo": "textures/def_white.png",
+                    "a_model_fshader": "shaders/unlit.frag",
+                    "a_model_albedo": "textures/proto/Dark/texture_08.png",
                     "a_model_transparent": false
                 }
             ],
@@ -97,8 +97,8 @@
                     ],
                     "a_model_mesh": "models/plane.npz",
                     "a_model_vshader": "shaders/base_cam.vert",
-                    "a_model_fshader": "shaders/basic_lit.frag",
-                    "a_model_albedo": "textures/def_white.png",
+                    "a_model_fshader": "shaders/unlit.frag",
+                    "a_model_albedo": "textures/proto/Dark/texture_08.png",
                     "a_model_transparent": false
                 }
             ],
@@ -123,8 +123,8 @@
                     ],
                     "a_model_mesh": "models/plane.npz",
                     "a_model_vshader": "shaders/base_cam.vert",
-                    "a_model_fshader": "shaders/basic_lit.frag",
-                    "a_model_albedo": "textures/def_white.png",
+                    "a_model_fshader": "shaders/unlit.frag",
+                    "a_model_albedo": "textures/proto/Dark/texture_08.png",
                     "a_model_transparent": false
                 }
             ],
@@ -149,8 +149,8 @@
                     ],
                     "a_model_mesh": "models/cube.npz",
                     "a_model_vshader": "shaders/base_cam.vert",
-                    "a_model_fshader": "shaders/basic_lit.frag",
-                    "a_model_albedo": "textures/def_white.png",
+                    "a_model_fshader": "shaders/unlit.frag",
+                    "a_model_albedo": "textures/proto/Dark/texture_08.png",
                     "a_model_transparent": false
                 }
             ],
@@ -175,8 +175,8 @@
                     ],
                     "a_model_mesh": "models/cube.npz",
                     "a_model_vshader": "shaders/base_cam.vert",
-                    "a_model_fshader": "shaders/basic_lit.frag",
-                    "a_model_albedo": "textures/def_white.png",
+                    "a_model_fshader": "shaders/unlit.frag",
+                    "a_model_albedo": "textures/proto/Dark/texture_08.png",
                     "a_model_transparent": false
                 }
             ],
@@ -201,8 +201,8 @@
                     ],
                     "a_model_mesh": "models/cube.npz",
                     "a_model_vshader": "shaders/base_cam.vert",
-                    "a_model_fshader": "shaders/basic_lit.frag",
-                    "a_model_albedo": "textures/def_white.png",
+                    "a_model_fshader": "shaders/unlit.frag",
+                    "a_model_albedo": "textures/proto/Dark/texture_08.png",
                     "a_model_transparent": false
                 }
             ],
@@ -227,8 +227,8 @@
                     ],
                     "a_model_mesh": "models/cube.npz",
                     "a_model_vshader": "shaders/base_cam.vert",
-                    "a_model_fshader": "shaders/basic_lit.frag",
-                    "a_model_albedo": "textures/def_white.png",
+                    "a_model_fshader": "shaders/unlit.frag",
+                    "a_model_albedo": "textures/proto/Dark/texture_08.png",
                     "a_model_transparent": false
                 }
             ],
@@ -253,8 +253,8 @@
                     ],
                     "a_model_mesh": "models/cube.npz",
                     "a_model_vshader": "shaders/base_cam.vert",
-                    "a_model_fshader": "shaders/basic_lit.frag",
-                    "a_model_albedo": "textures/def_white.png",
+                    "a_model_fshader": "shaders/unlit.frag",
+                    "a_model_albedo": "textures/proto/Dark/texture_08.png",
                     "a_model_transparent": false
                 }
             ]
