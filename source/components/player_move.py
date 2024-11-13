@@ -4,7 +4,7 @@ import math
 from engine.cue.cue_state import GameState
 from engine.cue.components.cue_transform import Transform
 from engine.cue.rendering.cue_camera import Camera
-from engine.cue.phys.cue_phys_types import PhysRay
+from engine.cue.phys.cue_phys_types import PhysRay, EPSILON
 
 import engine.cue.cue_sequence as seq
 
@@ -118,46 +118,57 @@ class PlayerMovement:
     def _check_collisions_and_apply_velocity(self, dt: float) -> bool:
         new_vel: Vec3 = self.p_vel
         new_pos: Vec3 = self.p_pos
-        tmax = new_vel.length() * dt
-        standing_on_ground = False
 
-        player_box: PhysRay = PhysRay.make(new_pos + Vec3(0., PlayerMovement.PLAYER_SIZE.y / 2, 0.), new_vel.normalize(), PlayerMovement.PLAYER_SIZE)
-        scene_hit = GameState.collider_scene.first_hit(player_box, tmax)
-
-        show_debug = self.show_player_debug
-
-        while scene_hit is not None:
-            # conform to collision
-            frac_traveled = scene_hit.tmin / tmax
-            if np.dot(scene_hit.norm, np.array([0., 1., 0.], dtype=np.float32)) > PlayerMovement.MIN_STEP_STRAIGHTNESS:
-                standing_on_ground = True
-
-            new_pos += new_vel * dt * frac_traveled
-            new_vel = new_vel - new_vel.project(scene_hit.norm)
-            dt *= 1. - frac_traveled
-
-            if show_debug:
-                hit_pos = Vec3(*scene_hit.pos)
-                hit_pos2 = Vec3(*(scene_hit.pos + scene_hit.norm))
-                gizmo.draw_line(hit_pos, hit_pos2, Vec3(.35, 1., .35), Vec3(.35, 1., .35))
-
-            # add a tiny nudge away from the collider to fully escape the hit 
-            new_pos += scene_hit.norm * 1e-6
-
-            # recalc scene hits
+        if new_vel.length_squared() != 0.:
             tmax = new_vel.length() * dt
-            if tmax != 0.:
-                player_box: PhysRay = PhysRay.make(new_pos + Vec3(0., PlayerMovement.PLAYER_SIZE.y / 2, 0.), new_vel.normalize(), PlayerMovement.PLAYER_SIZE)
-                scene_hit = GameState.collider_scene.first_hit(player_box, tmax)
-            else:
-                break
 
-            if frac_traveled == 0:
-                # we're stuck inside a collider (?)
-                new_vel = Vec3()
-                break
+            player_box: PhysRay = PhysRay.make(new_pos + Vec3(0., PlayerMovement.PLAYER_SIZE.y / 2, 0.), new_vel.normalize(), PlayerMovement.PLAYER_SIZE)
+            scene_hit = GameState.collider_scene.first_hit(player_box, tmax)
 
-        new_pos += new_vel * dt
+            show_debug = self.show_player_debug
+
+            while scene_hit is not None:
+                # conform to collision
+                frac_traveled = scene_hit.tmin / tmax
+
+                new_pos += new_vel * dt * frac_traveled
+                new_vel = new_vel - new_vel.project(scene_hit.norm)
+                dt *= 1. - frac_traveled
+
+                if show_debug:
+                    hit_pos = Vec3(*scene_hit.pos)
+                    hit_pos2 = Vec3(*(scene_hit.pos + scene_hit.norm))
+                    gizmo.draw_line(hit_pos, hit_pos2, Vec3(.35, 1., .35), Vec3(.35, 1., .35))
+
+                # add a tiny nudge away from the collider to fully escape the hit 
+                new_pos += scene_hit.norm * EPSILON
+
+                # recalc scene hits
+                tmax = new_vel.length() * dt
+                if tmax != 0.:
+                    player_box: PhysRay = PhysRay.make(new_pos + Vec3(0., PlayerMovement.PLAYER_SIZE.y / 2, 0.), new_vel.normalize(), PlayerMovement.PLAYER_SIZE)
+                    scene_hit = GameState.collider_scene.first_hit(player_box, tmax)
+                else:
+                    break
+
+                if frac_traveled == 0:
+                    # we're stuck inside a collider (?)
+                    new_vel = Vec3()
+                    break
+
+            new_pos += new_vel * dt
+
+        # perform stand check
+
+        tmax = new_vel.length() * dt
+        stand_dir = new_vel.normalize() if new_vel.length_squared() != 0 else Vec3(0., -1., 0.)
+
+        player_stand_box: PhysRay = PhysRay.make(new_pos + Vec3(0., PlayerMovement.PLAYER_SIZE.y / 2 - EPSILON * 2, 0.), stand_dir, PlayerMovement.PLAYER_SIZE)
+        stand_hit = GameState.collider_scene.first_hit(player_stand_box, tmax)
+        standing_on_ground = stand_hit is not None
+
+        if standing_on_ground:
+            new_pos.y = stand_hit.pos[1] - PlayerMovement.PLAYER_SIZE.y / 2 + EPSILON * 2
 
         self.p_vel = new_vel
         self.p_pos = new_pos
@@ -222,14 +233,11 @@ class PlayerMovement:
         if not input_active:
             self.p_vel /= 1. + PlayerMovement.GROUND_FRICTION * dt
 
-        standing_on_ground = True
-        if self.p_vel.length_squared() != 0:
-            standing_on_ground = self._check_collisions_and_apply_velocity(dt)
+        standing_on_ground = self._check_collisions_and_apply_velocity(dt)
 
-        # FIXME: broken standing detection
-        # if not standing_on_ground:
-        #     self.p_state = 1
-        #     return
+        if not standing_on_ground:
+            self.p_state = 1
+            return
                 
 
     def tick_in_flight(self) -> None:
@@ -266,9 +274,7 @@ class PlayerMovement:
 
         self.p_vel += PlayerMovement.GRAVITY * dt
             
-        standing_on_ground = False
-        if self.p_vel.length_squared() != 0:
-            standing_on_ground = self._check_collisions_and_apply_velocity(dt)
+        standing_on_ground = self._check_collisions_and_apply_velocity(dt)
 
         # check if landed and change state (temp. currently assume infinite floor at y == 0.)
         if standing_on_ground:
