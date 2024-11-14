@@ -97,7 +97,7 @@ while True:
         if e.type == pg.MOUSEMOTION:
             GameState.renderer.fullscreen_imgui_ctx.set_mouse_input(e.pos)
 
-        if e.type == pg.KEYDOWN and e.dict["key"] == pg.K_BACKQUOTE:
+        if e.type == pg.KEYDOWN and e.dict["key"] == pg.K_ESCAPE:
             dev_con ^= True
             p_spawn.player_controller.set_captured(not dev_con)
 
