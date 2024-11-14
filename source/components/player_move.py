@@ -143,6 +143,12 @@ class PlayerMovement:
                 # add a tiny nudge away from the collider to fully escape the hit 
                 new_pos += scene_hit.norm * EPSILON
 
+                if scene_hit.tout < 0.:
+                    # we're stuck inside a collider (?)
+                    # new_vel = Vec3()
+                    # print("stuck", scene_hit.tout)
+                    break
+
                 # recalc scene hits
                 tmax = new_vel.length() * dt
                 if tmax != 0.:
@@ -151,24 +157,18 @@ class PlayerMovement:
                 else:
                     break
 
-                if frac_traveled == 0:
-                    # we're stuck inside a collider (?)
-                    new_vel = Vec3()
-                    break
-
             new_pos += new_vel * dt
 
         # perform stand check
 
-        tmax = new_vel.length() * dt
         stand_dir = new_vel.normalize() if new_vel.length_squared() != 0 else Vec3(0., -1., 0.)
 
-        player_stand_box: PhysRay = PhysRay.make(new_pos + Vec3(0., PlayerMovement.PLAYER_SIZE.y / 2 - EPSILON * 2, 0.), stand_dir, PlayerMovement.PLAYER_SIZE)
-        stand_hit = GameState.collider_scene.first_hit(player_stand_box, tmax)
+        player_stand_box: PhysRay = PhysRay.make(new_pos + Vec3(0., PlayerMovement.PLAYER_SIZE.y / 2 - EPSILON, 0.), stand_dir, PlayerMovement.PLAYER_SIZE)
+        stand_hit = GameState.collider_scene.first_hit(player_stand_box, EPSILON)
         standing_on_ground = stand_hit is not None
 
         if standing_on_ground:
-            new_pos.y = stand_hit.pos[1] - PlayerMovement.PLAYER_SIZE.y / 2 + EPSILON * 2
+            new_pos.y = stand_hit.pos[1] - PlayerMovement.PLAYER_SIZE.y / 2 + EPSILON
 
         self.p_vel = new_vel
         self.p_pos = new_pos

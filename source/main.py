@@ -17,14 +17,13 @@ try:
 
     from engine.cue.phys.cue_phys_scene import PhysScene
 
-    from ui import GameUI
-
-    import pygame as pg
-    import imgui
-
 except ImportError: 
     print("[\x1b[1m\x1b[31merror\x1b[0m] There was a problem importing the Cue Engine, make sure you pip installed the requirements.txt and did a `git submodule update --init`")
     raise
+
+import pygame as pg
+import numpy as np
+import imgui
 
 # == contants ==
 
@@ -41,13 +40,14 @@ args = p.parse_args()
 if args.bootup_map:
     BOOTUP_MAP = args.bootup_map
 
-# == import game entities ==
+# == import game code ==
 
 import entity.sps_player_spawn
 import entity.sps_static_cam
 import entity.sps_dev_text
 
 import dev_utils
+from ui import GameUI
 
 # == init engine ==
 
