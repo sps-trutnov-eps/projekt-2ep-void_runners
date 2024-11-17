@@ -4,8 +4,8 @@
         "type_list": [
             "sps_dev_text",
             "sps_player_spawn",
-            "bt_static_mesh",
-            "bt_phys_aabb"
+            "bt_phys_aabb",
+            "bt_static_mesh"
         ],
         "asset_list": []
     },
@@ -18,7 +18,7 @@
                     "vec3://t_pos": [
                         0.0,
                         0.0,
-                        0.0
+                        4.414999961853027
                     ],
                     "vec3://t_rot": [
                         -90.0,
@@ -27,7 +27,7 @@
                     ],
                     "vec3://t_scale": [
                         8.769854545593262,
-                        10.379854202270508,
+                        14.804854393005371,
                         9.89985466003418
                     ],
                     "a_model_mesh": "models/plane.npz",
@@ -83,7 +83,7 @@
                 "bt_static_mesh",
                 {
                     "vec3://t_pos": [
-                        -7.581027431488037,
+                        -7.581027507781982,
                         1.0399999618530273,
                         -6.156169414520264
                     ],
@@ -137,7 +137,7 @@
                     "vec3://t_pos": [
                         -11.007428169250488,
                         4.175000057220459,
-                        -1.415000081062317
+                        3.674999918937684
                     ],
                     "vec3://t_rot": [
                         -90.0,
@@ -146,7 +146,7 @@
                     ],
                     "vec3://t_scale": [
                         2.234999895095825,
-                        11.3149995803833,
+                        15.339999580383301,
                         1.0
                     ],
                     "a_model_mesh": "models/plane.npz",
@@ -189,16 +189,16 @@
                     "vec3://t_pos": [
                         -8.772428512573242,
                         2.0249998569488525,
-                        0.0
+                        4.345
                     ],
                     "vec3://t_rot": [
-                        -90.0,
-                        -90.0,
-                        0.0
+                        90.0,
+                        0.0,
+                        90.0
                     ],
                     "vec3://t_scale": [
-                        2.044999837875366,
-                        10.379999160766602,
+                        2.149999837875366,
+                        14.7199991607666,
                         1.0
                     ],
                     "a_model_mesh": "models/plane.npz",
@@ -213,14 +213,14 @@
                 "bt_static_mesh",
                 {
                     "vec3://t_pos": [
-                        -5.366027755737305,
+                        -5.36602783203125,
                         2.732152223587036,
                         -9.071168899536133
                     ],
                     "vec3://t_rot": [
                         -90.0,
-                        33.20000076293945,
-                        0.0
+                        0.0,
+                        32.79999923706055
                     ],
                     "vec3://t_scale": [
                         2.6062326431274414,
@@ -240,7 +240,7 @@
                 {
                     "vec3://t_pos": [
                         0.0,
-                        7.034563722610473,
+                        8.204563722610473,
                         0.0
                     ],
                     "vec3://t_rot": [
@@ -631,16 +631,16 @@
                     "vec3://t_pos": [
                         8.767999649047852,
                         2.0249998569488525,
-                        0.0
+                        4.345
                     ],
                     "vec3://t_rot": [
-                        -90.0,
                         90.0,
-                        0.0
+                        0.0,
+                        -90.0
                     ],
                     "vec3://t_scale": [
-                        2.044999837875366,
-                        10.379999160766602,
+                        2.149999837875366,
+                        14.7199991607666,
                         1.0
                     ],
                     "a_model_mesh": "models/plane.npz",
@@ -661,8 +661,8 @@
                     ],
                     "vec3://t_rot": [
                         -90.0,
-                        -33.20000076293945,
-                        0.0
+                        -7.629394502828291e-07,
+                        -32.800000000000004
                     ],
                     "vec3://t_scale": [
                         2.6062326431274414,
@@ -800,29 +800,12 @@
                     "vec3://t_pos": [
                         0.0,
                         -0.02500000037252903,
-                        0.0
+                        4.414999961853027
                     ],
                     "vec3://t_scale": [
                         17.665000915527344,
                         0.05000000074505806,
-                        20.770000457763672
-                    ],
-                    "phys_bitmask": 0.0
-                }
-            ],
-            [
-                "r1_side_coll_0",
-                "bt_phys_aabb",
-                {
-                    "vec3://t_pos": [
-                        -11.006999969482422,
-                        2.0250000953674316,
-                        0.0
-                    ],
-                    "vec3://t_scale": [
-                        4.464238459007772,
-                        4.299238459007772,
-                        22.394238459007774
+                        29.610000610351562
                     ],
                     "phys_bitmask": 0.0
                 }
@@ -834,12 +817,12 @@
                     "vec3://t_pos": [
                         11.017999649047852,
                         2.0250000953674316,
-                        0.0
+                        3.9050000000000002
                     ],
                     "vec3://t_scale": [
                         4.504238605499268,
                         4.299000263214111,
-                        22.39423942565918
+                        30.30423942565918
                     ],
                     "phys_bitmask": 0.0
                 }
@@ -851,7 +834,7 @@
                     "vec3://t_pos": [
                         11.003000259399414,
                         4.175000190734863,
-                        -1.415000081062317
+                        3.674999918937684
                     ],
                     "vec3://t_rot": [
                         -90.0,
@@ -860,7 +843,7 @@
                     ],
                     "vec3://t_scale": [
                         2.234999895095825,
-                        11.3149995803833,
+                        15.339999580383301,
                         1.0
                     ],
                     "a_model_mesh": "models/plane.npz",
@@ -911,12 +894,12 @@
                     "vec3://t_pos": [
                         -11.006999969482422,
                         2.0250000953674316,
-                        0.0
+                        3.9050000000000002
                     ],
                     "vec3://t_scale": [
                         4.46423864364624,
                         4.299238681793213,
-                        22.394237518310547
+                        30.304237518310547
                     ],
                     "phys_bitmask": 0.0
                 }
@@ -1022,7 +1005,7 @@
                     "vec3://t_pos": [
                         0.0035889975260943174,
                         0.0,
-                        -14.805764198303223
+                        -14.785764198303223
                     ],
                     "vec3://t_rot": [
                         -90.0,
@@ -1031,8 +1014,8 @@
                     ],
                     "vec3://t_scale": [
                         2.825000047683716,
-                        4.389999866485596,
-                        1.0
+                        4.404999866485595,
+                        0.955
                     ],
                     "a_model_mesh": "models/plane.npz",
                     "a_model_vshader": "shaders/base_cam.vert",
@@ -1046,9 +1029,9 @@
                 "bt_static_mesh",
                 {
                     "vec3://t_pos": [
-                        7.72799991607666,
-                        1.2699998569488526,
-                        -19.185000305175784
+                        7.707999687194824,
+                        1.2699998617172241,
+                        -19.184999465942383
                     ],
                     "vec3://t_rot": [
                         0.0,
@@ -1056,8 +1039,8 @@
                         0.0
                     ],
                     "vec3://t_scale": [
-                        4.849999732971192,
-                        1.5249994659423827,
+                        4.879999904632569,
+                        1.5249994993209839,
                         1.0
                     ],
                     "a_model_mesh": "models/plane.npz",
@@ -1072,9 +1055,9 @@
                 "bt_static_mesh",
                 {
                     "vec3://t_pos": [
-                        -7.662429122924805,
-                        1.2699998569488526,
-                        -19.185000305175784
+                        -7.662429332733154,
+                        1.2699998617172241,
+                        -19.184999465942383
                     ],
                     "vec3://t_rot": [
                         0.0,
@@ -1082,8 +1065,8 @@
                         0.0
                     ],
                     "vec3://t_scale": [
-                        4.8649997329711905,
-                        1.5249994659423827,
+                        4.864999771118164,
+                        1.5249994993209839,
                         1.0
                     ],
                     "a_model_mesh": "models/plane.npz",
@@ -1091,23 +1074,6 @@
                     "a_model_fshader": "shaders/unlit.frag",
                     "a_model_albedo": "textures/proto/Dark/texture_07.png",
                     "a_model_transparent": false
-                }
-            ],
-            [
-                "c1_bott_0",
-                "bt_phys_aabb",
-                {
-                    "vec3://t_pos": [
-                        0.004000000189989805,
-                        -0.02500000037252903,
-                        -14.805999755859375
-                    ],
-                    "vec3://t_scale": [
-                        5.650000095367432,
-                        0.05000000074505806,
-                        8.875
-                    ],
-                    "phys_bitmask": -0.6700000166893005
                 }
             ],
             [
@@ -1190,8 +1156,8 @@
                     ],
                     "vec3://t_rot": [
                         -90.0,
-                        0.0,
-                        90.0
+                        -90.0,
+                        0.0
                     ],
                     "vec3://t_scale": [
                         15.229999542236328,
@@ -1216,8 +1182,8 @@
                     ],
                     "vec3://t_rot": [
                         -90.0,
-                        0.0,
-                        90.0
+                        -90.0,
+                        0.0
                     ],
                     "vec3://t_scale": [
                         15.229999542236328,
@@ -1242,8 +1208,8 @@
                     ],
                     "vec3://t_rot": [
                         90.0,
-                        0.0,
-                        90.0
+                        -90.0,
+                        0.0
                     ],
                     "vec3://t_scale": [
                         15.229999542236328,
@@ -1294,8 +1260,8 @@
                     ],
                     "vec3://t_rot": [
                         -90.0,
-                        0.0,
-                        90.0
+                        90.0,
+                        0.0
                     ],
                     "vec3://t_scale": [
                         8.225669860839844,
@@ -1320,7 +1286,7 @@
                     ],
                     "vec3://t_rot": [
                         0.0,
-                        -90.0,
+                        -270.0,
                         180.0
                     ],
                     "vec3://t_scale": [
@@ -1372,8 +1338,8 @@
                     ],
                     "vec3://t_rot": [
                         -90.0,
-                        0.0,
-                        90.0
+                        90.0,
+                        0.0
                     ],
                     "vec3://t_scale": [
                         1.835577368736267,
@@ -1394,12 +1360,12 @@
                     "vec3://t_pos": [
                         -12.46500015258789,
                         1.399999976158142,
-                        -34.13600158691406
+                        -36.86100158691407
                     ],
                     "vec3://t_scale": [
                         0.05000000074505806,
                         2.815000057220459,
-                        20.024999618530273
+                        35.24499961853027
                     ],
                     "phys_bitmask": 0.0
                 }
@@ -1411,12 +1377,12 @@
                     "vec3://t_pos": [
                         12.600001335144043,
                         1.399999976158142,
-                        -39.74100112915039
+                        -36.9210011291504
                     ],
                     "vec3://t_scale": [
                         0.05000000074505806,
                         2.815000057220459,
-                        20.024999618530273
+                        35.51999961853028
                     ],
                     "phys_bitmask": 0.0
                 }
@@ -1458,7 +1424,7 @@
                     ],
                     "vec3://t_rot": [
                         0.0,
-                        -270.0,
+                        -450.0,
                         180.0
                     ],
                     "vec3://t_scale": [
@@ -1484,8 +1450,8 @@
                     ],
                     "vec3://t_rot": [
                         -90.0,
-                        0.0,
-                        90.0
+                        90.0,
+                        0.0
                     ],
                     "vec3://t_scale": [
                         8.225669860839844,
@@ -1510,8 +1476,8 @@
                     ],
                     "vec3://t_rot": [
                         -90.0,
-                        0.0,
-                        90.0
+                        90.0,
+                        0.0
                     ],
                     "vec3://t_scale": [
                         1.835577368736267,
@@ -1614,8 +1580,8 @@
                     ],
                     "vec3://t_rot": [
                         90.0,
-                        0.0,
-                        90.0
+                        -90.0,
+                        0.0
                     ],
                     "vec3://t_scale": [
                         15.229999542236328,
@@ -2177,7 +2143,7 @@
                     "vec3://t_scale": [
                         0.3166944086551666,
                         0.3166944086551666,
-                        -0.8988543152809143
+                        0.8989999890327454
                     ],
                     "a_model_mesh": "models/cube.npz",
                     "a_model_vshader": "shaders/base_cam.vert",
@@ -2299,8 +2265,8 @@
                     ],
                     "vec3://t_rot": [
                         -90.0,
-                        0.0,
-                        90.0
+                        90.0,
+                        0.0
                     ],
                     "vec3://t_scale": [
                         1.6535279750823975,
@@ -2406,6 +2372,705 @@
                         3.7699999809265137
                     ],
                     "phys_bitmask": 0.0
+                }
+            ],
+            [
+                "r2_mid_side_coll",
+                "bt_phys_aabb",
+                {
+                    "vec3://t_pos": [
+                        0.0,
+                        1.2699999809265137,
+                        -30.368999481201172
+                    ],
+                    "vec3://t_scale": [
+                        17.209999084472656,
+                        3.049999952316284,
+                        12.319999694824219
+                    ],
+                    "phys_bitmask": 0.0
+                }
+            ],
+            [
+                "r1_wall_4",
+                "bt_static_mesh",
+                {
+                    "vec3://t_pos": [
+                        0.0,
+                        3.2799997329711914,
+                        -10.375
+                    ],
+                    "vec3://t_rot": [
+                        0.0,
+                        0.0,
+                        0.0
+                    ],
+                    "vec3://t_scale": [
+                        2.8549997806549072,
+                        0.4899994134902954,
+                        1.0
+                    ],
+                    "a_model_mesh": "models/plane.npz",
+                    "a_model_vshader": "shaders/base_cam.vert",
+                    "a_model_fshader": "shaders/unlit.frag",
+                    "a_model_albedo": "textures/proto/Dark/texture_07.png",
+                    "a_model_transparent": false
+                }
+            ],
+            [
+                "c1_bott_coll",
+                "bt_phys_aabb",
+                {
+                    "vec3://t_pos": [
+                        0.004000000189989805,
+                        -0.02500000037252903,
+                        -14.785999755859375
+                    ],
+                    "vec3://t_scale": [
+                        5.650000095367432,
+                        0.05000000074505806,
+                        8.83
+                    ],
+                    "phys_bitmask": -0.6700000166893005
+                }
+            ],
+            [
+                "c1_top",
+                "bt_static_mesh",
+                {
+                    "vec3://t_pos": [
+                        0.0035889975260943174,
+                        2.7950000762939453,
+                        -14.78576374053955
+                    ],
+                    "vec3://t_rot": [
+                        90.0,
+                        0.0,
+                        0.0
+                    ],
+                    "vec3://t_scale": [
+                        2.825000047683716,
+                        4.404999732971191,
+                        0.9549999833106995
+                    ],
+                    "a_model_mesh": "models/plane.npz",
+                    "a_model_vshader": "shaders/base_cam.vert",
+                    "a_model_fshader": "shaders/unlit.frag",
+                    "a_model_albedo": "textures/proto/Dark/texture_07.png",
+                    "a_model_transparent": false
+                }
+            ],
+            [
+                "c1_side_0",
+                "bt_static_mesh",
+                {
+                    "vec3://t_pos": [
+                        -2.826411008834839,
+                        1.3969999551773071,
+                        -14.78576374053955
+                    ],
+                    "vec3://t_rot": [
+                        90.0,
+                        0.0,
+                        90.0
+                    ],
+                    "vec3://t_scale": [
+                        1.4100000858306885,
+                        4.404999732971191,
+                        0.9549999833106995
+                    ],
+                    "a_model_mesh": "models/plane.npz",
+                    "a_model_vshader": "shaders/base_cam.vert",
+                    "a_model_fshader": "shaders/unlit.frag",
+                    "a_model_albedo": "textures/proto/Dark/texture_03.png",
+                    "a_model_transparent": false
+                }
+            ],
+            [
+                "c1_side_1",
+                "bt_static_mesh",
+                {
+                    "vec3://t_pos": [
+                        2.8259999752044678,
+                        1.3969999551773071,
+                        -14.78576374053955
+                    ],
+                    "vec3://t_rot": [
+                        90.0,
+                        0.0,
+                        -90.0
+                    ],
+                    "vec3://t_scale": [
+                        1.4100000858306885,
+                        4.404999732971191,
+                        0.9549999833106995
+                    ],
+                    "a_model_mesh": "models/plane.npz",
+                    "a_model_vshader": "shaders/base_cam.vert",
+                    "a_model_fshader": "shaders/unlit.frag",
+                    "a_model_albedo": "textures/proto/Dark/texture_03.png",
+                    "a_model_transparent": false
+                }
+            ],
+            [
+                "c1_side_coll_0",
+                "bt_phys_aabb",
+                {
+                    "vec3://t_pos": [
+                        -2.8459999561309814,
+                        1.3969999551773071,
+                        -14.78600025177002
+                    ],
+                    "vec3://t_scale": [
+                        0.05000000074505806,
+                        2.7950000762939453,
+                        8.805000305175781
+                    ],
+                    "phys_bitmask": 0.0
+                }
+            ],
+            [
+                "c1_side_coll_1",
+                "bt_phys_aabb",
+                {
+                    "vec3://t_pos": [
+                        2.8459999561309814,
+                        1.3969999551773071,
+                        -14.78600025177002
+                    ],
+                    "vec3://t_scale": [
+                        0.05000000074505806,
+                        2.7950000762939453,
+                        8.805000305175781
+                    ],
+                    "phys_bitmask": 0.0
+                }
+            ],
+            [
+                "r2_side_coll_0",
+                "bt_phys_aabb",
+                {
+                    "vec3://t_pos": [
+                        7.72599983215332,
+                        1.3969999551773071,
+                        -19.166000366210938
+                    ],
+                    "vec3://t_scale": [
+                        9.725000381469727,
+                        2.7950000762939453,
+                        0.05000000074505806
+                    ],
+                    "phys_bitmask": 0.0
+                }
+            ],
+            [
+                "r2_side_coll_1",
+                "bt_phys_aabb",
+                {
+                    "vec3://t_pos": [
+                        -7.72599983215332,
+                        1.3969999551773071,
+                        -19.166000366210938
+                    ],
+                    "vec3://t_scale": [
+                        9.725000381469727,
+                        2.7950000762939453,
+                        0.05000000074505806
+                    ],
+                    "phys_bitmask": 0.0
+                }
+            ],
+            [
+                "r2_side_5",
+                "bt_static_mesh",
+                {
+                    "vec3://t_pos": [
+                        0.0,
+                        1.3899998664855957,
+                        -36.53499984741211
+                    ],
+                    "vec3://t_rot": [
+                        0.0,
+                        180.0,
+                        0.0
+                    ],
+                    "vec3://t_scale": [
+                        8.604999542236328,
+                        1.4349995851516724,
+                        1.0
+                    ],
+                    "a_model_mesh": "models/plane.npz",
+                    "a_model_vshader": "shaders/base_cam.vert",
+                    "a_model_fshader": "shaders/unlit.frag",
+                    "a_model_albedo": "textures/proto/Dark/texture_07.png",
+                    "a_model_transparent": false
+                }
+            ],
+            [
+                "r2_side_coll_2",
+                "bt_phys_aabb",
+                {
+                    "vec3://t_pos": [
+                        6.731266498565674,
+                        1.403201699256897,
+                        -46.49451446533203
+                    ],
+                    "vec3://t_scale": [
+                        3.7749998569488525,
+                        2.8350000381469727,
+                        8.479999542236328
+                    ],
+                    "phys_bitmask": 0.0
+                }
+            ],
+            [
+                "r2_mid_side_coll_0",
+                "bt_phys_aabb",
+                {
+                    "vec3://t_pos": [
+                        0.0,
+                        1.402999997138977,
+                        -46.04600143432617
+                    ],
+                    "vec3://t_scale": [
+                        9.6899995803833,
+                        2.8350000381469727,
+                        0.05000000074505806
+                    ],
+                    "phys_bitmask": 0.0
+                }
+            ],
+            [
+                "r2_side_coll_3",
+                "bt_phys_aabb",
+                {
+                    "vec3://t_pos": [
+                        -6.730999946594238,
+                        1.403201699256897,
+                        -46.49451446533203
+                    ],
+                    "vec3://t_scale": [
+                        3.7749998569488525,
+                        2.8350000381469727,
+                        8.479999542236328
+                    ],
+                    "phys_bitmask": 0.0
+                }
+            ],
+            [
+                "r2_mid_side_0",
+                "bt_static_mesh",
+                {
+                    "vec3://t_pos": [
+                        0.0,
+                        1.402999997138977,
+                        -46.0207633972168
+                    ],
+                    "vec3://t_rot": [
+                        0.0,
+                        0.0,
+                        0.0
+                    ],
+                    "vec3://t_scale": [
+                        4.844999313354492,
+                        1.4149999618530273,
+                        1.0
+                    ],
+                    "a_model_mesh": "models/plane.npz",
+                    "a_model_vshader": "shaders/base_cam.vert",
+                    "a_model_fshader": "shaders/unlit.frag",
+                    "a_model_albedo": "textures/proto/Dark/texture_07.png",
+                    "a_model_transparent": false
+                }
+            ],
+            [
+                "r2_mid_side_1",
+                "bt_static_mesh",
+                {
+                    "vec3://t_pos": [
+                        4.799999713897705,
+                        1.402999997138977,
+                        -44.14076126098633
+                    ],
+                    "vec3://t_rot": [
+                        0.0,
+                        90.0,
+                        0.0
+                    ],
+                    "vec3://t_scale": [
+                        1.889999303817749,
+                        1.4149999618530273,
+                        1.0
+                    ],
+                    "a_model_mesh": "models/plane.npz",
+                    "a_model_vshader": "shaders/base_cam.vert",
+                    "a_model_fshader": "shaders/unlit.frag",
+                    "a_model_albedo": "textures/proto/Dark/texture_07.png",
+                    "a_model_transparent": false
+                }
+            ],
+            [
+                "r2_mid_side_2",
+                "bt_static_mesh",
+                {
+                    "vec3://t_pos": [
+                        -4.800000190734863,
+                        1.402999997138977,
+                        -44.14076232910156
+                    ],
+                    "vec3://t_rot": [
+                        0.0,
+                        -90.0,
+                        0.0
+                    ],
+                    "vec3://t_scale": [
+                        1.889999270439148,
+                        1.4149999618530273,
+                        1.0
+                    ],
+                    "a_model_mesh": "models/plane.npz",
+                    "a_model_vshader": "shaders/base_cam.vert",
+                    "a_model_fshader": "shaders/unlit.frag",
+                    "a_model_albedo": "textures/proto/Dark/texture_07.png",
+                    "a_model_transparent": false
+                }
+            ],
+            [
+                "r2_top_mid_1",
+                "bt_static_mesh",
+                {
+                    "vec3://t_pos": [
+                        0.0,
+                        2.7899999618530273,
+                        -44.135765075683594
+                    ],
+                    "vec3://t_rot": [
+                        90.0,
+                        0.0,
+                        0.0
+                    ],
+                    "vec3://t_scale": [
+                        4.844999313354492,
+                        1.8849998712539673,
+                        1.0
+                    ],
+                    "a_model_mesh": "models/plane.npz",
+                    "a_model_vshader": "shaders/base_cam.vert",
+                    "a_model_fshader": "shaders/unlit.frag",
+                    "a_model_albedo": "textures/proto/Dark/texture_07.png",
+                    "a_model_transparent": false
+                }
+            ],
+            [
+                "r2_mid_prop_3",
+                "bt_static_mesh",
+                {
+                    "vec3://t_pos": [
+                        -4.2267412662506105,
+                        0.3730665922164917,
+                        -45.46846420288086
+                    ],
+                    "vec3://t_rot": [
+                        -90.0,
+                        -21.599999999999994,
+                        0.0
+                    ],
+                    "vec3://t_scale": [
+                        0.18882287191291824,
+                        0.18882287191291824,
+                        0.18882287191291824
+                    ],
+                    "a_model_mesh": "models/chair.npz",
+                    "a_model_vshader": "shaders/base_cam.vert",
+                    "a_model_fshader": "shaders/unlit.frag",
+                    "a_model_albedo": "textures/proto/Purple/texture_09.png",
+                    "a_model_transparent": false
+                }
+            ],
+            [
+                "r2_mid_side_3",
+                "bt_static_mesh",
+                {
+                    "vec3://t_pos": [
+                        6.704999923706055,
+                        1.402999997138977,
+                        -42.25
+                    ],
+                    "vec3://t_rot": [
+                        0.0,
+                        0.0,
+                        0.0
+                    ],
+                    "vec3://t_scale": [
+                        1.909999966621399,
+                        1.4149999618530273,
+                        1.0
+                    ],
+                    "a_model_mesh": "models/plane.npz",
+                    "a_model_vshader": "shaders/base_cam.vert",
+                    "a_model_fshader": "shaders/unlit.frag",
+                    "a_model_albedo": "textures/proto/Dark/texture_07.png",
+                    "a_model_transparent": false
+                }
+            ],
+            [
+                "r2_mid_side_4",
+                "bt_static_mesh",
+                {
+                    "vec3://t_pos": [
+                        -6.704999923706055,
+                        1.402999997138977,
+                        -42.25
+                    ],
+                    "vec3://t_rot": [
+                        0.0,
+                        0.0,
+                        0.0
+                    ],
+                    "vec3://t_scale": [
+                        1.909999966621399,
+                        1.4149999618530273,
+                        1.0
+                    ],
+                    "a_model_mesh": "models/plane.npz",
+                    "a_model_vshader": "shaders/base_cam.vert",
+                    "a_model_fshader": "shaders/unlit.frag",
+                    "a_model_albedo": "textures/proto/Dark/texture_07.png",
+                    "a_model_transparent": false
+                }
+            ],
+            [
+                "r1_wall_5",
+                "bt_static_mesh",
+                {
+                    "vec3://t_pos": [
+                        -13.237428665161133,
+                        12.670000076293945,
+                        1.6799999475479126
+                    ],
+                    "vec3://t_rot": [
+                        90.0,
+                        0.0,
+                        90.0
+                    ],
+                    "vec3://t_scale": [
+                        8.5,
+                        17.334999084472656,
+                        1.0
+                    ],
+                    "a_model_mesh": "models/plane.npz",
+                    "a_model_vshader": "shaders/base_cam.vert",
+                    "a_model_fshader": "shaders/unlit.frag",
+                    "a_model_albedo": "textures/concrete/Concrete028_2K-PNG_Color_Pixelized.png",
+                    "a_model_transparent": false
+                }
+            ],
+            [
+                "r1_wall_6",
+                "bt_static_mesh",
+                {
+                    "vec3://t_pos": [
+                        13.237000465393066,
+                        12.670000076293945,
+                        1.6799999475479126
+                    ],
+                    "vec3://t_rot": [
+                        -90.0,
+                        0.0,
+                        90.0
+                    ],
+                    "vec3://t_scale": [
+                        8.5,
+                        17.334999084472656,
+                        1.0
+                    ],
+                    "a_model_mesh": "models/plane.npz",
+                    "a_model_vshader": "shaders/base_cam.vert",
+                    "a_model_fshader": "shaders/unlit.frag",
+                    "a_model_albedo": "textures/concrete/Concrete028_2K-PNG_Color_Pixelized.png",
+                    "a_model_transparent": false
+                }
+            ],
+            [
+                "r1_wall_7",
+                "bt_static_mesh",
+                {
+                    "vec3://t_pos": [
+                        0.0,
+                        12.670000076293945,
+                        -15.654999732971191
+                    ],
+                    "vec3://t_rot": [
+                        0.0,
+                        0.0,
+                        90.0
+                    ],
+                    "vec3://t_scale": [
+                        8.5,
+                        13.254999160766602,
+                        1.0
+                    ],
+                    "a_model_mesh": "models/plane.npz",
+                    "a_model_vshader": "shaders/base_cam.vert",
+                    "a_model_fshader": "shaders/unlit.frag",
+                    "a_model_albedo": "textures/concrete/Concrete028_2K-PNG_Color_Pixelized.png",
+                    "a_model_transparent": false
+                }
+            ],
+            [
+                "r1_top_bg_void",
+                "bt_static_mesh",
+                {
+                    "vec3://t_pos": [
+                        0.0,
+                        25.052209854125977,
+                        0.0
+                    ],
+                    "vec3://t_rot": [
+                        90.0,
+                        0.0,
+                        0.0
+                    ],
+                    "vec3://t_scale": [
+                        25.0,
+                        25.0,
+                        1.0
+                    ],
+                    "a_model_mesh": "models/plane.npz",
+                    "a_model_vshader": "shaders/base_cam.vert",
+                    "a_model_fshader": "shaders/unlit.frag",
+                    "a_model_albedo": "textures/def_white.png",
+                    "a_model_transparent": false
+                }
+            ],
+            [
+                "r1_wall_8",
+                "bt_static_mesh",
+                {
+                    "vec3://t_pos": [
+                        0.0,
+                        12.670000076293945,
+                        18.985000610351562
+                    ],
+                    "vec3://t_rot": [
+                        180.0,
+                        0.0,
+                        90.0
+                    ],
+                    "vec3://t_scale": [
+                        8.5,
+                        13.254999160766602,
+                        1.0
+                    ],
+                    "a_model_mesh": "models/plane.npz",
+                    "a_model_vshader": "shaders/base_cam.vert",
+                    "a_model_fshader": "shaders/unlit.frag",
+                    "a_model_albedo": "textures/concrete/Concrete028_2K-PNG_Color_Pixelized.png",
+                    "a_model_transparent": false
+                }
+            ],
+            [
+                "r2_mid_prop_4",
+                "bt_static_mesh",
+                {
+                    "vec3://t_pos": [
+                        -3.5267412662506104,
+                        0.37306660413742065,
+                        -45.493465423583984
+                    ],
+                    "vec3://t_rot": [
+                        -90.0,
+                        -5.200000286102295,
+                        0.0
+                    ],
+                    "vec3://t_scale": [
+                        0.18882286548614502,
+                        0.18882286548614502,
+                        0.18882286548614502
+                    ],
+                    "a_model_mesh": "models/chair.npz",
+                    "a_model_vshader": "shaders/base_cam.vert",
+                    "a_model_fshader": "shaders/unlit.frag",
+                    "a_model_albedo": "textures/proto/Purple/texture_09.png",
+                    "a_model_transparent": false
+                }
+            ],
+            [
+                "r2_mid_prop_5",
+                "bt_static_mesh",
+                {
+                    "vec3://t_pos": [
+                        -2.856741189956665,
+                        0.37306660413742065,
+                        -45.493465423583984
+                    ],
+                    "vec3://t_rot": [
+                        -90.0,
+                        -5.200000286102295,
+                        0.0
+                    ],
+                    "vec3://t_scale": [
+                        0.18882286548614502,
+                        0.18882286548614502,
+                        0.18882286548614502
+                    ],
+                    "a_model_mesh": "models/chair.npz",
+                    "a_model_vshader": "shaders/base_cam.vert",
+                    "a_model_fshader": "shaders/unlit.frag",
+                    "a_model_albedo": "textures/proto/Purple/texture_09.png",
+                    "a_model_transparent": false
+                }
+            ],
+            [
+                "r2_side_6",
+                "bt_static_mesh",
+                {
+                    "vec3://t_pos": [
+                        -8.625,
+                        1.402999997138977,
+                        -48.540000915527344
+                    ],
+                    "vec3://t_rot": [
+                        0.0,
+                        90.0,
+                        0.0
+                    ],
+                    "vec3://t_scale": [
+                        6.300000190734863,
+                        1.4149999618530273,
+                        1.0
+                    ],
+                    "a_model_mesh": "models/plane.npz",
+                    "a_model_vshader": "shaders/base_cam.vert",
+                    "a_model_fshader": "shaders/unlit.frag",
+                    "a_model_albedo": "textures/proto/Dark/texture_07.png",
+                    "a_model_transparent": false
+                }
+            ],
+            [
+                "r2_side_7",
+                "bt_static_mesh",
+                {
+                    "vec3://t_pos": [
+                        8.614999771118164,
+                        1.402999997138977,
+                        -46.4900016784668
+                    ],
+                    "vec3://t_rot": [
+                        0.0,
+                        -90.0,
+                        0.0
+                    ],
+                    "vec3://t_scale": [
+                        4.24500036239624,
+                        1.4149999618530273,
+                        1.0
+                    ],
+                    "a_model_mesh": "models/plane.npz",
+                    "a_model_vshader": "shaders/base_cam.vert",
+                    "a_model_fshader": "shaders/unlit.frag",
+                    "a_model_albedo": "textures/proto/Dark/texture_07.png",
+                    "a_model_transparent": false
                 }
             ]
         ]

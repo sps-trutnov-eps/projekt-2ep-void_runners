@@ -4,9 +4,9 @@
         "type_list": [
             "sps_dev_text",
             "bt_static_mesh",
-            "sps_player_spawn",
+            "bt_phys_aabb",
             "bt_map_trigger",
-            "bt_phys_aabb"
+            "sps_player_spawn"
         ],
         "asset_list": []
     },
@@ -227,8 +227,8 @@
                     ],
                     "vec3://t_rot": [
                         -90.0,
-                        0.0,
-                        -90.0
+                        -90.0,
+                        0.0
                     ],
                     "vec3://t_scale": [
                         3.3600001335144043,
@@ -252,8 +252,8 @@
                     ],
                     "vec3://t_rot": [
                         -90.0,
-                        0.0,
-                        -90.0
+                        -90.0,
+                        0.0
                     ],
                     "vec3://t_scale": [
                         3.3600001335144043,
@@ -670,8 +670,8 @@
                     ],
                     "vec3://t_rot": [
                         -90.0,
-                        -90.0,
-                        0.0
+                        0.0,
+                        -90.0
                     ],
                     "vec3://t_scale": [
                         1.5049999952316284,
@@ -689,14 +689,14 @@
                 "bt_static_mesh",
                 {
                     "vec3://t_pos": [
-                        6.510000095367432,
+                        6.510000228881836,
                         0.0,
                         -38.00385665893555
                     ],
                     "vec3://t_rot": [
                         -90.0,
-                        0.0,
-                        -90.0
+                        -90.0,
+                        0.0
                     ],
                     "vec3://t_scale": [
                         1.5950000286102295,
@@ -894,8 +894,8 @@
                     ],
                     "vec3://t_rot": [
                         -90.0,
-                        -90.0,
-                        0.0
+                        0.0,
+                        -90.0
                     ],
                     "vec3://t_scale": [
                         1.5049999952316284,
@@ -1267,15 +1267,28 @@
             ],
             [
                 "r2_battery_prop",
-                "sps_dev_text",
+                "bt_static_mesh",
                 {
                     "vec3://t_pos": [
-                        15.865097999572754,
-                        0.0880584642291069,
-                        -65.43856811523438
+                        16.192779541015625,
+                        0.2654985189437866,
+                        -65.39850616455078
                     ],
-                    "dev_text": "A grabbable battery, can be inserted into the battery slot, TODO: sps_grab_prop entity type",
-                    "hide_text": false
+                    "vec3://t_rot": [
+                        -90.0,
+                        0.0,
+                        0.0
+                    ],
+                    "vec3://t_scale": [
+                        0.14840835332870483,
+                        0.14840835332870483,
+                        0.14840835332870483
+                    ],
+                    "a_model_mesh": "models/crate.npz",
+                    "a_model_vshader": "shaders/base_cam.vert",
+                    "a_model_fshader": "shaders/unlit.frag",
+                    "a_model_albedo": "textures/proto/Green/texture_09.png",
+                    "a_model_transparent": false
                 }
             ],
             [
@@ -1513,6 +1526,19 @@
                         2.0
                     ],
                     "phys_bitmask": 0.0
+                }
+            ],
+            [
+                "r2_battery_prop_note",
+                "sps_dev_text",
+                {
+                    "vec3://t_pos": [
+                        16.19171905517578,
+                        0.5399636030197144,
+                        -65.4105453491211
+                    ],
+                    "dev_text": "A pickup-able battery TODO: sps_interact_prop",
+                    "hide_text": false
                 }
             ]
         ]
