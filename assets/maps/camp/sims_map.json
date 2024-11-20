@@ -2,8 +2,8 @@
     "cmf_ver": 2,
     "cmf_header": {
         "type_list": [
-            "sps_player_spawn",
-            "bt_static_mesh"
+            "bt_static_mesh",
+            "sps_player_spawn"
         ],
         "asset_list": []
     },
@@ -48,84 +48,6 @@
                         0.0,
                         0.0
                     ]
-                }
-            ],
-            [
-                "wall",
-                "bt_static_mesh",
-                {
-                    "vec3://t_pos": [
-                        -0.004024328663945198,
-                        2.0036277770996094,
-                        -2.980583906173706
-                    ],
-                    "vec3://t_rot": [
-                        0.0,
-                        0.0,
-                        0.0
-                    ],
-                    "vec3://t_scale": [
-                        1.0,
-                        1.0,
-                        1.0
-                    ],
-                    "a_model_mesh": "models/plane.npz",
-                    "a_model_vshader": "shaders/base_cam.vert",
-                    "a_model_fshader": "shaders/unlit.frag",
-                    "a_model_albedo": "textures/proto/Dark/texture_08.png",
-                    "a_model_transparent": false
-                }
-            ],
-            [
-                "wall_0",
-                "bt_static_mesh",
-                {
-                    "vec3://t_pos": [
-                        -0.9840243458747864,
-                        1.9836277961730957,
-                        -1.9955841302871704
-                    ],
-                    "vec3://t_rot": [
-                        0.0,
-                        -89.5999984741211,
-                        0.800000011920929
-                    ],
-                    "vec3://t_scale": [
-                        1.0,
-                        1.0,
-                        1.0
-                    ],
-                    "a_model_mesh": "models/plane.npz",
-                    "a_model_vshader": "shaders/base_cam.vert",
-                    "a_model_fshader": "shaders/unlit.frag",
-                    "a_model_albedo": "textures/proto/Dark/texture_08.png",
-                    "a_model_transparent": false
-                }
-            ],
-            [
-                "wall_1",
-                "bt_static_mesh",
-                {
-                    "vec3://t_pos": [
-                        0.9809756278991699,
-                        1.9836277961730957,
-                        -1.9955841302871704
-                    ],
-                    "vec3://t_rot": [
-                        0.0,
-                        -89.5999984741211,
-                        0.800000011920929
-                    ],
-                    "vec3://t_scale": [
-                        1.0,
-                        1.0,
-                        1.0
-                    ],
-                    "a_model_mesh": "models/plane.npz",
-                    "a_model_vshader": "shaders/base_cam.vert",
-                    "a_model_fshader": "shaders/unlit.frag",
-                    "a_model_albedo": "textures/proto/Dark/texture_08.png",
-                    "a_model_transparent": false
                 }
             ],
             [
@@ -243,6 +165,32 @@
                     ],
                     "vec3://t_rot": [
                         0.0,
+                        0.0,
+                        0.0
+                    ],
+                    "vec3://t_scale": [
+                        1.0,
+                        1.0,
+                        1.0
+                    ],
+                    "a_model_mesh": "models/cube.npz",
+                    "a_model_vshader": "shaders/base_cam.vert",
+                    "a_model_fshader": "shaders/unlit.frag",
+                    "a_model_albedo": "textures/proto/Dark/texture_08.png",
+                    "a_model_transparent": false
+                }
+            ],
+            [
+                "new_entity_6",
+                "bt_static_mesh",
+                {
+                    "vec3://t_pos": [
+                        2.8499999046325684,
+                        -0.8399999737739563,
+                        5.800000190734863
+                    ],
+                    "vec3://t_rot": [
+                        0.17000000178813934,
                         0.0,
                         0.0
                     ],
