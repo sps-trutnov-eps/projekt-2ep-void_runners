@@ -2,7 +2,9 @@
     "cmf_ver": 2,
     "cmf_header": {
         "type_list": [
+            "bt_map_trigger",
             "bt_static_mesh",
+            "bt_phys_aabb",
             "sps_player_spawn"
         ],
         "asset_list": []
@@ -33,21 +35,6 @@
                     "a_model_fshader": "shaders/unlit.frag",
                     "a_model_albedo": "textures/proto/Dark/texture_08.png",
                     "a_model_transparent": false
-                }
-            ],
-            [
-                "new_entity_0",
-                "sps_player_spawn",
-                {
-                    "vec3://t_pos": [
-                        -0.02588387206196785,
-                        0.9772680401802063,
-                        -2.377497911453247
-                    ],
-                    "vec2://spawn_rot": [
-                        0.0,
-                        0.0
-                    ]
                 }
             ],
             [
@@ -129,39 +116,140 @@
                 }
             ],
             [
-                "new_entity_4",
-                "bt_static_mesh",
+                "collision 2",
+                "bt_phys_aabb",
                 {
                     "vec3://t_pos": [
                         0.0,
-                        -0.8399999737739563,
-                        3.044999837875366
-                    ],
-                    "vec3://t_rot": [
-                        0.0,
-                        0.0,
-                        0.0
+                        -0.8399999141693115,
+                        0.24499991536140442
                     ],
                     "vec3://t_scale": [
-                        1.0,
-                        1.0,
-                        1.0
+                        2.0,
+                        2.0,
+                        2.0
+                    ]
+                }
+            ],
+            [
+                "collision 3",
+                "bt_phys_aabb",
+                {
+                    "vec3://t_pos": [
+                        0.0,
+                        -0.5349999666213989,
+                        -0.875
                     ],
-                    "a_model_mesh": "models/cube.npz",
-                    "a_model_vshader": "shaders/base_cam.vert",
-                    "a_model_fshader": "shaders/unlit.frag",
-                    "a_model_albedo": "textures/proto/Dark/texture_08.png",
-                    "a_model_transparent": false
+                    "vec3://t_scale": [
+                        2.0,
+                        2.0,
+                        2.0
+                    ]
+                }
+            ],
+            [
+                "collision 4",
+                "bt_phys_aabb",
+                {
+                    "vec3://t_pos": [
+                        0.0,
+                        -0.26499998569488525,
+                        -1.3350000381469727
+                    ],
+                    "vec3://t_scale": [
+                        2.0,
+                        2.0,
+                        2.0
+                    ]
+                }
+            ],
+            [
+                "collision 5",
+                "bt_phys_aabb",
+                {
+                    "vec3://t_pos": [
+                        0.0,
+                        0.0,
+                        -2.0
+                    ],
+                    "vec3://t_scale": [
+                        2.0,
+                        2.0,
+                        2.0
+                    ]
+                }
+            ],
+            [
+                "new_entity_4",
+                "bt_phys_aabb",
+                {
+                    "vec3://t_pos": [
+                        0.9834344387054443,
+                        0.5308333039283752,
+                        -1.272195816040039
+                    ],
+                    "vec3://t_scale": [
+                        0.05000000074505806,
+                        5.0,
+                        5.0
+                    ]
                 }
             ],
             [
                 "new_entity_5",
+                "bt_phys_aabb",
+                {
+                    "vec3://t_pos": [
+                        -1.0965656042099,
+                        0.5308333039283752,
+                        -1.272195816040039
+                    ],
+                    "vec3://t_scale": [
+                        0.05000000074505806,
+                        5.0,
+                        5.0
+                    ]
+                }
+            ],
+            [
+                "new_entity_6",
+                "bt_phys_aabb",
+                {
+                    "vec3://t_pos": [
+                        0.13759705424308777,
+                        0.6516001224517822,
+                        -3.021854877471924
+                    ],
+                    "vec3://t_scale": [
+                        5.0,
+                        5.0,
+                        0.05000000074505806
+                    ]
+                }
+            ],
+            [
+                "sps_player",
+                "sps_player_spawn",
+                {
+                    "vec3://t_pos": [
+                        -0.02588387206196785,
+                        1.3972680568695068,
+                        -2.377497911453247
+                    ],
+                    "vec2://spawn_rot": [
+                        0.0,
+                        0.0
+                    ]
+                }
+            ],
+            [
+                "new_entity_0",
                 "bt_static_mesh",
                 {
                     "vec3://t_pos": [
-                        0.0,
-                        -0.8399999737739563,
-                        5.815000057220459
+                        -0.03926461935043335,
+                        -0.5232527852058411,
+                        5.088344573974609
                     ],
                     "vec3://t_rot": [
                         0.0,
@@ -169,8 +257,522 @@
                         0.0
                     ],
                     "vec3://t_scale": [
+                        2.0,
+                        0.5,
+                        0.5
+                    ],
+                    "a_model_mesh": "models/cube.npz",
+                    "a_model_vshader": "shaders/base_cam.vert",
+                    "a_model_fshader": "shaders/unlit.frag",
+                    "a_model_albedo": "textures/proto/Dark/texture_08.png",
+                    "a_model_transparent": false
+                }
+            ],
+            [
+                "collision 7",
+                "bt_phys_aabb",
+                {
+                    "vec3://t_pos": [
+                        -0.039264678955078125,
+                        -0.5232527256011963,
+                        5.088344573974609
+                    ],
+                    "vec3://t_scale": [
+                        4.0,
+                        0.9999999403953552,
+                        1.0
+                    ]
+                }
+            ],
+            [
+                "new_entity_7",
+                "bt_static_mesh",
+                {
+                    "vec3://t_pos": [
+                        -0.03926461935043335,
+                        -0.5232527852058411,
+                        8.593344688415527
+                    ],
+                    "vec3://t_rot": [
+                        0.0,
+                        0.0,
+                        0.0
+                    ],
+                    "vec3://t_scale": [
+                        2.0,
+                        0.5,
+                        0.5
+                    ],
+                    "a_model_mesh": "models/cube.npz",
+                    "a_model_vshader": "shaders/base_cam.vert",
+                    "a_model_fshader": "shaders/unlit.frag",
+                    "a_model_albedo": "textures/proto/Dark/texture_08.png",
+                    "a_model_transparent": false
+                }
+            ],
+            [
+                "collision 8",
+                "bt_phys_aabb",
+                {
+                    "vec3://t_pos": [
+                        -0.039264678955078125,
+                        -0.5232527256011963,
+                        8.593344688415527
+                    ],
+                    "vec3://t_scale": [
+                        4.0,
+                        0.9999999403953552,
+                        1.0
+                    ]
+                }
+            ],
+            [
+                "collision 9",
+                "bt_phys_aabb",
+                {
+                    "vec3://t_pos": [
+                        -1.9889793395996094,
+                        0.0785520002245903,
+                        5.083941459655762
+                    ],
+                    "vec3://t_scale": [
+                        0.14604759216308594,
+                        0.42179131507873535,
+                        1.036078929901123
+                    ]
+                }
+            ],
+            [
+                "collision 10",
+                "bt_phys_aabb",
+                {
+                    "vec3://t_pos": [
+                        1.9010205268859863,
+                        0.0785520002245903,
+                        5.083941459655762
+                    ],
+                    "vec3://t_scale": [
+                        0.1460477113723755,
+                        0.42179131507873535,
+                        1.036078929901123
+                    ]
+                }
+            ],
+            [
+                "new_entity_railling_1",
+                "bt_static_mesh",
+                {
+                    "vec3://t_pos": [
+                        -1.988979458808899,
+                        0.16106919944286346,
+                        5.083939075469971
+                    ],
+                    "vec3://t_rot": [
+                        -90.0,
+                        0.0,
+                        0.0
+                    ],
+                    "vec3://t_scale": [
+                        0.9699999690055847,
+                        0.2849999964237213,
+                        0.1900000125169754
+                    ],
+                    "a_model_mesh": "models/railing.npz",
+                    "a_model_vshader": "shaders/base_cam.vert",
+                    "a_model_fshader": "shaders/unlit.frag",
+                    "a_model_albedo": "textures/proto/Dark/texture_08.png",
+                    "a_model_transparent": false
+                }
+            ],
+            [
+                "railling_2",
+                "bt_static_mesh",
+                {
+                    "vec3://t_pos": [
+                        1.9010205268859863,
+                        0.16106919944286346,
+                        5.083939075469971
+                    ],
+                    "vec3://t_rot": [
+                        -90.0,
+                        0.0,
+                        0.0
+                    ],
+                    "vec3://t_scale": [
+                        0.9699999690055847,
+                        0.2849999964237213,
+                        0.1900000125169754
+                    ],
+                    "a_model_mesh": "models/railing.npz",
+                    "a_model_vshader": "shaders/base_cam.vert",
+                    "a_model_fshader": "shaders/unlit.frag",
+                    "a_model_albedo": "textures/proto/Dark/texture_08.png",
+                    "a_model_transparent": false
+                }
+            ],
+            [
+                "new_entity_railling_0",
+                "bt_static_mesh",
+                {
+                    "vec3://t_pos": [
+                        -1.988979458808899,
+                        0.16106919944286346,
+                        8.593939781188965
+                    ],
+                    "vec3://t_rot": [
+                        -90.0,
+                        0.0,
+                        0.0
+                    ],
+                    "vec3://t_scale": [
+                        0.9699999690055847,
+                        0.2849999964237213,
+                        0.1900000125169754
+                    ],
+                    "a_model_mesh": "models/railing.npz",
+                    "a_model_vshader": "shaders/base_cam.vert",
+                    "a_model_fshader": "shaders/unlit.frag",
+                    "a_model_albedo": "textures/proto/Dark/texture_08.png",
+                    "a_model_transparent": false
+                }
+            ],
+            [
+                "new_entity_railling_2",
+                "bt_static_mesh",
+                {
+                    "vec3://t_pos": [
+                        1.9060205221176147,
+                        0.16106919944286346,
+                        8.593939781188965
+                    ],
+                    "vec3://t_rot": [
+                        -90.0,
+                        0.0,
+                        0.0
+                    ],
+                    "vec3://t_scale": [
+                        0.9699999690055847,
+                        0.2849999964237213,
+                        0.1900000125169754
+                    ],
+                    "a_model_mesh": "models/railing.npz",
+                    "a_model_vshader": "shaders/base_cam.vert",
+                    "a_model_fshader": "shaders/unlit.frag",
+                    "a_model_albedo": "textures/proto/Dark/texture_08.png",
+                    "a_model_transparent": false
+                }
+            ],
+            [
+                "collision 11",
+                "bt_phys_aabb",
+                {
+                    "vec3://t_pos": [
+                        1.9060206413269043,
+                        0.0785520002245903,
+                        8.593942642211914
+                    ],
+                    "vec3://t_scale": [
+                        0.14604759216308594,
+                        0.42179131507873535,
+                        1.0360784530639648
+                    ]
+                }
+            ],
+            [
+                "collision 12",
+                "bt_phys_aabb",
+                {
+                    "vec3://t_pos": [
+                        -1.9889793395996094,
+                        0.0785520002245903,
+                        8.593942642211914
+                    ],
+                    "vec3://t_scale": [
+                        0.14604759216308594,
+                        0.42179131507873535,
+                        1.0360784530639648
+                    ]
+                }
+            ],
+            [
+                "new_entity_8",
+                "bt_static_mesh",
+                {
+                    "vec3://t_pos": [
+                        -0.03926461935043335,
+                        -3.6832528114318848,
+                        9.58834457397461
+                    ],
+                    "vec3://t_rot": [
+                        0.0,
+                        0.0,
+                        0.0
+                    ],
+                    "vec3://t_scale": [
+                        2.0,
+                        0.5,
+                        0.5
+                    ],
+                    "a_model_mesh": "models/cube.npz",
+                    "a_model_vshader": "shaders/base_cam.vert",
+                    "a_model_fshader": "shaders/unlit.frag",
+                    "a_model_albedo": "textures/proto/Dark/texture_08.png",
+                    "a_model_transparent": false
+                }
+            ],
+            [
+                "collision 13",
+                "bt_phys_aabb",
+                {
+                    "vec3://t_pos": [
+                        -0.039264678955078125,
+                        -3.6832528114318848,
+                        9.58834457397461
+                    ],
+                    "vec3://t_scale": [
+                        4.0,
                         1.0,
+                        1.0
+                    ]
+                }
+            ],
+            [
+                "new_entity_railling_3",
+                "bt_static_mesh",
+                {
+                    "vec3://t_pos": [
+                        -1.988979458808899,
+                        -2.8889307975769043,
+                        9.588939666748047
+                    ],
+                    "vec3://t_rot": [
+                        -90.0,
+                        0.0,
+                        0.0
+                    ],
+                    "vec3://t_scale": [
+                        0.9699999690055847,
+                        0.2849999964237213,
+                        0.1900000125169754
+                    ],
+                    "a_model_mesh": "models/railing.npz",
+                    "a_model_vshader": "shaders/base_cam.vert",
+                    "a_model_fshader": "shaders/unlit.frag",
+                    "a_model_albedo": "textures/proto/Dark/texture_08.png",
+                    "a_model_transparent": false
+                }
+            ],
+            [
+                "collision 14",
+                "bt_phys_aabb",
+                {
+                    "vec3://t_pos": [
+                        -1.9889793395996094,
+                        -2.9714479446411133,
+                        9.58894157409668
+                    ],
+                    "vec3://t_scale": [
+                        0.14604759216308594,
+                        0.42179131507873535,
+                        1.0360784530639648
+                    ]
+                }
+            ],
+            [
+                "new_entity_railling_4",
+                "bt_static_mesh",
+                {
+                    "vec3://t_pos": [
+                        1.9060205221176147,
+                        -2.8889307975769043,
+                        9.588939666748047
+                    ],
+                    "vec3://t_rot": [
+                        -90.0,
+                        0.0,
+                        0.0
+                    ],
+                    "vec3://t_scale": [
+                        0.9699999690055847,
+                        0.2849999964237213,
+                        0.1900000125169754
+                    ],
+                    "a_model_mesh": "models/railing.npz",
+                    "a_model_vshader": "shaders/base_cam.vert",
+                    "a_model_fshader": "shaders/unlit.frag",
+                    "a_model_albedo": "textures/proto/Dark/texture_08.png",
+                    "a_model_transparent": false
+                }
+            ],
+            [
+                "collision 15",
+                "bt_phys_aabb",
+                {
+                    "vec3://t_pos": [
+                        1.9060206413269043,
+                        -2.9714479446411133,
+                        9.58894157409668
+                    ],
+                    "vec3://t_scale": [
+                        0.14604759216308594,
+                        0.42179131507873535,
+                        1.0360784530639648
+                    ]
+                }
+            ],
+            [
+                "new_entity_9",
+                "bt_static_mesh",
+                {
+                    "vec3://t_pos": [
+                        -1.0755432844161987,
+                        -3.242476224899292,
+                        13.850189208984375
+                    ],
+                    "vec3://t_rot": [
+                        0.0,
+                        0.0,
+                        0.0
+                    ],
+                    "vec3://t_scale": [
+                        0.5,
+                        0.05000000074505806,
+                        3.0
+                    ],
+                    "a_model_mesh": "models/cube.npz",
+                    "a_model_vshader": "shaders/base_cam.vert",
+                    "a_model_fshader": "shaders/unlit.frag",
+                    "a_model_albedo": "textures/proto/Dark/texture_08.png",
+                    "a_model_transparent": false
+                }
+            ],
+            [
+                "new_entity_10",
+                "bt_static_mesh",
+                {
+                    "vec3://t_pos": [
+                        0.9544566869735718,
+                        -3.242476224899292,
+                        13.850189208984375
+                    ],
+                    "vec3://t_rot": [
+                        0.0,
+                        0.0,
+                        0.0
+                    ],
+                    "vec3://t_scale": [
+                        0.5,
+                        0.05000000074505806,
+                        3.0
+                    ],
+                    "a_model_mesh": "models/cube.npz",
+                    "a_model_vshader": "shaders/base_cam.vert",
+                    "a_model_fshader": "shaders/unlit.frag",
+                    "a_model_albedo": "textures/proto/Dark/texture_08.png",
+                    "a_model_transparent": false
+                }
+            ],
+            [
+                "collision 16",
+                "bt_phys_aabb",
+                {
+                    "vec3://t_pos": [
+                        0.9544566869735718,
+                        -3.242476224899292,
+                        13.850189208984375
+                    ],
+                    "vec3://t_scale": [
                         1.0,
+                        0.09999990463256836,
+                        6.0
+                    ]
+                }
+            ],
+            [
+                "new_entity_11",
+                "bt_static_mesh",
+                {
+                    "vec3://t_pos": [
+                        0.9544566869735718,
+                        -3.242476224899292,
+                        21.25018882751465
+                    ],
+                    "vec3://t_rot": [
+                        0.0,
+                        0.0,
+                        0.0
+                    ],
+                    "vec3://t_scale": [
+                        0.5,
+                        0.05000000074505806,
+                        3.0
+                    ],
+                    "a_model_mesh": "models/cube.npz",
+                    "a_model_vshader": "shaders/base_cam.vert",
+                    "a_model_fshader": "shaders/unlit.frag",
+                    "a_model_albedo": "textures/proto/Dark/texture_08.png",
+                    "a_model_transparent": false
+                }
+            ],
+            [
+                "new_entity_12",
+                "bt_static_mesh",
+                {
+                    "vec3://t_pos": [
+                        -1.0505433082580566,
+                        -3.242476224899292,
+                        21.25018882751465
+                    ],
+                    "vec3://t_rot": [
+                        0.0,
+                        0.0,
+                        0.0
+                    ],
+                    "vec3://t_scale": [
+                        0.5,
+                        0.05000000074505806,
+                        3.0
+                    ],
+                    "a_model_mesh": "models/cube.npz",
+                    "a_model_vshader": "shaders/base_cam.vert",
+                    "a_model_fshader": "shaders/unlit.frag",
+                    "a_model_albedo": "textures/proto/Dark/texture_08.png",
+                    "a_model_transparent": false
+                }
+            ],
+            [
+                "collision 17",
+                "bt_phys_aabb",
+                {
+                    "vec3://t_pos": [
+                        -1.0505433082580566,
+                        -3.242476224899292,
+                        21.25018882751465
+                    ],
+                    "vec3://t_scale": [
+                        1.0,
+                        0.09999990463256836,
+                        6.0
+                    ]
+                }
+            ],
+            [
+                "new_entity_13",
+                "bt_static_mesh",
+                {
+                    "vec3://t_pos": [
+                        -1.5705432891845703,
+                        -3.242476224899292,
+                        25.7001895904541
+                    ],
+                    "vec3://t_rot": [
+                        0.0,
+                        90.0,
+                        0.0
+                    ],
+                    "vec3://t_scale": [
+                        0.5,
+                        0.05000000074505806,
                         1.0
                     ],
                     "a_model_mesh": "models/cube.npz",
@@ -181,22 +783,22 @@
                 }
             ],
             [
-                "new_entity_6",
+                "new_entity_14",
                 "bt_static_mesh",
                 {
                     "vec3://t_pos": [
-                        2.8499999046325684,
-                        -0.8399999737739563,
-                        5.800000190734863
+                        -4.740543365478516,
+                        -3.242476224899292,
+                        25.7001895904541
                     ],
                     "vec3://t_rot": [
-                        0.17000000178813934,
                         0.0,
+                        90.0,
                         0.0
                     ],
                     "vec3://t_scale": [
-                        1.0,
-                        1.0,
+                        0.5,
+                        0.05000000074505806,
                         1.0
                     ],
                     "a_model_mesh": "models/cube.npz",
@@ -204,6 +806,202 @@
                     "a_model_fshader": "shaders/unlit.frag",
                     "a_model_albedo": "textures/proto/Dark/texture_08.png",
                     "a_model_transparent": false
+                }
+            ],
+            [
+                "new_entity_15",
+                "bt_static_mesh",
+                {
+                    "vec3://t_pos": [
+                        -8.010543823242188,
+                        -3.242476224899292,
+                        25.7001895904541
+                    ],
+                    "vec3://t_rot": [
+                        0.0,
+                        90.0,
+                        0.0
+                    ],
+                    "vec3://t_scale": [
+                        3.0,
+                        0.05000000074505806,
+                        1.0
+                    ],
+                    "a_model_mesh": "models/cube.npz",
+                    "a_model_vshader": "shaders/base_cam.vert",
+                    "a_model_fshader": "shaders/unlit.frag",
+                    "a_model_albedo": "textures/proto/Dark/texture_08.png",
+                    "a_model_transparent": false
+                }
+            ],
+            [
+                "new_entity_16",
+                "bt_static_mesh",
+                {
+                    "vec3://t_pos": [
+                        -10.4722261428833,
+                        -3.705034017562866,
+                        25.910804748535156
+                    ],
+                    "vec3://t_rot": [
+                        0.0,
+                        -89.5999984741211,
+                        0.0
+                    ],
+                    "vec3://t_scale": [
+                        0.13974812626838684,
+                        0.13974812626838684,
+                        0.13974812626838684
+                    ],
+                    "a_model_mesh": "models/door.npz",
+                    "a_model_vshader": "shaders/base_cam.vert",
+                    "a_model_fshader": "shaders/unlit.frag",
+                    "a_model_albedo": "textures/proto/Purple/texture_09.png",
+                    "a_model_transparent": false
+                }
+            ],
+            [
+                "collision 18",
+                "bt_phys_aabb",
+                {
+                    "vec3://t_pos": [
+                        -1.5705432891845703,
+                        -3.242476224899292,
+                        25.7001895904541
+                    ],
+                    "vec3://t_scale": [
+                        2.0,
+                        0.09999990463256836,
+                        1.0
+                    ]
+                }
+            ],
+            [
+                "new_entity_17",
+                "bt_static_mesh",
+                {
+                    "vec3://t_pos": [
+                        -4.740542888641357,
+                        -5.917476654052734,
+                        25.690189361572266
+                    ],
+                    "vec3://t_rot": [
+                        30.399999618530273,
+                        90.0,
+                        -30.399999618530273
+                    ],
+                    "vec3://t_scale": [
+                        1.0,
+                        0.05000000074505806,
+                        2.0
+                    ],
+                    "a_model_mesh": "models/cube.npz",
+                    "a_model_vshader": "shaders/base_cam.vert",
+                    "a_model_fshader": "shaders/unlit.frag",
+                    "a_model_albedo": "textures/proto/Dark/texture_08.png",
+                    "a_model_transparent": false
+                }
+            ],
+            [
+                "collision 19",
+                "bt_phys_aabb",
+                {
+                    "vec3://t_pos": [
+                        -4.740542888641357,
+                        -5.917476654052734,
+                        25.690189361572266
+                    ],
+                    "vec3://t_scale": [
+                        4.0,
+                        0.10000038146972656,
+                        2.0
+                    ]
+                }
+            ],
+            [
+                "new_entity_18",
+                "bt_static_mesh",
+                {
+                    "vec3://t_pos": [
+                        -4.346428394317627,
+                        -3.0222556591033936,
+                        24.659420013427734
+                    ],
+                    "vec3://t_rot": [
+                        -0.40000009536743164,
+                        -180.0,
+                        0.0
+                    ],
+                    "vec3://t_scale": [
+                        2.700000047683716,
+                        3.0,
+                        1.0
+                    ],
+                    "a_model_mesh": "models/plane.npz",
+                    "a_model_vshader": "shaders/base_cam.vert",
+                    "a_model_fshader": "shaders/unlit.frag",
+                    "a_model_albedo": "textures/proto/Dark/texture_08.png",
+                    "a_model_transparent": false
+                }
+            ],
+            [
+                "new_entity_19",
+                "bt_static_mesh",
+                {
+                    "vec3://t_pos": [
+                        -6.68459415435791,
+                        -5.589875221252441,
+                        25.684587478637695
+                    ],
+                    "vec3://t_rot": [
+                        270.3999938964844,
+                        0.0,
+                        0.0
+                    ],
+                    "vec3://t_scale": [
+                        0.9804222583770752,
+                        0.5734490752220154,
+                        0.24042226374149323
+                    ],
+                    "a_model_mesh": "models/railing.npz",
+                    "a_model_vshader": "shaders/base_cam.vert",
+                    "a_model_fshader": "shaders/unlit.frag",
+                    "a_model_albedo": "textures/proto/Dark/texture_08.png",
+                    "a_model_transparent": false
+                }
+            ],
+            [
+                "collision 20",
+                "bt_phys_aabb",
+                {
+                    "vec3://t_pos": [
+                        -6.68459415435791,
+                        -5.694728851318359,
+                        25.683685302734375
+                    ],
+                    "vec3://t_scale": [
+                        0.14761686325073242,
+                        0.5439105033874512,
+                        2.0880126953125
+                    ]
+                }
+            ],
+            [
+                "new_entity_20",
+                "bt_map_trigger",
+                {
+                    "vec3://t_pos": [
+                        -4.748116493225098,
+                        -5.838562965393066,
+                        25.702407836914062
+                    ],
+                    "vec3://t_scale": [
+                        4.0,
+                        0.05000000074505806,
+                        2.0
+                    ],
+                    "next_map": "",
+                    "enabled_at_start": true
                 }
             ]
         ]
