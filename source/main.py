@@ -45,9 +45,11 @@ if args.bootup_map:
 import entity.sps_player_spawn
 import entity.sps_static_cam
 import entity.sps_dev_text
+import entity.sps_view_mesh
 
 import dev_utils
 from ui import GameUI
+from sps_state import SpsState
 
 # == init engine ==
 
@@ -64,19 +66,16 @@ GameState.collider_scene = PhysScene()
 
 # == Init game state ==
 
-game_ui = GameUI(lives=3, ammo=50, score=0)
-dev_con = False
-
-p_spawn: entity.sps_player_spawn.SpsPlayerSpawn | None = None
+SpsState.p_hud_ui = GameUI(lives=3, ammo=50, score=0)
 
 def on_map_load(path: str) -> None:
-    global p_spawn
+    SpsState.dev_con = False
 
     # try to lookup the player spawn entity
     try:
-        p_spawn = GameState.entity_storage.get_entity("sps_player_spawn", "sps_player")
+        SpsState.p_active_controller = GameState.entity_storage.get_entity("sps_player_spawn", "sps_player").player_controller
     except KeyError:
-        p_spawn = None
+        SpsState.p_active_controller = None
 
     # GameState.static_sequencer.on_event(cue_map.on_load_evid, on_map_load)
 # GameState.static_sequencer.on_event(cue_map.on_load_evid, on_map_load)
@@ -98,8 +97,8 @@ while True:
             GameState.renderer.fullscreen_imgui_ctx.set_mouse_input(e.pos)
 
         if e.type == pg.KEYDOWN and e.dict["key"] == pg.K_ESCAPE:
-            dev_con ^= True
-            p_spawn.player_controller.set_captured(not dev_con)
+            SpsState.dev_con ^= True
+            SpsState.p_active_controller.set_captured(not SpsState.dev_con)
 
         if e.type == pg.QUIT:
             sys.exit(0)
@@ -125,13 +124,13 @@ while True:
 
     # == frame ==
 
-    game_ui.render_ui()
+    SpsState.p_hud_ui.render_ui()
 
-    if dev_con:
-        dev_con = cue_utils.show_developer_console()
+    if SpsState.dev_con:
+        SpsState.dev_con = cue_utils.show_developer_console()
 
-        if not dev_con:
-            p_spawn.player_controller.set_captured(True)
+        if not SpsState.dev_con:
+            SpsState.p_active_controller.set_captured(True)
 
     if dev_utils.is_perf_overlay_open:
         cue_utils.show_perf_overlay()
