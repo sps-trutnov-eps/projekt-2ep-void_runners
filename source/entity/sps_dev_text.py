@@ -7,14 +7,14 @@ from pygame.math import Vector3 as Vec3
 def spawn_dev_text(en_data: dict) -> None:
     return None # dev_text only shows itself in the editor
 
-def dev_text_tick(s: dict | None, dev_state: dict, en_data: dict) -> dict:
+def dev_text_tick(s: dict | None, dev_state: en.DevTickState, en_data: dict) -> dict:
     if en_data["t_pos"] is None:
-        en_data["t_pos"] = dev_state["suggested_initial_pos"]
+        en_data["t_pos"] = dev_state.suggested_initial_pos
 
     if s is None:
         s = {}
 
-    if dev_state["is_selected"]:
+    if dev_state.is_entity_selected:
         handle_transform_edit_mode(s, dev_state, en_data, True, False, False)
 
     min_p = en_data["t_pos"] - Vec3(.05, .05, .05)

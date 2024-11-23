@@ -26,14 +26,14 @@ class SpsPlayerSpawn:
 def spawn_player_point(en_data: dict):
     return SpsPlayerSpawn(en_data)
 
-def dev_player_spawn(s: dict | None, dev_state: dict, en_data: dict) -> dict:
+def dev_player_spawn(s: dict | None, dev_state: en.DevTickState, en_data: dict) -> dict:
     if en_data["t_pos"] is None:
-        en_data["t_pos"] = dev_state["suggested_initial_pos"]
+        en_data["t_pos"] = dev_state.suggested_initial_pos
 
     if s is None:
         s = {}
 
-    if dev_state["is_selected"]:
+    if dev_state.is_entity_selected:
         # handle trasnsform editing
         handle_transform_edit_mode(s, dev_state, en_data, True, False, False)
 
@@ -43,7 +43,7 @@ def dev_player_spawn(s: dict | None, dev_state: dict, en_data: dict) -> dict:
     min_p.y += PlayerMovement.PLAYER_SIZE.y / 2
     max_p.y += PlayerMovement.PLAYER_SIZE.y / 2
     
-    gizmo.draw_box(min_p, max_p, Vec3(1., 1., .2) if dev_state["is_selected"] else Vec3(.7, .7, .05))
+    gizmo.draw_box(min_p, max_p, Vec3(1., 1., .2) if dev_state.is_entity_selected else Vec3(.7, .7, .05))
 
     return s
 

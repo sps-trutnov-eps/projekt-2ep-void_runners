@@ -109,7 +109,7 @@ class PlayerMovement:
 
         seq.next(PlayerMovement.tick, self)
 
-    # == landed state player movement ==
+    # == player movement logic ==
     # note: do not search for any kind of logic here, most stuff was figured out by feel and experimentation
 
     def _land_accel_func(self, d: Vec3, vel: Vec3, maxs: float, accel: float, dt: float) -> Vec3:

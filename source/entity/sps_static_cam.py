@@ -29,24 +29,24 @@ class SpsStaticCam:
 def spawn_player_point(en_data: dict):
     return SpsStaticCam(en_data)
 
-def dev_player_spawn(s: dict | None, dev_state: dict, en_data: dict) -> dict:
+def dev_player_spawn(s: dict | None, dev_state: en.DevTickState, en_data: dict) -> dict:
     if s is None or not s["last_dict"] == en_data:
         if en_data["t_pos"] is None:
-            en_data["t_pos"] = dev_state["suggested_initial_pos"]
+            en_data["t_pos"] = dev_state.suggested_initial_pos
 
         s = {
             "last_dict": dict(en_data),
             "trans": Transform(en_data["t_pos"], Vec3(en_data["t_rot"].x, -en_data["t_rot"].y, 0.)),
         }
 
-    if dev_state["is_selected"]:
+    if dev_state.is_entity_selected:
         # handle trasnsform editing
         handle_transform_edit_mode(s, dev_state, en_data, True, False, False)
     
     pos = en_data["t_pos"]
     min_p = pos - Vec3(.15, .15, .15)
     max_p = pos + Vec3(.15, .15, .15)
-    line_col = Vec3(1., 1., .2) if dev_state["is_selected"] else Vec3(.7, .7, .05)
+    line_col = Vec3(1., 1., .2) if dev_state.is_entity_selected else Vec3(.7, .7, .05)
 
     gizmo.draw_box(min_p, max_p, line_col)
 
