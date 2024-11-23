@@ -28,7 +28,7 @@ import imgui
 # == contants ==
 
 ASSET_DIR = os.path.join(os.path.dirname(__file__), "../assets/")
-BOOTUP_MAP =  ASSET_DIR + "/maps/test_map2.json"
+BOOTUP_MAP =  ASSET_DIR + "/maps/main_menu.json"
 
 # == launch arguments ==
 
@@ -50,6 +50,7 @@ import entity.sps_view_mesh
 import dev_utils
 from ui import GameUI
 from sps_state import SpsState
+from mainmenu import MenuUI
 
 # == init engine ==
 
@@ -66,7 +67,7 @@ GameState.collider_scene = PhysScene()
 
 # == Init game state ==
 
-SpsState.p_hud_ui = GameUI(lives=3, ammo=50, score=0)
+SpsState.p_hud_ui = MenuUI ()
 
 def on_map_load(path: str) -> None:
     SpsState.dev_con = False
