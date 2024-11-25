@@ -67,16 +67,20 @@ GameState.collider_scene = PhysScene()
 
 # == Init game state ==
 
-SpsState.p_hud_ui = MenuUI ()
+SpsState.hitbox_scene = PhysScene()
 
 def on_map_load(path: str) -> None:
     SpsState.dev_con = False
 
-    # try to lookup the player spawn entity
-    try:
-        SpsState.p_active_controller = GameState.entity_storage.get_entity("sps_player_spawn", "sps_player").player_controller
-    except KeyError:
-        SpsState.p_active_controller = None
+    # crunch filled nightmares
+    if os.path.basename(path) == "main_menu.json":
+        SpsState.p_hud_ui = MenuUI()
+    
+    else:
+        SpsState.p_hud_ui = GameUI()
+
+    SpsState.p_health = 100
+    SpsState.p_ammo = 15
 
     # GameState.static_sequencer.on_event(cue_map.on_load_evid, on_map_load)
 # GameState.static_sequencer.on_event(cue_map.on_load_evid, on_map_load)
