@@ -38,6 +38,7 @@ class PlayerMovement:
     OVERSPEED_FRICTION = 2
     GRAVITY = Vec3(0., -5.6, 0.)
     MIN_STEP_STRAIGHTNESS = .7
+    MAX_STEP_DISTANCE = .2
 
     PLAYER_SIZE = Vec3(.45, .95, .45)
     CAMERA_OFFSET = Vec3(0, .8, 0)
@@ -119,6 +120,8 @@ class PlayerMovement:
         new_vel: Vec3 = self.p_vel
         new_pos: Vec3 = self.p_pos
 
+        max_step = PlayerMovement.MAX_STEP_DISTANCE if self.p_state == 0 else 0. # enable step only if already on ground (prevents little teleports when sliding up agains an edge)
+
         if new_vel.length_squared() != 0.:
             tmax = new_vel.length() * dt
 
@@ -128,9 +131,44 @@ class PlayerMovement:
             show_debug = self.show_player_debug
 
             while scene_hit is not None:
-                # conform to collision
                 frac_traveled = scene_hit.tmin / tmax
 
+                # check if it is valid to step up on the collided object
+
+                step_pos = Vec3(new_pos) + new_vel * dt * frac_traveled
+                step_pos += -scene_hit.norm * EPSILON # nudge the step test pos slightly into the coll
+
+                player_stand_box: PhysRay = PhysRay.make(step_pos + Vec3(0., max_step - EPSILON, 0.), Vec3(0., -1., 0.), PlayerMovement.PLAYER_SIZE.elementwise() * Vec3(1., 0., 1.))
+                stand_hit = GameState.collider_scene.first_hit(player_stand_box, max_step)
+
+                if stand_hit is not None and stand_hit.tout >= 0.:
+                    # collision is not above the max step distance, check for obstruction above step
+
+                    step_pos.y = stand_hit.pos[1] + EPSILON
+
+                    player_stand_box: PhysRay = PhysRay.make(step_pos + Vec3(0., PlayerMovement.PLAYER_SIZE.y / 2, 0.), Vec3(0., 1., 0.), PlayerMovement.PLAYER_SIZE)
+                    stand_hit = GameState.collider_scene.first_hit(player_stand_box, EPSILON)
+                    
+                    if show_debug:
+                        pos = step_pos + Vec3(0., PlayerMovement.PLAYER_SIZE.y / 2, 0.)
+                        size = PlayerMovement.PLAYER_SIZE
+
+                        gizmo.draw_box(pos - size, pos + size, Vec3(.15, .8, .15) if stand_hit is None else Vec3(1., .15, .15))
+
+                    if stand_hit is None:
+                        # no obstruction found, perform step
+                        new_pos = step_pos
+                        dt *= 1. - frac_traveled
+
+                        # recalc and continue checking for collisions after step
+                        player_box: PhysRay = PhysRay.make(new_pos + Vec3(0., PlayerMovement.PLAYER_SIZE.y / 2, 0.), new_vel.normalize(), PlayerMovement.PLAYER_SIZE)
+                        scene_hit = GameState.collider_scene.first_hit(player_box, tmax)
+
+                        continue
+
+                    # else if obstruction found, forget about stepping and treat it as a normal collision
+
+                # collision confirmed, conform to collision
                 new_pos += new_vel * dt * frac_traveled
                 new_vel = new_vel - new_vel.project(scene_hit.norm)
                 dt *= 1. - frac_traveled
@@ -161,14 +199,14 @@ class PlayerMovement:
 
         # perform stand check
 
-        stand_dir = new_vel.normalize() if new_vel.length_squared() != 0 else Vec3(0., -1., 0.)
-
-        player_stand_box: PhysRay = PhysRay.make(new_pos + Vec3(0., PlayerMovement.PLAYER_SIZE.y / 2 - EPSILON, 0.), stand_dir, PlayerMovement.PLAYER_SIZE)
-        stand_hit = GameState.collider_scene.first_hit(player_stand_box, EPSILON)
+        player_stand_box: PhysRay = PhysRay.make(new_pos + Vec3(0., max_step - EPSILON, 0.), Vec3(0., -1., 0.), PlayerMovement.PLAYER_SIZE.elementwise() * Vec3(1., 0., 1.))
+        stand_hit = GameState.collider_scene.first_hit(player_stand_box, max_step + EPSILON)
         standing_on_ground = stand_hit is not None
 
         if standing_on_ground:
-            new_pos.y = stand_hit.pos[1] - PlayerMovement.PLAYER_SIZE.y / 2 + EPSILON
+            # new_vel = new_vel - new_vel.project(stand_hit.norm) # delete downwards velocity as full-on collision with the floor techically never happened
+            new_vel.y = max(new_vel.y, 0.)
+            new_pos.y = stand_hit.pos[1] + EPSILON
 
         self.p_vel = new_vel
         self.p_pos = new_pos
