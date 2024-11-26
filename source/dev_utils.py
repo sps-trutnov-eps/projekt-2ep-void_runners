@@ -90,3 +90,10 @@ def deltascale_cmd(args: list[str]):
     dev_deltascale = scale
 
 utils.add_dev_command("deltascale", deltascale_cmd)
+
+# == ai cmds ==
+
+def ai_debug_cmd(args: list[str]):
+    SpsState.ai_debug ^= True
+
+utils.add_dev_command("ai_debug", ai_debug_cmd)

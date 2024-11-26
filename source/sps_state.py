@@ -29,3 +29,7 @@ class SpsState:
     # == damage system ==
 
     hitbox_scene: 'PhysScene'
+
+    # == dev bools ==
+
+    ai_debug: bool = False
