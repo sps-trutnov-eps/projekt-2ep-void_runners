@@ -13,7 +13,35 @@ class GameUI:
         self.displayed_health = 100
         self.health_change_time = 0
         self.damage_flash = 0
+        
+        # UI Layout constants
+        self.PADDING = 15
+        self.CORNER_RADIUS = 10
+        self.UI_WIDTH = 280
+        self.UI_HEIGHT = 180
+        
+        # Calculate positions (right bottom corner)
+        self.base_x = 1280 - self.UI_WIDTH - self.PADDING  # Assuming 1280x720 resolution
+        self.base_y = 720 - self.UI_HEIGHT - self.PADDING
+        
+        # Load textures
         self.heart_texture = GameState.asset_manager.load_texture("textures/hpsrdce.png")
+
+    def render_rounded_panel(self, x, y, width, height, color):
+        """Helper method to draw a rounded panel with border"""
+        # Background
+        self.ctx.add_rect_filled(
+            x, y, x + width, y + height,
+            color,
+            rounding=self.CORNER_RADIUS
+        )
+        # Border
+        self.ctx.add_rect(
+            x, y, x + width, y + height,
+            imgui.get_color_u32_rgba(1, 1, 1, 0.3),
+            rounding=self.CORNER_RADIUS,
+            thickness=1.0
+        )
 
     def render_ui(self):
         self.ctx = im2d.Im2DContext(GameState.renderer.fullscreen_imgui_ctx)
@@ -28,61 +56,76 @@ class GameUI:
             self.damage_flash = 1.0
             self.last_health = SpsState.p_health
         
-        # Interpolate displayed health
         health_transition = min(1.0, (current_time - self.health_change_time) * 3)
         self.displayed_health += (SpsState.p_health - self.displayed_health) * health_transition
-        
-        # Update damage flash
         self.damage_flash = max(0, self.damage_flash - GameState.delta_time * 2)
-        
-        # Main UI background with dynamic opacity
-        background_alpha = 0.8 + self.pulse_animation * 0.1
-        self.ctx.add_rect_filled(
-            40, 530, 310, 690,
-            imgui.get_color_u32_rgba(0, 0, 0, background_alpha)
+
+        # Main panel background
+        self.render_rounded_panel(
+            self.base_x, 
+            self.base_y,
+            self.UI_WIDTH,
+            self.UI_HEIGHT,
+            imgui.get_color_u32_rgba(0, 0, 0, 0.8 + self.pulse_animation * 0.1)
         )
-        
-        # Health display with animations
+
+        # Health Section
         health_color = imgui.get_color_u32_rgba(
             1.0 if self.damage_flash > 0 else 0.2,
             1.0 if SpsState.p_health > 30 else 0.2,
             0.2,
             1.0
         )
-        
-        # Health bar
-        health_width = 250 * (self.displayed_health / 100)
-        self.ctx.add_rect_filled(
-            60, 580, 60 + health_width, 595,
-            health_color
-        )
-        self.ctx.add_rect(
-            60, 580, 310, 595,
-            imgui.get_color_u32_rgba(1, 1, 1, 0.5)
-        )
-        
-        # Health icon with pulse effect when low
+
+        # Health icon
         icon_scale = 1.0 + (self.pulse_animation * 0.2 if SpsState.p_health < 30 else 0)
-        icon_size = 64 * icon_scale
+        icon_size = 32 * icon_scale
+        icon_x = self.base_x + self.PADDING
+        icon_y = self.base_y + self.PADDING
+        
         self.ctx.add_image(
             self.heart_texture,
-            (35, 510),
-            (35 + icon_size, 510 + icon_size)
+            (icon_x, icon_y),
+            (icon_x + icon_size, icon_y + icon_size)
         )
+
+        # Health bar background
+        health_bar_x = icon_x + icon_size + 10
+        health_bar_y = icon_y + 8
+        health_bar_width = 180
+        health_bar_height = 16
         
-        # Health text with shadow
-        self.ctx.add_text(
-            65, 551,
-            imgui.get_color_u32_rgba(0, 0, 0, 1),
-            f"Health: {int(self.displayed_health)}"
+        self.ctx.add_rect_filled(
+            health_bar_x, 
+            health_bar_y,
+            health_bar_x + health_bar_width,
+            health_bar_y + health_bar_height,
+            imgui.get_color_u32_rgba(0.2, 0.2, 0.2, 0.8),
+            rounding=4
         )
-        self.ctx.add_text(
-            64, 550,
+
+        # Health bar fill
+        health_width = health_bar_width * (self.displayed_health / 100)
+        self.ctx.add_rect_filled(
+            health_bar_x,
+            health_bar_y,
+            health_bar_x + health_width,
+            health_bar_y + health_bar_height,
             health_color,
-            f"Health: {int(self.displayed_health)}"
+            rounding=4
         )
-        
-        # Ammo display
+
+        # Health text
+        health_text = f"{int(self.displayed_health)}%"
+        self.ctx.add_text(
+            health_bar_x + health_bar_width/2 - 15,
+            health_bar_y,
+            imgui.get_color_u32_rgba(1, 1, 1, 1),
+            health_text
+        )
+
+        # Ammo Section
+        ammo_y = icon_y + icon_size + 20
         ammo_color = imgui.get_color_u32_rgba(1, 1, 1, 1)
         if SpsState.p_ammo < 5:
             ammo_color = imgui.get_color_u32_rgba(
@@ -91,40 +134,53 @@ class GameUI:
                 0.2,
                 1.0
             )
-            
-        self.ctx.add_text(
-            65, 611,
-            imgui.get_color_u32_rgba(0, 0, 0, 1),
-            f"Ammo: {SpsState.p_ammo}"
+
+        # Ammo background
+        self.render_rounded_panel(
+            self.base_x + self.PADDING,
+            ammo_y,
+            120,
+            40,
+            imgui.get_color_u32_rgba(0.15, 0.15, 0.15, 0.9)
         )
+
+        # Ammo text
         self.ctx.add_text(
-            64, 610,
+            self.base_x + self.PADDING * 2,
+            ammo_y + 12,
             ammo_color,
             f"Ammo: {SpsState.p_ammo}"
         )
+
+        # Score Section
+        score_y = ammo_y + 50
         
-        # Score display
-        self.ctx.add_text(
-            65, 661,
-            imgui.get_color_u32_rgba(0, 0, 0, 1),
-            f"Score: {0}"  # Zde by mělo být napojení na skutečné skóre
-        )
-        self.ctx.add_text(
-            64, 660,
-            imgui.get_color_u32_rgba(1, 1, 1, 1),
-            f"Score: {0}"
+        # Score background
+        self.render_rounded_panel(
+            self.base_x + self.PADDING,
+            score_y,
+            120,
+            40,
+            imgui.get_color_u32_rgba(0.15, 0.15, 0.15, 0.9)
         )
 
-        # Draw decorative elements
-        self.ctx.add_line(
-            60, 605,
-            290, 605,
-            imgui.get_color_u32_rgba(1, 1, 1, 0.3),
-            1.0
+        # Score text
+        score = 0  # Replace with actual score
+        self.ctx.add_text(
+            self.base_x + self.PADDING * 2,
+            score_y + 12,
+            imgui.get_color_u32_rgba(1, 1, 1, 1),
+            f"Score: {score}"
         )
-        self.ctx.add_line(
-            60, 655,
-            290, 655,
-            imgui.get_color_u32_rgba(1, 1, 1, 0.3),
-            1.0
-        )
+
+        # Optional: Add visual feedback for important events
+        if self.damage_flash > 0:
+            flash_alpha = self.damage_flash * 0.3
+            self.ctx.add_rect_filled(
+                self.base_x,
+                self.base_y,
+                self.base_x + self.UI_WIDTH,
+                self.base_y + self.UI_HEIGHT,
+                imgui.get_color_u32_rgba(1, 0, 0, flash_alpha),
+                rounding=self.CORNER_RADIUS
+            )
