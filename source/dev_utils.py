@@ -1,6 +1,7 @@
 from engine.cue.cue_state import GameState
-from engine.cue.cue_map import reset_map
+from engine.cue.cue_map import reset_state
 import engine.cue.cue_utils as utils
+from sps_state import SpsState
 
 from pygame.math import Vector3 as Vec3, Vector2 as Vec2
 import random
@@ -16,8 +17,8 @@ def gen_map(args: list[str]):
 
     utils.info("[dev utils] generating and loading a benchmark map...")
     
-    reset_map()
-    GameState.entity_storage.spawn("sps_player_spawn", "p_spawn", {"spawn_pos": Vec3(0., 0., 0.), "spawn_rot": Vec2(0., 0.)})
+    reset_state()
+    GameState.entity_storage.spawn("sps_player_spawn", "p_spawn", {"t_pos": Vec3(0., 0., 0.), "spawn_rot": Vec2(0., 0.)})
 
     for i in range(ball_count):
         ball_data = {

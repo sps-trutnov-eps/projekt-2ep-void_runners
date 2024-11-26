@@ -38,7 +38,7 @@ class PlayerMovement:
     OVERSPEED_FRICTION = 2
     GRAVITY = Vec3(0., -5.6, 0.)
     MIN_STEP_STRAIGHTNESS = .7
-    MAX_STEP_DISTANCE = .2
+    MAX_STEP_DISTANCE = .3
 
     PLAYER_SIZE = Vec3(.45, .95, .45)
     CAMERA_OFFSET = Vec3(0, .8, 0)
@@ -56,16 +56,39 @@ class PlayerMovement:
         self.show_player_info = False
         self.show_player_debug = False
 
+        self.view_forward = Vec3()
+        self.view_forward_flat = Vec3()
+        self.view_right_flat = Vec3()
+
+        self.view_overlay_pos = Vec3()
+        self.view_overlay_rot = Vec3()
+        self.movement_disabled = False
+
         seq.next(PlayerMovement.tick, self)
 
     def tick(self) -> None:
         # call the specific player controller for the current state
+
+        prev_pos = self.p_pos
 
         if self.p_state == 0: # on ground / landed
             self.tick_landed()
         
         elif self.p_state == 1: # in air / in-flight
             self.tick_in_flight()
+
+        # check for trigger collisions and fire trigger code
+
+        frame_diff = self.p_pos - prev_pos
+        if frame_diff.length_squared() == 0.:
+            frame_diff = Vec3(0., EPSILON, 0.)
+
+        player_box = PhysRay.make(prev_pos + Vec3(0., PlayerMovement.PLAYER_SIZE.y / 2, 0.), frame_diff.normalize(), PlayerMovement.PLAYER_SIZE)
+        trigger_hits = GameState.trigger_scene.all_hits(player_box, frame_diff.length())
+
+        for hit in trigger_hits:
+            # get trigger handle and callback to it
+            hit.usr.on_triggered()
 
         # update controlled transform
 
@@ -78,7 +101,7 @@ class PlayerMovement:
             res = GameState.renderer.win_res
             pg.mouse.set_pos(res[0] // 2, res[1] // 2)
 
-        yaw_rot, pitch_rot = self.view_rot.yx
+        yaw_rot, pitch_rot = self.view_rot.yx + self.view_overlay_rot.xy
         yaw_rot = math.radians(yaw_rot)
         pitch_rot = math.radians(pitch_rot)
 
@@ -89,7 +112,7 @@ class PlayerMovement:
         self.controlled_trans.set_pos(self.p_pos)
         self.controlled_trans.set_rot(Vec3(self.view_rot[0], self.view_rot[1], 0.))
 
-        self.controlled_cam.set_view(self.p_pos + PlayerMovement.CAMERA_OFFSET, Vec3(self.view_rot[0], self.view_rot[1], 0.))
+        self.controlled_cam.set_view(self.p_pos + PlayerMovement.CAMERA_OFFSET + self.view_overlay_pos, Vec3(self.view_rot[0], self.view_rot[1], 0.))
 
         if self.show_player_info:
             GameState.renderer.fullscreen_imgui_ctx.set_as_current_context()
@@ -220,7 +243,7 @@ class PlayerMovement:
 
         input_active = False
 
-        if self.is_captured:
+        if self.is_captured and not self.movement_disabled:
             keys = pg.key.get_pressed()
             mods = pg.key.get_mods()
             vel = self.p_vel
@@ -285,7 +308,7 @@ class PlayerMovement:
 
         input_active = False
 
-        if self.is_captured:
+        if self.is_captured and not self.movement_disabled:
             keys = pg.key.get_pressed()
             mods = pg.key.get_mods()
             vel = self.p_vel
@@ -322,6 +345,11 @@ class PlayerMovement:
         pg.event.set_grab(cap)
         pg.mouse.set_visible(not cap)
 
+        # reset rel mouse
+        res = GameState.renderer.win_res
+        pg.mouse.set_pos(res[0] // 2, res[1] // 2)
+        pg.mouse.get_rel()
+
         self.is_captured = cap
 
     controlled_trans: Transform
@@ -341,7 +369,9 @@ class PlayerMovement:
     view_forward_flat: Vec3 # same as [view_forward] but with y ignored and normalized
     view_right_flat: Vec3
 
-    p_aabb: None
+    view_overlay_pos: Vec3
+    view_overlay_rot: Vec3
+    movement_disabled: bool
 
     # debug
     show_player_info: bool

@@ -46,6 +46,7 @@ import entity.sps_player_spawn
 import entity.sps_static_cam
 import entity.sps_dev_text
 import entity.sps_view_mesh
+import entity.sps_hurt_trigger
 
 import dev_utils
 from ui import GameUI
@@ -57,23 +58,23 @@ from mainmenu import MenuUI
 t = time.perf_counter()
 
 GameState.sequencer = CueSequencer(t)
-GameState.static_sequencer = CueSequencer(t)
 GameState.entity_storage = EntityStorage()
 GameState.asset_manager = AssetManager(ASSET_DIR)
 
 GameState.renderer = CueRenderer((1280, 720), fullscreen=False, vsync=True)
 GameState.active_scene = RenderScene()
 GameState.collider_scene = PhysScene()
+GameState.trigger_scene = PhysScene()
 
 # == Init game state ==
 
 SpsState.hitbox_scene = PhysScene()
 
-def on_map_load(path: str) -> None:
+def on_map_load() -> None:
     SpsState.dev_con = False
 
     # crunch filled nightmares
-    if os.path.basename(path) == "main_menu.json":
+    if os.path.basename(GameState.current_map) == "main_menu.json":
         SpsState.p_hud_ui = MenuUI()
     
     else:
@@ -82,13 +83,12 @@ def on_map_load(path: str) -> None:
     SpsState.p_health = 100
     SpsState.p_ammo = 15
 
-    # GameState.static_sequencer.on_event(cue_map.on_load_evid, on_map_load)
-# GameState.static_sequencer.on_event(cue_map.on_load_evid, on_map_load)
+    GameState.static_sequencer.on_event(cue_map.map_load_evid, on_map_load)
+GameState.static_sequencer.on_event(cue_map.map_load_evid, on_map_load)
 
 # == init map ==
 
 cue_map.load_map(BOOTUP_MAP)
-on_map_load(BOOTUP_MAP)
 
 # == main game loop ==
 

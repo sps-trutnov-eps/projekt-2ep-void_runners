@@ -152,7 +152,7 @@ class MenuUI:
         self.selected_button = None
         self.animation_progress = 0.0
         self.mouse_pressed = False
-        self.first_map = "assets/maps/camp/c0_wakeup_p2.json"
+        self.first_map = "maps/camp/c0_wakeup_p2.json"
         self.current_screen = "main"  # main nebo loadout
         self.loadout_screen = CharacterSelectUI(self.back_to_main)
         
