@@ -1,46 +1,213 @@
 from engine.cue.cue_state import GameState
 from engine.cue.im2d import im2d_draw as im2d
 import imgui
+import math
+import time
+import sys
+import pygame as pg
+from engine.cue import cue_map
+from sps_state import SpsState
+from ui import GameUI
 
 class MenuUI:
     def __init__(self):
-        # Načtení textury pro pozadí
-        self.tex = GameState.asset_manager.load_texture("textures/def_white.png")
-        # Přidání stavu pro hover efekt
-        self.is_play_hovered = False
+        # Načtení textur
+        self.background_tex = GameState.asset_manager.load_texture("textures/def_white.png")
+        self.logo_tex = GameState.asset_manager.load_texture("textures/def_white.png")
         
+        # Stav UI
+        self.start_time = time.time()
+        self.buttons = [
+            {"text": "PLAY", "action": self.start_game},
+            {"text": "OPTIONS", "action": self.show_options},
+            {"text": "EXIT", "action": self.exit_game}
+        ]
+        self.selected_button = None
+        self.animation_progress = 0.0
+        self.mouse_pressed = False
+        
+        # Cesta k první mapě
+        self.first_map = "G:/projekt-2ep-t05/assets/maps/camp/c0_wakeup_p2.json"
+        
+        # Barvy
+        self.colors = {
+            "primary": (0.2, 0.6, 1.0, 1.0),
+            "secondary": (0.1, 0.3, 0.8, 1.0),
+            "accent": (1.0, 0.5, 0.0, 1.0),
+            "text": (1.0, 1.0, 1.0, 1.0),
+            "background": (0.05, 0.05, 0.1, 0.9)
+        }
+
+    def animate_value(self, start, end, progress):
+        return start + (end - start) * (1 - math.cos(progress * math.pi)) / 2
+
     def render_ui(self):
-        # Vytvoření 2D kontextu pro vykreslování
         self.ctx = im2d.Im2DContext(GameState.renderer.fullscreen_imgui_ctx)
+        current_time = time.time()
         
-        # Základní pozice a velikosti
-        button_x, button_y = 20, 540
-        button_width, button_height = 280, 140
+        # Aktualizace animace
+        self.animation_progress = min(1.0, (current_time - self.start_time) * 2)
         
-        # Detekce myši pro hover efekt
-        mouse_pos = imgui.get_mouse_pos()
-        self.is_play_hovered = (
-            button_x <= mouse_pos.x <= button_x + button_width and
-            button_y <= mouse_pos.y <= button_y + button_height
+        # === Pozadí ===
+        screen_width, screen_height = 1280, 720
+        
+        # Vykreslení tmavého pozadí s gradientem
+        self.ctx.add_rect_filled_multicolor(
+            0, 0, screen_width, screen_height,
+            imgui.get_color_u32_rgba(0.05, 0.05, 0.1, 0.95),
+            imgui.get_color_u32_rgba(0.1, 0.1, 0.2, 0.95),
+            imgui.get_color_u32_rgba(0.05, 0.05, 0.1, 0.95),
+            imgui.get_color_u32_rgba(0.02, 0.02, 0.05, 0.95)
         )
         
-        # Barva tlačítka - červená, světlejší při hoveru
-        button_color = imgui.get_color_u32_rgba(1, 0.2, 0.2, 1) if self.is_play_hovered else imgui.get_color_u32_rgba(0.8, 0, 0, 1)
-        
-        # Vykreslení tlačítka
-        self.ctx.add_rect_filled(
-            button_x, button_y,
-            button_x + button_width, button_y + button_height,
-            button_color
-        )
-        
-        # Vykreslení textu "Play"
-        text_color = imgui.get_color_u32_rgba(1, 1, 1, 1)
-        self.ctx.add_text(50, 550, text_color, "Play")
-        
-        # Vykreslení textury (např. jako pozadí nebo ikona)
+        # === Logo ===
+        logo_size = 200
+        logo_y = self.animate_value(-logo_size, 100, self.animation_progress)
         self.ctx.add_image(
-            self.tex,
-            (40, 700),  # horní levý roh
-            (240, 620)  # spodní pravý roh
+            self.logo_tex,
+            ((screen_width - logo_size) / 2, logo_y),
+            ((screen_width + logo_size) / 2, logo_y + logo_size)
         )
+        
+        # === Menu tlačítka ===
+        button_width = 300
+        button_height = 60
+        button_spacing = 20
+        start_y = 300
+        
+        # Získání stavu myši
+        mouse_pos = imgui.get_mouse_pos()
+        mouse_clicked = pg.mouse.get_pressed()[0]
+        
+        # Detekce kliknutí
+        if mouse_clicked and not self.mouse_pressed:
+            self.mouse_pressed = True
+        elif not mouse_clicked and self.mouse_pressed:
+            self.mouse_pressed = False
+            # Kontrola kliknutí na tlačítko
+            for i, button in enumerate(self.buttons):
+                button_x = (screen_width - button_width) / 2
+                button_y = start_y + i * (button_height + button_spacing)
+                
+                if (button_x <= mouse_pos.x <= button_x + button_width and
+                    button_y <= mouse_pos.y <= button_y + button_height):
+                    button["action"]()
+        
+        for i, button in enumerate(self.buttons):
+            # Animace postupného objevení tlačítek
+            button_alpha = max(0.0, min(1.0, (self.animation_progress - i * 0.2) * 2))
+            
+            # Výpočet pozice tlačítka
+            button_x = (screen_width - button_width) / 2
+            button_y = start_y + i * (button_height + button_spacing)
+            
+            # Detekce hoveru
+            is_hovered = (
+                button_x <= mouse_pos.x <= button_x + button_width and
+                button_y <= mouse_pos.y <= button_y + button_height
+            )
+            
+            # Efekt hoveru
+            if is_hovered:
+                pulse = (math.sin(current_time * 5) + 1) * 0.5 * 0.2
+                hover_width = button_width + 20
+                hover_x = button_x - 10
+            else:
+                pulse = 0
+                hover_width = button_width
+                hover_x = button_x
+            
+            # Pozadí tlačítka
+            button_color = self.colors["primary"] if not is_hovered else self.colors["accent"]
+            button_color = (*button_color[:3], button_color[3] * button_alpha)
+            
+            # Hlavní tělo tlačítka
+            self.ctx.add_rect_filled(
+                hover_x, button_y,
+                hover_x + hover_width, button_y + button_height,
+                imgui.get_color_u32_rgba(*button_color)
+            )
+            
+            # Okraj tlačítka
+            border_color = (*self.colors["secondary"][:3], self.colors["secondary"][3] * button_alpha)
+            self.ctx.add_rect(
+                hover_x, button_y,
+                hover_x + hover_width, button_y + button_height,
+                imgui.get_color_u32_rgba(*border_color),
+                thickness=2
+            )
+            
+            # Text tlačítka
+            text_width = imgui.calc_text_size(button["text"]).x
+            text_x = button_x + (button_width - text_width) / 2
+            text_y = button_y + (button_height - 20) / 2
+            
+            text_color = (*self.colors["text"][:3], self.colors["text"][3] * button_alpha)
+            self.ctx.add_text(
+                text_x, text_y,
+                imgui.get_color_u32_rgba(*text_color),
+                button["text"]
+            )
+            
+            # Dekorativní prvky při hoveru
+            if is_hovered:
+                # Svítící okraj
+                glow_color = (*self.colors["accent"][:3], 0.3 * button_alpha)
+                self.ctx.add_rect(
+                    hover_x - 5, button_y - 5,
+                    hover_x + hover_width + 5, button_y + button_height + 5,
+                    imgui.get_color_u32_rgba(*glow_color),
+                    thickness=2
+                )
+                
+                # Animované rohy
+                corner_size = 10 + pulse * 50
+                corner_color = (*self.colors["accent"][:3], (0.5 + pulse) * button_alpha)
+                
+                # Levý horní roh
+                self.ctx.add_line(
+                    hover_x, button_y + corner_size,
+                    hover_x, button_y,
+                    imgui.get_color_u32_rgba(*corner_color),
+                    2
+                )
+                self.ctx.add_line(
+                    hover_x, button_y,
+                    hover_x + corner_size, button_y,
+                    imgui.get_color_u32_rgba(*corner_color),
+                    2
+                )
+                
+                # Pravý dolní roh
+                self.ctx.add_line(
+                    hover_x + hover_width - corner_size, button_y + button_height,
+                    hover_x + hover_width, button_y + button_height,
+                    imgui.get_color_u32_rgba(*corner_color),
+                    2
+                )
+                self.ctx.add_line(
+                    hover_x + hover_width, button_y + button_height - corner_size,
+                    hover_x + hover_width, button_y + button_height,
+                    imgui.get_color_u32_rgba(*corner_color),
+                    2
+                )
+
+    def start_game(self):
+        print("Starting game...")  # Debug výpis
+        
+        # Nastavení herního UI
+        SpsState.p_hud_ui = GameUI()
+        SpsState.p_health = 100
+        SpsState.p_ammo = 15
+        SpsState.dev_con = False
+        
+        # Načtení první mapy
+        cue_map.load_map(self.first_map)
+
+    def show_options(self):
+        print("Opening options...")
+        pass
+
+    def exit_game(self):
+        print("Exiting game...")
+        sys.exit(0)

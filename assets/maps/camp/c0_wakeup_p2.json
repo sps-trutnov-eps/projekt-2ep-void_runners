@@ -2,10 +2,10 @@
     "cmf_ver": 2,
     "cmf_header": {
         "type_list": [
-            "sps_dev_text",
-            "bt_static_mesh",
-            "bt_phys_aabb",
             "bt_map_trigger",
+            "bt_phys_aabb",
+            "bt_static_mesh",
+            "sps_dev_text",
             "sps_player_spawn"
         ],
         "asset_list": []
