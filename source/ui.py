@@ -20,9 +20,9 @@ class GameUI:
         self.UI_WIDTH = 280
         self.UI_HEIGHT = 180
         
-        # Calculate positions (right bottom corner)
-        self.base_x = 1280 - self.UI_WIDTH - self.PADDING  # Assuming 1280x720 resolution
-        self.base_y = 720 - self.UI_HEIGHT - self.PADDING
+        # Calculate position offsets (right bottom corner)
+        self.offset_x = -self.UI_WIDTH - self.PADDING
+        self.offset_y = -self.UI_HEIGHT - self.PADDING
         
         # Load textures
         self.heart_texture = GameState.asset_manager.load_texture("textures/hpsrdce.png")
@@ -46,6 +46,10 @@ class GameUI:
     def render_ui(self):
         self.ctx = im2d.Im2DContext(GameState.renderer.fullscreen_imgui_ctx)
         current_time = time.perf_counter()
+
+        screen_width, screen_height = GameState.renderer.win_res
+        base_x = screen_width + self.offset_x
+        base_y = screen_height + self.offset_y
         
         # Update animations
         self.pulse_animation = (math.sin(current_time * 2) + 1) * 0.5
@@ -62,8 +66,8 @@ class GameUI:
 
         # Main panel background
         self.render_rounded_panel(
-            self.base_x, 
-            self.base_y,
+            base_x, 
+            base_y,
             self.UI_WIDTH,
             self.UI_HEIGHT,
             imgui.get_color_u32_rgba(0, 0, 0, 0.8 + self.pulse_animation * 0.1)
@@ -80,8 +84,8 @@ class GameUI:
         # Health icon
         icon_scale = 1.0 + (self.pulse_animation * 0.2 if SpsState.p_health < 30 else 0)
         icon_size = 32 * icon_scale
-        icon_x = self.base_x + self.PADDING
-        icon_y = self.base_y + self.PADDING
+        icon_x = base_x + self.PADDING
+        icon_y = base_y + self.PADDING
         
         self.ctx.add_image(
             self.heart_texture,
@@ -137,7 +141,7 @@ class GameUI:
 
         # Ammo background
         self.render_rounded_panel(
-            self.base_x + self.PADDING,
+            base_x + self.PADDING,
             ammo_y,
             120,
             40,
@@ -146,7 +150,7 @@ class GameUI:
 
         # Ammo text
         self.ctx.add_text(
-            self.base_x + self.PADDING * 2,
+            base_x + self.PADDING * 2,
             ammo_y + 12,
             ammo_color,
             f"Ammo: {SpsState.p_ammo}"
@@ -157,7 +161,7 @@ class GameUI:
         
         # Score background
         self.render_rounded_panel(
-            self.base_x + self.PADDING,
+            base_x + self.PADDING,
             score_y,
             120,
             40,
@@ -167,7 +171,7 @@ class GameUI:
         # Score text
         score = 0  # Replace with actual score
         self.ctx.add_text(
-            self.base_x + self.PADDING * 2,
+            base_x + self.PADDING * 2,
             score_y + 12,
             imgui.get_color_u32_rgba(1, 1, 1, 1),
             f"Score: {score}"
@@ -177,10 +181,10 @@ class GameUI:
         if self.damage_flash > 0:
             flash_alpha = self.damage_flash * 0.3
             self.ctx.add_rect_filled(
-                self.base_x,
-                self.base_y,
-                self.base_x + self.UI_WIDTH,
-                self.base_y + self.UI_HEIGHT,
+                base_x,
+                base_y,
+                base_x + self.UI_WIDTH,
+                base_y + self.UI_HEIGHT,
                 imgui.get_color_u32_rgba(1, 0, 0, flash_alpha),
                 rounding=self.CORNER_RADIUS
             )
