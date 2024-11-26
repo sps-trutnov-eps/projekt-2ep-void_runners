@@ -18,9 +18,9 @@ class CharacterSelectUI:
         
         # Definice postav
         self.characters = [
-            {"name": "Character 1", "description": "Fast and agile fighter", "icon": GameState.asset_manager.load_texture("textures/def_white.png")},
-            {"name": "Character 2", "description": "Heavy tank with high HP", "icon": GameState.asset_manager.load_texture("textures/def_white.png")},
-            {"name": "Character 3", "description": "Balanced all-rounder", "icon": GameState.asset_manager.load_texture("textures/def_white.png")}
+            {"name": "Character 1", "description": "Fast and agile fighter", "icon": GameState.asset_manager.load_texture("textures/annonym.png")},
+            {"name": "Character 2", "description": "Heavy tank with high HP", "icon": GameState.asset_manager.load_texture("textures/annonym.png")},
+            {"name": "Character 3", "description": "Balanced all-rounder", "icon": GameState.asset_manager.load_texture("textures/annonym.png")}
         ]
         
         self.selected_character = None
