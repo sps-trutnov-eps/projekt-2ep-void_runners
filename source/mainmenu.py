@@ -18,11 +18,46 @@ class CharacterSelectUI:
         
         # Definice postav
         self.characters = [
-            {"name": "Character 1", "description": "Fast and agile fighter", "icon": GameState.asset_manager.load_texture("textures/annonym.png")},
-            {"name": "Character 2", "description": "Heavy tank with high HP", "icon": GameState.asset_manager.load_texture("textures/annonym.png")},
-            {"name": "Character 3", "description": "Balanced all-rounder", "icon": GameState.asset_manager.load_texture("textures/annonym.png")}
+            {
+                "name": "Heavy",
+                "description": "Tank with high HP",
+                "icon": GameState.asset_manager.load_texture("textures/annonym.png"),
+                "stats": {
+                    "health": 200,  # Dvojnásobné HP
+                    "ammo": 15,     # Standardní munice
+                    "speed": 1.0    # Standardní rychlost
+                }
+            },
+            {
+                "name": "Commando",
+                "description": "Well equipped soldier",
+                "icon": GameState.asset_manager.load_texture("textures/annonym.png"),
+                "stats": {
+                    "health": 100,  # Standardní HP
+                    "ammo": 30,     # Dvojnásobná munice
+                    "speed": 1.0    # Standardní rychlost
+                }
+            },
+            {
+                "name": "Assassin",
+                "description": "Fast and agile fighter",
+                "icon": GameState.asset_manager.load_texture("textures/annonym.png"),
+                "stats": {
+                    "health": 100,  # Standardní HP
+                    "ammo": 15,     # Standardní munice
+                    "speed": 1.5    # O 50% vyšší rychlost
+                }
+            }
         ]
         
+        self.selected_character = None
+        self.colors = {
+            "primary": (0.2, 0.6, 1.0, 1.0),
+            "secondary": (0.1, 0.3, 0.8, 1.0),
+            "accent": (1.0, 0.5, 0.0, 1.0),
+            "text": (1.0, 1.0, 1.0, 1.0),
+            "background": (0.05, 0.05, 0.1, 0.9)
+        }
         self.selected_character = None
         self.colors = {
             "primary": (0.2, 0.6, 1.0, 1.0),
@@ -141,7 +176,7 @@ class CharacterSelectUI:
 class MenuUI:
     def __init__(self):
         self.background_tex = GameState.asset_manager.load_texture("textures/def_white.png")
-        self.logo_tex = GameState.asset_manager.load_texture("textures/def_white.png")
+        self.logo_tex = GameState.asset_manager.load_texture("textures/name.png")
         self.start_time = time.time()
         self.buttons = [
             {"text": "PLAY", "action": self.start_game},
@@ -333,11 +368,18 @@ class MenuUI:
 
     def start_game(self):
         if hasattr(self.loadout_screen, 'selected_character') and self.loadout_screen.selected_character is not None:
-            print(f"Starting game with character {self.loadout_screen.selected_character + 1}")
+            selected_char = self.loadout_screen.characters[self.loadout_screen.selected_character]
+            print(f"Starting game with {selected_char['name']}")
             SpsState.p_hud_ui = GameUI()
-            SpsState.p_health = 100
-            SpsState.p_ammo = 15
+            SpsState.p_health = selected_char['stats']['health']
+            SpsState.p_ammo = selected_char['stats']['ammo']
             SpsState.dev_con = False
+            
+            # Nastavení rychlosti hráče
+            # Předpokládám, že máte nějaký systém pro nastavení rychlosti hráče
+            # Toto je příklad - upravte podle vašeho herního enginu
+            SpsState.p_speed = selected_char['stats']['speed']
+            
             cue_map.load_map(self.first_map)
         else:
             print("Please select a character first in the Loadout menu!")
