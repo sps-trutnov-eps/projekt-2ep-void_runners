@@ -16,6 +16,7 @@ class SpsState:
 
     p_health: int
     p_ammo: int
+    
 
     p_hud_selected_weapon: int | None = None
     p_hud_ui: 'GameUI | MenuUI | None'

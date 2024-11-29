@@ -13,52 +13,43 @@ class CharacterSelectUI:
     def __init__(self, on_back):
         self.start_time = time.time()
         self.animation_progress = 0.0
+        self.on_back = on_back
         self.mouse_pressed = False
-        self.on_back = on_back  # Callback pro návrat do hlavního menu
         
-        # Definice postav
+        # Načtení základní textury pro ikony
+        self.default_icon = GameState.asset_manager.load_texture("textures/def_white.png")
+        
         self.characters = [
             {
                 "name": "Heavy",
                 "description": "Tank with high HP",
-                "icon": GameState.asset_manager.load_texture("textures/annonym.png"),
+                "icon": self.default_icon,
                 "stats": {
-                    "health": 200,  # Dvojnásobné HP
-                    "ammo": 15,     # Standardní munice
-                    "speed": 1.0    # Standardní rychlost
+                    "health": 200,
+                    "ammo": 15
                 }
             },
             {
                 "name": "Commando",
                 "description": "Well equipped soldier",
-                "icon": GameState.asset_manager.load_texture("textures/annonym.png"),
+                "icon": self.default_icon,
                 "stats": {
-                    "health": 100,  # Standardní HP
-                    "ammo": 30,     # Dvojnásobná munice
-                    "speed": 1.0    # Standardní rychlost
+                    "health": 100,
+                    "ammo": 30
                 }
             },
             {
                 "name": "Assassin",
                 "description": "Fast and agile fighter",
-                "icon": GameState.asset_manager.load_texture("textures/annonym.png"),
+                "icon": self.default_icon,
                 "stats": {
-                    "health": 100,  # Standardní HP
-                    "ammo": 15,     # Standardní munice
-                    "speed": 1.5    # O 50% vyšší rychlost
+                    "health": 100,
+                    "ammo": 15
                 }
             }
         ]
+        self.selected_character = None
         
-        self.selected_character = None
-        self.colors = {
-            "primary": (0.2, 0.6, 1.0, 1.0),
-            "secondary": (0.1, 0.3, 0.8, 1.0),
-            "accent": (1.0, 0.5, 0.0, 1.0),
-            "text": (1.0, 1.0, 1.0, 1.0),
-            "background": (0.05, 0.05, 0.1, 0.9)
-        }
-        self.selected_character = None
         self.colors = {
             "primary": (0.2, 0.6, 1.0, 1.0),
             "secondary": (0.1, 0.3, 0.8, 1.0),
@@ -72,7 +63,7 @@ class CharacterSelectUI:
         current_time = time.time()
         self.animation_progress = min(1.0, (current_time - self.start_time) * 2)
         
-        screen_width, screen_height = GameState.renderer.win_res
+        screen_width, screen_height = 1280, 720
         
         # Pozadí
         self.ctx.add_rect_filled_multicolor(
@@ -187,7 +178,7 @@ class MenuUI:
         self.selected_button = None
         self.animation_progress = 0.0
         self.mouse_pressed = False
-        self.first_map = "maps/camp/c0_wakeup_p2.json"
+        self.first_map = "assets/maps/camp/c0_wakeup_p2.json"
         self.current_screen = "main"  # main nebo loadout
         self.loadout_screen = CharacterSelectUI(self.back_to_main)
         
@@ -223,7 +214,7 @@ class MenuUI:
         self.animation_progress = min(1.0, (current_time - self.start_time) * 2)
         
         # === Pozadí ===
-        screen_width, screen_height = GameState.renderer.win_res
+        screen_width, screen_height = 1280, 720
         
         # Vykreslení tmavého pozadí s gradientem
         self.ctx.add_rect_filled_multicolor(
@@ -368,17 +359,13 @@ class MenuUI:
 
     def start_game(self):
         if hasattr(self.loadout_screen, 'selected_character') and self.loadout_screen.selected_character is not None:
-            selected_char = self.loadout_screen.characters[self.loadout_screen.selected_character]
-            print(f"Starting game with {selected_char['name']}")
-            SpsState.p_hud_ui = GameUI()
-            SpsState.p_health = selected_char['stats']['health']
-            SpsState.p_ammo = selected_char['stats']['ammo']
-            SpsState.dev_con = False
+            char = self.loadout_screen.characters[self.loadout_screen.selected_character]
+            print(f"Starting game with {char['name']}")
             
-            # Nastavení rychlosti hráče
-            # Předpokládám, že máte nějaký systém pro nastavení rychlosti hráče
-            # Toto je příklad - upravte podle vašeho herního enginu
-            SpsState.p_speed = selected_char['stats']['speed']
+            SpsState.p_hud_ui = GameUI()
+            SpsState.p_health = char["stats"]["health"]
+            SpsState.p_ammo = char["stats"]["ammo"]
+            SpsState.dev_con = False
             
             cue_map.load_map(self.first_map)
         else:
