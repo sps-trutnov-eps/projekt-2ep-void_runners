@@ -50,9 +50,7 @@ import entity.sps_hitbox_ai
 import entity.sps_hurt_trigger
 
 import dev_utils
-from ui import GameUI
 from sps_state import SpsState
-from mainmenu import MenuUI
 
 # == init engine ==
 
@@ -71,21 +69,11 @@ GameState.trigger_scene = PhysScene()
 
 SpsState.hitbox_scene = PhysScene()
 
-def on_map_load() -> None:
-    SpsState.dev_con = False
+from sps_post_pass import BloomPostPass, TonemapPostPass
 
-    # crunch filled nightmares
-    if os.path.basename(GameState.current_map) == "main_menu.json":
-        SpsState.p_hud_ui = MenuUI()
-    
-    else:
-        SpsState.p_hud_ui = GameUI()
-
-    SpsState.p_health = 100
-    SpsState.p_ammo = 15
-
-    GameState.static_sequencer.on_event(cue_map.map_load_evid, on_map_load)
-GameState.static_sequencer.on_event(cue_map.map_load_evid, on_map_load)
+tonemap_pass = TonemapPostPass()
+GameState.renderer.activate_post_pass(BloomPostPass(GameState.renderer.win_res))
+GameState.renderer.activate_post_pass(tonemap_pass)
 
 # == init map ==
 
@@ -134,6 +122,12 @@ while True:
 
     if SpsState.is_dev_con_open:
         SpsState.is_dev_con_open = cue_utils.show_developer_console()
+
+        with dev_utils.utils.begin_dev_overlay("tonemap_settings", 2):
+            _, tonemap_pass.bloom_enabled = imgui.checkbox("Bloom enabled", tonemap_pass.bloom_enabled)
+            _, tonemap_pass.bloom_strength = imgui.drag_float("Bloom strength", tonemap_pass.bloom_strength, change_speed=0.01)
+
+            _, tonemap_pass.exposure = imgui.drag_float("Exposure", tonemap_pass.exposure, change_speed=0.01)
 
         if not SpsState.is_dev_con_open:
             SpsState.p_active_controller.set_captured(True)

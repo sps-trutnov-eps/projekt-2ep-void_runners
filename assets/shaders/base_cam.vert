@@ -16,6 +16,8 @@ out vec3 frag_pos; // world space
 out vec3 frag_norm;
 out vec2 frag_uv;
 
+flat out int frag_ins_id;
+
 void main() {
     vec4 w_pos = cue_model_mat[gl_InstanceID] * vec4(pos, 1.);
     gl_Position = bt_cam_mat * w_pos;
@@ -24,4 +26,5 @@ void main() {
     frag_pos = w_pos.xyz;
     frag_norm = (cue_model_mat[gl_InstanceID] * vec4(norm, 0.)).xyz;
     frag_uv = uv;
+    frag_ins_id = gl_InstanceID;
 }

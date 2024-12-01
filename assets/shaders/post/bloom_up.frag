@@ -4,7 +4,6 @@
 // which is based on the Call Of Duty Siggraph 2014 bloom implementation
 
 uniform sampler2D in_texture;
-
 const float filter_radius = .005;
 
 in vec2 frag_uv;
