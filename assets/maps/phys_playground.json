@@ -2310,7 +2310,7 @@
                     "a_model_mesh": "models/crate.npz",
                     "a_model_vshader": "shaders/base_cam.vert",
                     "a_model_fshader": "shaders/unlit.frag",
-                    "a_model_albedo": "textures/cliffbk.bmp",
+                    "a_model_albedo": "textures/proto/Red/texture_01.png",
                     "a_model_transparent": false,
                     "hitbox_health": 120.0,
                     "vec3://ai_fire_offset": [
@@ -2348,7 +2348,7 @@
                     "a_model_mesh": "models/crate.npz",
                     "a_model_vshader": "shaders/base_cam.vert",
                     "a_model_fshader": "shaders/unlit.frag",
-                    "a_model_albedo": "textures/cliffbk.bmp",
+                    "a_model_albedo": "textures/proto/Red/texture_01.png",
                     "a_model_transparent": false,
                     "hitbox_health": 120.0,
                     "vec3://ai_fire_offset": [
@@ -2386,7 +2386,7 @@
                     "a_model_mesh": "models/crate.npz",
                     "a_model_vshader": "shaders/base_cam.vert",
                     "a_model_fshader": "shaders/unlit.frag",
-                    "a_model_albedo": "textures/cliffbk.bmp",
+                    "a_model_albedo": "textures/proto/Red/texture_01.png",
                     "a_model_transparent": false,
                     "hitbox_health": 120.0,
                     "vec3://ai_fire_offset": [
@@ -2424,7 +2424,7 @@
                     "a_model_mesh": "models/crate.npz",
                     "a_model_vshader": "shaders/base_cam.vert",
                     "a_model_fshader": "shaders/unlit.frag",
-                    "a_model_albedo": "textures/cliffbk.bmp",
+                    "a_model_albedo": "textures/proto/Red/texture_01.png",
                     "a_model_transparent": false,
                     "hitbox_health": 120.0,
                     "vec3://ai_fire_offset": [
@@ -2462,7 +2462,7 @@
                     "a_model_mesh": "models/crate.npz",
                     "a_model_vshader": "shaders/base_cam.vert",
                     "a_model_fshader": "shaders/unlit.frag",
-                    "a_model_albedo": "textures/cliffbk.bmp",
+                    "a_model_albedo": "textures/proto/Red/texture_01.png",
                     "a_model_transparent": false,
                     "hitbox_health": 120.0,
                     "vec3://ai_fire_offset": [
@@ -2500,7 +2500,7 @@
                     "a_model_mesh": "models/crate.npz",
                     "a_model_vshader": "shaders/base_cam.vert",
                     "a_model_fshader": "shaders/unlit.frag",
-                    "a_model_albedo": "textures/cliffbk.bmp",
+                    "a_model_albedo": "textures/proto/Red/texture_01.png",
                     "a_model_transparent": false,
                     "hitbox_health": 120.0,
                     "vec3://ai_fire_offset": [
@@ -2538,7 +2538,7 @@
                     "a_model_mesh": "models/crate.npz",
                     "a_model_vshader": "shaders/base_cam.vert",
                     "a_model_fshader": "shaders/unlit.frag",
-                    "a_model_albedo": "textures/cliffbk.bmp",
+                    "a_model_albedo": "textures/proto/Red/texture_01.png",
                     "a_model_transparent": false,
                     "hitbox_health": 120.0,
                     "vec3://ai_fire_offset": [
@@ -2576,7 +2576,7 @@
                     "a_model_mesh": "models/crate.npz",
                     "a_model_vshader": "shaders/base_cam.vert",
                     "a_model_fshader": "shaders/unlit.frag",
-                    "a_model_albedo": "textures/cliffbk.bmp",
+                    "a_model_albedo": "textures/proto/Red/texture_01.png",
                     "a_model_transparent": false,
                     "hitbox_health": 120.0,
                     "vec3://ai_fire_offset": [
@@ -2614,7 +2614,7 @@
                     "a_model_mesh": "models/crate.npz",
                     "a_model_vshader": "shaders/base_cam.vert",
                     "a_model_fshader": "shaders/unlit.frag",
-                    "a_model_albedo": "textures/cliffbk.bmp",
+                    "a_model_albedo": "textures/proto/Red/texture_01.png",
                     "a_model_transparent": false,
                     "hitbox_health": 120.0,
                     "vec3://ai_fire_offset": [
@@ -2652,7 +2652,7 @@
                     "a_model_mesh": "models/crate.npz",
                     "a_model_vshader": "shaders/base_cam.vert",
                     "a_model_fshader": "shaders/unlit.frag",
-                    "a_model_albedo": "textures/cliffbk.bmp",
+                    "a_model_albedo": "textures/proto/Red/texture_01.png",
                     "a_model_transparent": false,
                     "hitbox_health": 120.0,
                     "vec3://ai_fire_offset": [
@@ -2690,7 +2690,7 @@
                     "a_model_mesh": "models/crate.npz",
                     "a_model_vshader": "shaders/base_cam.vert",
                     "a_model_fshader": "shaders/unlit.frag",
-                    "a_model_albedo": "textures/cliffbk.bmp",
+                    "a_model_albedo": "textures/proto/Red/texture_01.png",
                     "a_model_transparent": false,
                     "hitbox_health": 120.0,
                     "vec3://ai_fire_offset": [
@@ -2728,7 +2728,7 @@
                     "a_model_mesh": "models/crate.npz",
                     "a_model_vshader": "shaders/base_cam.vert",
                     "a_model_fshader": "shaders/unlit.frag",
-                    "a_model_albedo": "textures/cliffbk.bmp",
+                    "a_model_albedo": "textures/proto/Red/texture_01.png",
                     "a_model_transparent": false,
                     "hitbox_health": 120.0,
                     "vec3://ai_fire_offset": [
@@ -2766,7 +2766,7 @@
                     "a_model_mesh": "models/crate.npz",
                     "a_model_vshader": "shaders/base_cam.vert",
                     "a_model_fshader": "shaders/unlit.frag",
-                    "a_model_albedo": "textures/cliffbk.bmp",
+                    "a_model_albedo": "textures/proto/Red/texture_01.png",
                     "a_model_transparent": false,
                     "hitbox_health": 120.0,
                     "vec3://ai_fire_offset": [
@@ -2804,7 +2804,7 @@
                     "a_model_mesh": "models/crate.npz",
                     "a_model_vshader": "shaders/base_cam.vert",
                     "a_model_fshader": "shaders/unlit.frag",
-                    "a_model_albedo": "textures/cliffbk.bmp",
+                    "a_model_albedo": "textures/proto/Red/texture_01.png",
                     "a_model_transparent": false,
                     "hitbox_health": 120.0,
                     "vec3://ai_fire_offset": [
@@ -2842,7 +2842,7 @@
                     "a_model_mesh": "models/crate.npz",
                     "a_model_vshader": "shaders/base_cam.vert",
                     "a_model_fshader": "shaders/unlit.frag",
-                    "a_model_albedo": "textures/cliffbk.bmp",
+                    "a_model_albedo": "textures/proto/Red/texture_01.png",
                     "a_model_transparent": false,
                     "hitbox_health": 120.0,
                     "vec3://ai_fire_offset": [
@@ -2880,7 +2880,7 @@
                     "a_model_mesh": "models/crate.npz",
                     "a_model_vshader": "shaders/base_cam.vert",
                     "a_model_fshader": "shaders/unlit.frag",
-                    "a_model_albedo": "textures/cliffbk.bmp",
+                    "a_model_albedo": "textures/proto/Red/texture_01.png",
                     "a_model_transparent": false,
                     "hitbox_health": 120.0,
                     "vec3://ai_fire_offset": [

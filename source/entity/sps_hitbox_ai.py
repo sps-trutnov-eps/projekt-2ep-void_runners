@@ -326,7 +326,7 @@ class SpsHitboxAi:
 
         # set travel target pos
 
-        if (self.dr_nav_target_pos - self.ai_trans._pos).length_squared() < self.DRONE_NAVIG_TARGET_MARGIN ** 2: # retarget when arrived at target
+        if (self.dr_nav_target_pos - self.ai_trans._pos).length_squared() < self.DRONE_NAVIG_TARGET_MARGIN ** 2 or self.dr_stuck: # retarget when arrived at target
             if GameState.current_time - self.dr_nav_margin_cooldown > self.DRONE_NAVIG_NEXT_TARGET_COOLDOWN: # retarget only after some time near the target
                 # TODO: visible target pos when no-approaching (as by ai_manager) 
 
@@ -347,7 +347,7 @@ class SpsHitboxAi:
 
         # stuck detection
 
-        if self.dr_vel.length_squared() > .01 or idling_at_target:
+        if self.dr_vel.length_squared() > .05 or idling_at_target:
             self.dr_last_non_stuck_time = GameState.current_time
             self.dr_stuck = False
 
