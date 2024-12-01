@@ -4,8 +4,8 @@
         "type_list": [
             "sps_dev_text",
             "sps_player_spawn",
-            "bt_phys_aabb",
-            "bt_static_mesh"
+            "bt_static_mesh",
+            "bt_phys_aabb"
         ],
         "asset_list": []
     },
@@ -2938,9 +2938,12 @@
                     ],
                     "a_model_mesh": "models/plane.npz",
                     "a_model_vshader": "shaders/base_cam.vert",
-                    "a_model_fshader": "shaders/unlit.frag",
+                    "a_model_fshader": "shaders/emit_surf.frag",
                     "a_model_albedo": "textures/def_white.png",
-                    "a_model_transparent": false
+                    "a_model_transparent": false,
+                    "a_model_uniforms": {
+                        "emit_power": 15.0
+                    }
                 }
             ],
             [
