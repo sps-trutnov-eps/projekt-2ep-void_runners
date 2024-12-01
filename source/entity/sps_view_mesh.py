@@ -90,6 +90,7 @@ def gen_def_data():
         "a_model_fshader": "shaders/unlit.frag",
         "a_model_albedo": "textures/def_white.png",
         "a_model_transparent": False,
+        "a_model_uniforms": {},
     }
 
 en.create_entity_type("sps_view_mesh", SpsViewMesh.spawn, SpsViewMesh.despawn, SpsViewMesh.dev_tick, gen_def_data)

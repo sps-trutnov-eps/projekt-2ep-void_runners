@@ -47,6 +47,9 @@ class GameUI:
         self.ctx = im2d.Im2DContext(GameState.renderer.fullscreen_imgui_ctx)
         current_time = time.perf_counter()
 
+        if SpsState.p_health == 0:
+            return # don't render ui when dead
+
         screen_width, screen_height = GameState.renderer.win_res
         base_x = screen_width + self.offset_x
         base_y = screen_height + self.offset_y

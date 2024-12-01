@@ -30,6 +30,7 @@ class SpsHurtTrigger:
     def on_triggered(self) -> None:
         if self.hurt_interval == 0.:
             manag.p_death()
+            return
 
         if time.perf_counter() - self.last_damage_time > self.hurt_interval:
             manag.p_take_damage(self.hurt_damage)

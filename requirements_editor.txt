@@ -1,2 +1,1 @@
-# these are extra deps required only for the on-cue editor
-filedialpy
+source/engine/requirements_editor.txt

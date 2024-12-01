@@ -1,4 +1,1 @@
-pygame
-pyOpenGL
-imgui[pygame]
-numpy
+source/engine/requirements.txt

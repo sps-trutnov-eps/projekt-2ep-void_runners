@@ -1,6 +1,7 @@
 from dataclasses import dataclass
 import math
 
+from sps_state import SpsState
 from engine.cue.cue_state import GameState
 from engine.cue.components.cue_transform import Transform
 from engine.cue.rendering.cue_camera import Camera
@@ -79,16 +80,17 @@ class PlayerMovement:
 
         # check for trigger collisions and fire trigger code
 
-        frame_diff = self.p_pos - prev_pos
-        if frame_diff.length_squared() == 0.:
-            frame_diff = Vec3(0., EPSILON, 0.)
+        if SpsState.p_health != 0:
+            frame_diff = self.p_pos - prev_pos
+            if frame_diff.length_squared() == 0.:
+                frame_diff = Vec3(0., EPSILON, 0.)
 
-        player_box = PhysRay.make(prev_pos + Vec3(0., PlayerMovement.PLAYER_SIZE.y / 2, 0.), frame_diff.normalize(), PlayerMovement.PLAYER_SIZE)
-        trigger_hits = GameState.trigger_scene.all_hits(player_box, frame_diff.length())
+            player_box = PhysRay.make(prev_pos + Vec3(0., PlayerMovement.PLAYER_SIZE.y / 2, 0.), frame_diff.normalize(), PlayerMovement.PLAYER_SIZE)
+            trigger_hits = GameState.trigger_scene.all_hits(player_box, frame_diff.length())
 
-        for hit in trigger_hits:
-            # get trigger handle and callback to it
-            hit.usr.on_triggered()
+            for hit in trigger_hits:
+                # get trigger handle and callback to it
+                hit.usr.on_triggered()
 
         # update controlled transform
 
@@ -299,7 +301,6 @@ class PlayerMovement:
         if not standing_on_ground:
             self.p_state = 1
             return
-                
 
     def tick_in_flight(self) -> None:
         dt = GameState.delta_time

@@ -56,9 +56,9 @@ from mainmenu import MenuUI
 
 # == init engine ==
 
-t = time.perf_counter()
+GameState.current_time = time.perf_counter()
 
-GameState.sequencer = CueSequencer(t)
+GameState.sequencer = CueSequencer(GameState.current_time)
 GameState.entity_storage = EntityStorage()
 GameState.asset_manager = AssetManager(ASSET_DIR)
 
@@ -103,8 +103,8 @@ while True:
             GameState.renderer.fullscreen_imgui_ctx.set_mouse_input(e.pos)
 
         if e.type == pg.KEYDOWN and e.dict["key"] == pg.K_ESCAPE:
-            SpsState.dev_con ^= True
-            SpsState.p_active_controller.set_captured(not SpsState.dev_con)
+            SpsState.is_dev_con_open ^= True
+            SpsState.p_active_controller.set_captured(not SpsState.is_dev_con_open)
 
         if e.type == pg.QUIT:
             sys.exit(0)
@@ -114,31 +114,31 @@ while True:
 
     # == tick ==
 
-    dt = (time.perf_counter() - t) * dev_utils.dev_deltascale
-    t = time.perf_counter()
+    dt = (time.perf_counter() - GameState.current_time) * SpsState.cheat_deltascale
+    GameState.current_time = time.perf_counter()
 
     GameState.delta_time = dt
     GameState.renderer.fullscreen_imgui_ctx.delta_time(dt)
 
     GameState.renderer.fullscreen_imgui_ctx.set_as_current_context()
     imgui.new_frame()
-    
-    GameState.sequencer.tick(t)
-    GameState.static_sequencer.tick(t)
 
-    tt = time.perf_counter() - t
+    GameState.sequencer.tick(GameState.current_time)
+    GameState.static_sequencer.tick(GameState.current_time)
+
+    tt = time.perf_counter() - GameState.current_time
 
     # == frame ==
 
     SpsState.p_hud_ui.render_ui()
 
-    if SpsState.dev_con:
-        SpsState.dev_con = cue_utils.show_developer_console()
+    if SpsState.is_dev_con_open:
+        SpsState.is_dev_con_open = cue_utils.show_developer_console()
 
-        if not SpsState.dev_con:
+        if not SpsState.is_dev_con_open:
             SpsState.p_active_controller.set_captured(True)
 
-    if dev_utils.is_perf_overlay_open:
+    if SpsState.is_perf_overlay_open:
         cue_utils.show_perf_overlay()
 
     GameState.renderer.frame(GameState.active_camera, GameState.active_scene)
