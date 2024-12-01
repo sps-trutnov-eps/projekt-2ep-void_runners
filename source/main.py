@@ -48,6 +48,7 @@ import entity.sps_dev_text
 import entity.sps_view_mesh
 import entity.sps_hitbox_ai
 import entity.sps_hurt_trigger
+import entity.sps_projectile
 
 import dev_utils
 from sps_state import SpsState
