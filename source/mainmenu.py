@@ -367,7 +367,7 @@ class MenuUI:
             SpsState.p_ammo = char["stats"]["ammo"]
             SpsState.dev_con = False
             
-            cue_map.load_map(self.first_map)
+            cue_map.load_map_when_safe(self.first_map)
         else:
             print("Please select a character first in the Loadout menu!")
 

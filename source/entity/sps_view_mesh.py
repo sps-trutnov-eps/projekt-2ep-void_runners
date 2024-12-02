@@ -13,6 +13,8 @@ from engine.cue.entities.cue_entity_utils import handle_transform_edit_mode
 from engine.cue.entities.bt_static_mesh import BtStaticMesh
 from engine.cue.rendering import cue_gizmos as gizmo 
 
+import math
+
 # a simple mesh that is part of the players view model
 
 @dataclass(init=False, slots=True)
@@ -30,8 +32,8 @@ class SpsViewMesh:
         seq.next(self.tick)
 
     def tick(self) -> None:
-        self.track_trans.set_pos(self.track_trans._pos + ((GameState.active_camera.cam_pos - self.track_trans._pos) * min(self.view_ease_power * 60 * GameState.delta_time, 1.)))
-        self.track_trans.set_rot(self.track_trans._rot + ((-GameState.active_camera.cam_rot - self.track_trans._rot) * min(self.view_ease_power * 60 * GameState.delta_time, 1.)))
+        self.track_trans.set_pos_rot(self.track_trans._pos + ((GameState.active_camera.cam_pos - self.track_trans._pos) * min(self.view_ease_power * math.sqrt(GameState.delta_time), 1.)),
+                                     self.track_trans._rot + ((-GameState.active_camera.cam_rot - self.track_trans._rot) * min(self.view_ease_power * math.sqrt(GameState.delta_time), 1.)))
 
         self.view_space_trans._update() # update internal matrix in case cam pos changed
 
@@ -75,6 +77,7 @@ class SpsViewMesh:
 
     view_ease_power: float
     track_trans: Transform
+    
 
     view_space_trans: Transform
     mesh_renderer: ModelRenderer

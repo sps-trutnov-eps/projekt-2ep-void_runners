@@ -2942,7 +2942,7 @@
                     "a_model_albedo": "textures/def_white.png",
                     "a_model_transparent": false,
                     "a_model_uniforms": {
-                        "emit_power": 15.0
+                        "emit_power": 30.0
                     }
                 }
             ],

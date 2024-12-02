@@ -1,10 +1,9 @@
-import time, random
+import time, random, math
 
 from dataclasses import dataclass
 from engine.cue.entities import cue_entity_types as en
 from engine.cue import cue_sequence as seq
 from engine.cue.cue_state import GameState
-from sps_state import SpsState
 
 from engine.cue.entities.cue_entity_utils import handle_transform_edit_mode
 from engine.cue.rendering import cue_gizmos as gizmo
@@ -13,6 +12,9 @@ from engine.cue.entities.bt_static_mesh import BtStaticMesh
 from engine.cue.components.cue_transform import Transform
 from engine.cue.components.cue_model import ModelRenderer
 from engine.cue.phys.cue_phys_types import PhysAABB, PhysRay, EPSILON
+
+from sps_state import SpsState
+import prefabs
 
 from pygame.math import Vector3 as Vec3
 import numpy as np
@@ -26,6 +28,7 @@ class SpsHitboxAi:
         "enemy_drone": 1,
     }
     AI_ARGO_DECAY = 12.
+    AI_UPDATE_RATE = 5 # in updates per second
 
     # turret
 
@@ -58,6 +61,7 @@ class SpsHitboxAi:
         self.ai_model = ModelRenderer(en_data, self.ai_trans)
 
         self.ai_fire_offset = np.array([*en_data["ai_fire_offset"], 1.], dtype=np.float32)
+        self.ai_fire_pos = Vec3(*(self.ai_trans._trans_matrix @ self.ai_fire_offset)[0:3]) # initial, updated in tick
         self.ai_hitbox_size = self.ai_trans._scale.elementwise() * en_data["hitbox_scale"]
         self.ai_hitbox = PhysAABB.make(self.ai_trans._pos, self.ai_hitbox_size, self)
         SpsState.hitbox_scene.add_coll(self.ai_hitbox)
@@ -69,12 +73,16 @@ class SpsHitboxAi:
         if self.ai_type == 0:
             self.tr_initial_view_dir = Vec3(0., 0., 1.)
             self.tr_view_dir = Vec3(self.tr_initial_view_dir)
+            self.tr_view_target_dir = Vec3(self.tr_initial_view_dir)
             self.tr_state = 0
 
             self.tr_fire_colldown = 0
             self.tr_next_projectile_id = 0
 
             self.tr_prefire_pause = GameState.current_time
+            self.tr_laser_length = 0.
+
+            seq.next(self.update_ai_enemy_turret)
         
         elif self.ai_type == 1:
             self.dr_vel = Vec3()
@@ -85,6 +93,8 @@ class SpsHitboxAi:
 
             self.dr_last_non_stuck_time = GameState.current_time
             self.dr_stuck = False
+
+            seq.next(self.update_ai_enemy_drone)
         
         self.local_name = en_data["bt_en_name"]
 
@@ -108,7 +118,7 @@ class SpsHitboxAi:
         self.hitbox_health -= damage
 
         if self.local_name is None:
-            return # entity despawned already, this case should be reachable, but it happens anyway... 
+            return # entity despawned already, this case should be unreachable, but it happens anyway... 
 
         if self.hitbox_health <= 0:
             # TODO: spawn particle debris
@@ -125,20 +135,23 @@ class SpsHitboxAi:
 
     # == ai impls ==
 
-    def tick_enemy_turret(self) -> None:
+    def update_ai_enemy_turret(self) -> None:
+        if self.local_name is None:
+            return # despawned
+
         # check for player visibility
         
         if SpsState.p_health != 0:
 
-            target_dir = (SpsState.p_active_controller.p_pos - self.ai_fire_pos + Vec3(0., SpsState.p_active_controller.PLAYER_SIZE.y / 2, 0.))
-            target_dist = target_dir.length()
+            self.tr_view_target_dir = (SpsState.p_active_controller.p_pos - self.ai_fire_pos + Vec3(0., SpsState.p_active_controller.PLAYER_SIZE.y / 2, 0.))
+            target_dist = self.tr_view_target_dir.length()
 
             if target_dist == 0.:
                 return # both target and origin are at the same place, possible crash, just give up
 
-            target_dir.normalize_ip()
+            self.tr_view_target_dir.normalize_ip()
 
-            vis_ray = PhysRay.make(self.ai_fire_pos, target_dir)
+            vis_ray = PhysRay.make(self.ai_fire_pos, self.tr_view_target_dir)
             vis_hit = GameState.collider_scene.first_hit(vis_ray, target_dist)
 
             is_visible = vis_hit is None
@@ -151,35 +164,44 @@ class SpsHitboxAi:
             self.ai_target_last_seen_time = time.perf_counter()
 
         else:
-            self.ai_agro_level = max(0., self.ai_agro_level - self.AI_ARGO_DECAY * GameState.delta_time)
+            self.ai_agro_level = max(0., self.ai_agro_level - self.AI_ARGO_DECAY * GameState.delta_time * 1 / self.AI_UPDATE_RATE)
 
         # laser ray cast
 
         laser_ray = PhysRay.make(self.ai_fire_pos, self.tr_view_dir)
         laser_hit = GameState.collider_scene.first_hit(laser_ray)
-        laser_length = laser_hit.tmin if laser_hit is not None else 1000.
+        self.tr_laser_length = laser_hit.tmin if laser_hit is not None else 1000.
 
+        seq.after(1 / self.AI_UPDATE_RATE, self.update_ai_enemy_turret)
+
+    def tick_enemy_turret(self) -> None:
         # debug gizmos
 
         if SpsState.cheat_ai_debug:
             # gizmo.draw_text(self.ai_trans._pos, f"ai_type: {self.ai_type}\nai_argo_level: {round(self.ai_agro_level, 2)}\nai_vis: {is_visible}\ntr_state: {self.tr_state}", start_fade=float('inf'))
 
             line_col = Vec3(.35, 1., .35) if self.tr_state == 3 else Vec3(.35, .35, 1.)
-            gizmo.draw_line(self.ai_fire_pos, self.ai_fire_pos + self.tr_view_dir * laser_length, line_col, line_col)
+            gizmo.draw_line(self.ai_fire_pos, self.ai_fire_pos + self.tr_view_dir * self.tr_laser_length, line_col, line_col)
 
         # aim for player
 
-        if is_visible:
+        if self.ai_agro_level == 100.:
             # player visible, align with player
 
-            view_diff = target_dir - self.tr_view_dir
+            # recalc the view_target for player to avoid jittering when following
+            self.tr_view_target_dir = (SpsState.p_active_controller.p_pos - self.ai_fire_pos + Vec3(0., SpsState.p_active_controller.PLAYER_SIZE.y / 2, 0.))
+
+            try: self.tr_view_target_dir.normalize_ip()
+            except: pass
+
+            view_diff = self.tr_view_target_dir - self.tr_view_dir
             if view_diff.length_squared() != 0.:
                 self.tr_view_dir += view_diff.normalize() * min(view_diff.length(), self.TURRET_AIM_SPEED_FACTOR * GameState.delta_time)
             
             try: self.tr_view_dir.normalize_ip()
             except: pass # this case (view_dir == [0, 0, 0]) is *very* unlikely, but still possible
 
-            if self.tr_view_dir.dot(target_dir) >= self.TURRET_AIM_ALIGN_TOLERANCE:
+            if self.tr_view_dir.dot(self.tr_view_target_dir) >= self.TURRET_AIM_ALIGN_TOLERANCE:
                 self.tr_state = 3
             else:
                 self.tr_state = 2
@@ -190,10 +212,10 @@ class SpsHitboxAi:
             # animate the turret scan with random movements around the last seen point
             if GameState.current_time - self.tr_scan_cooldown > self.TURRET_SCAN_COOLDOWN:
                 self.tr_scan_cooldown = GameState.current_time
-                self.tr_scan_target_dir = ((self.ai_target_last_seen_pos - self.ai_trans._pos).normalize() + Vec3(random.uniform(-.35, .35), random.uniform(-.35, .35), random.uniform(-.35, .35))).normalize()
+                self.tr_view_target_dir = ((self.ai_target_last_seen_pos - self.ai_trans._pos).normalize() + Vec3(random.uniform(-.35, .35), random.uniform(-.35, .35), random.uniform(-.35, .35))).normalize()
 
             # interpolate around that scan dir
-            view_diff = self.tr_scan_target_dir - self.tr_view_dir
+            view_diff = self.tr_view_target_dir - self.tr_view_dir
             if view_diff.length_squared() != 0.:
                 self.tr_view_dir += view_diff.normalize() * min(view_diff.length(), self.TURRET_SCAN_SPEED_FACTOR * GameState.delta_time)
 
@@ -212,25 +234,18 @@ class SpsHitboxAi:
             time.perf_counter() - self.tr_fire_colldown > self.TURRET_FIRE_COOLDOWN and # no inter-bullet cooldown
             GameState.current_time - self.tr_prefire_pause > self.TURRET_AIM_FIRE_PAUSE # no prefire cooldown    
             ):
-            proj_data = {
-                "t_pos": self.ai_fire_pos,
-                "t_rot": Vec3(),
-                "t_scale": Vec3(.4, .4, .4),
-                "projectile_type": "bullet",
-                "projectile_damage": 20,
-                "projectile_dir": Vec3(self.tr_view_dir),
-                "projectile_velocity": 45,
-                "hitbox_scale": Vec3(1.0, 1.0, 1.0),
-                "a_model_mesh": "models/chair.npz",
-                "a_model_vshader": "shaders/base_cam.vert",
-                "a_model_fshader": "shaders/unlit.frag",
-                "a_model_albedo": "textures/proto/Dark/texture_07.png",
-                "a_model_transparent": False,
-            }
 
-            GameState.entity_storage.spawn("sps_projectile", f"__{self.local_name}_proj_{self.tr_next_projectile_id}", proj_data)
+            # load bullet prefab
+            proj_name = f"__{self.local_name}_proj_{self.tr_next_projectile_id}"
+            proj_prefab = prefabs.load_prefab(proj_name, "prefabs/turret_bullet.json")
+
+            # setup initial dynamic entity data
+            proj_prefab[0][2]["t_pos"] = self.ai_fire_pos
+            proj_prefab[0][2]["projectile_dir"] = Vec3(self.tr_view_dir)
+
+            prefabs.spawn_prefab(proj_prefab)
+
             self.tr_fire_colldown = time.perf_counter()
-
             self.tr_next_projectile_id += 1
 
     def _dr_navigate(self, target_pos: Vec3) -> None:
@@ -243,7 +258,7 @@ class SpsHitboxAi:
             if nav_target_pos != current_pos:
                 vis_ray = PhysRay.make(current_pos, (nav_target_pos - current_pos).normalize(), self.ai_hitbox_size)
                 vis_hit = GameState.collider_scene.first_hit(vis_ray, (nav_target_pos - current_pos).length())
-
+                
                 if vis_hit is not None:
                     # rand_scalar /= 1.6
                     continue # nav_target_pos not reachable, retry
@@ -294,13 +309,17 @@ class SpsHitboxAi:
 
         self.dr_vel = vel
         self.ai_trans.set_pos(pos)
-        self.ai_hitbox.update(pos, self.ai_hitbox_size)
 
-    def tick_enemy_drone(self) -> None:
+        self.ai_hitbox.update(pos, self.ai_hitbox_size)
+        SpsState.hitbox_scene.update_coll(self.ai_hitbox)
+
+    def update_ai_enemy_drone(self) -> None:
+        if self.local_name is None:
+            return # despawned
+
         # check for player visibility
 
         if SpsState.p_health != 0:
-
             target_dir = (SpsState.p_active_controller.p_pos - self.ai_fire_pos + Vec3(0., SpsState.p_active_controller.PLAYER_SIZE.y / 2, 0.))
             target_dist = target_dir.length()
 
@@ -322,7 +341,7 @@ class SpsHitboxAi:
             self.ai_target_last_seen_time = time.perf_counter()
 
         else:
-            self.ai_agro_level = max(0., self.ai_agro_level - self.AI_ARGO_DECAY * GameState.delta_time)
+            self.ai_agro_level = max(0., self.ai_agro_level - self.AI_ARGO_DECAY * GameState.delta_time * 1 / self.AI_UPDATE_RATE)
 
         # set travel target pos
 
@@ -354,11 +373,11 @@ class SpsHitboxAi:
         if GameState.current_time - self.dr_last_non_stuck_time > self.DRONE_NAVIG_MAX_STUCK_TIME:
             self.dr_stuck = True
 
+    def tick_enemy_drone(self) -> None:
         # tick travel update
 
         target_diff = self.dr_nav_target_pos - self.ai_trans._pos
 
-        import math
         try: nav_target_vel: Vec3 = target_diff.normalize() * min(self.DRONE_NAVIG_SPEED, math.exp(target_diff.length()) - .6)
         except: nav_target_vel = Vec3()
 
@@ -383,6 +402,8 @@ class SpsHitboxAi:
 
             if self.ai_agro_level > 0.:
                 gizmo.draw_box(self.ai_target_last_seen_pos - Vec3(.2, .2, .2), self.ai_target_last_seen_pos + Vec3(.2, .2, .2), Vec3(.35, 1., 1.))
+
+        seq.after(1., self.update_ai_enemy_drone)
 
     # == entity hooks ==
 
@@ -457,14 +478,15 @@ class SpsHitboxAi:
     # turret vars
 
     tr_view_dir: Vec3
+    tr_view_target_dir: Vec3
     tr_state: int
 
     tr_prefire_pause: float
+    tr_laser_length: float
     tr_fire_colldown: float
     tr_next_projectile_id: int
 
     tr_scan_cooldown: float
-    tr_scan_target_dir: Vec3
 
     tr_initial_view_dir: Vec3
     dr_last_non_stuck_time: float

@@ -4,11 +4,11 @@
         "type_list": [
             "sps_player_spawn",
             "sps_hurt_trigger",
-            "bt_static_mesh",
-            "sps_view_mesh",
             "sps_dev_text",
+            "bt_static_mesh",
+            "bt_phys_aabb",
             "bt_map_trigger",
-            "bt_phys_aabb"
+            "sps_view_mesh"
         ],
         "asset_list": []
     },
@@ -1727,33 +1727,6 @@
                         2.0
                     ],
                     "phys_bitmask": 0.0
-                }
-            ],
-            [
-                "test_view",
-                "sps_view_mesh",
-                {
-                    "vec3://t_pos": [
-                        0.23000000417232513,
-                        -0.2199999988079071,
-                        -0.6650000214576721
-                    ],
-                    "vec3://t_rot": [
-                        -90.0,
-                        180.0,
-                        0.0
-                    ],
-                    "vec3://t_scale": [
-                        0.08778657764196396,
-                        0.08778657764196396,
-                        0.08778657764196396
-                    ],
-                    "easing_scalar": 0.44999998807907104,
-                    "a_model_mesh": "models/glock19_Future.npz",
-                    "a_model_vshader": "shaders/base_cam.vert",
-                    "a_model_fshader": "shaders/unlit.frag",
-                    "a_model_albedo": "textures/proto/Red/texture_10.png",
-                    "a_model_transparent": false
                 }
             ]
         ]

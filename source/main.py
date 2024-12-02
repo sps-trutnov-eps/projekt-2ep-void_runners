@@ -11,7 +11,6 @@ try:
     from engine.cue.rendering.cue_scene import RenderScene
 
     from engine.cue import cue_map
-    from engine.cue import cue_utils
     from engine.cue import cue_cmds
     from engine.cue import cue_sequence as seq
 
@@ -101,6 +100,10 @@ while True:
         GameState.sequencer.send_event_id(e.type, e)
         GameState.static_sequencer.send_event_id(e.type, e)
 
+    # check for deferred map loads
+    if hasattr(GameState, "next_map_deferred"):
+        cue_map.load_map(GameState.next_map_deferred)
+
     # == tick ==
 
     dt = (time.perf_counter() - GameState.current_time) * SpsState.cheat_deltascale
@@ -120,21 +123,6 @@ while True:
     # == frame ==
 
     SpsState.p_hud_ui.render_ui()
-
-    if SpsState.is_dev_con_open:
-        SpsState.is_dev_con_open = cue_utils.show_developer_console()
-
-        with dev_utils.utils.begin_dev_overlay("tonemap_settings", 2):
-            _, tonemap_pass.bloom_enabled = imgui.checkbox("Bloom enabled", tonemap_pass.bloom_enabled)
-            _, tonemap_pass.bloom_strength = imgui.drag_float("Bloom strength", tonemap_pass.bloom_strength, change_speed=0.01)
-
-            _, tonemap_pass.exposure = imgui.drag_float("Exposure", tonemap_pass.exposure, change_speed=0.01)
-
-        if not SpsState.is_dev_con_open:
-            SpsState.p_active_controller.set_captured(True)
-
-    if SpsState.is_perf_overlay_open:
-        cue_utils.show_perf_overlay()
 
     GameState.renderer.frame(GameState.active_camera, GameState.active_scene)
 

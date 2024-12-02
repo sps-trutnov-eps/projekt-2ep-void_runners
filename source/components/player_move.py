@@ -183,6 +183,7 @@ class PlayerMovement:
                     if stand_hit is None:
                         # no obstruction found, perform step
                         new_pos = step_pos
+                        new_pos.y += EPSILON # does prevent freezes when stand_hit misses the step up (i guess?)
                         dt *= 1. - frac_traveled
 
                         # recalc and continue checking for collisions after step

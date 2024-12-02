@@ -101,3 +101,23 @@ def nodmg_cmd(args: list[str]):
     utils.info(f"[dev utils] no damage: {SpsState.cheat_nodmg}")
 
 utils.add_dev_command("nodmg", nodmg_cmd)
+
+# == vis_sub cmd ==
+
+def vis_sub_cmd(args: list[str]):
+    if len(args) == 0:
+        if SpsState.dev_vis_sub_zone_target is None:
+            SpsState.dev_vis_sub_zones ^= True
+            return
+
+        SpsState.dev_vis_sub_zones = True
+        SpsState.dev_vis_sub_zone_target = None
+    
+    elif len(args) == 1:
+        SpsState.dev_vis_sub_zones = True
+        SpsState.dev_vis_sub_zone_target = args[0]
+
+    else:
+        utils.error("[dev utils] unknown args")
+
+utils.add_dev_command("vis_sub", vis_sub_cmd)

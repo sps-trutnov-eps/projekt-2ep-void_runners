@@ -14,13 +14,10 @@ class SpsState:
     # this should be a player class / entity but too late..
 
     p_active_controller: 'PlayerMovement'
-    p_active_view_mesh: str | None
-
     p_hitbox: 'PhysAABB'
 
     p_health: int
     p_ammo: int
-    
 
     p_hud_selected_weapon: int | None = None
     p_hud_ui: 'GameUI | MenuUI | None'
@@ -37,8 +34,10 @@ class SpsState:
 
     # == dev bools ==
 
-    is_perf_overlay_open: bool = False
+    is_perf_overlay_open: bool = True
     is_dev_con_open: bool = False
+    dev_vis_sub_zones: bool = True
+    dev_vis_sub_zone_target: None | str = None
 
     cheat_deltascale: float = 1.
 
