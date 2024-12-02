@@ -34,12 +34,12 @@ class SpsState:
 
     # == dev bools ==
 
-    is_perf_overlay_open: bool = True
+    is_perf_overlay_open: bool = False
     is_dev_con_open: bool = False
-    dev_vis_sub_zones: bool = True
+    dev_vis_sub_zones: bool = False
     dev_vis_sub_zone_target: None | str = None
 
     cheat_deltascale: float = 1.
 
-    cheat_ai_debug: bool = True
+    cheat_ai_debug: bool = False
     cheat_nodmg: bool = False
