@@ -121,3 +121,19 @@ def vis_sub_cmd(args: list[str]):
         utils.error("[dev utils] unknown args")
 
 utils.add_dev_command("vis_sub", vis_sub_cmd)
+
+# == ai_invis cmd ==
+
+def ai_invis_cmd(args: list[str]):
+    SpsState.cheat_ai_invis ^= True
+    utils.info(f"[dev utils] Player insivible: {SpsState.cheat_ai_invis}")
+
+utils.add_dev_command("ai_invis", ai_invis_cmd)
+
+# == post_config cmd ==
+
+def post_config_cmd(args: list[str]):
+    SpsState.is_post_config_open ^= True
+    utils.info(f"[dev utils] Player insivible: {SpsState.is_post_config_open}")
+
+utils.add_dev_command("post_config", post_config_cmd)

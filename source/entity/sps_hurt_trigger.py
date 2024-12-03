@@ -4,7 +4,7 @@ from dataclasses import dataclass
 from engine.cue.entities import cue_entity_types as en
 from engine.cue.cue_state import GameState
 from sps_state import SpsState
-import sps_manager as manag
+import sps_player as player
 
 from engine.cue.components.cue_transform import Transform
 from engine.cue.phys.cue_phys_types import PhysAABB
@@ -29,11 +29,11 @@ class SpsHurtTrigger:
 
     def on_triggered(self) -> None:
         if self.hurt_interval == 0.:
-            manag.p_death()
+            player.p_death()
             return
 
         if time.perf_counter() - self.last_damage_time > self.hurt_interval:
-            manag.p_take_damage(self.hurt_damage)
+            player.p_take_damage(self.hurt_damage)
             self.last_damage_time = time.perf_counter()
 
     # == entity hooks ==
