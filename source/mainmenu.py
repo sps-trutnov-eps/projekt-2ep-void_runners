@@ -9,6 +9,17 @@ from engine.cue import cue_map
 from sps_state import SpsState
 from ui import GameUI
 
+from engine.cue.cue_state import GameState
+from engine.cue.im2d import im2d_draw as im2d
+import imgui
+import math
+import time
+import sys
+import pygame as pg
+from engine.cue import cue_map
+from sps_state import SpsState
+from ui import GameUI
+
 class CharacterSelectUI:
     def __init__(self, on_back):
         self.start_time = time.time()
@@ -17,7 +28,7 @@ class CharacterSelectUI:
         self.mouse_pressed = False
         
         # Načtení základní textury pro ikony
-        self.default_icon = GameState.asset_manager.load_texture("textures/def_white.png")
+        self.default_icon = GameState.asset_manager.load_texture("textures/annonym.png")
         
         self.characters = [
             {
@@ -26,7 +37,8 @@ class CharacterSelectUI:
                 "icon": self.default_icon,
                 "stats": {
                     "health": 200,
-                    "ammo": 15
+                    "ammo": 15,
+                    "can_double_jump": False
                 }
             },
             {
@@ -35,16 +47,18 @@ class CharacterSelectUI:
                 "icon": self.default_icon,
                 "stats": {
                     "health": 100,
-                    "ammo": 30
+                    "ammo": 30,
+                    "can_double_jump": False
                 }
             },
             {
                 "name": "Assassin",
-                "description": "Fast and agile fighter",
+                "description": "Fast and agile fighter with double jump",
                 "icon": self.default_icon,
                 "stats": {
                     "health": 100,
-                    "ammo": 15
+                    "ammo": 15,
+                    "can_double_jump": True
                 }
             }
         ]
@@ -361,12 +375,15 @@ class MenuUI:
         if hasattr(self.loadout_screen, 'selected_character') and self.loadout_screen.selected_character is not None:
             char = self.loadout_screen.characters[self.loadout_screen.selected_character]
             print(f"Starting game with {char['name']}")
-            
-            SpsState.p_hud_ui = GameUI()
+                
+                # Store character stats in SpsState before starting game
+            SpsState.selected_char_stats = char["stats"]
             SpsState.p_health = char["stats"]["health"]
             SpsState.p_ammo = char["stats"]["ammo"]
+            SpsState.can_double_jump = char["stats"]["can_double_jump"]
+            SpsState.p_hud_ui = GameUI()
             SpsState.dev_con = False
-            
+                
             cue_map.load_map_when_safe(self.first_map)
         else:
             print("Please select a character first in the Loadout menu!")

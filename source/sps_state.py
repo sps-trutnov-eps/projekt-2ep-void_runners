@@ -30,6 +30,8 @@ class SpsState:
 
     # == enemy and damage system ==
 
+    
+
     active_nav_nodes: list['SpsNavNode']
     hitbox_scene: 'PhysScene'
 

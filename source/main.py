@@ -95,6 +95,12 @@ while True:
         if e.type == pg.KEYDOWN and e.dict["key"] == pg.K_ESCAPE:
             SpsState.is_dev_con_open ^= True
             SpsState.p_active_controller.set_captured(not SpsState.is_dev_con_open)
+        
+        if e.type == pg.KEYDOWN and e.dict["key"] == pg.K_g:
+            if hasattr(SpsState, "p_active_controller"):
+                player_pos = SpsState.p_active_controller.position
+                look_dir = SpsState.p_active_controller.get_look_direction()
+                SpsState.grenade_manager.throw_grenade(player_pos, look_dir)
 
         if e.type == pg.QUIT:
             sys.exit(0)
