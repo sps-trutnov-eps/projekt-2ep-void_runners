@@ -29,7 +29,7 @@ class PlayerMovement:
     WALK_ACCEL = 16
     SPRINT_MAX_SPEED = 3.6
     SPRINT_ACCEL = 24
-    AIR_ACCEL = .4
+    AIR_ACCEL = 2.4
     MOUSE_ACCEL = .2 # (degrees per mouse-specific unit)
 
     JUMP_IMPULSE = Vec3(0., 2.5, 0.)
@@ -155,7 +155,10 @@ class PlayerMovement:
 
             show_debug = self.show_player_debug
 
-            while scene_hit is not None:
+            for i in range(64): # 64 = max complexity
+                if scene_hit is None:
+                    break
+
                 frac_traveled = scene_hit.tmin / tmax
 
                 # check if it is valid to step up on the collided object
@@ -172,18 +175,20 @@ class PlayerMovement:
                     step_pos.y = stand_hit.pos[1] + EPSILON
 
                     player_stand_box: PhysRay = PhysRay.make(step_pos + Vec3(0., PlayerMovement.PLAYER_SIZE.y / 2, 0.), Vec3(0., 1., 0.), PlayerMovement.PLAYER_SIZE)
-                    stand_hit = GameState.collider_scene.first_hit(player_stand_box, EPSILON)
+                    stand_check_hit = GameState.collider_scene.first_hit(player_stand_box, EPSILON)
                     
                     if show_debug:
                         pos = step_pos + Vec3(0., PlayerMovement.PLAYER_SIZE.y / 2, 0.)
                         size = PlayerMovement.PLAYER_SIZE
 
-                        gizmo.draw_box(pos - size, pos + size, Vec3(.15, .8, .15) if stand_hit is None else Vec3(1., .15, .15))
+                        gizmo.draw_box(pos - size, pos + size, Vec3(.15, .8, .15) if stand_check_hit is None else Vec3(1., .15, .15))
 
-                    if stand_hit is None:
+                    if stand_check_hit is None:
                         # no obstruction found, perform step
                         new_pos = step_pos
                         new_pos.y += EPSILON # does prevent freezes when stand_hit misses the step up (i guess?)
+
+                        new_vel = new_vel - new_vel.project(stand_hit.norm)
                         dt *= 1. - frac_traveled
 
                         # recalc and continue checking for collisions after step
@@ -318,17 +323,26 @@ class PlayerMovement:
             accel = PlayerMovement.AIR_ACCEL
             accel_vec = Vec3(0, 0, 0)
 
+            if not self.p_vel.length_squared() == 0.:
+                vel_dir = self.p_vel.normalize()
+
+                forward_dot = 1. - abs(self.view_forward_flat.dot(vel_dir))
+                right_dot = 1. - abs(self.view_right_flat.dot(vel_dir))
+            else:
+                forward_dot = 1.
+                right_dot = 1.
+
             if keys[pg.K_w]:
-                accel_vec += self.view_forward_flat * accel * dt
+                accel_vec += self.view_forward_flat * accel * dt * forward_dot
                 input_active = True
             if keys[pg.K_s]:
-                accel_vec -= self.view_forward_flat * accel * dt
+                accel_vec -= self.view_forward_flat * accel * dt * forward_dot
                 input_active = True
             if keys[pg.K_d]:
-                accel_vec += self.view_right_flat * accel * dt
+                accel_vec += self.view_right_flat * accel * dt * right_dot
                 input_active = True
             if keys[pg.K_a]:
-                accel_vec -= self.view_right_flat * accel * dt
+                accel_vec -= self.view_right_flat * accel * dt * right_dot
                 input_active = True
 
             vel += accel_vec

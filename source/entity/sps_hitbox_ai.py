@@ -11,12 +11,15 @@ from engine.cue.rendering import cue_gizmos as gizmo
 from engine.cue.entities.bt_static_mesh import BtStaticMesh
 from engine.cue.components.cue_transform import Transform
 from engine.cue.components.cue_model import ModelRenderer
+from engine.cue.rendering.cue_resources import GPUMesh
 from engine.cue.phys.cue_phys_types import PhysAABB, PhysRay, EPSILON
 
+from components.line_renderer import LineRenderer
 from sps_state import SpsState
 import prefabs
 
 from pygame.math import Vector3 as Vec3
+from OpenGL import GL as gl
 import numpy as np
 
 # a semi-generic entity for most ai controlled enemies or npcs
@@ -53,6 +56,8 @@ class SpsHitboxAi:
     DRONE_NAVIG_MAX_ATTEMPTS = 4 
     DRONE_NAVIG_MAX_STUCK_TIME = 1.5
 
+    DRONE_NAVIG_PLAYER_AVOIDANCE = 15. # how much to avoid flying into the player
+
     def __init__(self, en_data: dict) -> None:
         self.hitbox_health = en_data["hitbox_health"]
         self.ai_type = self.AI_TYPE_TABLE[en_data["ai_type"]]
@@ -69,11 +74,11 @@ class SpsHitboxAi:
         self.ai_agro_level = 0.
         self.ai_target_last_seen_pos = Vec3()
         self.ai_target_last_seen_time = 0.
+        self.ai_overlay_rot = en_data["t_rot"]
         self.ai_last_update = GameState.current_time
 
         if self.ai_type == 0:
             self.tr_initial_view_dir = Vec3(0., 0., 1.)
-            self.tr_overlay_rot = en_data["t_rot"]
             self.tr_view_dir = Vec3(self.tr_initial_view_dir)
             self.tr_view_target_dir = Vec3(self.tr_initial_view_dir)
             self.tr_state = 0
@@ -83,6 +88,19 @@ class SpsHitboxAi:
 
             self.tr_prefire_pause = GameState.current_time
             self.tr_laser_length = 0.
+
+            self.tr_laser_mesh = GPUMesh()
+            self._tr_gen_laser_mesh()
+
+            laser_data = {
+                "a_model_vshader": "shaders/line_segment.vert",
+                "a_model_fshader": "shaders/unlit.frag",
+                "a_model_albedo": "textures/def_white.png",
+                "a_model_transparent": True,
+            }
+
+            # note: using ai transform which may be far from the laser mesh itself, this may cause wrong draw ordering and transparency artifacts but good enough
+            self.tr_laser_renderer = LineRenderer(laser_data, self.tr_laser_mesh, .008, self.ai_trans)
 
             # temporally space out ai updates over many frames, so only a few updates per frame happen
             seq.after(random.uniform(0., .5), self.update_ai_enemy_turret)
@@ -137,7 +155,23 @@ class SpsHitboxAi:
         except:
             pass # malformed hit pos (hit_pos == self.ai_trans._pos), just ignore
 
+    def on_force(self, active_force: Vec3) -> None:
+        if self.ai_type == 1:
+            self.dr_vel += active_force * GameState.delta_time
+
     # == ai impls ==
+
+    def _tr_gen_laser_mesh(self) -> None:
+        laser_end_pos = (self.ai_fire_pos + (self.tr_view_dir.elementwise() * self.tr_laser_length))
+
+        vert_buf = np.array([*self.ai_fire_pos, *self.ai_fire_pos, *laser_end_pos, *laser_end_pos], dtype=np.float32)
+        norm_buf = np.array([*self.tr_view_dir, *self.tr_view_dir, *self.tr_view_dir, *self.tr_view_dir], dtype=np.float32)
+        uv_buf = np.array([0., 0., 0., 1., 1., 0., 1., 1.], dtype=np.float32)
+
+        # vert_buf = np.array([0., .5, 0., 0., .5, 0., 1., .5, 0., 1., .5, 0.], dtype=np.float32)
+        elem_buf = np.array([0, 1, 2, 2, 1, 3], dtype=np.uint32)
+
+        self.tr_laser_mesh.write_to(vert_buf, norm_buf, uv_buf, 4, elem_buf, 6, gl.GL_STREAM_DRAW)
 
     def update_ai_enemy_turret(self) -> None:
         if self.local_name is None:
@@ -172,12 +206,6 @@ class SpsHitboxAi:
 
         else:
             self.ai_agro_level = max(0., self.ai_agro_level - self.AI_ARGO_DECAY * (GameState.current_time - self.ai_last_update))
-
-        # laser ray cast
-
-        laser_ray = PhysRay.make(self.ai_fire_pos, self.tr_view_dir)
-        laser_hit = GameState.collider_scene.first_hit(laser_ray)
-        self.tr_laser_length = laser_hit.tmin if laser_hit is not None else 1000.
 
         self.ai_last_update = GameState.current_time
         seq.after(1 / self.AI_UPDATE_RATE, self.update_ai_enemy_turret)
@@ -237,6 +265,15 @@ class SpsHitboxAi:
             self.tr_state = 0
             self.tr_prefire_pause = GameState.current_time
 
+        # regen laser with latest dir
+
+        # costly per frame hit scan, but it's a sacrifice i'm willing to make...
+        laser_ray = PhysRay.make(self.ai_fire_pos, self.tr_view_dir)
+        laser_hit = GameState.collider_scene.first_hit(laser_ray)
+        self.tr_laser_length = laser_hit.tmin if laser_hit is not None else 1000.
+
+        self._tr_gen_laser_mesh()
+
         # rotate model by dir
 
         try:
@@ -246,7 +283,7 @@ class SpsHitboxAi:
             forward_dir_flat = Vec3(0., 0., 0.)
 
         # atan2, my beloved
-        self.ai_trans.set_rot(Vec3(0., math.degrees(math.atan2(forward_dir_flat.z, forward_dir_flat.x)), 0.) + self.tr_overlay_rot)
+        self.ai_trans.set_rot(Vec3(0., math.degrees(math.atan2(forward_dir_flat.z, forward_dir_flat.x)), 0.) + self.ai_overlay_rot)
 
         # fire if valid
 
@@ -269,26 +306,28 @@ class SpsHitboxAi:
             self.tr_fire_colldown = time.perf_counter()
             self.tr_next_projectile_id += 1
 
-    def _dr_navigate(self, target_pos: Vec3) -> bool:
+    def _dr_navigate(self, target_pos: Vec3, is_player: bool) -> None:
         rand_scalar = 1.
         current_pos = self.ai_trans._pos
 
         for i in range(self.DRONE_NAVIG_MAX_ATTEMPTS):
-            nav_target_pos = Vec3(target_pos) + Vec3(random.uniform(-1.2, 1.2), random.uniform(.2, 1.2), random.uniform(-1.2, 1.2)).elementwise() * rand_scalar
+            if not is_player:
+                nav_target_pos = Vec3(target_pos) + Vec3(random.uniform(-1.2, 1.2), random.uniform(.2, 1.2), random.uniform(-1.2, 1.2)).elementwise() * rand_scalar
+            else:
+                nav_target_pos = Vec3(target_pos) + Vec3(random.uniform(-2.2, 2.2), random.uniform(.2, 2.2), random.uniform(-2.2, 2.2)).elementwise() * rand_scalar
 
             if nav_target_pos != current_pos:
-                # vis_ray = PhysRay.make(current_pos, (nav_target_pos - current_pos).normalize(), self.ai_hitbox_size)
-                # vis_hit = GameState.collider_scene.first_hit(vis_ray, (nav_target_pos - current_pos).length())
+                # note: it's better if we check if target is reachable but the cost of multiple hit scans is not worth the micro-stutters, rely on stuck detection
+                vis_ray = PhysRay.make(current_pos, (nav_target_pos - current_pos).normalize(), self.ai_hitbox_size)
+                vis_hit = GameState.collider_scene.first_hit(vis_ray, (nav_target_pos - current_pos).length())
                 
-                vis_hit = None
-                if vis_hit is not None:
+                if vis_hit is not None or (is_player and (nav_target_pos - target_pos).length_squared() < 2. ** 2):
                     # rand_scalar /= 1.6
-                    continue # nav_target_pos not reachable, retry
+                    continue # nav_target_pos not reachable or too close, retry
 
             self.dr_nav_target_pos = nav_target_pos
-            return True
-
-        return False
+            self.dr_nav_target_is_player = is_player
+            return
 
     def _dr_check_collisions_and_apply_velocity(self) -> None:
         # tbh this comes derectly from PlayerMovement, only modified to for the SpsHitboxAi class
@@ -303,7 +342,10 @@ class SpsHitboxAi:
             player_box: PhysRay = PhysRay.make(pos, vel.normalize(), self.ai_hitbox_size)
             scene_hit = GameState.collider_scene.first_hit(player_box, tmax)
 
-            while scene_hit is not None:
+            for i in range(32):
+                if scene_hit is None:
+                    break
+
                 frac_traveled = scene_hit.tmin / tmax
 
                 pos += vel * dt * frac_traveled
@@ -373,10 +415,10 @@ class SpsHitboxAi:
 
                 if is_visible:
                     # override target_pos even when mid navigation if players visible
-                    self.dr_nav_target_is_player = True if self._dr_navigate(SpsState.p_active_controller.p_pos) else self.dr_nav_target_is_player
+                    self._dr_navigate(SpsState.p_active_controller.p_pos, True)
 
                 elif self.ai_agro_level > 0.:
-                    self.dr_nav_target_is_player = False if self._dr_navigate(self.ai_target_last_seen_pos) else self.dr_nav_target_is_player
+                    self._dr_navigate(self.ai_target_last_seen_pos, False)
 
                 else:
                     nodes_by_dist = sorted(SpsState.active_nav_nodes, key=lambda node: (node.node_pos - self.ai_trans._pos).length_squared())
@@ -403,7 +445,7 @@ class SpsHitboxAi:
                                 break
 
                         if target_node is not None:
-                            self.dr_nav_target_is_player = False if self._dr_navigate(target_node.node_pos) else self.dr_nav_target_is_player
+                            self._dr_navigate(target_node.node_pos, False)
 
             idling_at_target = True
         else:
@@ -412,7 +454,7 @@ class SpsHitboxAi:
 
         if is_visible and not self.dr_nav_target_is_player:
             # override target dir to player if seen
-            self.dr_nav_target_is_player = True if self._dr_navigate(SpsState.p_active_controller.p_pos) else self.dr_nav_target_is_player
+            self._dr_navigate(SpsState.p_active_controller.p_pos, True)
 
         # stuck detection
 
@@ -434,11 +476,29 @@ class SpsHitboxAi:
         try: nav_target_vel: Vec3 = target_diff.normalize() * min(self.DRONE_NAVIG_SPEED, math.exp(target_diff.length()) - .6)
         except: nav_target_vel = Vec3()
 
-        try: nav_accel: Vec3 = ((nav_target_vel - self.dr_vel) * self.DRONE_NAVIG_ACCEL).clamp_magnitude(self.DRONE_NAVIG_SPEED)
+        # try to avoid flying into the players face
+        player_diff = (self.ai_trans._pos - SpsState.p_active_controller.p_pos)
+        player_repulsion = player_diff.normalize() * max(2. - player_diff.length(), 0.) * self.DRONE_NAVIG_PLAYER_AVOIDANCE
+
+        try: nav_accel: Vec3 = ((nav_target_vel - self.dr_vel) * self.DRONE_NAVIG_ACCEL).clamp_magnitude(self.DRONE_NAVIG_SPEED) + player_repulsion
         except: nav_accel = Vec3()
 
         self.dr_vel += (nav_accel * GameState.delta_time)
         self._dr_check_collisions_and_apply_velocity()
+
+        # rotate model by dir
+
+        if self.ai_agro_level == 100.:
+            target_diff = SpsState.p_active_controller.p_pos - self.ai_trans._pos
+
+            try: forward_dir_flat = Vec3(target_diff.x, 0., target_diff.z).normalize()
+            except: forward_dir_flat = Vec3(0., 0., 0.)
+
+        else:
+            try: forward_dir_flat = Vec3(self.dr_vel.x, 0., self.dr_vel.z).normalize()
+            except: forward_dir_flat = Vec3(0., 0., 0.)
+        
+        self.ai_trans.set_rot(Vec3(0., math.degrees(math.atan2(forward_dir_flat.z, forward_dir_flat.x)), 0.) + self.ai_overlay_rot)
 
         # debug gizmos
 
@@ -463,7 +523,10 @@ class SpsHitboxAi:
         return SpsHitboxAi(en_data)
 
     def despawn(self) -> None:
-        self.ai_model.hide()
+        if self.ai_type == 0:
+            self.tr_laser_renderer.despawn()
+        self.ai_model.despawn()
+
         SpsState.hitbox_scene.remove_coll(self.ai_hitbox)
 
     @staticmethod
@@ -520,6 +583,7 @@ class SpsHitboxAi:
     ai_hitbox_size: Vec3
     ai_hitbox: PhysAABB
     ai_fire_offset: np.ndarray # a np vec4 ready to be matmultiplied with the transform matrix
+    ai_overlay_rot: Vec3
     ai_fire_pos: Vec3
 
     ai_agro_level: float
@@ -539,11 +603,10 @@ class SpsHitboxAi:
     tr_next_projectile_id: int
 
     tr_scan_cooldown: float
-
     tr_initial_view_dir: Vec3
-    tr_overlay_rot: Vec3
 
-    local_name: str | None
+    tr_laser_renderer: LineRenderer
+    tr_laser_mesh: GPUMesh
 
     # drone vars
 
@@ -556,6 +619,8 @@ class SpsHitboxAi:
     
     dr_stuck: bool
     dr_last_non_stuck_time: float
+
+    local_name: str | None
 
 def gen_def_data() -> dict:
     return {

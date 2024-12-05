@@ -2,12 +2,12 @@
     "cmf_ver": 2,
     "cmf_header": {
         "type_list": [
-            "bt_static_mesh",
-            "sps_hitbox_ai",
             "sps_dev_text",
-            "sps_player_spawn",
             "sps_nav_node",
-            "bt_phys_aabb"
+            "sps_player_spawn",
+            "bt_phys_aabb",
+            "bt_static_mesh",
+            "sps_hitbox_ai"
         ],
         "asset_list": []
     },
@@ -3016,6 +3016,1830 @@
                     "a_model_albedo": "textures/concrete/Concrete036_2K-JPG_Color_Pixelized.jpg",
                     "a_model_transparent": false,
                     "a_model_uniforms": {}
+                }
+            ],
+            [
+                "test_chair_death_drone_15",
+                "sps_hitbox_ai",
+                {
+                    "vec3://t_pos": [
+                        -4.097435474395752,
+                        8.416730880737305,
+                        -4.298618316650391
+                    ],
+                    "vec3://t_rot": [
+                        -90.0,
+                        0.0,
+                        0.0
+                    ],
+                    "vec3://t_scale": [
+                        0.1426348239183426,
+                        0.1426348239183426,
+                        0.1426348239183426
+                    ],
+                    "ai_type": "enemy_drone",
+                    "vec3://hitbox_scale": [
+                        2.630000114440918,
+                        3.3499999046325684,
+                        2.630000114440918
+                    ],
+                    "a_model_mesh": "models/crate.npz",
+                    "a_model_vshader": "shaders/base_cam.vert",
+                    "a_model_fshader": "shaders/unlit.frag",
+                    "a_model_albedo": "textures/proto/Red/texture_01.png",
+                    "a_model_transparent": false,
+                    "hitbox_health": 120.0,
+                    "vec3://ai_fire_offset": [
+                        1.559999942779541,
+                        0.0,
+                        -0.07000000029802322
+                    ]
+                }
+            ],
+            [
+                "test_chair_death_drone_16",
+                "sps_hitbox_ai",
+                {
+                    "vec3://t_pos": [
+                        -3.482435464859009,
+                        6.686730861663818,
+                        -4.298618316650391
+                    ],
+                    "vec3://t_rot": [
+                        -90.0,
+                        0.0,
+                        0.0
+                    ],
+                    "vec3://t_scale": [
+                        0.1426348239183426,
+                        0.1426348239183426,
+                        0.1426348239183426
+                    ],
+                    "ai_type": "enemy_drone",
+                    "vec3://hitbox_scale": [
+                        2.630000114440918,
+                        3.3499999046325684,
+                        2.630000114440918
+                    ],
+                    "a_model_mesh": "models/crate.npz",
+                    "a_model_vshader": "shaders/base_cam.vert",
+                    "a_model_fshader": "shaders/unlit.frag",
+                    "a_model_albedo": "textures/proto/Red/texture_01.png",
+                    "a_model_transparent": false,
+                    "hitbox_health": 120.0,
+                    "vec3://ai_fire_offset": [
+                        1.559999942779541,
+                        0.0,
+                        -0.07000000029802322
+                    ]
+                }
+            ],
+            [
+                "test_chair_death_drone_17",
+                "sps_hitbox_ai",
+                {
+                    "vec3://t_pos": [
+                        -4.69743537902832,
+                        7.276731014251709,
+                        -4.298618316650391
+                    ],
+                    "vec3://t_rot": [
+                        -90.0,
+                        0.0,
+                        0.0
+                    ],
+                    "vec3://t_scale": [
+                        0.1426348239183426,
+                        0.1426348239183426,
+                        0.1426348239183426
+                    ],
+                    "ai_type": "enemy_drone",
+                    "vec3://hitbox_scale": [
+                        2.630000114440918,
+                        3.3499999046325684,
+                        2.630000114440918
+                    ],
+                    "a_model_mesh": "models/crate.npz",
+                    "a_model_vshader": "shaders/base_cam.vert",
+                    "a_model_fshader": "shaders/unlit.frag",
+                    "a_model_albedo": "textures/proto/Red/texture_01.png",
+                    "a_model_transparent": false,
+                    "hitbox_health": 120.0,
+                    "vec3://ai_fire_offset": [
+                        1.559999942779541,
+                        0.0,
+                        -0.07000000029802322
+                    ]
+                }
+            ],
+            [
+                "test_chair_death_drone_18",
+                "sps_hitbox_ai",
+                {
+                    "vec3://t_pos": [
+                        -4.69743537902832,
+                        7.826730728149414,
+                        -4.298618316650391
+                    ],
+                    "vec3://t_rot": [
+                        -90.0,
+                        0.0,
+                        0.0
+                    ],
+                    "vec3://t_scale": [
+                        0.1426348239183426,
+                        0.1426348239183426,
+                        0.1426348239183426
+                    ],
+                    "ai_type": "enemy_drone",
+                    "vec3://hitbox_scale": [
+                        2.630000114440918,
+                        3.3499999046325684,
+                        2.630000114440918
+                    ],
+                    "a_model_mesh": "models/crate.npz",
+                    "a_model_vshader": "shaders/base_cam.vert",
+                    "a_model_fshader": "shaders/unlit.frag",
+                    "a_model_albedo": "textures/proto/Red/texture_01.png",
+                    "a_model_transparent": false,
+                    "hitbox_health": 120.0,
+                    "vec3://ai_fire_offset": [
+                        1.559999942779541,
+                        0.0,
+                        -0.07000000029802322
+                    ]
+                }
+            ],
+            [
+                "test_chair_death_drone_19",
+                "sps_hitbox_ai",
+                {
+                    "vec3://t_pos": [
+                        -4.69743537902832,
+                        8.416730880737305,
+                        -4.298618316650391
+                    ],
+                    "vec3://t_rot": [
+                        -90.0,
+                        0.0,
+                        0.0
+                    ],
+                    "vec3://t_scale": [
+                        0.1426348239183426,
+                        0.1426348239183426,
+                        0.1426348239183426
+                    ],
+                    "ai_type": "enemy_drone",
+                    "vec3://hitbox_scale": [
+                        2.630000114440918,
+                        3.3499999046325684,
+                        2.630000114440918
+                    ],
+                    "a_model_mesh": "models/crate.npz",
+                    "a_model_vshader": "shaders/base_cam.vert",
+                    "a_model_fshader": "shaders/unlit.frag",
+                    "a_model_albedo": "textures/proto/Red/texture_01.png",
+                    "a_model_transparent": false,
+                    "hitbox_health": 120.0,
+                    "vec3://ai_fire_offset": [
+                        1.559999942779541,
+                        0.0,
+                        -0.07000000029802322
+                    ]
+                }
+            ],
+            [
+                "test_chair_death_drone_20",
+                "sps_hitbox_ai",
+                {
+                    "vec3://t_pos": [
+                        -4.097435474395752,
+                        6.686730861663818,
+                        -4.298618316650391
+                    ],
+                    "vec3://t_rot": [
+                        -90.0,
+                        0.0,
+                        0.0
+                    ],
+                    "vec3://t_scale": [
+                        0.1426348239183426,
+                        0.1426348239183426,
+                        0.1426348239183426
+                    ],
+                    "ai_type": "enemy_drone",
+                    "vec3://hitbox_scale": [
+                        2.630000114440918,
+                        3.3499999046325684,
+                        2.630000114440918
+                    ],
+                    "a_model_mesh": "models/crate.npz",
+                    "a_model_vshader": "shaders/base_cam.vert",
+                    "a_model_fshader": "shaders/unlit.frag",
+                    "a_model_albedo": "textures/proto/Red/texture_01.png",
+                    "a_model_transparent": false,
+                    "hitbox_health": 120.0,
+                    "vec3://ai_fire_offset": [
+                        1.559999942779541,
+                        0.0,
+                        -0.07000000029802322
+                    ]
+                }
+            ],
+            [
+                "test_chair_death_drone_21",
+                "sps_hitbox_ai",
+                {
+                    "vec3://t_pos": [
+                        -2.8824355602264404,
+                        7.826730728149414,
+                        -4.298618316650391
+                    ],
+                    "vec3://t_rot": [
+                        -90.0,
+                        0.0,
+                        0.0
+                    ],
+                    "vec3://t_scale": [
+                        0.1426348239183426,
+                        0.1426348239183426,
+                        0.1426348239183426
+                    ],
+                    "ai_type": "enemy_drone",
+                    "vec3://hitbox_scale": [
+                        2.630000114440918,
+                        3.3499999046325684,
+                        2.630000114440918
+                    ],
+                    "a_model_mesh": "models/crate.npz",
+                    "a_model_vshader": "shaders/base_cam.vert",
+                    "a_model_fshader": "shaders/unlit.frag",
+                    "a_model_albedo": "textures/proto/Red/texture_01.png",
+                    "a_model_transparent": false,
+                    "hitbox_health": 120.0,
+                    "vec3://ai_fire_offset": [
+                        1.559999942779541,
+                        0.0,
+                        -0.07000000029802322
+                    ]
+                }
+            ],
+            [
+                "test_chair_death_drone_22",
+                "sps_hitbox_ai",
+                {
+                    "vec3://t_pos": [
+                        -4.69743537902832,
+                        6.686730861663818,
+                        -4.298618316650391
+                    ],
+                    "vec3://t_rot": [
+                        -90.0,
+                        0.0,
+                        0.0
+                    ],
+                    "vec3://t_scale": [
+                        0.1426348239183426,
+                        0.1426348239183426,
+                        0.1426348239183426
+                    ],
+                    "ai_type": "enemy_drone",
+                    "vec3://hitbox_scale": [
+                        2.630000114440918,
+                        3.3499999046325684,
+                        2.630000114440918
+                    ],
+                    "a_model_mesh": "models/crate.npz",
+                    "a_model_vshader": "shaders/base_cam.vert",
+                    "a_model_fshader": "shaders/unlit.frag",
+                    "a_model_albedo": "textures/proto/Red/texture_01.png",
+                    "a_model_transparent": false,
+                    "hitbox_health": 120.0,
+                    "vec3://ai_fire_offset": [
+                        1.559999942779541,
+                        0.0,
+                        -0.07000000029802322
+                    ]
+                }
+            ],
+            [
+                "test_chair_death_drone_23",
+                "sps_hitbox_ai",
+                {
+                    "vec3://t_pos": [
+                        -2.8824355602264404,
+                        7.276731014251709,
+                        -4.298618316650391
+                    ],
+                    "vec3://t_rot": [
+                        -90.0,
+                        0.0,
+                        0.0
+                    ],
+                    "vec3://t_scale": [
+                        0.1426348239183426,
+                        0.1426348239183426,
+                        0.1426348239183426
+                    ],
+                    "ai_type": "enemy_drone",
+                    "vec3://hitbox_scale": [
+                        2.630000114440918,
+                        3.3499999046325684,
+                        2.630000114440918
+                    ],
+                    "a_model_mesh": "models/crate.npz",
+                    "a_model_vshader": "shaders/base_cam.vert",
+                    "a_model_fshader": "shaders/unlit.frag",
+                    "a_model_albedo": "textures/proto/Red/texture_01.png",
+                    "a_model_transparent": false,
+                    "hitbox_health": 120.0,
+                    "vec3://ai_fire_offset": [
+                        1.559999942779541,
+                        0.0,
+                        -0.07000000029802322
+                    ]
+                }
+            ],
+            [
+                "test_chair_death_drone_24",
+                "sps_hitbox_ai",
+                {
+                    "vec3://t_pos": [
+                        -3.482435464859009,
+                        8.416730880737305,
+                        -4.298618316650391
+                    ],
+                    "vec3://t_rot": [
+                        -90.0,
+                        0.0,
+                        0.0
+                    ],
+                    "vec3://t_scale": [
+                        0.1426348239183426,
+                        0.1426348239183426,
+                        0.1426348239183426
+                    ],
+                    "ai_type": "enemy_drone",
+                    "vec3://hitbox_scale": [
+                        2.630000114440918,
+                        3.3499999046325684,
+                        2.630000114440918
+                    ],
+                    "a_model_mesh": "models/crate.npz",
+                    "a_model_vshader": "shaders/base_cam.vert",
+                    "a_model_fshader": "shaders/unlit.frag",
+                    "a_model_albedo": "textures/proto/Red/texture_01.png",
+                    "a_model_transparent": false,
+                    "hitbox_health": 120.0,
+                    "vec3://ai_fire_offset": [
+                        1.559999942779541,
+                        0.0,
+                        -0.07000000029802322
+                    ]
+                }
+            ],
+            [
+                "test_chair_death_drone_25",
+                "sps_hitbox_ai",
+                {
+                    "vec3://t_pos": [
+                        -4.097435474395752,
+                        7.826730728149414,
+                        -4.298618316650391
+                    ],
+                    "vec3://t_rot": [
+                        -90.0,
+                        0.0,
+                        0.0
+                    ],
+                    "vec3://t_scale": [
+                        0.1426348239183426,
+                        0.1426348239183426,
+                        0.1426348239183426
+                    ],
+                    "ai_type": "enemy_drone",
+                    "vec3://hitbox_scale": [
+                        2.630000114440918,
+                        3.3499999046325684,
+                        2.630000114440918
+                    ],
+                    "a_model_mesh": "models/crate.npz",
+                    "a_model_vshader": "shaders/base_cam.vert",
+                    "a_model_fshader": "shaders/unlit.frag",
+                    "a_model_albedo": "textures/proto/Red/texture_01.png",
+                    "a_model_transparent": false,
+                    "hitbox_health": 120.0,
+                    "vec3://ai_fire_offset": [
+                        1.559999942779541,
+                        0.0,
+                        -0.07000000029802322
+                    ]
+                }
+            ],
+            [
+                "test_chair_death_drone_26",
+                "sps_hitbox_ai",
+                {
+                    "vec3://t_pos": [
+                        -2.8824355602264404,
+                        8.416730880737305,
+                        -4.298618316650391
+                    ],
+                    "vec3://t_rot": [
+                        -90.0,
+                        0.0,
+                        0.0
+                    ],
+                    "vec3://t_scale": [
+                        0.1426348239183426,
+                        0.1426348239183426,
+                        0.1426348239183426
+                    ],
+                    "ai_type": "enemy_drone",
+                    "vec3://hitbox_scale": [
+                        2.630000114440918,
+                        3.3499999046325684,
+                        2.630000114440918
+                    ],
+                    "a_model_mesh": "models/crate.npz",
+                    "a_model_vshader": "shaders/base_cam.vert",
+                    "a_model_fshader": "shaders/unlit.frag",
+                    "a_model_albedo": "textures/proto/Red/texture_01.png",
+                    "a_model_transparent": false,
+                    "hitbox_health": 120.0,
+                    "vec3://ai_fire_offset": [
+                        1.559999942779541,
+                        0.0,
+                        -0.07000000029802322
+                    ]
+                }
+            ],
+            [
+                "test_chair_death_drone_27",
+                "sps_hitbox_ai",
+                {
+                    "vec3://t_pos": [
+                        -4.097435474395752,
+                        7.276731014251709,
+                        -4.298618316650391
+                    ],
+                    "vec3://t_rot": [
+                        -90.0,
+                        0.0,
+                        0.0
+                    ],
+                    "vec3://t_scale": [
+                        0.1426348239183426,
+                        0.1426348239183426,
+                        0.1426348239183426
+                    ],
+                    "ai_type": "enemy_drone",
+                    "vec3://hitbox_scale": [
+                        2.630000114440918,
+                        3.3499999046325684,
+                        2.630000114440918
+                    ],
+                    "a_model_mesh": "models/crate.npz",
+                    "a_model_vshader": "shaders/base_cam.vert",
+                    "a_model_fshader": "shaders/unlit.frag",
+                    "a_model_albedo": "textures/proto/Red/texture_01.png",
+                    "a_model_transparent": false,
+                    "hitbox_health": 120.0,
+                    "vec3://ai_fire_offset": [
+                        1.559999942779541,
+                        0.0,
+                        -0.07000000029802322
+                    ]
+                }
+            ],
+            [
+                "test_chair_death_drone_28",
+                "sps_hitbox_ai",
+                {
+                    "vec3://t_pos": [
+                        -3.482435464859009,
+                        7.276731014251709,
+                        -4.298618316650391
+                    ],
+                    "vec3://t_rot": [
+                        -90.0,
+                        0.0,
+                        0.0
+                    ],
+                    "vec3://t_scale": [
+                        0.1426348239183426,
+                        0.1426348239183426,
+                        0.1426348239183426
+                    ],
+                    "ai_type": "enemy_drone",
+                    "vec3://hitbox_scale": [
+                        2.630000114440918,
+                        3.3499999046325684,
+                        2.630000114440918
+                    ],
+                    "a_model_mesh": "models/crate.npz",
+                    "a_model_vshader": "shaders/base_cam.vert",
+                    "a_model_fshader": "shaders/unlit.frag",
+                    "a_model_albedo": "textures/proto/Red/texture_01.png",
+                    "a_model_transparent": false,
+                    "hitbox_health": 120.0,
+                    "vec3://ai_fire_offset": [
+                        1.559999942779541,
+                        0.0,
+                        -0.07000000029802322
+                    ]
+                }
+            ],
+            [
+                "test_chair_death_drone_29",
+                "sps_hitbox_ai",
+                {
+                    "vec3://t_pos": [
+                        -3.482435464859009,
+                        7.826730728149414,
+                        -4.298618316650391
+                    ],
+                    "vec3://t_rot": [
+                        -90.0,
+                        0.0,
+                        0.0
+                    ],
+                    "vec3://t_scale": [
+                        0.1426348239183426,
+                        0.1426348239183426,
+                        0.1426348239183426
+                    ],
+                    "ai_type": "enemy_drone",
+                    "vec3://hitbox_scale": [
+                        2.630000114440918,
+                        3.3499999046325684,
+                        2.630000114440918
+                    ],
+                    "a_model_mesh": "models/crate.npz",
+                    "a_model_vshader": "shaders/base_cam.vert",
+                    "a_model_fshader": "shaders/unlit.frag",
+                    "a_model_albedo": "textures/proto/Red/texture_01.png",
+                    "a_model_transparent": false,
+                    "hitbox_health": 120.0,
+                    "vec3://ai_fire_offset": [
+                        1.559999942779541,
+                        0.0,
+                        -0.07000000029802322
+                    ]
+                }
+            ],
+            [
+                "test_chair_death_drone_30",
+                "sps_hitbox_ai",
+                {
+                    "vec3://t_pos": [
+                        -2.8824355602264404,
+                        6.686730861663818,
+                        -4.298618316650391
+                    ],
+                    "vec3://t_rot": [
+                        -90.0,
+                        0.0,
+                        0.0
+                    ],
+                    "vec3://t_scale": [
+                        0.1426348239183426,
+                        0.1426348239183426,
+                        0.1426348239183426
+                    ],
+                    "ai_type": "enemy_drone",
+                    "vec3://hitbox_scale": [
+                        2.630000114440918,
+                        3.3499999046325684,
+                        2.630000114440918
+                    ],
+                    "a_model_mesh": "models/crate.npz",
+                    "a_model_vshader": "shaders/base_cam.vert",
+                    "a_model_fshader": "shaders/unlit.frag",
+                    "a_model_albedo": "textures/proto/Red/texture_01.png",
+                    "a_model_transparent": false,
+                    "hitbox_health": 120.0,
+                    "vec3://ai_fire_offset": [
+                        1.559999942779541,
+                        0.0,
+                        -0.07000000029802322
+                    ]
+                }
+            ],
+            [
+                "test_chair_death_drone_31",
+                "sps_hitbox_ai",
+                {
+                    "vec3://t_pos": [
+                        -4.69743537902832,
+                        7.276731014251709,
+                        -3.7536182403564453
+                    ],
+                    "vec3://t_rot": [
+                        -90.0,
+                        0.0,
+                        0.0
+                    ],
+                    "vec3://t_scale": [
+                        0.1426348239183426,
+                        0.1426348239183426,
+                        0.1426348239183426
+                    ],
+                    "ai_type": "enemy_drone",
+                    "vec3://hitbox_scale": [
+                        2.630000114440918,
+                        3.3499999046325684,
+                        2.630000114440918
+                    ],
+                    "a_model_mesh": "models/crate.npz",
+                    "a_model_vshader": "shaders/base_cam.vert",
+                    "a_model_fshader": "shaders/unlit.frag",
+                    "a_model_albedo": "textures/proto/Red/texture_01.png",
+                    "a_model_transparent": false,
+                    "hitbox_health": 120.0,
+                    "vec3://ai_fire_offset": [
+                        1.559999942779541,
+                        0.0,
+                        -0.07000000029802322
+                    ]
+                }
+            ],
+            [
+                "test_chair_death_drone_32",
+                "sps_hitbox_ai",
+                {
+                    "vec3://t_pos": [
+                        -4.097435474395752,
+                        7.826730728149414,
+                        -3.7536182403564453
+                    ],
+                    "vec3://t_rot": [
+                        -90.0,
+                        0.0,
+                        0.0
+                    ],
+                    "vec3://t_scale": [
+                        0.1426348239183426,
+                        0.1426348239183426,
+                        0.1426348239183426
+                    ],
+                    "ai_type": "enemy_drone",
+                    "vec3://hitbox_scale": [
+                        2.630000114440918,
+                        3.3499999046325684,
+                        2.630000114440918
+                    ],
+                    "a_model_mesh": "models/crate.npz",
+                    "a_model_vshader": "shaders/base_cam.vert",
+                    "a_model_fshader": "shaders/unlit.frag",
+                    "a_model_albedo": "textures/proto/Red/texture_01.png",
+                    "a_model_transparent": false,
+                    "hitbox_health": 120.0,
+                    "vec3://ai_fire_offset": [
+                        1.559999942779541,
+                        0.0,
+                        -0.07000000029802322
+                    ]
+                }
+            ],
+            [
+                "test_chair_death_drone_33",
+                "sps_hitbox_ai",
+                {
+                    "vec3://t_pos": [
+                        -4.69743537902832,
+                        8.416730880737305,
+                        -3.7536182403564453
+                    ],
+                    "vec3://t_rot": [
+                        -90.0,
+                        0.0,
+                        0.0
+                    ],
+                    "vec3://t_scale": [
+                        0.1426348239183426,
+                        0.1426348239183426,
+                        0.1426348239183426
+                    ],
+                    "ai_type": "enemy_drone",
+                    "vec3://hitbox_scale": [
+                        2.630000114440918,
+                        3.3499999046325684,
+                        2.630000114440918
+                    ],
+                    "a_model_mesh": "models/crate.npz",
+                    "a_model_vshader": "shaders/base_cam.vert",
+                    "a_model_fshader": "shaders/unlit.frag",
+                    "a_model_albedo": "textures/proto/Red/texture_01.png",
+                    "a_model_transparent": false,
+                    "hitbox_health": 120.0,
+                    "vec3://ai_fire_offset": [
+                        1.559999942779541,
+                        0.0,
+                        -0.07000000029802322
+                    ]
+                }
+            ],
+            [
+                "test_chair_death_drone_34",
+                "sps_hitbox_ai",
+                {
+                    "vec3://t_pos": [
+                        -2.8824355602264404,
+                        7.826730728149414,
+                        -3.7536182403564453
+                    ],
+                    "vec3://t_rot": [
+                        -90.0,
+                        0.0,
+                        0.0
+                    ],
+                    "vec3://t_scale": [
+                        0.1426348239183426,
+                        0.1426348239183426,
+                        0.1426348239183426
+                    ],
+                    "ai_type": "enemy_drone",
+                    "vec3://hitbox_scale": [
+                        2.630000114440918,
+                        3.3499999046325684,
+                        2.630000114440918
+                    ],
+                    "a_model_mesh": "models/crate.npz",
+                    "a_model_vshader": "shaders/base_cam.vert",
+                    "a_model_fshader": "shaders/unlit.frag",
+                    "a_model_albedo": "textures/proto/Red/texture_01.png",
+                    "a_model_transparent": false,
+                    "hitbox_health": 120.0,
+                    "vec3://ai_fire_offset": [
+                        1.559999942779541,
+                        0.0,
+                        -0.07000000029802322
+                    ]
+                }
+            ],
+            [
+                "test_chair_death_drone_35",
+                "sps_hitbox_ai",
+                {
+                    "vec3://t_pos": [
+                        -4.69743537902832,
+                        7.826730728149414,
+                        -3.7536182403564453
+                    ],
+                    "vec3://t_rot": [
+                        -90.0,
+                        0.0,
+                        0.0
+                    ],
+                    "vec3://t_scale": [
+                        0.1426348239183426,
+                        0.1426348239183426,
+                        0.1426348239183426
+                    ],
+                    "ai_type": "enemy_drone",
+                    "vec3://hitbox_scale": [
+                        2.630000114440918,
+                        3.3499999046325684,
+                        2.630000114440918
+                    ],
+                    "a_model_mesh": "models/crate.npz",
+                    "a_model_vshader": "shaders/base_cam.vert",
+                    "a_model_fshader": "shaders/unlit.frag",
+                    "a_model_albedo": "textures/proto/Red/texture_01.png",
+                    "a_model_transparent": false,
+                    "hitbox_health": 120.0,
+                    "vec3://ai_fire_offset": [
+                        1.559999942779541,
+                        0.0,
+                        -0.07000000029802322
+                    ]
+                }
+            ],
+            [
+                "test_chair_death_drone_36",
+                "sps_hitbox_ai",
+                {
+                    "vec3://t_pos": [
+                        -3.482435464859009,
+                        7.276731014251709,
+                        -3.7536182403564453
+                    ],
+                    "vec3://t_rot": [
+                        -90.0,
+                        0.0,
+                        0.0
+                    ],
+                    "vec3://t_scale": [
+                        0.1426348239183426,
+                        0.1426348239183426,
+                        0.1426348239183426
+                    ],
+                    "ai_type": "enemy_drone",
+                    "vec3://hitbox_scale": [
+                        2.630000114440918,
+                        3.3499999046325684,
+                        2.630000114440918
+                    ],
+                    "a_model_mesh": "models/crate.npz",
+                    "a_model_vshader": "shaders/base_cam.vert",
+                    "a_model_fshader": "shaders/unlit.frag",
+                    "a_model_albedo": "textures/proto/Red/texture_01.png",
+                    "a_model_transparent": false,
+                    "hitbox_health": 120.0,
+                    "vec3://ai_fire_offset": [
+                        1.559999942779541,
+                        0.0,
+                        -0.07000000029802322
+                    ]
+                }
+            ],
+            [
+                "test_chair_death_drone_37",
+                "sps_hitbox_ai",
+                {
+                    "vec3://t_pos": [
+                        -4.097435474395752,
+                        8.416730880737305,
+                        -3.7536182403564453
+                    ],
+                    "vec3://t_rot": [
+                        -90.0,
+                        0.0,
+                        0.0
+                    ],
+                    "vec3://t_scale": [
+                        0.1426348239183426,
+                        0.1426348239183426,
+                        0.1426348239183426
+                    ],
+                    "ai_type": "enemy_drone",
+                    "vec3://hitbox_scale": [
+                        2.630000114440918,
+                        3.3499999046325684,
+                        2.630000114440918
+                    ],
+                    "a_model_mesh": "models/crate.npz",
+                    "a_model_vshader": "shaders/base_cam.vert",
+                    "a_model_fshader": "shaders/unlit.frag",
+                    "a_model_albedo": "textures/proto/Red/texture_01.png",
+                    "a_model_transparent": false,
+                    "hitbox_health": 120.0,
+                    "vec3://ai_fire_offset": [
+                        1.559999942779541,
+                        0.0,
+                        -0.07000000029802322
+                    ]
+                }
+            ],
+            [
+                "test_chair_death_drone_38",
+                "sps_hitbox_ai",
+                {
+                    "vec3://t_pos": [
+                        -4.097435474395752,
+                        6.686730861663818,
+                        -3.7536182403564453
+                    ],
+                    "vec3://t_rot": [
+                        -90.0,
+                        0.0,
+                        0.0
+                    ],
+                    "vec3://t_scale": [
+                        0.1426348239183426,
+                        0.1426348239183426,
+                        0.1426348239183426
+                    ],
+                    "ai_type": "enemy_drone",
+                    "vec3://hitbox_scale": [
+                        2.630000114440918,
+                        3.3499999046325684,
+                        2.630000114440918
+                    ],
+                    "a_model_mesh": "models/crate.npz",
+                    "a_model_vshader": "shaders/base_cam.vert",
+                    "a_model_fshader": "shaders/unlit.frag",
+                    "a_model_albedo": "textures/proto/Red/texture_01.png",
+                    "a_model_transparent": false,
+                    "hitbox_health": 120.0,
+                    "vec3://ai_fire_offset": [
+                        1.559999942779541,
+                        0.0,
+                        -0.07000000029802322
+                    ]
+                }
+            ],
+            [
+                "test_chair_death_drone_39",
+                "sps_hitbox_ai",
+                {
+                    "vec3://t_pos": [
+                        -2.8824355602264404,
+                        8.416730880737305,
+                        -3.7536182403564453
+                    ],
+                    "vec3://t_rot": [
+                        -90.0,
+                        0.0,
+                        0.0
+                    ],
+                    "vec3://t_scale": [
+                        0.1426348239183426,
+                        0.1426348239183426,
+                        0.1426348239183426
+                    ],
+                    "ai_type": "enemy_drone",
+                    "vec3://hitbox_scale": [
+                        2.630000114440918,
+                        3.3499999046325684,
+                        2.630000114440918
+                    ],
+                    "a_model_mesh": "models/crate.npz",
+                    "a_model_vshader": "shaders/base_cam.vert",
+                    "a_model_fshader": "shaders/unlit.frag",
+                    "a_model_albedo": "textures/proto/Red/texture_01.png",
+                    "a_model_transparent": false,
+                    "hitbox_health": 120.0,
+                    "vec3://ai_fire_offset": [
+                        1.559999942779541,
+                        0.0,
+                        -0.07000000029802322
+                    ]
+                }
+            ],
+            [
+                "test_chair_death_drone_40",
+                "sps_hitbox_ai",
+                {
+                    "vec3://t_pos": [
+                        -4.097435474395752,
+                        7.276731014251709,
+                        -3.7536182403564453
+                    ],
+                    "vec3://t_rot": [
+                        -90.0,
+                        0.0,
+                        0.0
+                    ],
+                    "vec3://t_scale": [
+                        0.1426348239183426,
+                        0.1426348239183426,
+                        0.1426348239183426
+                    ],
+                    "ai_type": "enemy_drone",
+                    "vec3://hitbox_scale": [
+                        2.630000114440918,
+                        3.3499999046325684,
+                        2.630000114440918
+                    ],
+                    "a_model_mesh": "models/crate.npz",
+                    "a_model_vshader": "shaders/base_cam.vert",
+                    "a_model_fshader": "shaders/unlit.frag",
+                    "a_model_albedo": "textures/proto/Red/texture_01.png",
+                    "a_model_transparent": false,
+                    "hitbox_health": 120.0,
+                    "vec3://ai_fire_offset": [
+                        1.559999942779541,
+                        0.0,
+                        -0.07000000029802322
+                    ]
+                }
+            ],
+            [
+                "test_chair_death_drone_41",
+                "sps_hitbox_ai",
+                {
+                    "vec3://t_pos": [
+                        -3.482435464859009,
+                        7.826730728149414,
+                        -3.7536182403564453
+                    ],
+                    "vec3://t_rot": [
+                        -90.0,
+                        0.0,
+                        0.0
+                    ],
+                    "vec3://t_scale": [
+                        0.1426348239183426,
+                        0.1426348239183426,
+                        0.1426348239183426
+                    ],
+                    "ai_type": "enemy_drone",
+                    "vec3://hitbox_scale": [
+                        2.630000114440918,
+                        3.3499999046325684,
+                        2.630000114440918
+                    ],
+                    "a_model_mesh": "models/crate.npz",
+                    "a_model_vshader": "shaders/base_cam.vert",
+                    "a_model_fshader": "shaders/unlit.frag",
+                    "a_model_albedo": "textures/proto/Red/texture_01.png",
+                    "a_model_transparent": false,
+                    "hitbox_health": 120.0,
+                    "vec3://ai_fire_offset": [
+                        1.559999942779541,
+                        0.0,
+                        -0.07000000029802322
+                    ]
+                }
+            ],
+            [
+                "test_chair_death_drone_42",
+                "sps_hitbox_ai",
+                {
+                    "vec3://t_pos": [
+                        -3.482435464859009,
+                        6.686730861663818,
+                        -3.7536182403564453
+                    ],
+                    "vec3://t_rot": [
+                        -90.0,
+                        0.0,
+                        0.0
+                    ],
+                    "vec3://t_scale": [
+                        0.1426348239183426,
+                        0.1426348239183426,
+                        0.1426348239183426
+                    ],
+                    "ai_type": "enemy_drone",
+                    "vec3://hitbox_scale": [
+                        2.630000114440918,
+                        3.3499999046325684,
+                        2.630000114440918
+                    ],
+                    "a_model_mesh": "models/crate.npz",
+                    "a_model_vshader": "shaders/base_cam.vert",
+                    "a_model_fshader": "shaders/unlit.frag",
+                    "a_model_albedo": "textures/proto/Red/texture_01.png",
+                    "a_model_transparent": false,
+                    "hitbox_health": 120.0,
+                    "vec3://ai_fire_offset": [
+                        1.559999942779541,
+                        0.0,
+                        -0.07000000029802322
+                    ]
+                }
+            ],
+            [
+                "test_chair_death_drone_43",
+                "sps_hitbox_ai",
+                {
+                    "vec3://t_pos": [
+                        -4.69743537902832,
+                        6.686730861663818,
+                        -3.7536182403564453
+                    ],
+                    "vec3://t_rot": [
+                        -90.0,
+                        0.0,
+                        0.0
+                    ],
+                    "vec3://t_scale": [
+                        0.1426348239183426,
+                        0.1426348239183426,
+                        0.1426348239183426
+                    ],
+                    "ai_type": "enemy_drone",
+                    "vec3://hitbox_scale": [
+                        2.630000114440918,
+                        3.3499999046325684,
+                        2.630000114440918
+                    ],
+                    "a_model_mesh": "models/crate.npz",
+                    "a_model_vshader": "shaders/base_cam.vert",
+                    "a_model_fshader": "shaders/unlit.frag",
+                    "a_model_albedo": "textures/proto/Red/texture_01.png",
+                    "a_model_transparent": false,
+                    "hitbox_health": 120.0,
+                    "vec3://ai_fire_offset": [
+                        1.559999942779541,
+                        0.0,
+                        -0.07000000029802322
+                    ]
+                }
+            ],
+            [
+                "test_chair_death_drone_44",
+                "sps_hitbox_ai",
+                {
+                    "vec3://t_pos": [
+                        -2.8824355602264404,
+                        7.276731014251709,
+                        -3.7536182403564453
+                    ],
+                    "vec3://t_rot": [
+                        -90.0,
+                        0.0,
+                        0.0
+                    ],
+                    "vec3://t_scale": [
+                        0.1426348239183426,
+                        0.1426348239183426,
+                        0.1426348239183426
+                    ],
+                    "ai_type": "enemy_drone",
+                    "vec3://hitbox_scale": [
+                        2.630000114440918,
+                        3.3499999046325684,
+                        2.630000114440918
+                    ],
+                    "a_model_mesh": "models/crate.npz",
+                    "a_model_vshader": "shaders/base_cam.vert",
+                    "a_model_fshader": "shaders/unlit.frag",
+                    "a_model_albedo": "textures/proto/Red/texture_01.png",
+                    "a_model_transparent": false,
+                    "hitbox_health": 120.0,
+                    "vec3://ai_fire_offset": [
+                        1.559999942779541,
+                        0.0,
+                        -0.07000000029802322
+                    ]
+                }
+            ],
+            [
+                "test_chair_death_drone_45",
+                "sps_hitbox_ai",
+                {
+                    "vec3://t_pos": [
+                        -2.8824355602264404,
+                        6.686730861663818,
+                        -3.7536182403564453
+                    ],
+                    "vec3://t_rot": [
+                        -90.0,
+                        0.0,
+                        0.0
+                    ],
+                    "vec3://t_scale": [
+                        0.1426348239183426,
+                        0.1426348239183426,
+                        0.1426348239183426
+                    ],
+                    "ai_type": "enemy_drone",
+                    "vec3://hitbox_scale": [
+                        2.630000114440918,
+                        3.3499999046325684,
+                        2.630000114440918
+                    ],
+                    "a_model_mesh": "models/crate.npz",
+                    "a_model_vshader": "shaders/base_cam.vert",
+                    "a_model_fshader": "shaders/unlit.frag",
+                    "a_model_albedo": "textures/proto/Red/texture_01.png",
+                    "a_model_transparent": false,
+                    "hitbox_health": 120.0,
+                    "vec3://ai_fire_offset": [
+                        1.559999942779541,
+                        0.0,
+                        -0.07000000029802322
+                    ]
+                }
+            ],
+            [
+                "test_chair_death_drone_46",
+                "sps_hitbox_ai",
+                {
+                    "vec3://t_pos": [
+                        -3.482435464859009,
+                        8.416730880737305,
+                        -3.7536182403564453
+                    ],
+                    "vec3://t_rot": [
+                        -90.0,
+                        0.0,
+                        0.0
+                    ],
+                    "vec3://t_scale": [
+                        0.1426348239183426,
+                        0.1426348239183426,
+                        0.1426348239183426
+                    ],
+                    "ai_type": "enemy_drone",
+                    "vec3://hitbox_scale": [
+                        2.630000114440918,
+                        3.3499999046325684,
+                        2.630000114440918
+                    ],
+                    "a_model_mesh": "models/crate.npz",
+                    "a_model_vshader": "shaders/base_cam.vert",
+                    "a_model_fshader": "shaders/unlit.frag",
+                    "a_model_albedo": "textures/proto/Red/texture_01.png",
+                    "a_model_transparent": false,
+                    "hitbox_health": 120.0,
+                    "vec3://ai_fire_offset": [
+                        1.559999942779541,
+                        0.0,
+                        -0.07000000029802322
+                    ]
+                }
+            ],
+            [
+                "test_chair_death_drone_47",
+                "sps_hitbox_ai",
+                {
+                    "vec3://t_pos": [
+                        -2.8824355602264404,
+                        8.416730880737305,
+                        -3.203618288040161
+                    ],
+                    "vec3://t_rot": [
+                        -90.0,
+                        0.0,
+                        0.0
+                    ],
+                    "vec3://t_scale": [
+                        0.1426348239183426,
+                        0.1426348239183426,
+                        0.1426348239183426
+                    ],
+                    "ai_type": "enemy_drone",
+                    "vec3://hitbox_scale": [
+                        2.630000114440918,
+                        3.3499999046325684,
+                        2.630000114440918
+                    ],
+                    "a_model_mesh": "models/crate.npz",
+                    "a_model_vshader": "shaders/base_cam.vert",
+                    "a_model_fshader": "shaders/unlit.frag",
+                    "a_model_albedo": "textures/proto/Red/texture_01.png",
+                    "a_model_transparent": false,
+                    "hitbox_health": 120.0,
+                    "vec3://ai_fire_offset": [
+                        1.559999942779541,
+                        0.0,
+                        -0.07000000029802322
+                    ]
+                }
+            ],
+            [
+                "test_chair_death_drone_48",
+                "sps_hitbox_ai",
+                {
+                    "vec3://t_pos": [
+                        -3.482435464859009,
+                        7.276731014251709,
+                        -3.203618288040161
+                    ],
+                    "vec3://t_rot": [
+                        -90.0,
+                        0.0,
+                        0.0
+                    ],
+                    "vec3://t_scale": [
+                        0.1426348239183426,
+                        0.1426348239183426,
+                        0.1426348239183426
+                    ],
+                    "ai_type": "enemy_drone",
+                    "vec3://hitbox_scale": [
+                        2.630000114440918,
+                        3.3499999046325684,
+                        2.630000114440918
+                    ],
+                    "a_model_mesh": "models/crate.npz",
+                    "a_model_vshader": "shaders/base_cam.vert",
+                    "a_model_fshader": "shaders/unlit.frag",
+                    "a_model_albedo": "textures/proto/Red/texture_01.png",
+                    "a_model_transparent": false,
+                    "hitbox_health": 120.0,
+                    "vec3://ai_fire_offset": [
+                        1.559999942779541,
+                        0.0,
+                        -0.07000000029802322
+                    ]
+                }
+            ],
+            [
+                "test_chair_death_drone_49",
+                "sps_hitbox_ai",
+                {
+                    "vec3://t_pos": [
+                        -4.69743537902832,
+                        7.276731014251709,
+                        -3.203618288040161
+                    ],
+                    "vec3://t_rot": [
+                        -90.0,
+                        0.0,
+                        0.0
+                    ],
+                    "vec3://t_scale": [
+                        0.1426348239183426,
+                        0.1426348239183426,
+                        0.1426348239183426
+                    ],
+                    "ai_type": "enemy_drone",
+                    "vec3://hitbox_scale": [
+                        2.630000114440918,
+                        3.3499999046325684,
+                        2.630000114440918
+                    ],
+                    "a_model_mesh": "models/crate.npz",
+                    "a_model_vshader": "shaders/base_cam.vert",
+                    "a_model_fshader": "shaders/unlit.frag",
+                    "a_model_albedo": "textures/proto/Red/texture_01.png",
+                    "a_model_transparent": false,
+                    "hitbox_health": 120.0,
+                    "vec3://ai_fire_offset": [
+                        1.559999942779541,
+                        0.0,
+                        -0.07000000029802322
+                    ]
+                }
+            ],
+            [
+                "test_chair_death_drone_50",
+                "sps_hitbox_ai",
+                {
+                    "vec3://t_pos": [
+                        -3.482435464859009,
+                        6.686730861663818,
+                        -3.203618288040161
+                    ],
+                    "vec3://t_rot": [
+                        -90.0,
+                        0.0,
+                        0.0
+                    ],
+                    "vec3://t_scale": [
+                        0.1426348239183426,
+                        0.1426348239183426,
+                        0.1426348239183426
+                    ],
+                    "ai_type": "enemy_drone",
+                    "vec3://hitbox_scale": [
+                        2.630000114440918,
+                        3.3499999046325684,
+                        2.630000114440918
+                    ],
+                    "a_model_mesh": "models/crate.npz",
+                    "a_model_vshader": "shaders/base_cam.vert",
+                    "a_model_fshader": "shaders/unlit.frag",
+                    "a_model_albedo": "textures/proto/Red/texture_01.png",
+                    "a_model_transparent": false,
+                    "hitbox_health": 120.0,
+                    "vec3://ai_fire_offset": [
+                        1.559999942779541,
+                        0.0,
+                        -0.07000000029802322
+                    ]
+                }
+            ],
+            [
+                "test_chair_death_drone_51",
+                "sps_hitbox_ai",
+                {
+                    "vec3://t_pos": [
+                        -4.69743537902832,
+                        8.416730880737305,
+                        -3.203618288040161
+                    ],
+                    "vec3://t_rot": [
+                        -90.0,
+                        0.0,
+                        0.0
+                    ],
+                    "vec3://t_scale": [
+                        0.1426348239183426,
+                        0.1426348239183426,
+                        0.1426348239183426
+                    ],
+                    "ai_type": "enemy_drone",
+                    "vec3://hitbox_scale": [
+                        2.630000114440918,
+                        3.3499999046325684,
+                        2.630000114440918
+                    ],
+                    "a_model_mesh": "models/crate.npz",
+                    "a_model_vshader": "shaders/base_cam.vert",
+                    "a_model_fshader": "shaders/unlit.frag",
+                    "a_model_albedo": "textures/proto/Red/texture_01.png",
+                    "a_model_transparent": false,
+                    "hitbox_health": 120.0,
+                    "vec3://ai_fire_offset": [
+                        1.559999942779541,
+                        0.0,
+                        -0.07000000029802322
+                    ]
+                }
+            ],
+            [
+                "test_chair_death_drone_52",
+                "sps_hitbox_ai",
+                {
+                    "vec3://t_pos": [
+                        -2.8824355602264404,
+                        7.826730728149414,
+                        -3.203618288040161
+                    ],
+                    "vec3://t_rot": [
+                        -90.0,
+                        0.0,
+                        0.0
+                    ],
+                    "vec3://t_scale": [
+                        0.1426348239183426,
+                        0.1426348239183426,
+                        0.1426348239183426
+                    ],
+                    "ai_type": "enemy_drone",
+                    "vec3://hitbox_scale": [
+                        2.630000114440918,
+                        3.3499999046325684,
+                        2.630000114440918
+                    ],
+                    "a_model_mesh": "models/crate.npz",
+                    "a_model_vshader": "shaders/base_cam.vert",
+                    "a_model_fshader": "shaders/unlit.frag",
+                    "a_model_albedo": "textures/proto/Red/texture_01.png",
+                    "a_model_transparent": false,
+                    "hitbox_health": 120.0,
+                    "vec3://ai_fire_offset": [
+                        1.559999942779541,
+                        0.0,
+                        -0.07000000029802322
+                    ]
+                }
+            ],
+            [
+                "test_chair_death_drone_53",
+                "sps_hitbox_ai",
+                {
+                    "vec3://t_pos": [
+                        -2.8824355602264404,
+                        7.276731014251709,
+                        -3.203618288040161
+                    ],
+                    "vec3://t_rot": [
+                        -90.0,
+                        0.0,
+                        0.0
+                    ],
+                    "vec3://t_scale": [
+                        0.1426348239183426,
+                        0.1426348239183426,
+                        0.1426348239183426
+                    ],
+                    "ai_type": "enemy_drone",
+                    "vec3://hitbox_scale": [
+                        2.630000114440918,
+                        3.3499999046325684,
+                        2.630000114440918
+                    ],
+                    "a_model_mesh": "models/crate.npz",
+                    "a_model_vshader": "shaders/base_cam.vert",
+                    "a_model_fshader": "shaders/unlit.frag",
+                    "a_model_albedo": "textures/proto/Red/texture_01.png",
+                    "a_model_transparent": false,
+                    "hitbox_health": 120.0,
+                    "vec3://ai_fire_offset": [
+                        1.559999942779541,
+                        0.0,
+                        -0.07000000029802322
+                    ]
+                }
+            ],
+            [
+                "test_chair_death_drone_54",
+                "sps_hitbox_ai",
+                {
+                    "vec3://t_pos": [
+                        -3.482435464859009,
+                        8.416730880737305,
+                        -3.203618288040161
+                    ],
+                    "vec3://t_rot": [
+                        -90.0,
+                        0.0,
+                        0.0
+                    ],
+                    "vec3://t_scale": [
+                        0.1426348239183426,
+                        0.1426348239183426,
+                        0.1426348239183426
+                    ],
+                    "ai_type": "enemy_drone",
+                    "vec3://hitbox_scale": [
+                        2.630000114440918,
+                        3.3499999046325684,
+                        2.630000114440918
+                    ],
+                    "a_model_mesh": "models/crate.npz",
+                    "a_model_vshader": "shaders/base_cam.vert",
+                    "a_model_fshader": "shaders/unlit.frag",
+                    "a_model_albedo": "textures/proto/Red/texture_01.png",
+                    "a_model_transparent": false,
+                    "hitbox_health": 120.0,
+                    "vec3://ai_fire_offset": [
+                        1.559999942779541,
+                        0.0,
+                        -0.07000000029802322
+                    ]
+                }
+            ],
+            [
+                "test_chair_death_drone_55",
+                "sps_hitbox_ai",
+                {
+                    "vec3://t_pos": [
+                        -4.097435474395752,
+                        7.276731014251709,
+                        -3.203618288040161
+                    ],
+                    "vec3://t_rot": [
+                        -90.0,
+                        0.0,
+                        0.0
+                    ],
+                    "vec3://t_scale": [
+                        0.1426348239183426,
+                        0.1426348239183426,
+                        0.1426348239183426
+                    ],
+                    "ai_type": "enemy_drone",
+                    "vec3://hitbox_scale": [
+                        2.630000114440918,
+                        3.3499999046325684,
+                        2.630000114440918
+                    ],
+                    "a_model_mesh": "models/crate.npz",
+                    "a_model_vshader": "shaders/base_cam.vert",
+                    "a_model_fshader": "shaders/unlit.frag",
+                    "a_model_albedo": "textures/proto/Red/texture_01.png",
+                    "a_model_transparent": false,
+                    "hitbox_health": 120.0,
+                    "vec3://ai_fire_offset": [
+                        1.559999942779541,
+                        0.0,
+                        -0.07000000029802322
+                    ]
+                }
+            ],
+            [
+                "test_chair_death_drone_56",
+                "sps_hitbox_ai",
+                {
+                    "vec3://t_pos": [
+                        -4.097435474395752,
+                        8.416730880737305,
+                        -3.203618288040161
+                    ],
+                    "vec3://t_rot": [
+                        -90.0,
+                        0.0,
+                        0.0
+                    ],
+                    "vec3://t_scale": [
+                        0.1426348239183426,
+                        0.1426348239183426,
+                        0.1426348239183426
+                    ],
+                    "ai_type": "enemy_drone",
+                    "vec3://hitbox_scale": [
+                        2.630000114440918,
+                        3.3499999046325684,
+                        2.630000114440918
+                    ],
+                    "a_model_mesh": "models/crate.npz",
+                    "a_model_vshader": "shaders/base_cam.vert",
+                    "a_model_fshader": "shaders/unlit.frag",
+                    "a_model_albedo": "textures/proto/Red/texture_01.png",
+                    "a_model_transparent": false,
+                    "hitbox_health": 120.0,
+                    "vec3://ai_fire_offset": [
+                        1.559999942779541,
+                        0.0,
+                        -0.07000000029802322
+                    ]
+                }
+            ],
+            [
+                "test_chair_death_drone_57",
+                "sps_hitbox_ai",
+                {
+                    "vec3://t_pos": [
+                        -4.69743537902832,
+                        7.826730728149414,
+                        -3.203618288040161
+                    ],
+                    "vec3://t_rot": [
+                        -90.0,
+                        0.0,
+                        0.0
+                    ],
+                    "vec3://t_scale": [
+                        0.1426348239183426,
+                        0.1426348239183426,
+                        0.1426348239183426
+                    ],
+                    "ai_type": "enemy_drone",
+                    "vec3://hitbox_scale": [
+                        2.630000114440918,
+                        3.3499999046325684,
+                        2.630000114440918
+                    ],
+                    "a_model_mesh": "models/crate.npz",
+                    "a_model_vshader": "shaders/base_cam.vert",
+                    "a_model_fshader": "shaders/unlit.frag",
+                    "a_model_albedo": "textures/proto/Red/texture_01.png",
+                    "a_model_transparent": false,
+                    "hitbox_health": 120.0,
+                    "vec3://ai_fire_offset": [
+                        1.559999942779541,
+                        0.0,
+                        -0.07000000029802322
+                    ]
+                }
+            ],
+            [
+                "test_chair_death_drone_58",
+                "sps_hitbox_ai",
+                {
+                    "vec3://t_pos": [
+                        -4.097435474395752,
+                        6.686730861663818,
+                        -3.203618288040161
+                    ],
+                    "vec3://t_rot": [
+                        -90.0,
+                        0.0,
+                        0.0
+                    ],
+                    "vec3://t_scale": [
+                        0.1426348239183426,
+                        0.1426348239183426,
+                        0.1426348239183426
+                    ],
+                    "ai_type": "enemy_drone",
+                    "vec3://hitbox_scale": [
+                        2.630000114440918,
+                        3.3499999046325684,
+                        2.630000114440918
+                    ],
+                    "a_model_mesh": "models/crate.npz",
+                    "a_model_vshader": "shaders/base_cam.vert",
+                    "a_model_fshader": "shaders/unlit.frag",
+                    "a_model_albedo": "textures/proto/Red/texture_01.png",
+                    "a_model_transparent": false,
+                    "hitbox_health": 120.0,
+                    "vec3://ai_fire_offset": [
+                        1.559999942779541,
+                        0.0,
+                        -0.07000000029802322
+                    ]
+                }
+            ],
+            [
+                "test_chair_death_drone_59",
+                "sps_hitbox_ai",
+                {
+                    "vec3://t_pos": [
+                        -4.097435474395752,
+                        7.826730728149414,
+                        -3.203618288040161
+                    ],
+                    "vec3://t_rot": [
+                        -90.0,
+                        0.0,
+                        0.0
+                    ],
+                    "vec3://t_scale": [
+                        0.1426348239183426,
+                        0.1426348239183426,
+                        0.1426348239183426
+                    ],
+                    "ai_type": "enemy_drone",
+                    "vec3://hitbox_scale": [
+                        2.630000114440918,
+                        3.3499999046325684,
+                        2.630000114440918
+                    ],
+                    "a_model_mesh": "models/crate.npz",
+                    "a_model_vshader": "shaders/base_cam.vert",
+                    "a_model_fshader": "shaders/unlit.frag",
+                    "a_model_albedo": "textures/proto/Red/texture_01.png",
+                    "a_model_transparent": false,
+                    "hitbox_health": 120.0,
+                    "vec3://ai_fire_offset": [
+                        1.559999942779541,
+                        0.0,
+                        -0.07000000029802322
+                    ]
+                }
+            ],
+            [
+                "test_chair_death_drone_60",
+                "sps_hitbox_ai",
+                {
+                    "vec3://t_pos": [
+                        -2.8824355602264404,
+                        6.686730861663818,
+                        -3.203618288040161
+                    ],
+                    "vec3://t_rot": [
+                        -90.0,
+                        0.0,
+                        0.0
+                    ],
+                    "vec3://t_scale": [
+                        0.1426348239183426,
+                        0.1426348239183426,
+                        0.1426348239183426
+                    ],
+                    "ai_type": "enemy_drone",
+                    "vec3://hitbox_scale": [
+                        2.630000114440918,
+                        3.3499999046325684,
+                        2.630000114440918
+                    ],
+                    "a_model_mesh": "models/crate.npz",
+                    "a_model_vshader": "shaders/base_cam.vert",
+                    "a_model_fshader": "shaders/unlit.frag",
+                    "a_model_albedo": "textures/proto/Red/texture_01.png",
+                    "a_model_transparent": false,
+                    "hitbox_health": 120.0,
+                    "vec3://ai_fire_offset": [
+                        1.559999942779541,
+                        0.0,
+                        -0.07000000029802322
+                    ]
+                }
+            ],
+            [
+                "test_chair_death_drone_61",
+                "sps_hitbox_ai",
+                {
+                    "vec3://t_pos": [
+                        -4.69743537902832,
+                        6.686730861663818,
+                        -3.203618288040161
+                    ],
+                    "vec3://t_rot": [
+                        -90.0,
+                        0.0,
+                        0.0
+                    ],
+                    "vec3://t_scale": [
+                        0.1426348239183426,
+                        0.1426348239183426,
+                        0.1426348239183426
+                    ],
+                    "ai_type": "enemy_drone",
+                    "vec3://hitbox_scale": [
+                        2.630000114440918,
+                        3.3499999046325684,
+                        2.630000114440918
+                    ],
+                    "a_model_mesh": "models/crate.npz",
+                    "a_model_vshader": "shaders/base_cam.vert",
+                    "a_model_fshader": "shaders/unlit.frag",
+                    "a_model_albedo": "textures/proto/Red/texture_01.png",
+                    "a_model_transparent": false,
+                    "hitbox_health": 120.0,
+                    "vec3://ai_fire_offset": [
+                        1.559999942779541,
+                        0.0,
+                        -0.07000000029802322
+                    ]
+                }
+            ],
+            [
+                "test_chair_death_drone_62",
+                "sps_hitbox_ai",
+                {
+                    "vec3://t_pos": [
+                        -3.482435464859009,
+                        7.826730728149414,
+                        -3.203618288040161
+                    ],
+                    "vec3://t_rot": [
+                        -90.0,
+                        0.0,
+                        0.0
+                    ],
+                    "vec3://t_scale": [
+                        0.1426348239183426,
+                        0.1426348239183426,
+                        0.1426348239183426
+                    ],
+                    "ai_type": "enemy_drone",
+                    "vec3://hitbox_scale": [
+                        2.630000114440918,
+                        3.3499999046325684,
+                        2.630000114440918
+                    ],
+                    "a_model_mesh": "models/crate.npz",
+                    "a_model_vshader": "shaders/base_cam.vert",
+                    "a_model_fshader": "shaders/unlit.frag",
+                    "a_model_albedo": "textures/proto/Red/texture_01.png",
+                    "a_model_transparent": false,
+                    "hitbox_health": 120.0,
+                    "vec3://ai_fire_offset": [
+                        1.559999942779541,
+                        0.0,
+                        -0.07000000029802322
+                    ]
                 }
             ]
         ]

@@ -8,6 +8,7 @@ if TYPE_CHECKING:
     from engine.cue.phys.cue_phys_scene import PhysScene, PhysAABB
     from sps_post_pass import BloomPostPass, TonemapPostPass
     from entity.sps_nav_node import SpsNavNode
+    from entity.sps_view_mesh import SpsViewMesh
 
 # a shared state for the entire game, mostly for player <-> enemy interaction code
 
@@ -19,9 +20,12 @@ class SpsState:
     p_hitbox: 'PhysAABB'
 
     p_health: int
+    
     p_ammo: int
+    p_ammo_regen_cooldown: float
 
     p_selected_weapon: int | None = None
+    p_hud_view_mesh: 'SpsViewMesh'
     p_hud_ui: 'GameUI | MenuUI | None'
 
     p_death_timestamp: float
@@ -29,8 +33,6 @@ class SpsState:
     tonemap_post_pass: 'TonemapPostPass'
 
     # == enemy and damage system ==
-
-    
 
     active_nav_nodes: list['SpsNavNode']
     hitbox_scene: 'PhysScene'

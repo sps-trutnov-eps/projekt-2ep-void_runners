@@ -68,7 +68,7 @@ class SpsProjectile:
         return SpsProjectile(en_data)
 
     def despawn(self) -> None:
-        self.mesh_renderer.hide() # hide until this class gets garbage collected
+        self.mesh_renderer.despawn()
 
     @staticmethod
     def dev_tick(s: dict | None, dev_state: en.DevTickState, en_data: dict) -> dict:
