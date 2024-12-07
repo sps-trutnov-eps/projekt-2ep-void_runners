@@ -2,12 +2,12 @@
     "cmf_ver": 2,
     "cmf_header": {
         "type_list": [
-            "sps_hitbox_ai",
-            "bt_static_mesh",
             "sps_nav_node",
-            "sps_dev_text",
             "bt_phys_aabb",
-            "sps_player_spawn"
+            "sps_hitbox_ai",
+            "sps_player_spawn",
+            "sps_dev_text",
+            "bt_static_mesh"
         ],
         "asset_list": []
     },
@@ -3099,7 +3099,7 @@
                     ],
                     "ai_type": "enemy_drone",
                     "vec3://ai_fire_offset": [
-                        0.0,
+                        2.119999885559082,
                         0.0,
                         -0.5
                     ],

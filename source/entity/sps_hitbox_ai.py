@@ -15,6 +15,7 @@ from engine.cue.rendering.cue_resources import GPUMesh
 from engine.cue.phys.cue_phys_types import PhysAABB, PhysRay, EPSILON
 
 from components.line_renderer import LineRenderer
+from components.fire_emitter import FireEmitter
 from sps_state import SpsState
 import prefabs
 
@@ -57,6 +58,7 @@ class SpsHitboxAi:
     DRONE_NAVIG_MAX_STUCK_TIME = 1.5
 
     DRONE_NAVIG_PLAYER_AVOIDANCE = 15. # how much to avoid flying into the player
+    DRONE_NAVIG_MAX_DIST_FROM_TARGET = 15.
 
     def __init__(self, en_data: dict) -> None:
         self.hitbox_health = en_data["hitbox_health"]
@@ -77,6 +79,10 @@ class SpsHitboxAi:
         self.ai_overlay_rot = en_data["t_rot"]
         self.ai_last_update = GameState.current_time
 
+        self.ai_fire_end_time = 0.
+        self.ai_fire_damage_cooldown = 0.
+        self.ai_fire_emitter = FireEmitter()
+
         if self.ai_type == 0:
             self.tr_initial_view_dir = Vec3(0., 0., 1.)
             self.tr_view_dir = Vec3(self.tr_initial_view_dir)
@@ -94,9 +100,12 @@ class SpsHitboxAi:
 
             laser_data = {
                 "a_model_vshader": "shaders/line_segment.vert",
-                "a_model_fshader": "shaders/unlit.frag",
+                "a_model_fshader": "shaders/emit_surf.frag",
                 "a_model_albedo": "textures/def_white.png",
                 "a_model_transparent": True,
+                "a_model_uniforms": {
+                    "emit_power": 8.
+                }
             }
 
             # note: using ai transform which may be far from the laser mesh itself, this may cause wrong draw ordering and transparency artifacts but good enough
@@ -114,7 +123,7 @@ class SpsHitboxAi:
             self.dr_nav_margin_cooldown = GameState.current_time
 
             self.dr_last_non_stuck_time = GameState.current_time
-            self.dr_stuck = False
+            self.dr_re_navig = False
 
             seq.after(random.uniform(0., .5), self.update_ai_enemy_drone)
         
@@ -127,6 +136,17 @@ class SpsHitboxAi:
             return # despawned
 
         self.ai_fire_pos = Vec3(*(self.ai_trans._trans_matrix @ self.ai_fire_offset)[0:3])
+
+        if self.ai_fire_end_time < GameState.current_time:
+            self.ai_fire_emitter.set_on_fire(False)
+
+        elif GameState.current_time - self.ai_fire_damage_cooldown > .5:
+            self.ai_fire_damage_cooldown = GameState.current_time
+            self.on_damage(2, self.ai_trans._pos)
+
+        self.ai_fire_emitter.set_origin(self.ai_trans._pos)
+
+        # ai type ticks
 
         if self.ai_type == 0:
             self.tick_enemy_turret()
@@ -143,8 +163,13 @@ class SpsHitboxAi:
             return # entity despawned already, this case should be unreachable, but it happens anyway... 
 
         if self.hitbox_health <= 0:
-            # TODO: spawn particle debris
+            if self.ai_type == 0:
+                debris_data = prefabs.load_prefab(self.local_name, "prefabs/turret_debris.json")
+                debris_data[0][2]["t_pos"] = self.ai_trans._pos
 
+                prefabs.spawn_prefab(debris_data)
+
+            self.ai_fire_emitter.set_on_fire(False)
             GameState.entity_storage.despawn(self.local_name)
             self.local_name = None
 
@@ -158,6 +183,13 @@ class SpsHitboxAi:
     def on_force(self, active_force: Vec3) -> None:
         if self.ai_type == 1:
             self.dr_vel += active_force * GameState.delta_time
+
+    def set_fire(self, fire_lifetime: float) -> None:
+        if self.local_name is None:
+            return # entity despawned already, this case should be unreachable, but it happens anyway... 
+
+        self.ai_fire_end_time = GameState.current_time + fire_lifetime
+        self.ai_fire_emitter.set_on_fire(True)
 
     # == ai impls ==
 
@@ -407,9 +439,19 @@ class SpsHitboxAi:
         else:
             self.ai_agro_level = max(0., self.ai_agro_level - self.AI_ARGO_DECAY * (GameState.current_time - self.ai_last_update))
 
+        # check if target pos is still valid / usefull
+
+        if is_visible and not self.dr_nav_target_is_player:
+            # override target dir to player if seen
+            self._dr_navigate(SpsState.p_active_controller.p_pos, True)
+
+        elif self.ai_agro_level > 0. and (self.ai_target_last_seen_pos - self.dr_nav_target_pos).length_squared() > self.DRONE_NAVIG_MAX_DIST_FROM_TARGET ** 2:
+            # target pos if too far from target already, renavig
+            self.dr_re_navig = True
+
         # set travel target pos
 
-        if (self.dr_nav_target_pos - self.ai_trans._pos).length_squared() < self.DRONE_NAVIG_TARGET_MARGIN ** 2 or self.dr_stuck: # retarget when arrived at target
+        if (self.dr_nav_target_pos - self.ai_trans._pos).length_squared() < self.DRONE_NAVIG_TARGET_MARGIN ** 2 or self.dr_re_navig: # retarget when arrived at target
             if GameState.current_time - self.dr_nav_margin_cooldown > self.DRONE_NAVIG_NEXT_TARGET_COOLDOWN: # retarget only after some time near the target
                 # TODO: visible target pos when no-approaching (as by ai_manager) 
 
@@ -452,18 +494,14 @@ class SpsHitboxAi:
             self.dr_nav_margin_cooldown = GameState.current_time
             idling_at_target = False
 
-        if is_visible and not self.dr_nav_target_is_player:
-            # override target dir to player if seen
-            self._dr_navigate(SpsState.p_active_controller.p_pos, True)
-
         # stuck detection
 
         if self.dr_vel.length_squared() > .05 or idling_at_target:
             self.dr_last_non_stuck_time = GameState.current_time
-            self.dr_stuck = False
+            self.dr_re_navig = False
 
         if GameState.current_time - self.dr_last_non_stuck_time > self.DRONE_NAVIG_MAX_STUCK_TIME:
-            self.dr_stuck = True
+            self.dr_re_navig = True
 
         self.ai_last_update = GameState.current_time
         seq.after(1 / self.AI_UPDATE_RATE, self.update_ai_enemy_drone)
@@ -591,6 +629,10 @@ class SpsHitboxAi:
     ai_target_last_seen_time: float
     ai_last_update: float
 
+    ai_fire_end_time: float
+    ai_fire_damage_cooldown: float
+    ai_fire_emitter: FireEmitter
+
     # turret vars
 
     tr_view_dir: Vec3
@@ -617,7 +659,7 @@ class SpsHitboxAi:
     dr_nav_nodes_to_travel: list[int] # nav nodes in a queue to nav to the desired pos
     dr_nav_margin_cooldown: float
     
-    dr_stuck: bool
+    dr_re_navig: bool
     dr_last_non_stuck_time: float
 
     local_name: str | None

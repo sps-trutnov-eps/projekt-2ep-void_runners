@@ -29,7 +29,7 @@ class SpsHurtTrigger:
 
     def on_triggered(self) -> None:
         if self.hurt_interval == 0.:
-            player.p_death()
+            player.p_kill()
             return
 
         if time.perf_counter() - self.last_damage_time > self.hurt_interval:

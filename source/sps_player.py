@@ -7,7 +7,7 @@ from engine.cue import cue_map
 from engine.cue.phys.cue_phys_types import PhysAABB
 
 from sps_state import SpsState
-from sps_weapons import FdevImpl, GlockImpl
+from sps_weapons import FdevImpl, GlockImpl, FlameImpl
 
 from pygame.math import Vector3 as Vec3
 import pygame as pg
@@ -23,7 +23,7 @@ def p_respawn_cb(e) -> None:
     else:
         seq.on_event(pg.KEYDOWN, p_respawn_cb) # too early, wait for another key later
 
-def p_death() -> None:
+def p_on_death() -> None:
     SpsState.p_health = 0
 
     SpsState.p_active_controller.movement_disabled = True
@@ -43,10 +43,16 @@ def p_take_damage(damage_value: int): #, damage_dir: Vec3) -> None:
     SpsState.p_health -= damage_value
 
     if SpsState.p_health <= 0:
-        p_death()
+        p_on_death()
         return
 
     # TODO: damage indicator view overlay
+
+def p_kill():
+    if SpsState.p_health == 0:
+        return # already dead
+    
+    p_on_death()
 
 # an empty class to attach to the hitbox PhysAABB
 class PlayerHitboxShim:
@@ -58,6 +64,9 @@ class PlayerHitboxShim:
 
     def on_force(self, active_force: Vec3) -> None:
         SpsState.p_active_controller.p_vel += active_force * GameState.delta_time
+
+    def set_fire(self, fire_lifetime: float) -> None:
+        pass # just ignore..
 
 def p_setup():
     if os.path.basename(GameState.current_map) == "main_menu.json":
@@ -73,7 +82,7 @@ def p_setup():
     SpsState.p_hitbox = PhysAABB.make(SpsState.p_active_controller.p_pos + Vec3(0., SpsState.p_active_controller.PLAYER_SIZE.y / 2, 0.), SpsState.p_active_controller.PLAYER_SIZE, PlayerHitboxShim())
     SpsState.hitbox_scene.add_coll(SpsState.p_hitbox)
 
-    SpsState.p_weapon_impl = GlockImpl()
+    SpsState.p_weapon_impl = FlameImpl()
 
     seq.next(p_tick)
 

@@ -102,7 +102,7 @@ def nodmg_cmd(args: list[str]):
 
 utils.add_dev_command("nodmg", nodmg_cmd)
 
-# == vis_sub cmd ==
+# == phys_vis_sub cmd ==
 
 def vis_sub_cmd(args: list[str]):
     if len(args) == 0:
@@ -120,7 +120,7 @@ def vis_sub_cmd(args: list[str]):
     else:
         utils.error("[dev utils] unknown args")
 
-utils.add_dev_command("vis_sub", vis_sub_cmd)
+utils.add_dev_command("phys_vis_sub", vis_sub_cmd)
 
 # == ai_invis cmd ==
 

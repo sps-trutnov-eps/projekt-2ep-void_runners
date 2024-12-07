@@ -1,5 +1,5 @@
 from engine.cue.rendering import cue_scene as sc
-from engine.cue import cue_utils as utils, cue_sequence as seq
+from engine.cue import cue_utils as utils
 
 from engine.cue.rendering.cue_batch import DrawInstance, UniformBindTypes, UniformBind
 from engine.cue.cue_state import GameState
@@ -10,13 +10,13 @@ import numpy as np
 import OpenGL.GL as gl 
 from pygame.math import Vector3 as Vec3, Vector2 as Vec2
 
-# a simple billboard line renderer component, based of the ModelRenderer
+# a simple crude point mesh particle renderer helper
 
-class LineRenderer:
-    def __init__(self, en_data: dict, line_mesh: GPUMesh, initial_line_width: float, en_trans: Transform, target_scene: 'sc.RenderScene | None' = None) -> None:
+class ParticleRenderer:
+    def __init__(self, en_data: dict, point_mesh: GPUMesh, en_trans: Transform | None, target_scene: 'sc.RenderScene | None' = None) -> None:
         # load assets from preload or disk
         
-        self.mesh = line_mesh
+        self.mesh = point_mesh
         self.pipeline = GameState.asset_manager.load_shader(en_data["a_model_vshader"], en_data["a_model_fshader"])
 
         self.model_textures = tuple()
@@ -24,11 +24,6 @@ class LineRenderer:
             self.model_textures = (GameState.asset_manager.load_texture(en_data["a_model_albedo"]),)
 
         self.shader_uniform_data = []
-        self.line_width = initial_line_width
-
-        # add line uniforms
-        self.shader_uniform_data.append(UniformBind(UniformBindTypes.FLOAT3, gl.glGetUniformLocation(self.pipeline.shader_program, "cam_pos"), np.array([0., 0., 0.], dtype=np.float32)))
-        self.shader_uniform_data.append(UniformBind(UniformBindTypes.FLOAT1, gl.glGetUniformLocation(self.pipeline.shader_program, "line_width"), np.float32(initial_line_width)))
 
         if "a_model_uniforms" in en_data:
             for n, v in en_data["a_model_uniforms"].items():
@@ -63,7 +58,7 @@ class LineRenderer:
             target_scene = GameState.active_scene
 
         self.scene = target_scene
-        self.draw_ins = DrawInstance(self.mesh, self.pipeline, self.model_textures, self.model_opaque, self.shader_uniform_data, en_trans, LineRenderer._setup_batch, LineRenderer._restore_gl_state, )
+        self.draw_ins = DrawInstance(self.mesh, self.pipeline, self.model_textures, self.model_opaque, self.shader_uniform_data, en_trans, ParticleRenderer._setup_particle_batch, ParticleRenderer._restore_gl_state, gl.GL_POINTS)
         self.model_transform = en_trans
 
         # insert model into the render_scene
@@ -71,29 +66,23 @@ class LineRenderer:
         self.is_visible = False
         self.show()
 
-        seq.next(self._tick)
-
     @staticmethod
-    def _setup_batch() -> None:
+    def _setup_particle_batch() -> None:
         gl.glBlendFunc(gl.GL_ONE, gl.GL_ONE)
+        gl.glDepthMask(gl.GL_FALSE)
 
     @staticmethod
     def _restore_gl_state() -> None:
         gl.glBlendFunc(gl.GL_SRC_ALPHA, gl.GL_ONE_MINUS_SRC_ALPHA)
+        gl.glDepthMask(gl.GL_TRUE)
 
-    def _tick(self) -> None:
-        if self.draw_ins is None:
-            return # despawned
-
-        self.draw_ins.uniform_data[0].bind_value = np.array(GameState.active_camera.cam_pos, dtype=np.float32)
-        self.draw_ins.uniform_data[1].bind_value = np.float32(self.line_width)
-
-        seq.next(self._tick)
+    def refresh_show(self) -> None:
+        self.hide()
+        self.draw_ins = DrawInstance(self.mesh, self.pipeline, self.model_textures, self.model_opaque, self.shader_uniform_data, self.model_transform, ParticleRenderer._setup_particle_batch, ParticleRenderer._restore_gl_state, gl.GL_POINTS)
+        self.show()
 
     def despawn(self) -> None:
-        if self.is_visible:
-            self.scene.remove(self.draw_ins)
-        
+        self.hide()
         self.draw_ins = None
 
     # start rendering this model if hidden

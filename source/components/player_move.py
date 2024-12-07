@@ -32,7 +32,7 @@ class PlayerMovement:
     AIR_ACCEL = 2.4
     MOUSE_ACCEL = .2 # (degrees per mouse-specific unit)
 
-    JUMP_IMPULSE = Vec3(0., 2.5, 0.)
+    JUMP_IMPULSE = Vec3(0., 2.8, 0.)
     JUMP_FORWARD_IMPULSE = .6
 
     GROUND_FRICTION = 16

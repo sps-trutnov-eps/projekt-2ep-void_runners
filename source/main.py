@@ -47,6 +47,7 @@ import entity.sps_static_cam
 import entity.sps_dev_text
 import entity.sps_view_mesh
 import entity.sps_hurt_trigger
+import entity.sps_static_fire
 
 import entity.sps_projectile
 import entity.sps_hitbox_ai

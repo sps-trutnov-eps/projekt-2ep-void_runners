@@ -2,6 +2,7 @@ from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
     from components.player_move import PlayerMovement
+    from sps_weapons import FdevImpl, GlockImpl, FlameImpl
     from ui import GameUI
     from mainmenu import MenuUI
 
@@ -17,6 +18,7 @@ class SpsState:
     # this should be a player class / entity but too late..
 
     p_active_controller: 'PlayerMovement'
+    p_weapon_impl: 'FdevImpl | GlockImpl | FlameImpl'
     p_hitbox: 'PhysAABB'
 
     p_health: int

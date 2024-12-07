@@ -1,0 +1,9 @@
+{
+    "[prefab_name]_afterfire": [
+        "sps_static_fire",
+        {
+            "vec3://t_rot": [0.0, 0.0, 0.0],
+            "start_lit": true
+        }
+    ]
+}
