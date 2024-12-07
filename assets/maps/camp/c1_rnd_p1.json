@@ -2,10 +2,12 @@
     "cmf_ver": 2,
     "cmf_header": {
         "type_list": [
-            "sps_dev_text",
-            "sps_player_spawn",
+            "sps_hitbox_ai",
             "bt_static_mesh",
-            "bt_phys_aabb"
+            "sps_nav_node",
+            "sps_dev_text",
+            "bt_phys_aabb",
+            "sps_player_spawn"
         ],
         "asset_list": []
     },
@@ -3074,6 +3076,111 @@
                     "a_model_fshader": "shaders/unlit.frag",
                     "a_model_albedo": "textures/proto/Dark/texture_07.png",
                     "a_model_transparent": false
+                }
+            ],
+            [
+                "new_entity",
+                "sps_hitbox_ai",
+                {
+                    "vec3://t_pos": [
+                        -1.2240595817565918,
+                        2.4583845138549805,
+                        4.77012300491333
+                    ],
+                    "vec3://t_rot": [
+                        -90.0,
+                        0.0,
+                        0.0
+                    ],
+                    "vec3://t_scale": [
+                        0.09933357685804367,
+                        0.09933357685804367,
+                        0.09933357685804367
+                    ],
+                    "ai_type": "enemy_drone",
+                    "vec3://ai_fire_offset": [
+                        0.0,
+                        0.0,
+                        -0.5
+                    ],
+                    "vec3://hitbox_scale": [
+                        2.809999942779541,
+                        3.4000000953674316,
+                        2.809999942779541
+                    ],
+                    "hitbox_health": 120.0,
+                    "a_model_mesh": "models/crate.npz",
+                    "a_model_vshader": "shaders/base_cam.vert",
+                    "a_model_fshader": "shaders/unlit.frag",
+                    "a_model_albedo": "textures/proto/Red/texture_08.png",
+                    "a_model_transparent": false,
+                    "a_model_uniforms": {}
+                }
+            ],
+            [
+                "r1_nav_0",
+                "sps_nav_node",
+                {
+                    "vec3://t_pos": [
+                        4.262705326080322,
+                        1.0496973991394043,
+                        14.19773006439209
+                    ]
+                }
+            ],
+            [
+                "r1_nav_1",
+                "sps_nav_node",
+                {
+                    "vec3://t_pos": [
+                        4.262705326080322,
+                        1.0496973991394043,
+                        0.6380000114440918
+                    ]
+                }
+            ],
+            [
+                "r1_nav_2",
+                "sps_nav_node",
+                {
+                    "vec3://t_pos": [
+                        -4.263000011444092,
+                        1.0496973991394043,
+                        0.6380000114440918
+                    ]
+                }
+            ],
+            [
+                "r1_nav_3",
+                "sps_nav_node",
+                {
+                    "vec3://t_pos": [
+                        -4.263000011444092,
+                        1.0496973991394043,
+                        14.19773006439209
+                    ]
+                }
+            ],
+            [
+                "c1_nav_0",
+                "sps_nav_node",
+                {
+                    "vec3://t_pos": [
+                        0.0,
+                        1.0496973991394043,
+                        -11.102999687194824
+                    ]
+                }
+            ],
+            [
+                "c1_nav_1",
+                "sps_nav_node",
+                {
+                    "vec3://t_pos": [
+                        0.0,
+                        1.0496973991394043,
+                        -21.49799919128418
+                    ]
                 }
             ]
         ]

@@ -69,9 +69,11 @@ class SpsHitboxAi:
         self.ai_agro_level = 0.
         self.ai_target_last_seen_pos = Vec3()
         self.ai_target_last_seen_time = 0.
+        self.ai_last_update = GameState.current_time
 
         if self.ai_type == 0:
             self.tr_initial_view_dir = Vec3(0., 0., 1.)
+            self.tr_overlay_rot = en_data["t_rot"]
             self.tr_view_dir = Vec3(self.tr_initial_view_dir)
             self.tr_view_target_dir = Vec3(self.tr_initial_view_dir)
             self.tr_state = 0
@@ -82,19 +84,21 @@ class SpsHitboxAi:
             self.tr_prefire_pause = GameState.current_time
             self.tr_laser_length = 0.
 
-            seq.next(self.update_ai_enemy_turret)
+            # temporally space out ai updates over many frames, so only a few updates per frame happen
+            seq.after(random.uniform(0., .5), self.update_ai_enemy_turret)
         
         elif self.ai_type == 1:
             self.dr_vel = Vec3()
 
             self.dr_nav_nodes_to_travel = []
             self.dr_nav_target_pos = en_data["t_pos"]
+            self.dr_nav_target_is_player = False
             self.dr_nav_margin_cooldown = GameState.current_time
 
             self.dr_last_non_stuck_time = GameState.current_time
             self.dr_stuck = False
 
-            seq.next(self.update_ai_enemy_drone)
+            seq.after(random.uniform(0., .5), self.update_ai_enemy_drone)
         
         self.local_name = en_data["bt_en_name"]
 
@@ -141,20 +145,23 @@ class SpsHitboxAi:
 
         # check for player visibility
         
-        if SpsState.p_health != 0:
+        if SpsState.p_health != 0 and not SpsState.cheat_ai_invis:
 
-            self.tr_view_target_dir = (SpsState.p_active_controller.p_pos - self.ai_fire_pos + Vec3(0., SpsState.p_active_controller.PLAYER_SIZE.y / 2, 0.))
-            target_dist = self.tr_view_target_dir.length()
+            target_dir = (SpsState.p_active_controller.p_pos - self.ai_fire_pos + Vec3(0., SpsState.p_active_controller.PLAYER_SIZE.y / 2, 0.))
+            target_dist = target_dir.length()
 
             if target_dist == 0.:
                 return # both target and origin are at the same place, possible crash, just give up
 
-            self.tr_view_target_dir.normalize_ip()
+            target_dir.normalize_ip()
 
-            vis_ray = PhysRay.make(self.ai_fire_pos, self.tr_view_target_dir)
+            vis_ray = PhysRay.make(self.ai_fire_pos, target_dir)
             vis_hit = GameState.collider_scene.first_hit(vis_ray, target_dist)
 
             is_visible = vis_hit is None
+
+            if is_visible:
+                self.tr_view_target_dir = target_dir
         else:
             is_visible = False
 
@@ -164,7 +171,7 @@ class SpsHitboxAi:
             self.ai_target_last_seen_time = time.perf_counter()
 
         else:
-            self.ai_agro_level = max(0., self.ai_agro_level - self.AI_ARGO_DECAY * GameState.delta_time * 1 / self.AI_UPDATE_RATE)
+            self.ai_agro_level = max(0., self.ai_agro_level - self.AI_ARGO_DECAY * (GameState.current_time - self.ai_last_update))
 
         # laser ray cast
 
@@ -172,6 +179,7 @@ class SpsHitboxAi:
         laser_hit = GameState.collider_scene.first_hit(laser_ray)
         self.tr_laser_length = laser_hit.tmin if laser_hit is not None else 1000.
 
+        self.ai_last_update = GameState.current_time
         seq.after(1 / self.AI_UPDATE_RATE, self.update_ai_enemy_turret)
 
     def tick_enemy_turret(self) -> None:
@@ -229,6 +237,19 @@ class SpsHitboxAi:
             self.tr_state = 0
             self.tr_prefire_pause = GameState.current_time
 
+        # rotate model by dir
+
+        try:
+            forward_dir = self.tr_view_dir
+            forward_dir_flat = Vec3(forward_dir.x, 0., forward_dir.z).normalize()
+        except:
+            forward_dir_flat = Vec3(0., 0., 0.)
+
+        # atan2, my beloved
+        self.ai_trans.set_rot(Vec3(0., math.degrees(math.atan2(forward_dir_flat.z, forward_dir_flat.x)), 0.) + self.tr_overlay_rot)
+
+        # fire if valid
+
         if (
             self.tr_state == 3 and # player visible
             time.perf_counter() - self.tr_fire_colldown > self.TURRET_FIRE_COOLDOWN and # no inter-bullet cooldown
@@ -248,7 +269,7 @@ class SpsHitboxAi:
             self.tr_fire_colldown = time.perf_counter()
             self.tr_next_projectile_id += 1
 
-    def _dr_navigate(self, target_pos: Vec3) -> None:
+    def _dr_navigate(self, target_pos: Vec3) -> bool:
         rand_scalar = 1.
         current_pos = self.ai_trans._pos
 
@@ -256,17 +277,18 @@ class SpsHitboxAi:
             nav_target_pos = Vec3(target_pos) + Vec3(random.uniform(-1.2, 1.2), random.uniform(.2, 1.2), random.uniform(-1.2, 1.2)).elementwise() * rand_scalar
 
             if nav_target_pos != current_pos:
-                vis_ray = PhysRay.make(current_pos, (nav_target_pos - current_pos).normalize(), self.ai_hitbox_size)
-                vis_hit = GameState.collider_scene.first_hit(vis_ray, (nav_target_pos - current_pos).length())
+                # vis_ray = PhysRay.make(current_pos, (nav_target_pos - current_pos).normalize(), self.ai_hitbox_size)
+                # vis_hit = GameState.collider_scene.first_hit(vis_ray, (nav_target_pos - current_pos).length())
                 
+                vis_hit = None
                 if vis_hit is not None:
                     # rand_scalar /= 1.6
                     continue # nav_target_pos not reachable, retry
 
             self.dr_nav_target_pos = nav_target_pos
-            return
+            return True
 
-        pass # TODO: tiny graph pathfinder over nodes
+        return False
 
     def _dr_check_collisions_and_apply_velocity(self) -> None:
         # tbh this comes derectly from PlayerMovement, only modified to for the SpsHitboxAi class
@@ -319,7 +341,7 @@ class SpsHitboxAi:
 
         # check for player visibility
 
-        if SpsState.p_health != 0:
+        if SpsState.p_health != 0 and not SpsState.cheat_ai_invis:
             target_dir = (SpsState.p_active_controller.p_pos - self.ai_fire_pos + Vec3(0., SpsState.p_active_controller.PLAYER_SIZE.y / 2, 0.))
             target_dist = target_dir.length()
 
@@ -341,7 +363,7 @@ class SpsHitboxAi:
             self.ai_target_last_seen_time = time.perf_counter()
 
         else:
-            self.ai_agro_level = max(0., self.ai_agro_level - self.AI_ARGO_DECAY * GameState.delta_time * 1 / self.AI_UPDATE_RATE)
+            self.ai_agro_level = max(0., self.ai_agro_level - self.AI_ARGO_DECAY * (GameState.current_time - self.ai_last_update))
 
         # set travel target pos
 
@@ -351,18 +373,46 @@ class SpsHitboxAi:
 
                 if is_visible:
                     # override target_pos even when mid navigation if players visible
-                    self._dr_navigate(SpsState.p_active_controller.p_pos)
+                    self.dr_nav_target_is_player = True if self._dr_navigate(SpsState.p_active_controller.p_pos) else self.dr_nav_target_is_player
 
                 elif self.ai_agro_level > 0.:
-                    self._dr_navigate(self.ai_target_last_seen_pos)
+                    self.dr_nav_target_is_player = False if self._dr_navigate(self.ai_target_last_seen_pos) else self.dr_nav_target_is_player
 
                 else:
-                    pass # TODO: patrol, choose a navnode to move to
+                    nodes_by_dist = sorted(SpsState.active_nav_nodes, key=lambda node: (node.node_pos - self.ai_trans._pos).length_squared())
+
+                    if nodes_by_dist:
+                        nodes_to_test = nodes_by_dist[:min(self.DRONE_NAVIG_MAX_ATTEMPTS, len(nodes_by_dist) - 1)]
+                        random.shuffle(nodes_to_test)
+
+                        target_node = None
+                        for node in nodes_to_test:
+                            # patrol with nav nodes
+
+                            node_pos_diff = node.node_pos - self.ai_trans._pos
+
+                            node_dist = node_pos_diff.length()
+                            if node_dist < self.DRONE_NAVIG_TARGET_MARGIN:
+                                continue # already on this nav node
+
+                            vis_ray = PhysRay.make(self.ai_trans._pos, node_pos_diff.normalize())
+                            vis_hit = GameState.collider_scene.first_hit(vis_ray, node_dist)
+
+                            if vis_hit is None:
+                                target_node = node
+                                break
+
+                        if target_node is not None:
+                            self.dr_nav_target_is_player = False if self._dr_navigate(target_node.node_pos) else self.dr_nav_target_is_player
 
             idling_at_target = True
         else:
             self.dr_nav_margin_cooldown = GameState.current_time
             idling_at_target = False
+
+        if is_visible and not self.dr_nav_target_is_player:
+            # override target dir to player if seen
+            self.dr_nav_target_is_player = True if self._dr_navigate(SpsState.p_active_controller.p_pos) else self.dr_nav_target_is_player
 
         # stuck detection
 
@@ -372,6 +422,9 @@ class SpsHitboxAi:
 
         if GameState.current_time - self.dr_last_non_stuck_time > self.DRONE_NAVIG_MAX_STUCK_TIME:
             self.dr_stuck = True
+
+        self.ai_last_update = GameState.current_time
+        seq.after(1 / self.AI_UPDATE_RATE, self.update_ai_enemy_drone)
 
     def tick_enemy_drone(self) -> None:
         # tick travel update
@@ -390,7 +443,7 @@ class SpsHitboxAi:
         # debug gizmos
 
         if SpsState.cheat_ai_debug:
-            # gizmo.draw_text(self.ai_trans._pos, f"ai_type: {self.ai_type}\nai_argo_level: {round(self.ai_agro_level, 2)}\nai_vis: {is_visible}\ndr_nav_target_pos: {self.dr_nav_target_pos}", start_fade=float('inf'))
+            # gizmo.draw_text(self.ai_trans._pos, f"dr_target_pos: {self.dr_nav_target_pos} ({self.dr_nav_target_pos - self.ai_trans._pos})\n", start_fade=float('inf'))
 
             line_col = Vec3(.35, 1., 1.)
             gizmo.draw_line(self.dr_nav_target_pos + Vec3(.1, .0, .0), self.dr_nav_target_pos - Vec3(.1, .0, .0), line_col, line_col)
@@ -402,8 +455,6 @@ class SpsHitboxAi:
 
             if self.ai_agro_level > 0.:
                 gizmo.draw_box(self.ai_target_last_seen_pos - Vec3(.2, .2, .2), self.ai_target_last_seen_pos + Vec3(.2, .2, .2), Vec3(.35, 1., 1.))
-
-        seq.after(1., self.update_ai_enemy_drone)
 
     # == entity hooks ==
 
@@ -474,6 +525,7 @@ class SpsHitboxAi:
     ai_agro_level: float
     ai_target_last_seen_pos: Vec3
     ai_target_last_seen_time: float
+    ai_last_update: float
 
     # turret vars
 
@@ -489,8 +541,7 @@ class SpsHitboxAi:
     tr_scan_cooldown: float
 
     tr_initial_view_dir: Vec3
-    dr_last_non_stuck_time: float
-    dr_stuck: bool
+    tr_overlay_rot: Vec3
 
     local_name: str | None
 
@@ -499,8 +550,12 @@ class SpsHitboxAi:
     dr_vel: Vec3
 
     dr_nav_target_pos: Vec3 # current nav target
+    dr_nav_target_is_player: bool
     dr_nav_nodes_to_travel: list[int] # nav nodes in a queue to nav to the desired pos
     dr_nav_margin_cooldown: float
+    
+    dr_stuck: bool
+    dr_last_non_stuck_time: float
 
 def gen_def_data() -> dict:
     return {

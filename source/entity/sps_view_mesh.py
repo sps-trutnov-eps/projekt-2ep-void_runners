@@ -77,7 +77,6 @@ class SpsViewMesh:
 
     view_ease_power: float
     track_trans: Transform
-    
 
     view_space_trans: Transform
     mesh_renderer: ModelRenderer

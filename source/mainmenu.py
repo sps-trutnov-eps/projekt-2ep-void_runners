@@ -9,6 +9,17 @@ from engine.cue import cue_map
 from sps_state import SpsState
 from ui import GameUI
 
+from engine.cue.cue_state import GameState
+from engine.cue.im2d import im2d_draw as im2d
+import imgui
+import math
+import time
+import sys
+import pygame as pg
+from engine.cue import cue_map
+from sps_state import SpsState
+from ui import GameUI
+
 class CharacterSelectUI:
     def __init__(self, on_back):
         self.start_time = time.time()
@@ -17,7 +28,7 @@ class CharacterSelectUI:
         self.mouse_pressed = False
         
         # Načtení základní textury pro ikony
-        self.default_icon = GameState.asset_manager.load_texture("textures/def_white.png")
+        self.default_icon = GameState.asset_manager.load_texture("textures/annonym.png")
         
         self.characters = [
             {
@@ -34,7 +45,7 @@ class CharacterSelectUI:
             },
             {
                 "name": "Assassin",
-                "description": "Fast and agile fighter",
+                "description": "Fast and agile fighter with double jump",
                 "icon": self.default_icon,
                 
             }

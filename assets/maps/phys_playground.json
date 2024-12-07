@@ -2,11 +2,12 @@
     "cmf_ver": 2,
     "cmf_header": {
         "type_list": [
+            "bt_static_mesh",
             "sps_hitbox_ai",
             "sps_dev_text",
-            "bt_phys_aabb",
             "sps_player_spawn",
-            "bt_static_mesh"
+            "sps_nav_node",
+            "bt_phys_aabb"
         ],
         "asset_list": []
     },
@@ -2908,40 +2909,111 @@
                 }
             ],
             [
-                "new_entity",
+                "r1_nav_0",
+                "sps_nav_node",
+                {
+                    "vec3://t_pos": [
+                        -0.9872301816940308,
+                        1.1886506080627441,
+                        5.2850117683410645
+                    ]
+                }
+            ],
+            [
+                "r1_nav_1",
+                "sps_nav_node",
+                {
+                    "vec3://t_pos": [
+                        -7.167230129241943,
+                        1.1886506080627441,
+                        5.2850117683410645
+                    ]
+                }
+            ],
+            [
+                "r1_nav_2",
+                "sps_nav_node",
+                {
+                    "vec3://t_pos": [
+                        -0.9872301816940308,
+                        1.1886506080627441,
+                        -3.1050000190734863
+                    ]
+                }
+            ],
+            [
+                "r1_nav_3",
+                "sps_nav_node",
+                {
+                    "vec3://t_pos": [
+                        -0.9872301816940308,
+                        4.7936506271362305,
+                        0.5249997973442078
+                    ]
+                }
+            ],
+            [
+                "test_turret_death_idk",
                 "sps_hitbox_ai",
                 {
                     "vec3://t_pos": [
-                        -7.070744514465332,
-                        8.512974739074707,
-                        -3.0714774131774902
+                        -4.705744743347168,
+                        0.7429749965667725,
+                        -3.1914777755737305
                     ],
                     "vec3://t_rot": [
-                        0.0,
-                        0.0,
+                        180.0,
+                        -3.7300000190734863,
                         0.0
                     ],
                     "vec3://t_scale": [
-                        1.0,
-                        1.0,
-                        1.0
+                        0.1599999964237213,
+                        0.1599999964237213,
+                        0.1599999964237213
                     ],
                     "ai_type": "enemy_turret",
                     "vec3://ai_fire_offset": [
-                        0.0,
-                        0.0,
-                        1.6100000143051147
+                        1.440000057220459,
+                        -0.49000000953674316,
+                        -0.27000001072883606
                     ],
                     "vec3://hitbox_scale": [
-                        1.0,
-                        1.0,
-                        1.0
+                        1.25,
+                        2.0199999809265137,
+                        1.25
                     ],
                     "hitbox_health": 120.0,
-                    "a_model_mesh": "models/icosph.npz",
+                    "a_model_mesh": "models/standing_turret_head.npz",
                     "a_model_vshader": "shaders/base_cam.vert",
                     "a_model_fshader": "shaders/unlit.frag",
-                    "a_model_albedo": "textures/def_white.png",
+                    "a_model_albedo": "textures/concrete/Concrete032_2K-PNG_Color_Pixelized.png",
+                    "a_model_transparent": false,
+                    "a_model_uniforms": {}
+                }
+            ],
+            [
+                "test_turret_death_idk_base",
+                "bt_static_mesh",
+                {
+                    "vec3://t_pos": [
+                        -4.630162239074707,
+                        0.34723854064941406,
+                        -3.118018388748169
+                    ],
+                    "vec3://t_rot": [
+                        0.0,
+                        -140.0,
+                        0.0
+                    ],
+                    "vec3://t_scale": [
+                        0.15994666516780853,
+                        0.15994666516780853,
+                        0.15994666516780853
+                    ],
+                    "a_model_mesh": "models/standing_turret_base.npz",
+                    "a_model_vshader": "shaders/base_cam.vert",
+                    "a_model_fshader": "shaders/unlit.frag",
+                    "a_model_albedo": "textures/concrete/Concrete036_2K-JPG_Color_Pixelized.jpg",
                     "a_model_transparent": false,
                     "a_model_uniforms": {}
                 }

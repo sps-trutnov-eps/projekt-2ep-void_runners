@@ -43,14 +43,19 @@ if args.bootup_map:
 
 import entity.sps_player_spawn
 import entity.sps_static_cam
+
 import entity.sps_dev_text
 import entity.sps_view_mesh
-import entity.sps_hitbox_ai
 import entity.sps_hurt_trigger
-import entity.sps_projectile
 
-import dev_utils
+import entity.sps_projectile
+import entity.sps_hitbox_ai
+import entity.sps_nav_node
+
 from sps_state import SpsState
+import dev_utils
+import sps_manager
+import sps_player
 
 # == init engine ==
 
@@ -68,16 +73,13 @@ GameState.trigger_scene = PhysScene()
 # == Init game state ==
 
 SpsState.hitbox_scene = PhysScene()
+cue_map.load_map(BOOTUP_MAP)
 
 from sps_post_pass import BloomPostPass, TonemapPostPass
+SpsState.tonemap_post_pass = TonemapPostPass()
 
-tonemap_pass = TonemapPostPass()
 GameState.renderer.activate_post_pass(BloomPostPass(GameState.renderer.win_res))
-GameState.renderer.activate_post_pass(tonemap_pass)
-
-# == init map ==
-
-cue_map.load_map(BOOTUP_MAP)
+GameState.renderer.activate_post_pass(SpsState.tonemap_post_pass)
 
 # == main game loop ==
 
@@ -93,6 +95,12 @@ while True:
         if e.type == pg.KEYDOWN and e.dict["key"] == pg.K_ESCAPE:
             SpsState.is_dev_con_open ^= True
             SpsState.p_active_controller.set_captured(not SpsState.is_dev_con_open)
+        
+        if e.type == pg.KEYDOWN and e.dict["key"] == pg.K_g:
+            if hasattr(SpsState, "p_active_controller"):
+                player_pos = SpsState.p_active_controller.position
+                look_dir = SpsState.p_active_controller.get_look_direction()
+                SpsState.grenade_manager.throw_grenade(player_pos, look_dir)
 
         if e.type == pg.QUIT:
             sys.exit(0)
