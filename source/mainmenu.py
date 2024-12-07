@@ -24,28 +24,19 @@ class CharacterSelectUI:
                 "name": "Heavy",
                 "description": "Tank with high HP",
                 "icon": self.default_icon,
-                "stats": {
-                    "health": 200,
-                    "ammo": 15
-                }
+                
             },
             {
                 "name": "Commando",
                 "description": "Well equipped soldier",
                 "icon": self.default_icon,
-                "stats": {
-                    "health": 100,
-                    "ammo": 30
-                }
+                
             },
             {
                 "name": "Assassin",
                 "description": "Fast and agile fighter",
                 "icon": self.default_icon,
-                "stats": {
-                    "health": 100,
-                    "ammo": 15
-                }
+                
             }
         ]
         self.selected_character = None
@@ -363,11 +354,9 @@ class MenuUI:
             print(f"Starting game with {char['name']}")
             
             SpsState.p_hud_ui = GameUI()
-            SpsState.p_health = char["stats"]["health"]
-            SpsState.p_ammo = char["stats"]["ammo"]
             SpsState.dev_con = False
             
-            cue_map.load_map_when_safe(self.first_map)
+            cue_map.load_map(self.first_map)
         else:
             print("Please select a character first in the Loadout menu!")
 
