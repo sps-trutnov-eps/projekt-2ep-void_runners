@@ -84,6 +84,8 @@ class SpsHitboxAi:
         self.ai_fire_damage_cooldown = 0.
         self.ai_fire_emitter = FireEmitter()
 
+        SpsState.active_enemy_count += 1
+
         if self.ai_type == 0:
             self.tr_initial_view_dir = en_data["ai_idle_dir"]
             self.tr_view_dir = Vec3(self.tr_initial_view_dir)
@@ -177,7 +179,6 @@ class SpsHitboxAi:
 
             self.ai_fire_emitter.set_on_fire(False)
             GameState.entity_storage.despawn(self.local_name)
-            self.local_name = None
 
         try:
             hit_dir = (hit_pos - self.ai_trans._pos).normalize()
@@ -593,6 +594,8 @@ class SpsHitboxAi:
         return SpsHitboxAi(en_data)
 
     def despawn(self) -> None:
+        self.local_name = None
+
         if self.ai_type == 0:
             self.tr_laser_renderer.despawn()
         elif self.ai_type == 1:
@@ -600,6 +603,7 @@ class SpsHitboxAi:
 
         self.ai_model.despawn()
 
+        SpsState.active_enemy_count -= 1
         SpsState.hitbox_scene.remove_coll(self.ai_hitbox)
 
     @staticmethod

@@ -84,7 +84,7 @@ class GlockImpl:
 
         # process fire input
 
-        if mb[0] and GameState.current_time - self.fire_cooldown > .05 and SpsState.p_ammo > 0:
+        if mb[0] and GameState.current_time - self.fire_cooldown > .25 and SpsState.p_ammo > 0:
             # modify inter-frame state
 
             self.fire_cooldown = GameState.current_time
@@ -107,7 +107,7 @@ class GlockImpl:
 
             if box_hit is not None:
                 hit_pos = Vec3(*box_hit.pos)
-                box_hit.usr.on_damage(1000., hit_pos)
+                box_hit.usr.on_damage(120, hit_pos)
 
             elif coll_hit is not None:
                 hit_pos = Vec3(*coll_hit.pos)
@@ -117,13 +117,13 @@ class GlockImpl:
 
             # spawn visual beam
 
-            origin = Vec3(*(SpsState.p_hud_view_mesh.view_space_trans._trans_matrix @ np.array([0., -.8, .8, 1.], dtype=np.float32))[0:3])
+            origin = Vec3(*(SpsState.p_hud_view_mesh.view_space_trans._trans_matrix @ np.array([0., 1.8, .2, 1.], dtype=np.float32))[0:3])
             self._new_beam(origin, hit_pos)
 
         # reload ammo when valid
 
-        if SpsState.p_ammo < 100 and GameState.current_time > SpsState.p_ammo_regen_cooldown:
-            SpsState.p_ammo = min(100, SpsState.p_ammo + 2)
+        if SpsState.p_ammo < 10 and GameState.current_time > SpsState.p_ammo_regen_cooldown:
+            SpsState.p_ammo = min(10, SpsState.p_ammo + 2)
             SpsState.p_ammo_regen_cooldown = GameState.current_time
 
         # update view model
@@ -229,7 +229,7 @@ class FlameImpl:
 
     def _new_fire_particle(self, forward_dir: Vec3) -> None:
         # calc origin from view model space
-        origin = Vec3(*(SpsState.p_hud_view_mesh.view_space_trans._trans_matrix @ np.array([0., -.8, .8, 1.], dtype=np.float32))[0:3])
+        origin = Vec3(*(SpsState.p_hud_view_mesh.view_space_trans._trans_matrix @ np.array([0., .5, 4.4, 1.], dtype=np.float32))[0:3])
 
         self.fire_p_pos.append(origin)
         self.fire_p_vel.append(forward_dir * 2. + Vec3(random.uniform(-.5, .5), random.uniform(-.5, .5), random.uniform(-.5, .5)) + SpsState.p_active_controller.p_vel)
@@ -265,7 +265,7 @@ class FlameImpl:
 
             for hit in box_hits:
                 hit_pos = Vec3(*hit.pos)
-                hit.usr.on_damage(5, hit_pos)
+                hit.usr.on_damage(6, hit_pos)
                 hit.usr.set_fire(8.)
 
             # spawn visual

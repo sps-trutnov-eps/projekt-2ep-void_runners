@@ -44,7 +44,9 @@ class PlayerMovement:
     PLAYER_SIZE = Vec3(.45, .95, .45)
     CAMERA_OFFSET = Vec3(0, .8, 0)
 
-    def __init__(self, player_trans: Transform, player_cam: Camera, initial_view_rot: Vec2 = Vec2(0, 0)) -> None:
+    def __init__(self, player_trans: Transform, player_cam: Camera, initial_view_rot: Vec2 = Vec2(0, 0), dummy_player: bool = False) -> None:
+        self.dummy_player = dummy_player
+        
         self.controlled_trans = player_trans
         self.controlled_cam = player_cam
         self.set_captured(True) # by-default true
@@ -68,6 +70,9 @@ class PlayerMovement:
         seq.next(PlayerMovement.tick, self)
 
     def tick(self) -> None:
+        if self.dummy_player:
+            return # used for no-player senarios like the main menu
+
         # call the specific player controller for the current state
 
         prev_pos = self.p_pos
@@ -358,6 +363,9 @@ class PlayerMovement:
             self.p_state = 0
 
     def set_captured(self, cap: bool) -> None:
+        if self.dummy_player:
+            return
+
         pg.event.set_grab(cap)
         pg.mouse.set_visible(not cap)
 
@@ -388,6 +396,7 @@ class PlayerMovement:
     view_overlay_pos: Vec3
     view_overlay_rot: Vec3
     movement_disabled: bool
+    dummy_player: bool
 
     # debug
     show_player_info: bool

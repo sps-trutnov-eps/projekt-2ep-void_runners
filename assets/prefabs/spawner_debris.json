@@ -1,0 +1,26 @@
+{
+    "[prefab_name]_debris_model": [
+        "bt_static_mesh",
+        {
+            "t_pos": null,
+            "t_rot": null,
+            "vec3://t_scale": [
+                0.2280000001192093,
+                0.4189999997615814,
+                0.27399998903274536
+            ],
+            "a_model_mesh": "models/cube.npz",
+            "a_model_vshader": "shaders/base_cam.vert",
+            "a_model_fshader": "shaders/unlit.frag",
+            "a_model_albedo": "textures/proto/Dark/texture_09.png",
+            "a_model_transparent": false
+        }
+    ],
+    "[prefab_name]_afterfire": [
+        "sps_static_fire",
+        {
+            "t_pos": null,
+            "start_lit": true
+        }
+    ]
+}

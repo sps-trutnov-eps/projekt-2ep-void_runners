@@ -83,6 +83,8 @@ SpsState.tonemap_post_pass = TonemapPostPass()
 GameState.renderer.activate_post_pass(BloomPostPass(GameState.renderer.win_res))
 GameState.renderer.activate_post_pass(SpsState.tonemap_post_pass)
 
+pg.display.set_caption("Void Runners")
+
 # == main game loop ==
 
 while True:

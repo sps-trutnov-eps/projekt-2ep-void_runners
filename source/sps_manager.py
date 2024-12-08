@@ -65,16 +65,28 @@ def m_tick():
 
     seq.next(m_tick)
 
+    # enable map trigger when all enemies are dead
+
+    if (hasattr(SpsState, "active_enemy_count") and SpsState.active_enemy_count == 0) or SpsState.p_selected_char == "Speedrunner":
+        try:
+            map_trig = GameState.entity_storage.get_entity("bt_map_trigger", "map_exit_trigger")
+            map_trig.is_enabled = True
+
+        except KeyError:
+            pass # in a map with no exit trigger
+
 def on_map_reset() -> None:
     SpsState.hitbox_scene.reset()
     SpsState.active_nav_nodes = []
     SpsState.active_drone_count = 0
+    SpsState.active_enemy_count = 0
 
     GameState.static_sequencer.on_event(cue_map.map_reset_evid, on_map_reset)
 GameState.static_sequencer.on_event(cue_map.map_reset_evid, on_map_reset)
 
 def on_map_load() -> None:
     SpsState.is_dev_con_open = False
+    m_setup()
 
     # crunch filled nightmares
     if os.path.basename(GameState.current_map) == "main_menu.json":
@@ -82,7 +94,6 @@ def on_map_load() -> None:
     
     else:
         SpsState.p_hud_ui = GameUI()
-        m_setup()
 
     GameState.static_sequencer.on_event(cue_map.map_load_evid, on_map_load)
 GameState.static_sequencer.on_event(cue_map.map_load_evid, on_map_load)

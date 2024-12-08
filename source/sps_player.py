@@ -90,7 +90,7 @@ def p_setup():
         SpsState.p_weapon_impl = FlameImpl()
     elif SpsState.p_selected_char == "Commando":
         SpsState.p_weapon_impl = GlockImpl()
-    elif SpsState.p_selected_char == "Assassin":
+    elif SpsState.p_selected_char == "Speedrunner":
         SpsState.p_weapon_impl = FdevImpl()
     else:
         raise KeyError(f"unknown char {SpsState.p_selected_char}")
