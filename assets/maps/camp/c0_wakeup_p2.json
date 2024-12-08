@@ -2,12 +2,12 @@
     "cmf_ver": 2,
     "cmf_header": {
         "type_list": [
-            "bt_phys_aabb",
             "bt_static_mesh",
             "sps_hurt_trigger",
+            "sps_player_spawn",
             "sps_dev_text",
-            "bt_map_trigger",
-            "sps_player_spawn"
+            "bt_phys_aabb",
+            "bt_map_trigger"
         ],
         "asset_list": []
     },
@@ -1726,6 +1726,24 @@
                     ],
                     "next_map": "maps/camp/c1_rnd_p1.json",
                     "enabled_at_start": false
+                }
+            ],
+            [
+                "new_entity",
+                "sps_hurt_trigger",
+                {
+                    "vec3://t_pos": [
+                        7.818099498748779,
+                        -10.712556838989258,
+                        -52.105133056640625
+                    ],
+                    "vec3://t_scale": [
+                        37.59000015258789,
+                        0.23000000417232513,
+                        60.560001373291016
+                    ],
+                    "hurt_damage": 100.0,
+                    "hurt_interval": 0.25
                 }
             ]
         ]

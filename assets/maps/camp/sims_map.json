@@ -2,10 +2,11 @@
     "cmf_ver": 2,
     "cmf_header": {
         "type_list": [
-            "bt_map_trigger",
-            "bt_phys_aabb",
             "bt_static_mesh",
-            "sps_player_spawn"
+            "sps_hurt_trigger",
+            "sps_player_spawn",
+            "bt_phys_aabb",
+            "bt_map_trigger"
         ],
         "asset_list": []
     },
@@ -1002,6 +1003,24 @@
                     ],
                     "next_map": "",
                     "enabled_at_start": true
+                }
+            ],
+            [
+                "new_entity_21",
+                "sps_hurt_trigger",
+                {
+                    "vec3://t_pos": [
+                        0.3299996852874756,
+                        -6.605000019073486,
+                        9.340225219726562
+                    ],
+                    "vec3://t_scale": [
+                        29.860000610351562,
+                        0.30000001192092896,
+                        43.0
+                    ],
+                    "hurt_damage": 100.0,
+                    "hurt_interval": 0.25
                 }
             ]
         ]

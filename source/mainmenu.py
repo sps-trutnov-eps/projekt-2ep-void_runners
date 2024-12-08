@@ -33,19 +33,19 @@ class CharacterSelectUI:
         self.characters = [
             {
                 "name": "Heavy",
-                "description": "Tank with high HP",
+                "description": "A soldier with his trusty flamethrower.",
                 "icon": self.default_icon,
                 
             },
             {
                 "name": "Commando",
-                "description": "Well equipped soldier",
+                "description": "Noone can escape his revolver.",
                 "icon": self.default_icon,
                 
             },
             {
                 "name": "Speedrunner",
-                "description": "Fast and agile fighter with double jump",
+                "description": "His gravity gun earns him his title.",
                 "icon": self.default_icon,
             }
         ]

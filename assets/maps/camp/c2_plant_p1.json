@@ -2,11 +2,11 @@
     "cmf_ver": 2,
     "cmf_header": {
         "type_list": [
-            "bt_static_mesh",
             "bt_phys_aabb",
             "sps_player_spawn",
             "sps_dev_text",
-            "sps_hurt_trigger"
+            "sps_hurt_trigger",
+            "bt_static_mesh"
         ],
         "asset_list": []
     },
