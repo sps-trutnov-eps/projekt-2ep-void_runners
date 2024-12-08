@@ -68,6 +68,13 @@ class PlayerHitboxShim:
     def set_fire(self, fire_lifetime: float) -> None:
         pass # just ignore..
 
+def p_regen(t):
+    if SpsState.p_health == 0:
+        return # already dead
+
+    SpsState.p_health = min(100, SpsState.p_health + 5)
+    seq.after(t, p_regen, t)
+
 def p_setup():
     if os.path.basename(GameState.current_map) == "main_menu.json":
         GameState.static_sequencer.on_event(cue_map.map_load_evid, p_setup)
@@ -96,6 +103,11 @@ def p_setup():
         raise KeyError(f"unknown char {SpsState.p_selected_char}")
 
     seq.next(p_tick)
+
+    if SpsState.p_selected_char == "Heavy":
+        seq.after(1, p_regen, 1)
+    else:
+        seq.after(3, p_regen, 3)
 
     GameState.static_sequencer.on_event(cue_map.map_load_evid, p_setup)
 GameState.static_sequencer.on_event(cue_map.map_load_evid, p_setup)

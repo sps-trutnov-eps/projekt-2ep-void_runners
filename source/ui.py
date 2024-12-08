@@ -58,14 +58,18 @@ class GameUI:
         self.pulse_animation = (math.sin(current_time * 2) + 1) * 0.5
         
         # Smooth health changes
-        if self.last_health != SpsState.p_health:
+        if self.last_health > SpsState.p_health:
             self.health_change_time = current_time
             self.damage_flash = 1.0
-            self.last_health = SpsState.p_health
+        self.last_health = SpsState.p_health
         
         health_transition = min(1.0, (current_time - self.health_change_time) * 3)
         self.displayed_health += (SpsState.p_health - self.displayed_health) * health_transition
         self.damage_flash = max(0, self.damage_flash - GameState.delta_time * 2)
+
+        # Crosshair
+        self.ctx.add_line(screen_width / 2 - 8, screen_height / 2, screen_width / 2 + 8, screen_height / 2, imgui.get_color_u32_rgba(.25, .25, .25, 1), 1)
+        self.ctx.add_line(screen_width / 2, screen_height / 2 - 8, screen_width / 2, screen_height / 2 + 8, imgui.get_color_u32_rgba(.25, .25, .25, 1), 1)
 
         # Main panel background
         self.render_rounded_panel(
