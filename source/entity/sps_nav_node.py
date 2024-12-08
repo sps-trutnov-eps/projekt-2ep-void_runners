@@ -53,7 +53,7 @@ class SpsNavNode:
 
         pos = t._pos
 
-        line_col = Vec3(.15, .65, 1.) if dev_state.is_entity_selected else Vec3(.08, .15, .6)
+        line_col = Vec3(.15, .65, 1.) if dev_state.is_entity_selected else Vec3(.08, .35, .8)
         gizmo.draw_line(pos + Vec3(.1, .0, .0), pos - Vec3(.1, .0, .0), line_col, line_col)
         gizmo.draw_line(pos + Vec3(.0, .1, .0), pos - Vec3(.0, .1, .0), line_col, line_col)
         gizmo.draw_line(pos + Vec3(.0, .0, .1), pos - Vec3(.0, .0, .1), line_col, line_col)

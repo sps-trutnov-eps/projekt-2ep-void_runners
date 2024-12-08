@@ -76,6 +76,7 @@ class SpsHitboxAi:
         self.ai_agro_level = 0.
         self.ai_target_last_seen_pos = Vec3()
         self.ai_target_last_seen_time = 0.
+        self.ai_next_projectile_id = 0
         self.ai_overlay_rot = en_data["t_rot"]
         self.ai_last_update = GameState.current_time
 
@@ -84,13 +85,12 @@ class SpsHitboxAi:
         self.ai_fire_emitter = FireEmitter()
 
         if self.ai_type == 0:
-            self.tr_initial_view_dir = Vec3(0., 0., 1.)
+            self.tr_initial_view_dir = en_data["ai_idle_dir"]
             self.tr_view_dir = Vec3(self.tr_initial_view_dir)
             self.tr_view_target_dir = Vec3(self.tr_initial_view_dir)
             self.tr_state = 0
 
             self.tr_fire_colldown = 0
-            self.tr_next_projectile_id = 0
 
             self.tr_prefire_pause = GameState.current_time
             self.tr_laser_length = 0.
@@ -122,8 +122,14 @@ class SpsHitboxAi:
             self.dr_nav_target_is_player = False
             self.dr_nav_margin_cooldown = GameState.current_time
 
+            self.dr_burst_cooldown = 0.
+            self.dr_burst_ammo = 0
+            self.dr_fire_cooldown = 0.
+
             self.dr_last_non_stuck_time = GameState.current_time
             self.dr_re_navig = False
+
+            SpsState.active_drone_count += 1
 
             seq.after(random.uniform(0., .5), self.update_ai_enemy_drone)
         
@@ -288,6 +294,7 @@ class SpsHitboxAi:
                 self.tr_view_dir += view_diff.normalize() * min(view_diff.length(), self.TURRET_SCAN_SPEED_FACTOR * GameState.delta_time)
 
             self.tr_state = 1
+            self.tr_prefire_pause = GameState.current_time
 
         else:
             view_diff = self.tr_initial_view_dir - self.tr_view_dir
@@ -326,7 +333,7 @@ class SpsHitboxAi:
             ):
 
             # load bullet prefab
-            proj_name = f"__{self.local_name}_proj_{self.tr_next_projectile_id}"
+            proj_name = f"__{self.local_name}_proj_{self.ai_next_projectile_id}"
             proj_prefab = prefabs.load_prefab(proj_name, "prefabs/turret_bullet.json")
 
             # setup initial dynamic entity data
@@ -336,7 +343,7 @@ class SpsHitboxAi:
             prefabs.spawn_prefab(proj_prefab)
 
             self.tr_fire_colldown = time.perf_counter()
-            self.tr_next_projectile_id += 1
+            self.ai_next_projectile_id += 1
 
     def _dr_navigate(self, target_pos: Vec3, is_player: bool) -> None:
         rand_scalar = 1.
@@ -538,6 +545,31 @@ class SpsHitboxAi:
         
         self.ai_trans.set_rot(Vec3(0., math.degrees(math.atan2(forward_dir_flat.z, forward_dir_flat.x)), 0.) + self.ai_overlay_rot)
 
+        # fire bursts
+
+        if GameState.current_time - self.dr_burst_cooldown > 1.2:
+            self.dr_burst_cooldown = GameState.current_time
+            self.dr_burst_ammo = 3
+
+        if self.dr_burst_ammo > 0 and GameState.current_time - self.dr_fire_cooldown > .1 and self.ai_agro_level == 100.:
+            self.dr_fire_cooldown = GameState.current_time
+            self.dr_burst_ammo -= 1
+
+            target_dir = (SpsState.p_active_controller.p_pos - self.ai_fire_pos + Vec3(0., SpsState.p_active_controller.PLAYER_SIZE.y / 2, 0.)).normalize()
+
+            # load bullet prefab
+            proj_name = f"__{self.local_name}_proj_{self.ai_next_projectile_id}"
+            proj_prefab = prefabs.load_prefab(proj_name, "prefabs/drone_bullet.json")
+
+            # setup initial dynamic entity data
+            proj_prefab[0][2]["t_pos"] = self.ai_fire_pos
+            proj_prefab[0][2]["projectile_dir"] = target_dir
+
+            prefabs.spawn_prefab(proj_prefab)
+
+            self.tr_fire_colldown = time.perf_counter()
+            self.ai_next_projectile_id += 1
+
         # debug gizmos
 
         if SpsState.cheat_ai_debug:
@@ -563,6 +595,9 @@ class SpsHitboxAi:
     def despawn(self) -> None:
         if self.ai_type == 0:
             self.tr_laser_renderer.despawn()
+        elif self.ai_type == 1:
+            SpsState.active_drone_count -= 1
+
         self.ai_model.despawn()
 
         SpsState.hitbox_scene.remove_coll(self.ai_hitbox)
@@ -642,7 +677,7 @@ class SpsHitboxAi:
     tr_prefire_pause: float
     tr_laser_length: float
     tr_fire_colldown: float
-    tr_next_projectile_id: int
+    ai_next_projectile_id: int
 
     tr_scan_cooldown: float
     tr_initial_view_dir: Vec3
@@ -658,7 +693,11 @@ class SpsHitboxAi:
     dr_nav_target_is_player: bool
     dr_nav_nodes_to_travel: list[int] # nav nodes in a queue to nav to the desired pos
     dr_nav_margin_cooldown: float
-    
+
+    dr_fire_cooldown: float
+    dr_burst_cooldown: float
+    dr_burst_ammo: int
+
     dr_re_navig: bool
     dr_last_non_stuck_time: float
 
@@ -671,6 +710,7 @@ def gen_def_data() -> dict:
         "t_scale": Vec3(1.0, 1.0, 1.0),
         "ai_type": "enemy_turret",
         "ai_fire_offset": Vec3(0.0, 0.0, -.5),
+        "ai_idle_dir": Vec3(0.0, 0.0, 1.0),
         "hitbox_scale": Vec3(1.0, 1.0, 1.0),
         "hitbox_health": 120,
         "a_model_mesh": "models/icosph.npz",

@@ -365,9 +365,10 @@ class MenuUI:
             print(f"Starting game with {char['name']}")
             
             SpsState.p_hud_ui = GameUI()
-            SpsState.dev_con = False
-            
-            cue_map.load_map(self.first_map)
+            SpsState.is_dev_con_open = False
+            SpsState.p_selected_char = char['name']
+
+            cue_map.load_map_when_safe(self.first_map)
         else:
             print("Please select a character first in the Loadout menu!")
 

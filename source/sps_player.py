@@ -82,7 +82,18 @@ def p_setup():
     SpsState.p_hitbox = PhysAABB.make(SpsState.p_active_controller.p_pos + Vec3(0., SpsState.p_active_controller.PLAYER_SIZE.y / 2, 0.), SpsState.p_active_controller.PLAYER_SIZE, PlayerHitboxShim())
     SpsState.hitbox_scene.add_coll(SpsState.p_hitbox)
 
-    SpsState.p_weapon_impl = FlameImpl()
+    # test play support, assume heavy
+    if not hasattr(SpsState, "p_selected_char"):
+        SpsState.p_selected_char = "Heavy"
+
+    if SpsState.p_selected_char == "Heavy":
+        SpsState.p_weapon_impl = FlameImpl()
+    elif SpsState.p_selected_char == "Commando":
+        SpsState.p_weapon_impl = GlockImpl()
+    elif SpsState.p_selected_char == "Assassin":
+        SpsState.p_weapon_impl = FdevImpl()
+    else:
+        raise KeyError(f"unknown char {SpsState.p_selected_char}")
 
     seq.next(p_tick)
 

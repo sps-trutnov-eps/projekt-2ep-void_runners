@@ -104,9 +104,9 @@ class FireEmitter:
         self.fire_point_renderer.refresh_show()
         seq.next(self._tick)
 
-    def _new_fire_particle(self, forward_dir: Vec3) -> None:
+    def _new_fire_particle(self, initial_vel: Vec3) -> None:
         self.fire_p_pos.append(Vec3(self.fire_emit_origin))
-        self.fire_p_vel.append(forward_dir * 2. + Vec3(random.uniform(-.5, .5), random.uniform(-.5, .5), random.uniform(-.5, .5)))
+        self.fire_p_vel.append(initial_vel + Vec3(random.uniform(-.5, .5), random.uniform(-.5, .5), random.uniform(-.5, .5)))
         self.fire_p_spawn_time.append(GameState.current_time)
 
     def set_on_fire(self, is_on_fire: bool) -> None:

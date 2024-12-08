@@ -142,7 +142,7 @@ class GlockImpl:
 @dataclass(init=False, slots=True)
 class FlameImpl:
     def __init__(self) -> None:
-        prefabs.spawn_prefab_from_file("p_view_model", "prefabs/view_models/glock_19.json")
+        prefabs.spawn_prefab_from_file("p_view_model", "prefabs/view_models/flamethrower.json")
         SpsState.p_hud_view_mesh = GameState.entity_storage.get_entity("sps_view_mesh", "p_view_model")
         self.view_initial_pos = SpsState.p_hud_view_mesh.view_space_trans._pos
 
@@ -300,7 +300,7 @@ class FlameImpl:
 @dataclass(init=False, slots=True)
 class FdevImpl:
     def __init__(self):
-        prefabs.spawn_prefab_from_file("p_view_model", "prefabs/view_models/glock_19.json")
+        prefabs.spawn_prefab_from_file("p_view_model", "prefabs/view_models/gravgun.json")
         SpsState.p_hud_view_mesh = GameState.entity_storage.get_entity("sps_view_mesh", "p_view_model")
         self.view_initial_pos = SpsState.p_hud_view_mesh.view_space_trans._pos
 

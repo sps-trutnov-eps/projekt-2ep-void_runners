@@ -3,7 +3,6 @@ import os
 from engine.cue.cue_state import GameState
 from engine.cue import cue_sequence as seq
 from engine.cue import cue_map
-from engine.cue.phys.cue_phys_types import PhysAABB
 from engine.cue import cue_utils
 from engine.cue.rendering import cue_gizmos as gizmo
 
@@ -11,11 +10,9 @@ from ui import GameUI
 from sps_state import SpsState
 from mainmenu import MenuUI
 
-import prefabs
 import dev_utils
 
 from pygame.math import Vector3 as Vec3
-import pygame as pg
 import imgui
 
 # == global callbacks for managing the game (and player) as a whole ==
@@ -71,6 +68,7 @@ def m_tick():
 def on_map_reset() -> None:
     SpsState.hitbox_scene.reset()
     SpsState.active_nav_nodes = []
+    SpsState.active_drone_count = 0
 
     GameState.static_sequencer.on_event(cue_map.map_reset_evid, on_map_reset)
 GameState.static_sequencer.on_event(cue_map.map_reset_evid, on_map_reset)

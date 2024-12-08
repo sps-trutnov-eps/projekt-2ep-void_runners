@@ -2,11 +2,11 @@
     "cmf_ver": 2,
     "cmf_header": {
         "type_list": [
-            "sps_dev_text",
-            "bt_phys_aabb",
-            "sps_hurt_trigger",
             "bt_static_mesh",
-            "sps_player_spawn"
+            "bt_phys_aabb",
+            "sps_player_spawn",
+            "sps_dev_text",
+            "sps_hurt_trigger"
         ],
         "asset_list": []
     },
@@ -2541,6 +2541,296 @@
                     "a_model_fshader": "shaders/unlit.frag",
                     "a_model_albedo": "textures/concrete/Concrete032_2K-PNG_Color_Pixelized.png",
                     "a_model_transparent": false
+                }
+            ],
+            [
+                "c1_decor_light",
+                "bt_static_mesh",
+                {
+                    "vec3://t_pos": [
+                        19.608999252319336,
+                        1.9628955125808716,
+                        11.97232723236084
+                    ],
+                    "vec3://t_rot": [
+                        180.0,
+                        0.0,
+                        0.0
+                    ],
+                    "vec3://t_scale": [
+                        0.2725386619567871,
+                        0.2725386619567871,
+                        0.2725386619567871
+                    ],
+                    "a_model_mesh": "models/lamp_v2.npz",
+                    "a_model_vshader": "shaders/base_cam.vert",
+                    "a_model_fshader": "shaders/emit_surf.frag",
+                    "a_model_albedo": "textures/proto/Green/texture_09.png",
+                    "a_model_transparent": false,
+                    "a_model_uniforms": {
+                        "emit_power": 8.0
+                    }
+                }
+            ],
+            [
+                "c1_decor_light_0",
+                "bt_static_mesh",
+                {
+                    "vec3://t_pos": [
+                        0.05900000035762787,
+                        1.9628955125808716,
+                        11.97232723236084
+                    ],
+                    "vec3://t_rot": [
+                        180.0,
+                        0.0,
+                        0.0
+                    ],
+                    "vec3://t_scale": [
+                        0.2725386619567871,
+                        0.2725386619567871,
+                        0.2725386619567871
+                    ],
+                    "a_model_mesh": "models/lamp_v2.npz",
+                    "a_model_vshader": "shaders/base_cam.vert",
+                    "a_model_fshader": "shaders/emit_surf.frag",
+                    "a_model_albedo": "textures/proto/Green/texture_09.png",
+                    "a_model_transparent": false,
+                    "a_model_uniforms": {
+                        "emit_power": 8.0
+                    }
+                }
+            ],
+            [
+                "c1_decor_light_1",
+                "bt_static_mesh",
+                {
+                    "vec3://t_pos": [
+                        -21.461000442504883,
+                        1.9628955125808716,
+                        11.97232723236084
+                    ],
+                    "vec3://t_rot": [
+                        180.0,
+                        0.0,
+                        0.0
+                    ],
+                    "vec3://t_scale": [
+                        0.2725386619567871,
+                        0.2725386619567871,
+                        0.2725386619567871
+                    ],
+                    "a_model_mesh": "models/lamp_v2.npz",
+                    "a_model_vshader": "shaders/base_cam.vert",
+                    "a_model_fshader": "shaders/emit_surf.frag",
+                    "a_model_albedo": "textures/proto/Green/texture_09.png",
+                    "a_model_transparent": false,
+                    "a_model_uniforms": {
+                        "emit_power": 8.0
+                    }
+                }
+            ],
+            [
+                "c1_decor_light_2",
+                "bt_static_mesh",
+                {
+                    "vec3://t_pos": [
+                        -21.461000442504883,
+                        1.9628955125808716,
+                        -11.972673416137695
+                    ],
+                    "vec3://t_rot": [
+                        0.0,
+                        0.0,
+                        0.0
+                    ],
+                    "vec3://t_scale": [
+                        0.2725386619567871,
+                        0.2725386619567871,
+                        0.2725386619567871
+                    ],
+                    "a_model_mesh": "models/lamp_v2.npz",
+                    "a_model_vshader": "shaders/base_cam.vert",
+                    "a_model_fshader": "shaders/emit_surf.frag",
+                    "a_model_albedo": "textures/proto/Green/texture_09.png",
+                    "a_model_transparent": false,
+                    "a_model_uniforms": {
+                        "emit_power": 8.0
+                    }
+                }
+            ],
+            [
+                "c1_decor_light_3",
+                "bt_static_mesh",
+                {
+                    "vec3://t_pos": [
+                        0.05900000035762787,
+                        1.9628955125808716,
+                        -11.958000183105469
+                    ],
+                    "vec3://t_rot": [
+                        0.0,
+                        0.0,
+                        0.0
+                    ],
+                    "vec3://t_scale": [
+                        0.2725386619567871,
+                        0.2725386619567871,
+                        0.2725386619567871
+                    ],
+                    "a_model_mesh": "models/lamp_v2.npz",
+                    "a_model_vshader": "shaders/base_cam.vert",
+                    "a_model_fshader": "shaders/emit_surf.frag",
+                    "a_model_albedo": "textures/proto/Green/texture_09.png",
+                    "a_model_transparent": false,
+                    "a_model_uniforms": {
+                        "emit_power": 8.0
+                    }
+                }
+            ],
+            [
+                "c1_decor_light_4",
+                "bt_static_mesh",
+                {
+                    "vec3://t_pos": [
+                        19.608999252319336,
+                        1.9628955125808716,
+                        -11.958000183105469
+                    ],
+                    "vec3://t_rot": [
+                        0.0,
+                        0.0,
+                        0.0
+                    ],
+                    "vec3://t_scale": [
+                        0.2725386619567871,
+                        0.2725386619567871,
+                        0.2725386619567871
+                    ],
+                    "a_model_mesh": "models/lamp_v2.npz",
+                    "a_model_vshader": "shaders/base_cam.vert",
+                    "a_model_fshader": "shaders/emit_surf.frag",
+                    "a_model_albedo": "textures/proto/Green/texture_09.png",
+                    "a_model_transparent": false,
+                    "a_model_uniforms": {
+                        "emit_power": 8.0
+                    }
+                }
+            ],
+            [
+                "c1_decor_light_5",
+                "bt_static_mesh",
+                {
+                    "vec3://t_pos": [
+                        30.02899932861328,
+                        1.9628955125808716,
+                        -16.56800079345703
+                    ],
+                    "vec3://t_rot": [
+                        0.0,
+                        -90.0,
+                        0.0
+                    ],
+                    "vec3://t_scale": [
+                        0.2725386619567871,
+                        0.2725386619567871,
+                        0.2725386619567871
+                    ],
+                    "a_model_mesh": "models/lamp_v2.npz",
+                    "a_model_vshader": "shaders/base_cam.vert",
+                    "a_model_fshader": "shaders/emit_surf.frag",
+                    "a_model_albedo": "textures/proto/Green/texture_09.png",
+                    "a_model_transparent": false,
+                    "a_model_uniforms": {
+                        "emit_power": 8.0
+                    }
+                }
+            ],
+            [
+                "c1_decor_light_6",
+                "bt_static_mesh",
+                {
+                    "vec3://t_pos": [
+                        53.94900131225586,
+                        1.9628955125808716,
+                        -16.56800079345703
+                    ],
+                    "vec3://t_rot": [
+                        0.0,
+                        90.0,
+                        0.0
+                    ],
+                    "vec3://t_scale": [
+                        0.2725386619567871,
+                        0.2725386619567871,
+                        0.2725386619567871
+                    ],
+                    "a_model_mesh": "models/lamp_v2.npz",
+                    "a_model_vshader": "shaders/base_cam.vert",
+                    "a_model_fshader": "shaders/emit_surf.frag",
+                    "a_model_albedo": "textures/proto/Green/texture_09.png",
+                    "a_model_transparent": false,
+                    "a_model_uniforms": {
+                        "emit_power": 8.0
+                    }
+                }
+            ],
+            [
+                "c1_decor_light_7",
+                "bt_static_mesh",
+                {
+                    "vec3://t_pos": [
+                        30.02899932861328,
+                        1.9628955125808716,
+                        -33.85799789428711
+                    ],
+                    "vec3://t_rot": [
+                        0.0,
+                        -90.0,
+                        0.0
+                    ],
+                    "vec3://t_scale": [
+                        0.2725386619567871,
+                        0.2725386619567871,
+                        0.2725386619567871
+                    ],
+                    "a_model_mesh": "models/lamp_v2.npz",
+                    "a_model_vshader": "shaders/base_cam.vert",
+                    "a_model_fshader": "shaders/emit_surf.frag",
+                    "a_model_albedo": "textures/proto/Green/texture_09.png",
+                    "a_model_transparent": false,
+                    "a_model_uniforms": {
+                        "emit_power": 8.0
+                    }
+                }
+            ],
+            [
+                "c1_decor_light_8",
+                "bt_static_mesh",
+                {
+                    "vec3://t_pos": [
+                        53.94900131225586,
+                        1.9628955125808716,
+                        -33.85799789428711
+                    ],
+                    "vec3://t_rot": [
+                        0.0,
+                        90.0,
+                        0.0
+                    ],
+                    "vec3://t_scale": [
+                        0.2725386619567871,
+                        0.2725386619567871,
+                        0.2725386619567871
+                    ],
+                    "a_model_mesh": "models/lamp_v2.npz",
+                    "a_model_vshader": "shaders/base_cam.vert",
+                    "a_model_fshader": "shaders/emit_surf.frag",
+                    "a_model_albedo": "textures/proto/Green/texture_09.png",
+                    "a_model_transparent": false,
+                    "a_model_uniforms": {
+                        "emit_power": 8.0
+                    }
                 }
             ]
         ]
