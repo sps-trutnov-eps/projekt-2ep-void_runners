@@ -39,7 +39,7 @@ class SpsHitboxAi:
     TURRET_AIM_SPEED_FACTOR = 1.2
     TURRET_AIM_ALIGN_TOLERANCE = .998
     TURRET_AIM_FIRE_PAUSE = 1.8
-    TURRET_FIRE_COOLDOWN = .0
+    TURRET_FIRE_COOLDOWN = .1
     TURRET_BURST_COOLDOWN = .05
     TURRET_BURST_LENGHT = .05
 
@@ -103,7 +103,7 @@ class SpsHitboxAi:
             laser_data = {
                 "a_model_vshader": "shaders/line_segment.vert",
                 "a_model_fshader": "shaders/emit_surf.frag",
-                "a_model_albedo": "textures/def_white.png",
+                "a_model_albedo": "textures/laser.png",
                 "a_model_transparent": True,
                 "a_model_uniforms": {
                     "emit_power": 8.

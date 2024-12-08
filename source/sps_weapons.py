@@ -33,10 +33,9 @@ class GlockImpl:
         SpsState.p_ammo_regen_cooldown = 0
 
         self.beam_prefab = {
-            "a_model_mesh": "models/crate.npz",
             "a_model_vshader": "shaders/line_segment.vert",
             "a_model_fshader": "shaders/emit_surf.frag",
-            "a_model_albedo": "textures/def_white.png",
+            "a_model_albedo": "textures/glock_beam.png",
             "a_model_transparent": True,
             "a_model_uniforms": {
                 "emit_power": 1.,

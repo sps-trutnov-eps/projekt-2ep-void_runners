@@ -45,7 +45,7 @@ class CharacterSelectUI:
             },
             {
                 "name": "Speedrunner",
-                "description": "His gravity gun earns him his title.",
+                "description": "          Fast and agile\ndoes not kill enemies, only survives\n  get to the end as fast a possible",
                 "icon": self.default_icon,
             }
         ]
