@@ -2,13 +2,12 @@
     "cmf_ver": 2,
     "cmf_header": {
         "type_list": [
-            "sps_player_spawn",
+            "bt_phys_aabb",
+            "bt_static_mesh",
             "sps_hurt_trigger",
             "sps_dev_text",
-            "bt_static_mesh",
-            "bt_phys_aabb",
             "bt_map_trigger",
-            "sps_view_mesh"
+            "sps_player_spawn"
         ],
         "asset_list": []
     },
@@ -1283,24 +1282,6 @@
                 }
             ],
             [
-                "cor2_exit_map_trig",
-                "bt_map_trigger",
-                {
-                    "vec3://t_pos": [
-                        17.39083480834961,
-                        1.0924592018127441,
-                        -38.01653289794922
-                    ],
-                    "vec3://t_scale": [
-                        0.44999998807907104,
-                        2.0,
-                        2.0
-                    ],
-                    "next_map": "maps/camp/c1_rnd_p1.json",
-                    "enabled_at_start": true
-                }
-            ],
-            [
                 "cor2_exit_note",
                 "sps_dev_text",
                 {
@@ -1727,6 +1708,24 @@
                         2.0
                     ],
                     "phys_bitmask": 0.0
+                }
+            ],
+            [
+                "map_exit_trigger",
+                "bt_map_trigger",
+                {
+                    "vec3://t_pos": [
+                        17.39083480834961,
+                        1.0924592018127441,
+                        -38.01653289794922
+                    ],
+                    "vec3://t_scale": [
+                        0.44999998807907104,
+                        2.0,
+                        2.0
+                    ],
+                    "next_map": "maps/camp/c1_rnd_p1.json",
+                    "enabled_at_start": false
                 }
             ]
         ]

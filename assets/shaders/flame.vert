@@ -17,7 +17,7 @@ flat out int frag_ins_id;
 void main() {
     vec4 w_pos = vec4(pos, 1.);
     gl_Position = bt_cam_mat * w_pos;
-    gl_PointSize = 200 / gl_Position.z;
+    gl_PointSize = 300 / gl_Position.z;
 
     frag_lifetime = lifetime;
     sprite_index = int(lifetime);

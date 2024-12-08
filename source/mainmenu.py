@@ -44,10 +44,9 @@ class CharacterSelectUI:
                 
             },
             {
-                "name": "Assassin",
+                "name": "Speedrunner",
                 "description": "Fast and agile fighter with double jump",
                 "icon": self.default_icon,
-                
             }
         ]
         self.selected_character = None

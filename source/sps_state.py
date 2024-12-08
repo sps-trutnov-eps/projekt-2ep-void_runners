@@ -40,6 +40,7 @@ class SpsState:
     hitbox_scene: 'PhysScene'
 
     active_drone_count: int
+    active_enemy_count: int
 
     # == dev bools ==
 

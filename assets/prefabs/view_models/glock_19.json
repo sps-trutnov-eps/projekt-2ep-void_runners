@@ -5,20 +5,20 @@
             "vec3://t_pos": [
                 0.125,
                 -0.10999999940395355,
-                -0.33250001072883606
+                -0.23250001072883606
             ],
             "vec3://t_rot": [
                 -90.0,
-                180.0,
+                0.0,
                 0.0
             ],
             "vec3://t_scale": [
-                0.04399999976158142,
-                0.04399999976158142,
-                0.04399999976158142
+                0.08399999976158142,
+                0.08399999976158142,
+                0.08399999976158142
             ],
             "easing_scalar": 4.0,
-            "a_model_mesh": "models/glock19_Future.npz",
+            "a_model_mesh": "models/glock19.npz",
             "a_model_vshader": "shaders/base_cam.vert",
             "a_model_fshader": "shaders/unlit.frag",
             "a_model_albedo": "textures/proto/Red/texture_10.png",

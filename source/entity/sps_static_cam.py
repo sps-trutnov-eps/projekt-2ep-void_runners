@@ -8,9 +8,10 @@ from engine.cue.components.cue_transform import Transform
 from engine.cue.rendering.cue_camera import Camera
 from engine.cue.entities.cue_entity_utils import handle_transform_edit_mode
 
-from pygame.math import Vector3 as Vec3, Vector2 as Vec2
+from sps_state import SpsState
+from components.player_move import PlayerMovement
 
-import pygame as pg
+from pygame.math import Vector3 as Vec3, Vector2 as Vec2
 import numpy as np
 
 # a map entity for specifying the player spawn position
@@ -22,6 +23,11 @@ class SpsStaticCam:
         self.cam.set_view(en_data["t_pos"], Vec3(en_data["t_rot"].x, en_data["t_rot"].y, 0.))
 
         GameState.active_camera = self.cam
+
+        self.dummy_controller = PlayerMovement(Transform(en_data["t_pos"], Vec3(en_data["t_rot"].x, en_data["t_rot"].y, 0.)), GameState.active_camera, en_data["t_rot"], True)
+        SpsState.p_active_controller = self.dummy_controller
+
+    dummy_controller: PlayerMovement
 
     trans: Transform
     cam: Camera
