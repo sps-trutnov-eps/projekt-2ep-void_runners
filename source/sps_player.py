@@ -83,7 +83,7 @@ def p_setup():
     # reset player state (TODO: add ability stats)
 
     SpsState.p_health = 100
-    SpsState.p_ammo = 15
+    SpsState.p_ammo = 0
 
     # init hitbox and view model
     SpsState.p_hitbox = PhysAABB.make(SpsState.p_active_controller.p_pos + Vec3(0., SpsState.p_active_controller.PLAYER_SIZE.y / 2, 0.), SpsState.p_active_controller.PLAYER_SIZE, PlayerHitboxShim())
@@ -105,7 +105,7 @@ def p_setup():
     seq.next(p_tick)
 
     if SpsState.p_selected_char == "Heavy":
-        seq.after(1, p_regen, 1)
+        seq.after(.85, p_regen, .85)
     else:
         seq.after(3, p_regen, 3)
 

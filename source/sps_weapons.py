@@ -273,8 +273,8 @@ class FlameImpl:
 
         # reload ammo when valid
 
-        if SpsState.p_ammo < 250 and GameState.current_time > SpsState.p_ammo_regen_cooldown:
-            SpsState.p_ammo = min(250, SpsState.p_ammo + 2)
+        if SpsState.p_ammo < 400 and GameState.current_time > SpsState.p_ammo_regen_cooldown:
+            SpsState.p_ammo = min(400, SpsState.p_ammo + 4)
             SpsState.p_ammo_regen_cooldown = GameState.current_time
 
         # update view model

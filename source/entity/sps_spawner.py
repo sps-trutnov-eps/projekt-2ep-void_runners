@@ -50,7 +50,7 @@ class SpsSpawner:
         if self.fire_end_time < GameState.current_time:
             self.fire_emitter.set_on_fire(False)
 
-        if GameState.current_time - self.drone_spawn_cooldown > 1.5 and SpsState.active_drone_count < 15:
+        if GameState.current_time - self.drone_spawn_cooldown > 1.5 and SpsState.active_drone_count < 15 and SpsState.p_health != 0:
             # test if player is visible to spawner
 
             player_diff = SpsState.p_active_controller.p_pos - self.drone_spawn_pos

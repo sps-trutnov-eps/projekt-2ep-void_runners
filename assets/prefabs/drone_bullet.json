@@ -3,15 +3,18 @@
         "sps_projectile",
         {
             "vec3://t_rot": [0.0, 0.0, 0.0],
-            "vec3://t_scale": [0.2, 0.2, 0.2],
+            "vec3://t_scale": [0.05, 0.05, 0.05],
             "projectile_type": "bullet",
             "projectile_damage": 2,
             "projectile_velocity": 45,
-            "vec3://hitbox_scale": [0.2, 0.2, 0.2],
-            "a_model_mesh": "models/chair.npz",
+            "vec3://hitbox_scale": [0.4, 0.4, 0.4],
+            "a_model_mesh": "models/cube.npz",
             "a_model_vshader": "shaders/base_cam.vert",
-            "a_model_fshader": "shaders/unlit.frag",
-            "a_model_albedo": "textures/proto/Dark/texture_07.png",
+            "a_model_fshader": "shaders/emit_surf.frag",
+            "a_model_albedo": "textures/proto/Red/texture_07.png",
+            "a_model_uniforms": {
+                "emit_power": 50.0
+            },
             "a_model_transparent": false
         }
     ]

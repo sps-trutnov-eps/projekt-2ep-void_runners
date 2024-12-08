@@ -71,7 +71,7 @@ def m_tick():
         try:
             map_trig = GameState.entity_storage.get_entity("bt_map_trigger", "map_exit_trigger")
             map_trig.is_enabled = True
-
+            
         except KeyError:
             pass # in a map with no exit trigger
 
