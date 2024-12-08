@@ -73,6 +73,9 @@ class LineRenderer:
 
         seq.next(self._tick)
 
+    def __del__(self) -> None:
+        self.despawn()
+
     @staticmethod
     def _setup_batch() -> None:
         gl.glBlendFunc(gl.GL_ONE, gl.GL_ONE)
@@ -91,9 +94,7 @@ class LineRenderer:
         seq.next(self._tick)
 
     def despawn(self) -> None:
-        if self.is_visible:
-            self.scene.remove(self.draw_ins)
-        
+        self.hide() 
         self.draw_ins = None
 
     # start rendering this model if hidden

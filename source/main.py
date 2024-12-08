@@ -50,6 +50,7 @@ import entity.sps_hurt_trigger
 import entity.sps_static_fire
 
 import entity.sps_projectile
+import entity.sps_spawner
 import entity.sps_hitbox_ai
 import entity.sps_nav_node
 

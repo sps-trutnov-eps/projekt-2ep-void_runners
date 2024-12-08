@@ -3,9 +3,9 @@
     "cmf_header": {
         "type_list": [
             "sps_dev_text",
-            "sps_nav_node",
-            "sps_player_spawn",
             "bt_phys_aabb",
+            "sps_player_spawn",
+            "sps_nav_node",
             "bt_static_mesh",
             "sps_hitbox_ai"
         ],
@@ -2988,7 +2988,12 @@
                     "a_model_fshader": "shaders/unlit.frag",
                     "a_model_albedo": "textures/concrete/Concrete032_2K-PNG_Color_Pixelized.png",
                     "a_model_transparent": false,
-                    "a_model_uniforms": {}
+                    "a_model_uniforms": {},
+                    "vec3://ai_idle_dir": [
+                        0.0,
+                        0.0,
+                        1.0
+                    ]
                 }
             ],
             [

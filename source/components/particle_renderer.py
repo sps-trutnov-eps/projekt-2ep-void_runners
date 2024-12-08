@@ -66,6 +66,9 @@ class ParticleRenderer:
         self.is_visible = False
         self.show()
 
+    def __del__(self) -> None:
+        self.despawn()
+
     @staticmethod
     def _setup_particle_batch() -> None:
         gl.glBlendFunc(gl.GL_ONE, gl.GL_ONE)

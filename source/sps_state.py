@@ -26,7 +26,7 @@ class SpsState:
     p_ammo: int
     p_ammo_regen_cooldown: float
 
-    p_selected_weapon: int | None = None
+    p_selected_char: str
     p_hud_view_mesh: 'SpsViewMesh'
     p_hud_ui: 'GameUI | MenuUI | None'
 
@@ -38,6 +38,8 @@ class SpsState:
 
     active_nav_nodes: list['SpsNavNode']
     hitbox_scene: 'PhysScene'
+
+    active_drone_count: int
 
     # == dev bools ==
 
