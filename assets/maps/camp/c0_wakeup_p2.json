@@ -2,12 +2,12 @@
     "cmf_ver": 2,
     "cmf_header": {
         "type_list": [
-            "bt_static_mesh",
-            "sps_hurt_trigger",
             "sps_player_spawn",
+            "bt_static_mesh",
             "sps_dev_text",
-            "bt_phys_aabb",
-            "bt_map_trigger"
+            "sps_hurt_trigger",
+            "bt_map_trigger",
+            "bt_phys_aabb"
         ],
         "asset_list": []
     },
@@ -622,81 +622,6 @@
                 }
             ],
             [
-                "r1_wall_0",
-                "bt_static_mesh",
-                {
-                    "vec3://t_pos": [
-                        7.054328308105469,
-                        -4.885743618011475,
-                        -15.609781265258789
-                    ],
-                    "vec3://t_rot": [
-                        0.0,
-                        -90.0,
-                        180.0
-                    ],
-                    "vec3://t_scale": [
-                        12.545050621032715,
-                        13.689493179321289,
-                        0.9994932413101196
-                    ],
-                    "a_model_mesh": "models/plane.npz",
-                    "a_model_vshader": "shaders/base_cam.vert",
-                    "a_model_fshader": "shaders/unlit.frag",
-                    "a_model_albedo": "textures/proto/Dark/texture_13.png"
-                }
-            ],
-            [
-                "r1_wall_1",
-                "bt_static_mesh",
-                {
-                    "vec3://t_pos": [
-                        -9.870671272277832,
-                        -4.886000156402588,
-                        -15.609781265258789
-                    ],
-                    "vec3://t_rot": [
-                        0.0,
-                        90.0,
-                        180.0
-                    ],
-                    "vec3://t_scale": [
-                        12.545050621032715,
-                        13.689493179321289,
-                        0.9994932413101196
-                    ],
-                    "a_model_mesh": "models/plane.npz",
-                    "a_model_vshader": "shaders/base_cam.vert",
-                    "a_model_fshader": "shaders/unlit.frag",
-                    "a_model_albedo": "textures/proto/Dark/texture_13.png"
-                }
-            ],
-            [
-                "r1_top",
-                "bt_static_mesh",
-                {
-                    "vec3://t_pos": [
-                        -1.4110000133514404,
-                        8.809000015258789,
-                        -17.534780502319336
-                    ],
-                    "vec3://t_rot": [
-                        90.0,
-                        180.0,
-                        0.0
-                    ],
-                    "vec3://t_scale": [
-                        8.535530090332031,
-                        10.656405448913574,
-                        0.7780423164367676
-                    ],
-                    "a_model_mesh": "models/plane.npz",
-                    "a_model_vshader": "shaders/base_cam.vert",
-                    "a_model_fshader": "shaders/unlit.frag",
-                    "a_model_albedo": "textures/proto/Dark/texture_13.png"
-                }
-            ],
-            [
                 "r1_room_note",
                 "sps_dev_text",
                 {
@@ -1277,7 +1202,7 @@
                     "a_model_mesh": "models/door.npz",
                     "a_model_vshader": "shaders/base_cam.vert",
                     "a_model_fshader": "shaders/unlit.frag",
-                    "a_model_albedo": "textures/proto/Purple/texture_08.png",
+                    "a_model_albedo": "textures/proto/Green/texture_08.png",
                     "a_model_transparent": false
                 }
             ],
@@ -1676,24 +1601,6 @@
                 }
             ],
             [
-                "r1_bott_kill_trig",
-                "sps_hurt_trigger",
-                {
-                    "vec3://t_pos": [
-                        0.0,
-                        -8.03499984741211,
-                        -15.803000450134277
-                    ],
-                    "vec3://t_scale": [
-                        21.0,
-                        2.0,
-                        26.0
-                    ],
-                    "hurt_damage": 15.0,
-                    "hurt_interval": 0.0
-                }
-            ],
-            [
                 "r0_bott_coll",
                 "bt_phys_aabb",
                 {
@@ -1729,21 +1636,21 @@
                 }
             ],
             [
-                "new_entity",
+                "bott_kill_trig",
                 "sps_hurt_trigger",
                 {
                     "vec3://t_pos": [
-                        7.818099498748779,
-                        -10.712556838989258,
-                        -52.105133056640625
+                        4.110000133514404,
+                        -8.03499984741211,
+                        -34.33300018310547
                     ],
                     "vec3://t_scale": [
-                        37.59000015258789,
-                        0.23000000417232513,
-                        60.560001373291016
+                        60.0,
+                        2.0,
+                        100.0
                     ],
-                    "hurt_damage": 100.0,
-                    "hurt_interval": 0.25
+                    "hurt_damage": 15.0,
+                    "hurt_interval": 0.0
                 }
             ]
         ]

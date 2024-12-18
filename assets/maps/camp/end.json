@@ -2,8 +2,10 @@
     "cmf_ver": 2,
     "cmf_header": {
         "type_list": [
-            "bt_static_mesh",
+            "sps_spawner",
+            "sps_nav_node",
             "sps_player_spawn",
+            "bt_static_mesh",
             "bt_phys_aabb"
         ],
         "asset_list": []
@@ -1583,6 +1585,126 @@
                     "a_model_albedo": "textures/proto/Light/texture_05.png",
                     "a_model_transparent": false,
                     "a_model_uniforms": {}
+                }
+            ],
+            [
+                "end_spawner_0",
+                "sps_spawner",
+                {
+                    "vec3://t_pos": [
+                        1.2960973978042603,
+                        1.3080558776855469,
+                        -2.5292861461639404
+                    ],
+                    "vec3://t_rot": [
+                        0.0,
+                        0.0,
+                        0.0
+                    ],
+                    "vec3://t_scale": [
+                        0.20776017010211945,
+                        0.30201607942581177,
+                        0.17277434468269348
+                    ],
+                    "vec3://spawn_pos": [
+                        0.0,
+                        0.0,
+                        1.7799999713897705
+                    ],
+                    "vec3://hitbox_scale": [
+                        2.0,
+                        2.0,
+                        2.0
+                    ],
+                    "hitbox_health": 500.0,
+                    "a_model_mesh": "models/cube.npz",
+                    "a_model_vshader": "shaders/base_cam.vert",
+                    "a_model_fshader": "shaders/unlit.frag",
+                    "a_model_albedo": "textures/proto/Red/texture_09.png",
+                    "a_model_transparent": false,
+                    "a_model_uniforms": {}
+                }
+            ],
+            [
+                "end_spawner_1",
+                "sps_spawner",
+                {
+                    "vec3://t_pos": [
+                        -1.283902645111084,
+                        1.3080558776855469,
+                        -2.5292861461639404
+                    ],
+                    "vec3://t_rot": [
+                        0.0,
+                        0.0,
+                        0.0
+                    ],
+                    "vec3://t_scale": [
+                        0.20776017010211945,
+                        0.30201607942581177,
+                        0.17277434468269348
+                    ],
+                    "vec3://spawn_pos": [
+                        0.0,
+                        0.0,
+                        1.7799999713897705
+                    ],
+                    "vec3://hitbox_scale": [
+                        2.0,
+                        2.0,
+                        2.0
+                    ],
+                    "hitbox_health": 500.0,
+                    "a_model_mesh": "models/cube.npz",
+                    "a_model_vshader": "shaders/base_cam.vert",
+                    "a_model_fshader": "shaders/unlit.frag",
+                    "a_model_albedo": "textures/proto/Red/texture_09.png",
+                    "a_model_transparent": false,
+                    "a_model_uniforms": {}
+                }
+            ],
+            [
+                "box_nav_node_0",
+                "sps_nav_node",
+                {
+                    "vec3://t_pos": [
+                        -1.350000023841858,
+                        1.4112545251846313,
+                        -1.350000023841858
+                    ]
+                }
+            ],
+            [
+                "box_nav_node_1",
+                "sps_nav_node",
+                {
+                    "vec3://t_pos": [
+                        1.350000023841858,
+                        1.4112545251846313,
+                        -1.350000023841858
+                    ]
+                }
+            ],
+            [
+                "box_nav_node_2",
+                "sps_nav_node",
+                {
+                    "vec3://t_pos": [
+                        1.350000023841858,
+                        1.4112545251846313,
+                        1.350000023841858
+                    ]
+                }
+            ],
+            [
+                "box_nav_node_3",
+                "sps_nav_node",
+                {
+                    "vec3://t_pos": [
+                        -1.350000023841858,
+                        1.4112545251846313,
+                        1.350000023841858
+                    ]
                 }
             ]
         ]

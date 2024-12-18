@@ -32,6 +32,6 @@ import entity.sps_spawner
 import entity.sps_hitbox_ai
 import entity.sps_nav_node
 
-on_cue.EDITOR_ASSET_DIR = os.path.join(os.path.dirname(__file__), "../assets")
+on_cue.EDITOR_ASSET_DIR = os.path.join(os.path.dirname(__file__), "../assets/")
 on_cue.EDITOR_TEST_PLAY_CALLBACK = test_play
 on_cue.start_editor()

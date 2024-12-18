@@ -64,7 +64,7 @@ class CharacterSelectUI:
         current_time = time.time()
         self.animation_progress = min(1.0, (current_time - self.start_time) * 2)
         
-        screen_width, screen_height = 1280, 720
+        screen_width, screen_height = GameState.renderer.win_res
         
         # Pozadí
         self.ctx.add_rect_filled_multicolor(
@@ -215,7 +215,7 @@ class MenuUI:
         self.animation_progress = min(1.0, (current_time - self.start_time) * 2)
         
         # === Pozadí ===
-        screen_width, screen_height = 1280, 720
+        screen_width, screen_height = GameState.renderer.win_res
         
         # Vykreslení tmavého pozadí s gradientem
         self.ctx.add_rect_filled_multicolor(
